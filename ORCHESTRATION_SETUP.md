@@ -1,4 +1,4 @@
-# ORCHESTRATION_SETUP.md  
+# Orchestration Setup
 ## Pixstars — Unified AI-Driven Performance Orchestration
 
 ---
