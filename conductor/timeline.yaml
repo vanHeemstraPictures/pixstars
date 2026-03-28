@@ -1,0 +1,96 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Pixstars — Show Timeline
+# ═══════════════════════════════════════════════════════════════════════════════
+# Each cue has:
+#   time:       seconds from show start
+#   name:       human-readable cue name
+#   ardour:     OSC command(s) for Ardour (optional)
+#   lamp:       lamp state for Jess+ (optional)
+#   projection: projection scene name (optional)
+#   lighting:   lighting state name (optional)
+
+cues:
+  - time: 0.0
+    name: "SHOW_START"
+    lamp: "INERT"
+    projection: "BLACKOUT"
+    lighting: "BLACKOUT"
+    ardour:
+      command: "transport_play"
+
+  - time: 5.0
+    name: "GNR_LOGO"
+    projection: "GNR_LOGO"
+    lighting: "ROCKSTAR"
+
+  - time: 12.0
+    name: "LAMP_ON"
+    lamp: "FUNCTIONAL"
+    lighting: "LAMP_ONLY"
+
+  - time: 60.0
+    name: "DRUMS_BEGIN"
+    lamp: "CURIOUS"
+    lighting: "ROCKSTAR"
+
+  - time: 120.0
+    name: "SCENE_TRANSFORM_WALT"
+    lamp: "CURIOUS"
+    projection: "DISNEY_CASTLE"
+    lighting: "DISNEY_SOFT"
+
+  - time: 190.0
+    name: "MICKEY_DRAWING"
+    lamp: "PLEASED"
+    projection: "MICKEY_DRAWING"
+
+  - time: 270.0
+    name: "AI_ITERATION"
+    lamp: "ARROGANT"
+    projection: "AI_ITERATIONS"
+    lighting: "AI_COLD"
+
+  - time: 340.0
+    name: "OVERHEATING"
+    lamp: "OVERHEATING"
+    lighting: "OVERHEAT"
+
+  - time: 380.0
+    name: "LAMP_DEATH"
+    lamp: "DYING"
+    lighting: "DEATH"
+
+  - time: 385.0
+    name: "LAMP_DEAD"
+    lamp: "DEAD"
+    projection: "BLACKOUT"
+
+  - time: 460.0
+    name: "REVEAL_AI"
+    lamp: "WEAK"
+    projection: "AI_SIGNATURE"
+    lighting: "REBIRTH"
+
+  - time: 480.0
+    name: "REVEAL_WALT"
+    lamp: "LEARNING"
+    projection: "WALT_SIGNATURE"
+
+  - time: 490.0
+    name: "REVEAL_AXEL"
+    lamp: "REBORN"
+    projection: "AXEL_SIGNATURE"
+
+  - time: 500.0
+    name: "TEAM_ROCKSTARS"
+    lamp: "CELEBRATE"
+    projection: "TEAM_ROCKSTARS"
+    lighting: "FINALE"
+
+  - time: 555.0
+    name: "SHOW_END"
+    lamp: "OFF"
+    projection: "BLACKOUT"
+    lighting: "BLACKOUT"
+    ardour:
+      command: "transport_stop"
