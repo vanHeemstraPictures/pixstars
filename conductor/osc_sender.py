@@ -1,7 +1,8 @@
 """
 Pixstars Show Conductor — OSC Sender
 
-Sends OSC messages to all subsystems (Ardour, Jess+, Projection, Lighting).
+Sends OSC messages to all subsystems (Ardour, Jess+, Projection, Lighting)
+and mirrors them to the Digital Twin WebSocket bridge.
 """
 
 from pythonosc import udp_client
@@ -28,12 +29,18 @@ class OSCSender:
             self.clients["lighting"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.LIGHTING_OSC_PORT
             )
+            self.clients["twin"] = udp_client.SimpleUDPClient(
+                config.OSC_HOST, config.DIGITAL_TWIN_OSC_PORT
+            )
 
     def send(self, target: str, address: str, *args):
         """Send an OSC message to a target subsystem.
 
+        Also mirrors the message to the digital twin (unless the target
+        is already 'twin').
+
         Args:
-            target: One of 'ardour', 'lamp', 'projection', 'lighting'
+            target: One of 'ardour', 'lamp', 'projection', 'lighting', 'twin'
             address: OSC address path (e.g. '/transport_play')
             *args: OSC message arguments
         """
@@ -47,6 +54,10 @@ class OSCSender:
             return
 
         self.clients[target].send_message(address, list(args) if args else [])
+
+        # Mirror to digital twin (avoid infinite loop if target is already twin)
+        if target != "twin" and "twin" in self.clients:
+            self.clients["twin"].send_message(address, list(args) if args else [])
 
     # ── Convenience methods ──────────────────────────────────────────────
 

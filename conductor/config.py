@@ -19,6 +19,9 @@ PROJECTION_OSC_PORT = 9002
 # DMX Lighting Controller
 LIGHTING_OSC_PORT = 9003
 
+# Digital Twin WebSocket Bridge (Deno server)
+DIGITAL_TWIN_OSC_PORT = 9004
+
 # ── Timeline ─────────────────────────────────────────────────────────────────
 TIMELINE_FILE = "conductor/timeline.yaml"
 
