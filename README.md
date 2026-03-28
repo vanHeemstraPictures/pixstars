@@ -1,2 +1,3 @@
-# pixstars
-Pixstars
+# Pixstars
+
+- [References](./REFERENCES.md)
