@@ -70,7 +70,7 @@ export function createStage(scene: Scene): StageMeshes {
   glowLayer.intensity = 0.6;
 
   // ── Camera (audience perspective) ─────────────────────────────────────
-  const camera = new ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 3.5, 8, new Vector3(0, 1.2, 0), scene);
+  const camera = new ArcRotateCamera("camera", Math.PI / 2, Math.PI / 3, 10, new Vector3(0, 1.0, -1.0), scene);
   camera.lowerRadiusLimit = 3;
   camera.upperRadiusLimit = 20;
   camera.lowerBetaLimit = 0.2;
@@ -152,56 +152,67 @@ export function createStage(scene: Scene): StageMeshes {
 
   // White keys area (visual)
   const keys = MeshBuilder.CreateBox("keys", { width: 1.1, height: 0.01, depth: 0.12 }, scene);
-  keys.position = new Vector3(0, 0.84, 0.1);
+  keys.position = new Vector3(0, 0.84, -0.1);
   keys.material = keysMat;
 
-  // ── Pixar-style Desk Lamp ─────────────────────────────────────────────
-  // Lamp sits on top of the keyboard, right side
-  const lampPivot = new TransformNode("lampPivot", scene);
-  lampPivot.position = new Vector3(0.35, 0.83, -0.05);
+  // ── Pixar-style Desk Lamp (articulated hierarchy) ────────────────────
+  // Hierarchy: lampPivot → base → lowerJoint → lowerArm → upperJoint → upperArm → head + bulb
+  // Each joint pivot sits at the connection point so rotations look natural.
 
-  // Base (flat cylinder)
+  // Root pivot on the keyboard (left side from audience)
+  const lampPivot = new TransformNode("lampPivot", scene);
+  lampPivot.position = new Vector3(-0.35, 0.83, 0.05);
+
+  // Base (flat cylinder, sits on keyboard)
   const lampBase = MeshBuilder.CreateCylinder("lampBase", { height: 0.04, diameter: 0.15 }, scene);
   lampBase.material = lampMat;
   lampBase.parent = lampPivot;
   lampBase.position = new Vector3(0, 0.02, 0);
 
-  // Lower arm
+  // Lower joint (pivot at top of base)
+  const lowerJoint = new TransformNode("lowerJoint", scene);
+  lowerJoint.parent = lampPivot;
+  lowerJoint.position = new Vector3(0, 0.04, 0);
+  lowerJoint.rotation.z = -0.4;  // lean toward center of keyboard
+  lowerJoint.rotation.x = 0.15;  // lean slightly toward keys
+
+  // Lower arm (cylinder with origin at bottom, so it extends upward from the joint)
   const lampLowerArm = MeshBuilder.CreateCylinder("lampLowerArm", {
     height: 0.25, diameterTop: 0.025, diameterBottom: 0.03
   }, scene);
   lampLowerArm.material = lampMat;
-  lampLowerArm.parent = lampPivot;
-  lampLowerArm.position = new Vector3(0, 0.165, 0);
+  lampLowerArm.parent = lowerJoint;
+  lampLowerArm.position = new Vector3(0, 0.125, 0); // half height up from joint
 
-  // Head pivot (for tilt animation)
+  // Head pivot / upper joint (at top of lower arm)
   const lampHeadPivot = new TransformNode("lampHeadPivot", scene);
-  lampHeadPivot.parent = lampPivot;
-  lampHeadPivot.position = new Vector3(0, 0.29, 0);
+  lampHeadPivot.parent = lowerJoint;
+  lampHeadPivot.position = new Vector3(0, 0.25, 0); // top of lower arm
+  lampHeadPivot.rotation.z = 0.3;  // bend back slightly to arc over keyboard
+  lampHeadPivot.rotation.x = 0.2;  // tilt toward keys
 
-  // Upper arm
+  // Upper arm (extends from upper joint)
   const lampUpperArm = MeshBuilder.CreateCylinder("lampUpperArm", {
     height: 0.2, diameterTop: 0.02, diameterBottom: 0.025
   }, scene);
   lampUpperArm.material = lampMat;
   lampUpperArm.parent = lampHeadPivot;
-  lampUpperArm.position = new Vector3(0, 0.1, 0);
-  lampUpperArm.rotation.x = 0.3; // slight forward lean
+  lampUpperArm.position = new Vector3(0, 0.1, 0); // half height up from joint
 
-  // Lamp head (cone/shade)
+  // Lamp head (cone/shade, at top of upper arm)
   const lampHead = MeshBuilder.CreateCylinder("lampHead", {
     height: 0.08, diameterTop: 0.03, diameterBottom: 0.12
   }, scene);
   lampHead.material = lampHeadMat;
   lampHead.parent = lampHeadPivot;
-  lampHead.position = new Vector3(0, 0.22, 0.04);
-  lampHead.rotation.x = 0.6; // angled downward
+  lampHead.position = new Vector3(0, 0.22, 0);
+  lampHead.rotation.x = 0.8; // angled down at keys
 
-  // Bulb (small sphere inside head)
+  // Bulb (inside head)
   const lampBulb = MeshBuilder.CreateSphere("lampBulb", { diameter: 0.04 }, scene);
   lampBulb.material = bulbMat;
   lampBulb.parent = lampHeadPivot;
-  lampBulb.position = new Vector3(0, 0.2, 0.04);
+  lampBulb.position = new Vector3(0, 0.20, 0);
 
   // Bulb light
   const lampBulbLight = new PointLight("lampBulbLight", new Vector3(0, 0, 0), scene);
