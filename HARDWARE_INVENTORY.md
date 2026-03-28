@@ -26,6 +26,7 @@ All communication between subsystems uses OSC over localhost (`127.0.0.1`).
 | Conductor → Jess+ (Lamp) | 9001 | OSC |
 | Conductor → Projection | 9002 | OSC |
 | Conductor → Lighting | 9003 | OSC |
+| Conductor → Digital Twin | 9004 | OSC (→ WebSocket on port 8765) |
 
 ---
 
