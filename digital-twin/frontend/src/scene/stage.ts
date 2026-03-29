@@ -25,6 +25,7 @@ import {
   GlowLayer,
   Mesh,
   TransformNode,
+  DynamicTexture,
 } from "@babylonjs/core";
 
 export interface StageMeshes {
@@ -47,6 +48,7 @@ export interface StageMeshes {
   // Projection screen
   projectionScreen: Mesh;
   projectionMaterial: StandardMaterial;
+  projectionTexture: DynamicTexture;
 
   // Stage
   floor: Mesh;
@@ -106,9 +108,10 @@ export function createStage(scene: Scene): StageMeshes {
   bulbMat.diffuseColor = new Color3(1, 0.95, 0.7);
   bulbMat.emissiveColor = new Color3(0, 0, 0); // controlled by state
 
+  const screenTexture = new DynamicTexture("screenTexture", { width: 1024, height: 640 }, scene, false);
   const screenMat = new StandardMaterial("screenMat", scene);
-  screenMat.diffuseColor = new Color3(0.05, 0.05, 0.05);
-  screenMat.emissiveColor = new Color3(0, 0, 0);
+  screenMat.diffuseTexture = screenTexture;
+  screenMat.emissiveTexture = screenTexture;
   screenMat.specularColor = new Color3(0, 0, 0);
 
   const performerMat = new StandardMaterial("performerMat", scene);
@@ -121,14 +124,16 @@ export function createStage(scene: Scene): StageMeshes {
   floor.receiveShadows = true;
 
   // ── Rear Wall ─────────────────────────────────────────────────────────
-  const rearWall = MeshBuilder.CreatePlane("rearWall", { width: 10, height: 5 }, scene);
-  rearWall.position = new Vector3(0, 2.5, -4);
+  const rearWall = MeshBuilder.CreatePlane("rearWall", { width: 10, height: 4 }, scene);
+  rearWall.position = new Vector3(0, 2.0, -4);
   rearWall.material = wallMat;
 
   // ── Projection Screen (on rear wall) ──────────────────────────────────
-  const projectionScreen = MeshBuilder.CreatePlane("projScreen", { width: 4, height: 2.5 }, scene);
-  projectionScreen.position = new Vector3(0, 2.8, -3.98);
+  const projectionScreen = MeshBuilder.CreatePlane("projScreen", { width: 3.5, height: 2 }, scene);
+  projectionScreen.position = new Vector3(0, 2.0, -3.95);
+  projectionScreen.rotation.y = Math.PI;
   projectionScreen.material = screenMat;
+  screenMat.backFaceCulling = false;
 
   // ── Keyboard Stand ────────────────────────────────────────────────────
   // Two vertical legs
@@ -313,6 +318,7 @@ export function createStage(scene: Scene): StageMeshes {
     lampHeadPivot,
     projectionScreen,
     projectionMaterial: screenMat,
+    projectionTexture: screenTexture,
     spotLeft,
     spotRight,
     spotConeLeft,

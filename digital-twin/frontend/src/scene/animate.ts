@@ -18,6 +18,8 @@ interface AnimationState {
   lightingCurrent: LightingParams;
   projectionR: number; projectionG: number; projectionB: number;
   projTargetR: number; projTargetG: number; projTargetB: number;
+  projectionLabel: string;
+  projectionLabelDirty: boolean;
 
   // Animation timing
   time: number;
@@ -34,6 +36,8 @@ export function createAnimationState(): AnimationState {
     lightingCurrent: { ...blackout },
     projectionR: 0, projectionG: 0, projectionB: 0,
     projTargetR: 0, projTargetG: 0, projTargetB: 0,
+    projectionLabel: "",
+    projectionLabelDirty: true,
     time: 0,
     strobePhase: 0,
   };
@@ -57,6 +61,8 @@ export function handleStageEvent(event: StageEvent, state: AnimationState): void
         state.projTargetR = params.r;
         state.projTargetG = params.g;
         state.projTargetB = params.b;
+        state.projectionLabel = params.label;
+        state.projectionLabelDirty = true;
       }
       break;
     }
@@ -140,15 +146,40 @@ export function updateScene(
   state.projectionG = lerp(state.projectionG, state.projTargetG, lerpSpeed);
   state.projectionB = lerp(state.projectionB, state.projTargetB, lerpSpeed);
 
+  // Redraw dynamic texture when scene changes
+  if (state.projectionLabelDirty) {
+    const tex = meshes.projectionTexture;
+    const ctx = tex.getContext();
+    const w = tex.getSize().width;
+    const h = tex.getSize().height;
+
+    // Background color
+    const r = Math.round(state.projTargetR * 255);
+    const g = Math.round(state.projTargetG * 255);
+    const b = Math.round(state.projTargetB * 255);
+    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+    ctx.fillRect(0, 0, w, h);
+
+    // Text
+    if (state.projectionLabel) {
+      // Pick contrasting text color
+      const brightness = (r + g + b) / 3;
+      ctx.fillStyle = brightness > 128 ? "#000000" : "#ffffff";
+      ctx.font = "bold 72px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(state.projectionLabel, w / 2, h / 2);
+    }
+
+    tex.update();
+    state.projectionLabelDirty = false;
+  }
+
+  // Keep emissive glow on the screen material
   meshes.projectionMaterial.emissiveColor = new Color3(
     state.projectionR * 0.8,
     state.projectionG * 0.8,
     state.projectionB * 0.8,
-  );
-  meshes.projectionMaterial.diffuseColor = new Color3(
-    state.projectionR,
-    state.projectionG,
-    state.projectionB,
   );
 }
 
