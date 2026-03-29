@@ -70,7 +70,7 @@ export function createStage(scene: Scene): StageMeshes {
   glowLayer.intensity = 0.6;
 
   // ── Camera (audience perspective) ─────────────────────────────────────
-  const camera = new ArcRotateCamera("camera", Math.PI / 2, Math.PI / 3, 10, new Vector3(0, 1.0, -1.0), scene);
+  const camera = new ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2.1, 10, new Vector3(0, 1.0, -1.0), scene);
   camera.lowerRadiusLimit = 3;
   camera.upperRadiusLimit = 20;
   camera.lowerBetaLimit = 0.2;
