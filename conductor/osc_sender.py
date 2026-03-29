@@ -3,6 +3,9 @@ Pixstars Show Conductor — OSC Sender
 
 Sends OSC messages to all subsystems (Ardour, Jess+, Projection, Lighting)
 and mirrors them to the Digital Twin WebSocket bridge.
+
+Note: Ardour 9 uses /toggle_roll (equivalent to spacebar) for transport
+control, as /transport_play does not produce audio output.
 """
 
 from pythonosc import udp_client
@@ -15,6 +18,7 @@ class OSCSender:
     def __init__(self, dry_run: bool = False):
         self.dry_run = dry_run
         self.clients = {}
+        self._ardour_rolling = False  # Track Ardour transport state
 
         if not dry_run:
             self.clients["ardour"] = udp_client.SimpleUDPClient(
@@ -38,11 +42,6 @@ class OSCSender:
 
         Also mirrors the message to the digital twin (unless the target
         is already 'twin').
-
-        Args:
-            target: One of 'ardour', 'lamp', 'projection', 'lighting', 'twin'
-            address: OSC address path (e.g. '/transport_play')
-            *args: OSC message arguments
         """
         if self.dry_run:
             args_str = " ".join(str(a) for a in args) if args else ""
@@ -55,17 +54,23 @@ class OSCSender:
 
         self.clients[target].send_message(address, list(args) if args else [])
 
-        # Mirror to digital twin (avoid infinite loop if target is already twin)
+        # Mirror to digital twin
         if target != "twin" and "twin" in self.clients:
             self.clients["twin"].send_message(address, list(args) if args else [])
 
-    # ── Convenience methods ──────────────────────────────────────────────
+    # ── Ardour Transport (using /toggle_roll) ────────────────────────────
 
-    def ardour_transport_play(self):
-        self.send("ardour", "/transport_play")
+    def ardour_play(self):
+        """Start Ardour playback. Uses /toggle_roll if not already rolling."""
+        if not self._ardour_rolling:
+            self.send("ardour", "/toggle_roll")
+            self._ardour_rolling = True
 
-    def ardour_transport_stop(self):
-        self.send("ardour", "/transport_stop")
+    def ardour_stop(self):
+        """Stop Ardour playback. Uses /toggle_roll if currently rolling."""
+        if self._ardour_rolling:
+            self.send("ardour", "/toggle_roll")
+            self._ardour_rolling = False
 
     def ardour_locate(self, samples: int, roll: int = 1):
         """Locate Ardour playhead to a sample position."""
@@ -73,6 +78,8 @@ class OSCSender:
 
     def ardour_goto_start(self):
         self.send("ardour", "/goto_start")
+
+    # ── Subsystem Convenience Methods ────────────────────────────────────
 
     def lamp_state(self, state: str):
         """Send lamp state change to Jess+ adapter."""

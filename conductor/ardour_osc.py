@@ -1,11 +1,11 @@
 """
 Pixstars Show Conductor — Ardour OSC Integration
 
-Provides high-level Ardour control via OSC, based on the Ardour OSC API:
-https://manual.ardour.org/using-control-surfaces/controlling-ardour-with-osc/osc-control/
+Provides high-level Ardour control via OSC, based on the Ardour OSC API.
+Uses /toggle_roll for transport (Ardour 9 — equivalent to spacebar).
 
 Ardour must have OSC control surface enabled:
-  Preferences → Control Surfaces → OSC (port 3819 by default)
+  Ardour9 → Preferences → Control Surfaces → Open Sound Control (OSC)
 """
 
 from conductor.osc_sender import OSCSender
@@ -23,12 +23,12 @@ class ArdourOSC:
     # ── Transport ────────────────────────────────────────────────────────
 
     def play(self):
-        """Start Ardour playback."""
-        self.sender.ardour_transport_play()
+        """Start Ardour playback (uses /toggle_roll)."""
+        self.sender.ardour_play()
 
     def stop(self):
-        """Stop Ardour playback."""
-        self.sender.ardour_transport_stop()
+        """Stop Ardour playback (uses /toggle_roll)."""
+        self.sender.ardour_stop()
 
     def goto_start(self):
         """Move playhead to beginning of session."""
@@ -45,17 +45,13 @@ class ArdourOSC:
         self.sender.ardour_locate(samples, 1 if roll else 0)
 
     def toggle_roll(self):
-        """Toggle between play and stop."""
+        """Toggle between play and stop (raw, no state tracking)."""
         self.sender.send("ardour", "/toggle_roll")
 
     # ── Markers ──────────────────────────────────────────────────────────
 
     def goto_marker(self, marker_name: str):
-        """Jump to a named marker in Ardour.
-
-        Args:
-            marker_name: Name of the marker (string)
-        """
+        """Jump to a named marker in Ardour."""
         self.sender.send("ardour", "/marker", marker_name)
 
     def next_marker(self):
