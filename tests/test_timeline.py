@@ -87,8 +87,8 @@ class TestOSCSender(unittest.TestCase):
         sender.lamp_state("CURIOUS")
         sender.projection_scene("GNR_LOGO")
         sender.lighting_state("BLACKOUT")
-        sender.ardour_transport_play()
-        sender.ardour_transport_stop()
+        sender.ardour_play()
+        sender.ardour_stop()
 
 
 class TestArdourOSC(unittest.TestCase):

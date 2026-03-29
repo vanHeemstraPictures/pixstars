@@ -114,7 +114,7 @@ def run_show(cues: list[dict], sender: OSCSender, ardour: ArdourOSC, dry_run: bo
     except KeyboardInterrupt:
         elapsed = time.time() - show_start
         print(f"\n\n  SHOW STOPPED at {format_time(elapsed)}")
-        sender.ardour_transport_stop()
+        sender.ardour_stop()
         return
 
     elapsed = time.time() - show_start
