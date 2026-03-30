@@ -217,10 +217,38 @@ He looks at the audience. Not a theatrical look — an actual one. A man who mad
 
 The Disney castle projection appears — very faint, barely visible. A ghost of itself. It may be imagination.
 
+# 8. INT. STAGE - RETURN
+ACT SEVEN: RESURRECTION AND REVISION<br/>
+06:00 – 07:00 | RETURN<br/>
 
-# 8. 
+THE MAN holds the bulb over the lamp socket. His hand trembles slightly — not performance trembling, but the real trembling of doing something that might not work.
+He screws the bulb in.
 
+Nothing.
 
+He waits. The single kick drum continues.
+
+Nothing.
+
+SOUND DESIGN: Complete silence. The kick drum stops. Five full seconds of silence — the longest in the performance.
+
+Then: a flicker. One frame. Gone.
+
+Then: another. Longer this time.
+
+Then: a weak, warm, yellow light. Not cold white — yellow. Something has changed in the chemistry of this.
+
+The lamp’s head trembles. Not the mechanical movement of before — something smaller, more interior. The movement of breathing.
+
+THE MAN leans toward it. His face in the warm light.
+
+The lamp slowly lifts its head.
+
+SOUND DESIGN: The piano returns — not the intro of November Rain, but something new. A single note, held. Then a chord. Warm. Unresolved. Waiting.
+
+The lamp is alive. And it is not what it was.
+
+# 9.  
 
 
 MORE...
