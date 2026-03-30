@@ -290,7 +290,44 @@ I am a Rockstar.
 
 SOUND DESIGN: The full band enters — November Rain as recorded, at full volume, at the moment of the final verse. The room fills.
 
-# 11. 
+# 11. INT. STAGE - SYNTHESIS
+ACT TEN: THE FINALE<br/>
+08:40 – 09:17 | SYNTHESIS<br/>
+
+AXEL plays the final chords. Not mechanical now — present. Each chord deliberate, felt.
+The lamp swings. Not randomly — in time. Its warm yellow beam sweeps the stage on the downbeats, rests on AXEL on the upbeats. They have found a shared rhythm.
+
+STAGE DIRECTION: For this final sequence, the lamp and AXEL should feel inevitable together — not a man and a machine, but two things that found their correct proportion to one another.
+
+[PROJECTION — final sequence]:
+-	The GUNS and ROSES charcoal words from the opening — now side by side, not separated
+-	The Disney castle — full, vivid, proud
+-	The lamp drawing — the one THE MAN drew by hand in Act Three, digitally restored from its torn pieces, now whole
+-	The TEAM ROCKSTARS logo
+-	Then: all of them together, layered, translucent, a palimpsest
+
+Final chord. AXEL’s hands on the keys. The lamp at full extension — head raised, light maximum.
+
+AXEL hits the last key.<br/>
+The lamp switches off.<br/>
+Instantly. Complete darkness.<br/>
+
+The projections hold for exactly three seconds after the lamp dies — then they too go dark. In sequence. Disney castle last.
+
+A beat. Silence.
+
+Then, from the darkness, the lamp’s warm yellow light comes back on for one second — no sound, no movement — and goes out again.
+
+Curtain falls.
+
+The End
+
+
+
+
+
+
+
 
 
 
