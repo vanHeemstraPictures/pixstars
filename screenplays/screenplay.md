@@ -268,5 +268,39 @@ The Disney castle projection reappears — fully now, vivid, the pencil-sketch v
 The lamp and WALT remain facing each other.
 The piano, still: one held note.
 
+# 10. INT. STAGE -TRANSFORMATION
+ACT NINE: THE ROCKSTAR RETURNS — CHANGED<br/>
+08:00 – 08:40 | TRANSFORMATION<br/>
+
+WALT moves to the piano. He opens the bench compartment. Inside: a YELLOW bandana.
+He holds it for a moment. Looks at the red bandana and sunglasses still on the piano keys.
+
+He picks up the sunglasses. Puts them on.
+
+He ties the yellow bandana.
+
+He sits.
+
+AXEL (in Dutch, easy, a little reckless, the grin back but softer now):
+
+Maar zeg maar… A… X… E… L…
+I am a Rockstar.
+
+[PROJECTION]: The TEAM ROCKSTARS logo appears — but beneath it, barely visible, the Disney castle pencil sketch remains. Both true. Neither cancelling the other.
+
+SOUND DESIGN: The full band enters — November Rain as recorded, at full volume, at the moment of the final verse. The room fills.
+
+# 11. 
+
+
+
+
+
+
+
+
+
+
+
 
 MORE...
