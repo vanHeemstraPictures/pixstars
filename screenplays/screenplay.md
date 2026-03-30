@@ -78,4 +78,24 @@ THE MAN’s smile stays a half-second too long, then falls. He lowers the drawin
 
 The Disney castle projection remains on the rear wall. Unchanged. Unaware.
 
-# 4. 
+# 4. INT. STAGE - TRANSLATION
+02:10 – 03:00 | TRANSLATION<br/>
+
+THE MAN studies the lamp. Really looks at it — the neck, the joints, the articulation of the head. He is an engineer now, not an artist.
+
+He draws again. Same speed, same confidence, but different — geometric, structural. He is drawing what he sees, not what he imagines.
+
+He lifts the drawing: THE LAMP. Rendered in the same charcoal style as the GUNS and ROSES projections from the opening.
+
+LAMP (movement only — no voice yet): The lamp leans forward. 30°. Immediate. The speed of recognition.
+
+Its light falls directly on the drawing. The drawing is lit from within.
+
+THE MAN exhales. His shoulders drop. He didn’t know he’d been holding them.
+The lamp moves — a small lateral sway, barely perceptible. The movement of something alive.
+
+SOUND DESIGN: The drum track brightens slightly. A hi-hat joins. Not louder — warmer.
+THE MAN and the lamp remain in this moment. Neither rushes it.
+The Disney castle projection pulses once, gently, as if the castle itself is breathing.
+
+# 5. 
