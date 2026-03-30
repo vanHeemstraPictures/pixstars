@@ -53,4 +53,29 @@ Long pause. Neither moves.
 [PROJECTION — REAR SCRIM]: The Disney castle materialises from the center outward — not the polished logo, but a pencil sketch, hand-drawn, imperfect. The towers are slightly uneven. It looks like a memory of the castle rather than the castle itself. It breathes slightly — a subtle, slow pulse, as though the projection itself is alive.
 The drum track holds. Patient.
 
-# 3. 
+# 3. INT. STAGE - THE FIRST DRAWING
+ACT THREE: CREATION AND ITS COST<br/>
+01:10 – 02:10 | THE FIRST DRAWING<br/>
+
+THE MAN flips the sheet music over. Blank side up. He takes a pencil from his breast pocket — not a prop pencil; a real one, worn down, the eraser blackened with use.
+He draws. Fast, confident lines. He doesn’t look up. He knows what this is.
+
+SOUND DESIGN: A soft scratch of pencil on paper is mic’d and amplified — intimate, close, as though the audience is watching over his shoulder.
+
+The drawing completes. He lifts it. Mickey Mouse. Rough but unmistakable — the ears, the gloves, the circular world of it.
+
+THE MAN smiles. The smile of a man who made the thing he set out to make.
+He presents the drawing to the lamp, holding it at lamp-height, the way you’d show a child.
+
+The lamp looks. Its head tilts 20° left. Then right. Then it slowly — very slowly — turns away.
+
+Not rejection. Something more devastating: disinterest.
+The lamp’s beam withdraws from the drawing as it turns. The paper falls into shadow.
+
+SOUND DESIGN: A single low note on the piano — played by no one. Pre-recorded. It lingers.
+
+THE MAN’s smile stays a half-second too long, then falls. He lowers the drawing. He stares at Mickey Mouse in the dark.
+
+The Disney castle projection remains on the rear wall. Unchanged. Unaware.
+
+# 4. 
