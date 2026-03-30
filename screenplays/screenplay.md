@@ -98,4 +98,33 @@ SOUND DESIGN: The drum track brightens slightly. A hi-hat joins. Not louder — 
 THE MAN and the lamp remain in this moment. Neither rushes it.
 The Disney castle projection pulses once, gently, as if the castle itself is breathing.
 
-# 5. 
+# 5. INT. STAGE - ASCENT
+ASCENTACT FOUR: THE ACCELERATION<br/>
+03:00 – 04:15 | ASCENT<br/>
+
+[PROJECTION SEQUENCE — rapid, each image replacing the last]:<br/>
+The lamp drawing THE MAN made appears on the rear scrim.<br/>
+The lamp turns toward the projection. Its beam hits the scrim.<br/>
+Then the projection changes:
+∙	Version 2: The same lamp, refined. Cleaner lines. As if a better artist drew it.
+∙	Version 3: The same lamp, with shading and depth. Almost technical.
+∙	Version 4: The same lamp in 3D wireframe. Rotating.
+∙	Version 5: Rendered. Photorealistic. Lit from within.
+∙	Version 6–12: Iterations at increasing speed — different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+
+SOUND DESIGN: The guitar enters — not November Rain as normally heard, but processed through a generative algorithm that subtly mutates each bar. The song recognises itself but is no longer in control of itself.
+
+The lamp turns outward. Toward the audience. Its light sweeps the front rows — slowly, deliberately, like a lighthouse. It is showing off.
+
+THE MAN draws faster. Trying to keep pace. His lines lose their confidence — shorter, corrective strokes replacing the long sure ones.
+
+He looks between his paper and the projections. Paper. Projection. Paper. Projection.
+His hand stops.
+
+He holds his drawing up — his lamp, his version, his hand — against the backdrop of the evolving AI iterations. The comparison is not cruel. It is simply true.
+
+THE MAN lowers his drawing. Slowly. He places it face-down on the piano.
+
+[PROJECTION]: The Disney castle, still present in the background, begins to fade — not erased, but overwhelmed. Like a star at sunrise. It is still there if you look. Soon you will stop looking.
+
+# 6. 
