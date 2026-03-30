@@ -196,4 +196,31 @@ He lowers his hands.
 
 STAGE DIRECTION — on the three deaths: The rhythm is everything. Each death must be longer than the last, and each resurrection — before the third — must be faster than expected, almost contemptuous in its ease. The lamp does not try to survive. It simply does. Until it doesn’t. The audience should laugh, nervously, at the first resurrection. By the third death, no one is laughing.
 
+# 7. INT. STAGE - HOLDING
+ACT SIX: THE VOID WITH HANDS<br/>
+05:10 – 06:00 | HOLDING<br/>
+
+SOUND DESIGN: The drum track returns — very distant now. Single kick drum. Like a pulse being monitored.
+
+THE MAN sits on the piano bench, turned away from the keys. The collapsed lamp is in front of him.
+
+He lifts it. Not by the cord, not by the base — by the head. The way you’d hold a face.
+He sits with it.
+
+STAGE DIRECTION: This is the longest still moment in the performance. The temptation will be to shorten it in rehearsal. Do not. The audience needs to sit in this.
+
+He looks at the dead bulb in his other hand.
+
+He looks at the lamp head.
+
+He looks at the audience. Not a theatrical look — an actual one. A man who made something, broke it, and is now deciding what that means.
+
+The Disney castle projection appears — very faint, barely visible. A ghost of itself. It may be imagination.
+
+
+# 8. 
+
+
+
+
 MORE...
