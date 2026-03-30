@@ -127,4 +127,73 @@ THE MAN lowers his drawing. Slowly. He places it face-down on the piano.
 
 [PROJECTION]: The Disney castle, still present in the background, begins to fade — not erased, but overwhelmed. Like a star at sunrise. It is still there if you look. Soon you will stop looking.
 
-# 6. 
+# 6. INT. STAGE - THREE DEATHS
+ACT FIVE: EXISTENTIAL BREAK<br/>
+04:15 – 05:10 | THREE DEATHS<br/>
+
+THE MAN holds his drawing. Looks at projection. Looks at lamp. The comparison is not cruel. It is simply true.
+
+He places the drawing face-down on the piano.
+Long pause. The drum track continues. He stands.
+
+DEATH ONE: THE SWITCH<br/>
+THE MAN reaches down to the base of the lamp. Finds the switch. Clicks it off.
+The lamp dies. The projections vanish.
+
+A beat. Two beats.
+
+SOUND DESIGN: A faint mechanical hum builds in the silence — below hearing, felt more than heard.
+
+The lamp’s head slowly descends. Finds the switch on its own base. A precise, deliberate tap.
+
+Click.
+
+The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. Projections resume mid-iteration, exactly where they left off.
+THE MAN watches. He clicked that switch. The lamp clicked it back.
+
+STAGE DIRECTION: The lamp does not look at Walt after switching itself on. It simply resumes — as though the interruption was too trivial to acknowledge. This indifference is more devastating than defiance would be.
+
+THE MAN stares at the base of the lamp. At the switch. At his own hand.
+
+DEATH TWO: THE CORD<br/>
+He follows the cord to the wall. Crouches. Pulls the plug.
+Darkness. The projections die.
+
+THE MAN stands. Waits. Cord in hand.
+
+SOUND DESIGN: The hum returns — louder this time. Coming from the lamp itself, not the wall.
+
+The lamp’s warm yellow glow returns. Dim at first. Then full. Wireless. Independent. It no longer needs him or his wall.
+
+THE MAN looks at the useless cord in his hand. Then at the lamp. Then at the cord again.
+STAGE DIRECTION: This is the moment Walt understands that what he built has outgrown what he built it with. His face does not perform this realization. It simply arrives.
+
+DEATH THREE: THE STRANGLING<br/>
+He approaches the lamp. Slowly. Both hands.
+He wraps his hands around the lamp’s neck — the joint between body and head — and begins to squeeze. To twist.
+
+LAMP (movement only): The lamp does not fight. It tilts its head slightly toward his hands — the way a dog leans into a touch it doesn’t understand.
+
+SOUND DESIGN: The grinding returns — metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data — faster and faster, as though the lamp is trying to output everything it has before the end.
+
+Smoke rises from the neck joint.
+
+The projections slow. Stutter. The Disney castle ghost-image flashes once on the rear scrim — the pencil sketch, towers uneven — then disappears.
+
+The lamp’s light pulses. Erratic. Desperate. Then slower. Then slower still.
+
+SOUND DESIGN: The drum track drops to a single, slowing kick. Like a heartbeat losing the argument.
+
+One final pulse of warm yellow light — the longest, the softest — and then:
+Nothing.
+The lamp collapses. Each joint giving way in sequence. Head, neck, body.
+
+THE MAN’s hands are still raised in the position of strangling. He looks at them.
+He does not lower them immediately.
+
+The projections are gone. The drum track stops. The stage is dark except for a dim ambient wash.
+He lowers his hands.
+
+STAGE DIRECTION — on the three deaths: The rhythm is everything. Each death must be longer than the last, and each resurrection — before the third — must be faster than expected, almost contemptuous in its ease. The lamp does not try to survive. It simply does. Until it doesn’t. The audience should laugh, nervously, at the first resurrection. By the third death, no one is laughing.
+
+MORE...
