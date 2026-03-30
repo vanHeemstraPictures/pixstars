@@ -248,7 +248,25 @@ SOUND DESIGN: The piano returns — not the intro of November Rain, but somethin
 
 The lamp is alive. And it is not what it was.
 
-# 9.  
+# 9. INT. STAGE - RECOGNITION
+ACT EIGHT: NAMING<br/>
+07:00 – 08:00 | RECOGNITION
+[PROJECTION — REAR SCRIM]: A white page appears. Clean. The lamp’s beam falls on it.
+The lamp projects — from its own light, cast onto the scrim — a simple drawing. Not the elaborate AI iterations of Act Four. A child’s drawing. A stick figure. A lamp. A piano. Two figures, side by side.
+Beneath the drawing, projected text forms letter by letter, as if being typed by something learning to type:
+A… I…
+THE MAN watches. Then he stands. He picks up his pencil. He approaches the scrim. He writes beneath the lamp’s text, in his own hand, on the projection:
+W… A… L… T…
+The lamp’s head tilts. A long pause. As if processing. As if deciding whether a name is a gift or a claim.
+LAMP (first voice — soft, synthesised but warm, like a child learning vowels):
+Walt…
+THE MAN turns to look at the lamp. The lamp’s beam is on his face.
+THE MAN, quietly — not performing, speaking:
+WALT:
+Hello.
+The Disney castle projection reappears — fully now, vivid, the pencil-sketch version, towers uneven and alive. It fills the rear wall.
+The lamp and WALT remain facing each other.
+The piano, still: one held note.
 
 
 MORE...
