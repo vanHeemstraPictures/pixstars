@@ -1,0 +1,52 @@
+pixstars_start_show:
+  alias: Start Pixstars Show
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/show/start
+        payload: '{"action":"start"}'
+
+
+pixstars_abort_show:
+  alias: Abort Pixstars Show
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/show/abort
+        payload: '{"action":"abort"}'
+
+
+pixstars_blackout:
+  alias: Pixstars Blackout
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/show/blackout
+        payload: '{"action":"blackout"}'
+
+
+pixstars_lamp_rebirth:
+  alias: Lamp Rebirth
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/lamp/state/set
+        payload: '{"state":"REBORN"}'
+
+
+pixstars_lamp_dead:
+  alias: Lamp Dead
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/lamp/state/set
+        payload: '{"state":"DEAD"}'
+
+
+pixstars_lamp_curious:
+  alias: Lamp Curious
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: pixstars/lamp/state/set
+        payload: '{"state":"CURIOUS"}'
