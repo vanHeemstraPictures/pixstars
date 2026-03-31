@@ -1,0 +1,12 @@
+mqtt: !include mqtt-entities.yaml
+
+input_boolean: !include helpers.yaml
+input_select: !include helpers.yaml
+input_button: !include helpers.yaml
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+lovelace:
+  mode: yaml
+  resources: []
