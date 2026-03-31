@@ -1,0 +1,157 @@
+title: Pixstars
+views:
+  - title: Control
+    path: pixstars
+    icon: mdi:spotlight
+
+    cards:
+
+      - type: grid
+        columns: 5
+        cards:
+
+          - type: button
+            name: Start Show
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/show/start
+                payload: '{"action":"start"}'
+
+          - type: button
+            name: Pause
+            icon: mdi:pause
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/show/pause
+                payload: '{"action":"pause"}'
+
+          - type: button
+            name: Abort
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/show/abort
+                payload: '{"action":"abort"}'
+
+          - type: button
+            name: Blackout
+            icon: mdi:lightbulb-off
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/show/blackout
+                payload: '{"action":"blackout"}'
+
+          - type: button
+            name: Reset Lamp
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/reset
+                payload: '{"action":"reset"}'
+
+
+      - type: entities
+        title: Show Status
+        entities:
+          - input_boolean.pixstars_show_armed
+          - input_boolean.pixstars_show_running
+          - input_select.pixstars_scene
+          - sensor.pixstars_current_scene
+          - sensor.pixstars_lamp_state
+          - binary_sensor.pixstars_audio_ok
+          - binary_sensor.pixstars_lamp_connected
+
+
+      - type: gauge
+        entity: sensor.pixstars_lamp_motor_temperature
+        name: Motor Temp
+        min: 0
+        max: 100
+        severity:
+          green: 0
+          yellow: 50
+          red: 70
+
+
+      - type: gauge
+        entity: sensor.pixstars_lamp_controller_temperature
+        name: Controller Temp
+        min: 0
+        max: 100
+        severity:
+          green: 0
+          yellow: 45
+          red: 65
+
+
+      - type: gauge
+        entity: sensor.pixstars_lamp_current_draw
+        name: Current
+
+
+      - type: entities
+        title: Lamp Health
+        entities:
+          - binary_sensor.pixstars_lamp_stall_detected
+          - binary_sensor.pixstars_lamp_smoke_active
+
+
+      - type: grid
+        columns: 5
+        cards:
+
+          - type: button
+            name: Curious
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/state/set
+                payload: '{"state":"CURIOUS"}'
+
+          - type: button
+            name: Arrogant
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/state/set
+                payload: '{"state":"ARROGANT"}'
+
+          - type: button
+            name: Rebirth
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/state/set
+                payload: '{"state":"REBORN"}'
+
+          - type: button
+            name: Smoke
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/smoke/test
+                payload: '{"action":"test"}'
+
+          - type: button
+            name: Rehome
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              data:
+                topic: pixstars/lamp/rehome
+                payload: '{"action":"rehome"}'
