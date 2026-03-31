@@ -1,0 +1,61 @@
+input_boolean:
+  pixstars_show_armed:
+    name: Pixstars Show Armed
+
+  pixstars_show_running:
+    name: Pixstars Show Running
+
+  pixstars_abort_requested:
+    name: Pixstars Abort Requested
+
+  pixstars_rehearsal_mode:
+    name: Pixstars Rehearsal Mode
+
+
+input_select:
+  pixstars_scene:
+    name: Pixstars Scene
+    options:
+      - EMERGENCE
+      - NOTICING
+      - THE_FIRST_DRAWING
+      - TRANSLATION
+      - ASCENT
+      - THREE_DEATHS
+      - HOLDING
+      - RETURN
+      - RECOGNITION
+      - TRANSFORMATION
+      - SYNTHESIS
+
+
+input_button:
+  pixstars_start_show:
+    name: Start Show
+
+  pixstars_pause_show:
+    name: Pause Show
+
+  pixstars_abort_show:
+    name: Abort Show
+
+  pixstars_reset_lamp:
+    name: Reset Lamp
+
+  pixstars_blackout_now:
+    name: Blackout Now
+
+  pixstars_test_rebirth:
+    name: Test Rebirth
+
+  pixstars_test_smoke:
+    name: Test Smoke
+
+  pixstars_test_curious:
+    name: Test Curious
+
+  pixstars_test_arrogant:
+    name: Test Arrogant
+
+  pixstars_rehome_lamp:
+    name: Rehome Lamp
