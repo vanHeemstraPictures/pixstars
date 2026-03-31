@@ -1,0 +1,42 @@
+mqtt:
+  sensor:
+    - name: "Pixstars Lamp Motor Temperature"
+      state_topic: "pixstars/lamp/temp/motor"
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    - name: "Pixstars Lamp Controller Temperature"
+      state_topic: "pixstars/lamp/temp/controller"
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    - name: "Pixstars Lamp Current Draw"
+      state_topic: "pixstars/lamp/current"
+      unit_of_measurement: "A"
+
+    - name: "Pixstars Current Scene"
+      state_topic: "pixstars/scene/current"
+
+    - name: "Pixstars Lamp State"
+      state_topic: "pixstars/lamp/state/current"
+
+  binary_sensor:
+    - name: "Pixstars Lamp Connected"
+      state_topic: "pixstars/lamp/connected"
+      payload_on: "online"
+      payload_off: "offline"
+
+    - name: "Pixstars Audio OK"
+      state_topic: "pixstars/audio/status"
+      payload_on: "ok"
+      payload_off: "fault"
+
+    - name: "Pixstars Lamp Stall Detected"
+      state_topic: "pixstars/lamp/stall"
+      payload_on: "on"
+      payload_off: "off"
+
+    - name: "Pixstars Lamp Smoke Active"
+      state_topic: "pixstars/lamp/smoke"
+      payload_on: "on"
+      payload_off: "off"
