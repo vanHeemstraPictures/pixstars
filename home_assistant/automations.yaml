@@ -1,0 +1,49 @@
+automation:
+
+  - alias: Pixstars Emergency Stop
+    triggers:
+      - trigger: numeric_state
+        entity_id: sensor.pixstars_lamp_motor_temperature
+        above: 70
+
+      - trigger: numeric_state
+        entity_id: sensor.pixstars_lamp_controller_temperature
+        above: 65
+
+      - trigger: state
+        entity_id: binary_sensor.pixstars_lamp_stall_detected
+        to: "on"
+
+    actions:
+      - action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.pixstars_abort_requested
+
+      - action: mqtt.publish
+        data:
+          topic: pixstars/show/blackout
+          payload: '{"action":"blackout"}'
+
+      - action: mqtt.publish
+        data:
+          topic: pixstars/show/abort
+          payload: '{"action":"abort"}'
+
+
+  - alias: Pixstars Test Curious
+    triggers:
+      - trigger: state
+        entity_id: input_button.pixstars_test_curious
+
+    actions:
+      - action: mqtt.publish
+        data:
+          topic: pixstars/lamp/state/set
+          payload: '{"state":"CURIOUS"}'
+
+      - delay: "00:00:03"
+
+      - action: mqtt.publish
+        data:
+          topic: pixstars/lamp/state/set
+          payload: '{"state":"FUNCTIONAL"}'
