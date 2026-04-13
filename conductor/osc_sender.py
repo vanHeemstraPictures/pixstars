@@ -65,12 +65,16 @@ class OSCSender:
         if not self._ardour_rolling:
             self.send("ardour", "/toggle_roll")
             self._ardour_rolling = True
+            # Explicitly notify digital twin of transport state
+            self.send("twin", "/transport/state", "PLAYING")
 
     def ardour_stop(self):
         """Stop Ardour playback. Uses /toggle_roll if currently rolling."""
         if self._ardour_rolling:
             self.send("ardour", "/toggle_roll")
             self._ardour_rolling = False
+            # Explicitly notify digital twin of transport state
+            self.send("twin", "/transport/state", "STOPPED")
 
     def ardour_locate(self, samples: int, roll: int = 1):
         """Locate Ardour playhead to a sample position."""

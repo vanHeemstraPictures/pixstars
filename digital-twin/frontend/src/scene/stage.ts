@@ -54,6 +54,12 @@ export interface StageMeshes {
   floor: Mesh;
   rearWall: Mesh;
 
+  // Performer arms and hands (for animation)
+  armL: Mesh;
+  armR: Mesh;
+  handL: Mesh;
+  handR: Mesh;
+
   // Glow
   glowLayer: GlowLayer;
 }
@@ -284,28 +290,67 @@ export function createStage(scene: Scene): StageMeshes {
   fixtureR.position = new Vector3(2.5, 4, 1.5);
   fixtureR.material = standMat;
 
-  // ── Performer Silhouette ──────────────────────────────────────────────
-  // Simple seated figure behind keyboard
-  // Torso
+  // ── Performer Silhouette (seated at keyboard) ────────────────────────
+  // Piano bench
+  const bench = MeshBuilder.CreateBox("bench", { width: 0.6, height: 0.05, depth: 0.3 }, scene);
+  bench.position = new Vector3(0, 0.55, -0.5);
+  bench.material = performerMat;
+  const benchLegL = MeshBuilder.CreateCylinder("benchLegL", { height: 0.55, diameter: 0.04 }, scene);
+  benchLegL.position = new Vector3(-0.25, 0.275, -0.5);
+  benchLegL.material = performerMat;
+  const benchLegR = MeshBuilder.CreateCylinder("benchLegR", { height: 0.55, diameter: 0.04 }, scene);
+  benchLegR.position = new Vector3(0.25, 0.275, -0.5);
+  benchLegR.material = performerMat;
+
+  // Torso (seated upright on bench)
   const torso = MeshBuilder.CreateCylinder("torso", { height: 0.5, diameter: 0.3 }, scene);
-  torso.position = new Vector3(0, 1.3, -0.35);
+  torso.position = new Vector3(0, 1.05, -0.5);
   torso.material = performerMat;
 
   // Head
-  const head = MeshBuilder.CreateSphere("head", { diameter: 0.2 }, scene);
-  head.position = new Vector3(0, 1.7, -0.35);
+  const head = MeshBuilder.CreateSphere("head", { diameter: 0.22 }, scene);
+  head.position = new Vector3(0, 1.45, -0.5);
   head.material = performerMat;
 
-  // Arms (reaching toward keyboard)
-  const armL = MeshBuilder.CreateCylinder("armL", { height: 0.4, diameter: 0.06 }, scene);
-  armL.position = new Vector3(-0.2, 1.15, -0.15);
-  armL.rotation.x = Math.PI / 3;
-  armL.material = performerMat;
+  // Upper legs (thighs — horizontal, going forward toward keyboard)
+  const thighL = MeshBuilder.CreateCylinder("thighL", { height: 0.4, diameter: 0.1 }, scene);
+  thighL.position = new Vector3(-0.12, 0.6, -0.3);
+  thighL.rotation.x = Math.PI / 2;
+  thighL.material = performerMat;
+  const thighR = MeshBuilder.CreateCylinder("thighR", { height: 0.4, diameter: 0.1 }, scene);
+  thighR.position = new Vector3(0.12, 0.6, -0.3);
+  thighR.rotation.x = Math.PI / 2;
+  thighR.material = performerMat;
 
-  const armR = MeshBuilder.CreateCylinder("armR", { height: 0.4, diameter: 0.06 }, scene);
-  armR.position = new Vector3(0.2, 1.15, -0.15);
-  armR.rotation.x = Math.PI / 3;
+  // Lower legs (vertical, going down from knee)
+  const shinL = MeshBuilder.CreateCylinder("shinL", { height: 0.45, diameter: 0.08 }, scene);
+  shinL.position = new Vector3(-0.12, 0.35, -0.1);
+  shinL.material = performerMat;
+  const shinR = MeshBuilder.CreateCylinder("shinR", { height: 0.45, diameter: 0.08 }, scene);
+  shinR.position = new Vector3(0.12, 0.35, -0.1);
+  shinR.material = performerMat;
+
+  // Arms (reaching forward toward keyboard keys at Y=0.84, Z=-0.1)
+  const armL = MeshBuilder.CreateCylinder("armL", { height: 0.35, diameter: 0.06 }, scene);
+  armL.position = new Vector3(-0.2, 0.92, -0.3);
+  armL.rotation.x = Math.PI / 2.5;
+  armL.material = performerMat;
+  const armR = MeshBuilder.CreateCylinder("armR", { height: 0.35, diameter: 0.06 }, scene);
+  armR.position = new Vector3(0.2, 0.92, -0.3);
+  armR.rotation.x = Math.PI / 2.5;
   armR.material = performerMat;
+
+  // Hands (start in lap, animate to keys when playing)
+  const handMat = new StandardMaterial("handMat", scene);
+  handMat.diffuseColor = new Color3(0.15, 0.12, 0.1);
+  handMat.alpha = 0.85;
+
+  const handL = MeshBuilder.CreateBox("handL", { width: 0.12, height: 0.04, depth: 0.08 }, scene);
+  handL.position = new Vector3(-0.15, 0.65, -0.35);
+  handL.material = handMat;
+  const handR = MeshBuilder.CreateBox("handR", { width: 0.12, height: 0.04, depth: 0.08 }, scene);
+  handR.position = new Vector3(0.15, 0.65, -0.35);
+  handR.material = handMat;
 
   return {
     lampBase,
@@ -319,6 +364,10 @@ export function createStage(scene: Scene): StageMeshes {
     projectionScreen,
     projectionMaterial: screenMat,
     projectionTexture: screenTexture,
+    armL,
+    armR,
+    handL,
+    handR,
     spotLeft,
     spotRight,
     spotConeLeft,

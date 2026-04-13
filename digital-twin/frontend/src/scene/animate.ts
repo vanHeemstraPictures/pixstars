@@ -5,7 +5,7 @@
  * Handles smooth transitions (lerping) between states.
  */
 
-import { Color3, StandardMaterial } from "@babylonjs/core";
+import { Color3, StandardMaterial, Vector3 } from "@babylonjs/core";
 import type { StageMeshes } from "./stage";
 import type { StageEvent } from "../state/websocket";
 import { LAMP_STATES, LIGHTING_STATES, PROJECTION_SCENES, type LampParams, type LightingParams } from "../state/states";
@@ -20,6 +20,9 @@ interface AnimationState {
   projTargetR: number; projTargetG: number; projTargetB: number;
   projectionLabel: string;
   projectionLabelDirty: boolean;
+
+  // Transport
+  isPlaying: boolean;
 
   // Animation timing
   time: number;
@@ -38,6 +41,7 @@ export function createAnimationState(): AnimationState {
     projTargetR: 0, projTargetG: 0, projTargetB: 0,
     projectionLabel: "",
     projectionLabelDirty: true,
+    isPlaying: false,
     time: 0,
     strobePhase: 0,
   };
@@ -53,6 +57,10 @@ export function handleStageEvent(event: StageEvent, state: AnimationState): void
     case "lighting": {
       const params = LIGHTING_STATES[event.value];
       if (params) state.lightingTarget = { ...params };
+      break;
+    }
+    case "transport": {
+      state.isPlaying = event.value === "PLAYING" || event.value === "ROLLING";
       break;
     }
     case "projection": {
@@ -181,6 +189,63 @@ export function updateScene(
     state.projectionG * 0.8,
     state.projectionB * 0.8,
   );
+
+  // ── Performer arms + hands animation ─────────────────────────────
+  // Shoulders are fixed. Arms are computed to bridge shoulder→hand.
+  const shoulderL = new Vector3(-0.2, 0.95, -0.48);
+  const shoulderR = new Vector3(0.2, 0.95, -0.48);
+  const speed = 0.08;
+
+  let handLTarget: Vector3;
+  let handRTarget: Vector3;
+
+  if (state.isPlaying) {
+    // Hands on keys, oscillating left/right across registers
+    const spread = Math.sin(state.time * 0.8) * 0.15;
+    const flutter = Math.sin(state.time * 3.5) * 0.05;
+    handLTarget = new Vector3(-0.2 + spread - flutter, 0.855, -0.1);
+    handRTarget = new Vector3(0.2 - spread + flutter, 0.855, -0.1);
+  } else {
+    // Hands resting in lap
+    handLTarget = new Vector3(-0.15, 0.65, -0.35);
+    handRTarget = new Vector3(0.15, 0.65, -0.35);
+  }
+
+  // Smoothly move hands toward target
+  meshes.handL.position = Vector3.Lerp(meshes.handL.position, handLTarget, speed);
+  meshes.handR.position = Vector3.Lerp(meshes.handR.position, handRTarget, speed);
+
+  // Compute arm position and rotation to connect shoulder to hand
+  // Arm center = midpoint between shoulder and current hand position
+  // Arm rotation = angle from shoulder down to hand in the YZ plane
+  const hL = meshes.handL.position;
+  const hR = meshes.handR.position;
+
+  // Left arm
+  const midL = new Vector3(
+    (shoulderL.x + hL.x) / 2,
+    (shoulderL.y + hL.y) / 2,
+    (shoulderL.z + hL.z) / 2
+  );
+  const dyL = shoulderL.y - hL.y;
+  const dzL = hL.z - shoulderL.z;
+  const angleL = Math.atan2(dzL, dyL);  // angle from vertical in YZ plane
+
+  meshes.armL.position = Vector3.Lerp(meshes.armL.position, midL, speed);
+  meshes.armL.rotation.x = lerp(meshes.armL.rotation.x, angleL, speed);
+
+  // Right arm
+  const midR = new Vector3(
+    (shoulderR.x + hR.x) / 2,
+    (shoulderR.y + hR.y) / 2,
+    (shoulderR.z + hR.z) / 2
+  );
+  const dyR = shoulderR.y - hR.y;
+  const dzR = hR.z - shoulderR.z;
+  const angleR = Math.atan2(dzR, dyR);
+
+  meshes.armR.position = Vector3.Lerp(meshes.armR.position, midR, speed);
+  meshes.armR.rotation.x = lerp(meshes.armR.rotation.x, angleR, speed);
 }
 
 function lerp(a: number, b: number, t: number): number {

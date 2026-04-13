@@ -119,6 +119,7 @@ def run_show(cues: list[dict], sender: OSCSender, ardour: ArdourOSC, dry_run: bo
 
     elapsed = time.time() - show_start
     print("=" * 70)
+    sender.ardour_stop()
     print(f"  SHOW COMPLETE — Total time: {format_time(elapsed)}")
     print("=" * 70)
 
@@ -145,6 +146,10 @@ def _dispatch_cue(cue: dict, index: int, total: int, sender: OSCSender, ardour: 
     # Lighting state
     if "lighting" in cue and cue["lighting"]:
         sender.lighting_state(cue["lighting"])
+
+    # Always broadcast current transport state to digital twin
+    transport_state = "PLAYING" if sender._ardour_rolling else "STOPPED"
+    sender.send("twin", "/transport/state", transport_state)
 
 
 def main():

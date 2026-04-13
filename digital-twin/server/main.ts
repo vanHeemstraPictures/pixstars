@@ -84,15 +84,21 @@ console.log(`  OSC listener:  UDP port ${OSC_PORT}`);
 console.log(`  WebSocket:     ws://localhost:${WS_PORT}`);
 console.log("═".repeat(60));
 
-for await (const [data, _addr] of udpSocket) {
-  const msg = parseOSC(data);
-  if (!msg) continue;
+let transportPlaying = false;
 
-  // Map OSC address to a typed event
-  const event = mapOSCToEvent(msg.address, msg.args);
-  if (event) {
-    console.log(`  [OSC] ${msg.address} ${msg.args.join(" ")} → ${event.type}:${event.value}`);
-    broadcastJSON(event as unknown as Record<string, unknown>);
+for await (const [data, _addr] of udpSocket) {
+  try {
+    const msg = parseOSC(data);
+    if (!msg) continue;
+
+    // Map OSC address to a typed event
+    const event = mapOSCToEvent(msg.address, msg.args);
+    if (event) {
+      console.log(`  [OSC] ${msg.address} ${msg.args.join(" ")} → ${event.type}:${event.value}`);
+      broadcastJSON(event as unknown as Record<string, unknown>);
+    }
+  } catch (err) {
+    console.error(`  [OSC ERROR] ${err}`);
   }
 }
 
@@ -103,6 +109,7 @@ interface StageEvent {
   value: string;
   timestamp: number;
 }
+
 
 function mapOSCToEvent(
   address: string,
@@ -121,10 +128,21 @@ function mapOSCToEvent(
       return { type: "lighting", value: String(args[0] ?? ""), timestamp };
 
     case "/transport_play":
+      transportPlaying = true;
       return { type: "transport", value: "PLAYING", timestamp };
 
     case "/transport_stop":
+      transportPlaying = false;
       return { type: "transport", value: "STOPPED", timestamp };
+
+    case "/toggle_roll":
+      transportPlaying = !transportPlaying;
+      return { type: "transport", value: transportPlaying ? "PLAYING" : "STOPPED", timestamp };
+
+    case "/transport/state":
+      // Explicit transport state from conductor (more reliable than toggle)
+      transportPlaying = args[0] === "PLAYING";
+      return { type: "transport", value: String(args[0]), timestamp };
 
     case "/cue/name":
       return { type: "cue", value: String(args[0] ?? ""), timestamp };
