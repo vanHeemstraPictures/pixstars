@@ -131,6 +131,7 @@ class TestCueDispatching(unittest.TestCase):
     def test_full_cue_dispatches_all(self):
         """A cue with all fields dispatches to all subsystems."""
         sender = MagicMock(spec=OSCSender)
+        sender._ardour_rolling = False
         ardour = MagicMock(spec=ArdourOSC)
 
         cue = {
@@ -152,6 +153,7 @@ class TestCueDispatching(unittest.TestCase):
     def test_partial_cue_dispatches_only_present(self):
         """A cue with only lamp field only dispatches lamp."""
         sender = MagicMock(spec=OSCSender)
+        sender._ardour_rolling = False
         ardour = MagicMock(spec=ArdourOSC)
 
         cue = {
