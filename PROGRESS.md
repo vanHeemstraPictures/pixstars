@@ -7,7 +7,7 @@
 
 ## Phase 1 — Mac Mini Foundation
 
-- [ ] Review `README.md`
+- [x] Review `README.md`
 - [ ] Review `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`
 - [ ] Review `docs/OPTIMIZED_PIXSTARS_ARCHITECTURE.md`
 - [ ] Run `bash mac/scripts/install_hivemind_server.sh`
