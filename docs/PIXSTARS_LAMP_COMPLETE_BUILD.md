@@ -5,25 +5,28 @@ This document is the canonical combined build guide for the Pixstars lamp system
 ## System overview
 
 ### Lamp head
-- Raspberry Pi Zero 2 W
+
+- Raspberry Pi Zero 2 WH (pre-soldered headers — no soldering required)
 - USB microphone
 - small speaker
 - WS2812B / NeoPixel LED ring
 - `hivemind-mic-satellite`
 
 ### Mac Mini M4 Pro
+
 - `hivemind-core`
 - `hivemind-audio-binary-protocol`
 - OVOS-side STT / TTS / wake word / synthetic voice
 - optional Ardour for deterministic cue playback
 
 ## Wake word
+
 Target wake word: **Hey A.I.**
 
 ## LED state language
 
 | State | Meaning | Color | Motion |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | idle | resting but alive | warm amber | slow breathing |
 | listening | hearing user input | blue | gentle pulse |
 | thinking | processing | purple | tighter pulse |
