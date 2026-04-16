@@ -1,0 +1,15 @@
+[Unit]
+Description=Pixstars Lamp LED State Service
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+Environment="HOME=/home/pi"
+ExecStart=/home/pi/venvs/hivemind-mic-sat/bin/python /home/pi/led_hivemind_states_filewatch.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

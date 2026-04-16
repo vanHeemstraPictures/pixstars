@@ -1,0 +1,4 @@
+# Add one episode markdown file path per line, relative to repo root
+# Example:
+# articles/et_by_openvoiceos_series/et-by-openvoiceos-episode-01.md
+# articles/et_by_openvoiceos_series/et-by-openvoiceos-episode-02.md
