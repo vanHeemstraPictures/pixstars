@@ -1,0 +1,13 @@
+{
+  "auto_approve_min_score": 0.9,
+  "human_review_min_score": 0.75,
+  "reject_below_score": 0.75,
+  "required_checks": [
+    "intelligible",
+    "warm",
+    "fragile",
+    "not_too_robotic",
+    "not_too_comic",
+    "not_too_adult"
+  ]
+}

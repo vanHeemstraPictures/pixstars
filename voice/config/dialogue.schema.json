@@ -1,0 +1,38 @@
+{
+  "title": "Pixstars Lamp Dialogue Entry",
+  "type": "object",
+  "required": [
+    "id",
+    "text",
+    "emotion"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "episode": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "scene": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "text": {
+      "type": "string"
+    },
+    "emotion": {
+      "type": "string"
+    },
+    "delivery_notes": {
+      "type": "string"
+    },
+    "filename_hint": {
+      "type": "string"
+    }
+  }
+}

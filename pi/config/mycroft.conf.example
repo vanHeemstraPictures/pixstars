@@ -1,0 +1,16 @@
+{
+  "listener": {
+    "sample_rate": 16000,
+    "device_name": ""
+  },
+  "VAD": {
+    "module": "ovos-vad-plugin-silero"
+  },
+  "microphone": {
+    "module": "ovos-microphone-plugin-alsa"
+  },
+  "sounds": {
+    "start_listening": "",
+    "end_listening": ""
+  }
+}

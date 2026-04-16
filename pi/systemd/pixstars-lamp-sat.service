@@ -1,0 +1,17 @@
+[Unit]
+Description=Pixstars Lamp HiveMind Mic Satellite
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+Environment="HOME=/home/pi"
+# Replace the command below with the exact installed entry point if needed.
+ExecStart=/home/pi/venvs/hivemind-mic-sat/bin/python -m hivemind_mic_sat
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

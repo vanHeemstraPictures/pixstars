@@ -1,0 +1,3 @@
+cue_id,cue_label,audio_file,pre_state,during_state,post_state,notes
+cue_001,Hello,voice/output/final_wav/lamp_001_hello_curious.wav,thinking,speaking,idle,Opening greeting
+cue_002,Please Stay,voice/output/final_wav/lamp_003_please_stay_fragile.wav,thinking,speaking,idle,Conflict beat

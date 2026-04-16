@@ -1,0 +1,27 @@
+{
+  "listener": {
+    "host": "0.0.0.0",
+    "port": 5678
+  },
+  "binary_protocol": {
+    "module": "hivemind-audio-binary-protocol-plugin",
+    "hivemind-audio-binary-protocol-plugin": {
+      "stt": {
+        "module": "dummy-stt-plugin"
+      },
+      "tts": {
+        "module": "dummy-tts-plugin"
+      },
+      "vad": {
+        "module": "ovos-vad-plugin-silero"
+      },
+      "wake_word": "hey_ai",
+      "hotwords": {
+        "hey_ai": {
+          "module": "ovos-ww-plugin-precise-lite",
+          "model": "/ABSOLUTE/PATH/TO/hey_ai.tflite"
+        }
+      }
+    }
+  }
+}
