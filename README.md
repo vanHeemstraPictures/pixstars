@@ -166,6 +166,10 @@ Synthetic voice creation using Coqui XTTS. Includes dialogue extraction, render 
 - [Troubleshooting](./docs/TROUBLESHOOTING.md)
 - [ThingsBoard Integration Plan](./THINGSBOARD_SETUP.md)
 - [Voice Pipeline](./voice/docs/VOICE_PIPELINE.md)
+- [OpenVoiceOS / OVOS Setup](./SPEECH_SETUP_synthetic_voice.md)
+- [Installation Guide (incl. OVOS)](./INSTALL.md)
+- [Complete Lamp Build (incl. OVOS)](./docs/PIXSTARS_LAMP_COMPLETE_BUILD.md)
+- [HiveMind Voice Automation](./docs/HIVEMIND_VOICE_AUTOMATION.md)
 
 ---
 
