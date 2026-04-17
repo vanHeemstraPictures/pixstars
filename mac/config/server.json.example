@@ -7,19 +7,26 @@
     "module": "hivemind-audio-binary-protocol-plugin",
     "hivemind-audio-binary-protocol-plugin": {
       "stt": {
-        "module": "dummy-stt-plugin"
+        "module": "ovos-stt-plugin-server",
+        "ovos-stt-plugin-server": {
+          "url": "https://stt.openvoiceos.org/stt"
+        }
       },
       "tts": {
-        "module": "dummy-tts-plugin"
+        "module": "ovos-tts-plugin-piper",
+        "ovos-tts-plugin-piper": {
+          "voice": "alan-low"
+        }
       },
       "vad": {
         "module": "ovos-vad-plugin-silero"
       },
-      "wake_word": "hey_ai",
+      "_comment_wake_word": "Using hey_mycroft for now. Replace with hey_ai.tflite once the custom model has been trained.",
+      "wake_word": "hey_mycroft",
       "hotwords": {
-        "hey_ai": {
+        "hey_mycroft": {
           "module": "ovos-ww-plugin-precise-lite",
-          "model": "/ABSOLUTE/PATH/TO/hey_ai.tflite"
+          "model": "~/.local/share/pixstars/wake-words/hey_mycroft.tflite"
         }
       }
     }

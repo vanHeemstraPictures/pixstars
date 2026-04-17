@@ -10,11 +10,11 @@
 - [x] Review `README.md`
 - [x] Review `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`
 - [x] Review `docs/OPTIMIZED_PIXSTARS_ARCHITECTURE.md`
-- [ ] Run `bash mac/scripts/install_hivemind_server.sh`
-- [ ] Copy `mac/config/server.json.example` → `~/.config/hivemind-core/server.json`
-- [ ] Adjust wake-word model path
-- [ ] Adjust STT plugin
-- [ ] Adjust TTS plugin
+- [x] Run `bash mac/scripts/install_hivemind_server.sh`
+- [x] Copy `mac/config/server.json.example` → `~/.config/hivemind-core/server.json`
+- [x] Adjust wake-word model path
+- [x] Adjust STT plugin
+- [x] Adjust TTS plugin
 
 ## Phase 2 — Raspberry Pi Lamp Head
 
