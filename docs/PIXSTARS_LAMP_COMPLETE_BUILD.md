@@ -6,7 +6,7 @@ This document is the canonical combined build guide for the Pixstars lamp system
 
 ### Lamp head
 
-- Raspberry Pi Zero 2 WH (pre-soldered headers — no soldering required)
+- Raspberry Pi Zero 2 WH (H means pre-soldered headers — no soldering required)
 - USB microphone
 - small speaker
 - WS2812B / NeoPixel LED ring

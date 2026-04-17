@@ -8,8 +8,8 @@
 ## Phase 1 — Mac Mini Foundation
 
 - [x] Review `README.md`
-- [ ] Review `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`
-- [ ] Review `docs/OPTIMIZED_PIXSTARS_ARCHITECTURE.md`
+- [x] Review `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`
+- [x] Review `docs/OPTIMIZED_PIXSTARS_ARCHITECTURE.md`
 - [ ] Run `bash mac/scripts/install_hivemind_server.sh`
 - [ ] Copy `mac/config/server.json.example` → `~/.config/hivemind-core/server.json`
 - [ ] Adjust wake-word model path
