@@ -18,14 +18,29 @@ Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally
 
 When editing the screenplay, preserve the identity shifts and the lamp vocabulary. Don't collapse them.
 
-## Hardware stack (Pinokio lamp)
+## Hardware stack (Pinokio lamp) — Cave Architecture v2
 
-- **Pololu Mini Maestro 24-channel USB servo controller** — primary motion brain
-- **4× MG996R** servos (large articulation: base, shoulder, elbow, head tilt)
-- **2× MG90S** servos (fine motion)
+All servos and electronics are hidden inside a "cave" under a Lazy Susan turntable.
+The lamp itself contains no motors — only a NeoPixel LED ring and a Dynamixel AX-12A
+for head nod. Cables route through a single central column.
+
+See `architecture_decision_records/LAMP_ARCHITECTURE_v2.md` for the full rationale.
+
+### Cave (under turntable)
+- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + NeoPixel
+- **Pololu Mini Maestro 18-channel** servo controller (serial from ESP32)
+- **4x MG996R** servos — shoulder (Ch0), elbow (Ch1), forearm twist (Ch2), spare (Ch3)
+- **1x MG90S** servo — neck pan (Ch4), carbon fibre push-pull rod to lamp head
+- **NEMA 17 stepper + A4988 driver** — 360-degree base rotation via Lazy Susan bearing
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos, separated from logic)
-- **Logitech C920** webcam — mounted on/near the lamp, role TBD in script (gaze / projection source / both)
-- **NeoPixel RGBW LED ring** driven by an **Arduino Nano** acting as a serial bridge (the Maestro doesn't speak NeoPixel, hence the Nano)
+- **12V supply** for NEMA 17 stepper
+
+### Lamp head
+- **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
+- **NeoPixel RGBW LED ring** — driven by ESP32 directly (no Arduino Nano)
+- **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
+
+### Host
 - **Mac Mini M4 Pro** — show control host, runs everything
 
 Servo channel map and sequence scripts live in this repo. Update both together when channels shift.
@@ -42,9 +57,14 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
-- Maestro Control Center or scripted serial control for servos
-- Arduino serial bridge for the NeoPixel ring
+- ESP32 WiFi communication (OSC commands to lamp cave)
 - Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
+
+ESP32 in the lamp cave handles:
+- Maestro serial control for MG996R/MG90S servos
+- AX-12A TTL serial for head nod
+- NEMA 17 stepper via A4988 for base rotation
+- NeoPixel RGBW LED ring drive
 
 Timecode strategy and cue routing should live in `docs/` or a top-level `SHOW_CONTROL.md` — check what's there before assuming.
 

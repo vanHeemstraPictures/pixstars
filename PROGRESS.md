@@ -93,5 +93,7 @@
 
 _Add any notes, blockers, or decisions here as you go._
 
+- 2026-04-17: Phase 1 complete. Pi Zero 2 WH ordered (Amazon.nl), arriving 2026-04-18. Phase 2 blocked until hardware arrives.
+
 - 
 
