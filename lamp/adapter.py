@@ -11,7 +11,7 @@ Listens on port 9001 for:
 
 Usage:
     source .venv/bin/activate
-    python -m lamp.adapter                # Run with mock servo output
+    python -m lamp.adapter                # Run with mock servo output (ESP32 WiFi in production)
     python -m lamp.adapter --verbose      # Verbose logging
 """
 
@@ -69,8 +69,8 @@ class LampAdapter:
         #   hivemind.rhythm_rate = state.speed
         #   etc.
 
-        # TODO: When servo controller is connected, send direct
-        # position commands for non-AI states (INERT, DEAD, OFF)
+        # TODO: When ESP32 WiFi bridge is connected, send direct
+        # position commands via ESP32 to Maestro for non-AI states (INERT, DEAD, OFF)
 
     def _handle_unknown(self, address: str, *args):
         """Handle unrecognized OSC messages."""
@@ -88,7 +88,7 @@ class LampAdapter:
         print(f"  PIXSTARS LAMP ADAPTER")
         print(f"  Listening on port {self.port}")
         print(f"  Valid states: {', '.join(list_states())}")
-        print(f"  Servo: MOCKED (logging only)")
+        print(f"  Servo: MOCKED (logging only — ESP32 WiFi bridge in production)")
         print("=" * 50)
 
         # Handle Ctrl+C gracefully
