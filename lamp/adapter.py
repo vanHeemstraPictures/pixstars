@@ -69,8 +69,9 @@ class LampAdapter:
         #   hivemind.rhythm_rate = state.speed
         #   etc.
 
-        # TODO: When ESP32 WiFi bridge is connected, send direct
-        # position commands via ESP32 to Maestro for non-AI states (INERT, DEAD, OFF)
+        # TODO: When ESP32 WiFi bridge is connected, send servo commands
+        # via ESP32 to Maestro. Base rotation uses ComXim CT protocol
+        # directly from Mac Mini (not via ESP32).
 
     def _handle_unknown(self, address: str, *args):
         """Handle unrecognized OSC messages."""

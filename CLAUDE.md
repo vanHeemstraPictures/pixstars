@@ -18,26 +18,31 @@ Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally
 
 When editing the screenplay, preserve the identity shifts and the lamp vocabulary. Don't collapse them.
 
-## Hardware stack (Pinokio lamp) — Cave Architecture v2
+## Hardware stack (Pinokio lamp) — Cave Architecture v3
 
-All servos and electronics are hidden inside a "cave" under a Lazy Susan turntable.
-The lamp itself contains no motors — only a NeoPixel LED ring and a Dynamixel AX-12A
-for head nod. Cables route through a single central column.
+All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
+programmable turntable, mounted on a riser block. The lamp itself contains no motors
+— only a NeoPixel LED ring and a Dynamixel AX-12A for head nod. Cables route through
+a single central column.
 
-See `architecture_decision_records/LAMP_ARCHITECTURE_v2.md` for the full rationale.
+See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationale.
 
-### Cave (under turntable)
-- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + NeoPixel
-- **Pololu Mini Maestro 18-channel** servo controller (serial from ESP32)
-- **4x MG996R** servos — shoulder (Ch0), elbow (Ch1), forearm twist (Ch2), spare (Ch3)
-- **1x MG90S** servo — neck pan (Ch4), carbon fibre push-pull rod to lamp head
-- **NEMA 17 stepper + A4988 driver** — 360-degree base rotation via Lazy Susan bearing
+### Base rotation
+- **ComXim MTxRUWSLPro** programmable turntable — precision base rotation (0.1°),
+  WiFi CT command protocol, controlled directly from Mac Mini (not via ESP32)
+- **Riser block** (120–150mm AL or plywood) — creates cave depth, ComXim mounts on top
+
+### Cave (under turntable, on servo rail)
+- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A
+- **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
+- **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
+- **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
+- **Arduino Nano** — NeoPixel serial bridge (Ch5 on Maestro)
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos, separated from logic)
-- **12V supply** for NEMA 17 stepper
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
-- **NeoPixel RGBW LED ring** — driven by ESP32 directly (no Arduino Nano)
+- **NeoPixel RGBW LED ring** — driven by Arduino Nano (serial bridge from Maestro Ch5)
 - **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
 
 ### Host
@@ -57,14 +62,19 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
-- ESP32 WiFi communication (OSC commands to lamp cave)
+- ESP32 WiFi communication (OSC commands to lamp cave servos)
+- ComXim WiFi communication (CT commands for base rotation)
 - Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
 
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
-- NEMA 17 stepper via A4988 for base rotation
-- NeoPixel RGBW LED ring drive
+- Arduino Nano serial bridge for NeoPixel RGBW ring
+
+ComXim MTxRUWSLPro handles:
+- Base rotation (precision stepping, 0.1° resolution)
+- Origin return on command
+- Controlled directly from Mac Mini via WiFi CT protocol
 
 Timecode strategy and cue routing should live in `docs/` or a top-level `SHOW_CONTROL.md` — check what's there before assuming.
 
