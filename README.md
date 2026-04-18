@@ -114,7 +114,7 @@ Plays November Rain via Pianoteq (piano, Ch1) and MODO DRUM (drums, Ch10) from t
 
 ### Jess+ Lamp Adapter (`lamp/`)
 
-Translates 14 personality states (INERT → CURIOUS → PLEASED → ARROGANT → DYING → REBORN → ...) into servo parameters (energy, speed, range, jitter, tilt bias). Cave-based architecture: all servos hidden under a Lazy Susan turntable, controlled by an ESP32 via WiFi (no USB cable). 6 DOF: shoulder, elbow, forearm twist, neck pan (push-pull rod), head nod (Dynamixel AX-12A), and 360-degree base rotation (NEMA 17 stepper). Listens on OSC port 9001.
+Translates 14 personality states (INERT → CURIOUS → PLEASED → ARROGANT → DYING → REBORN → ...) into servo parameters (energy, speed, range, jitter, tilt bias). Cave-based architecture (v3): all servos hidden under a ComXim MTxRUWSLPro programmable turntable on a riser block. ESP32 WiFi bridge controls arm servos; ComXim WiFi handles precision base rotation (0.1°). 6 DOF: lower arm, elbow, neck pan (push-pull rod), head nod (Dynamixel AX-12A), and 360-degree base rotation (ComXim turntable). Listens on OSC port 9001.
 
 ### Projection Display (`projection/`)
 
