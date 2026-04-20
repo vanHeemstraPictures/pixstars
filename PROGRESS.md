@@ -18,11 +18,19 @@
 
 ## Phase 2 — Raspberry Pi Lamp Head
 
-- [ ] Flash Raspberry Pi OS Lite
-- [ ] SSH into the Pi
+- [ ] Flash microSD card with Raspberry Pi OS Lite (64-bit) via Raspberry Pi Imager
+- [ ] Configure: hostname `pixstars-lamp`, SSH, WiFi, username `pi`
+- [ ] Boot Pi and verify: `ping pixstars-lamp.local`
+- [ ] SSH into Pi: `ssh pi@pixstars-lamp.local`
+- [ ] Update system: `sudo apt update && sudo apt upgrade -y`
+- [ ] Install basics: `sudo apt install -y git python3-pip python3-venv alsa-utils`
+- [ ] Enable TRIM: `sudo systemctl enable fstrim.timer`
+- [ ] Optimize fstab: add `noatime,nodiratime` to root mount
+- [ ] Install log2ram: `sudo apt install -y log2ram`
 - [ ] Run `bash pi/scripts/install_pi_satellite.sh`
 - [ ] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
-- [ ] Test audio: `arecord -d 5 test.wav && aplay test.wav`
+- [ ] Test audio input: `arecord -d 5 test.wav`
+- [ ] Test audio output: `aplay test.wav`
 
 ## Phase 3 — Pairing
 

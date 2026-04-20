@@ -28,11 +28,119 @@ This pack combines:
 
 ### Phase 2 — Raspberry Pi lamp head
 
-1. Flash Raspberry Pi OS Lite
-2. SSH into the Pi
-3. Run:`bash pi/scripts/install_pi_satellite.sh`
-4. Copy:`pi/config/mycroft.conf.example`to:`~/.config/mycroft/mycroft.conf`
-5. Test:`arecord -d 5 test.wav aplay test.wav`
+> **Recommended SD card:** Use a high-quality A2-rated microSD card (e.g. SanDisk Extreme
+> 64GB A2). A fast card with good random I/O makes the Pi feel responsive instead of
+> "slightly off" — your audience will notice a 20ms jitter that feels wrong, even if
+> they can't name it.
+
+#### Step 1 — Flash the microSD card
+
+Use **Raspberry Pi Imager** (`brew install --cask raspberry-pi-imager`).
+
+When flashing:
+
+- **Device**: Raspberry Pi Zero 2 W
+- **OS**: Raspberry Pi OS Lite (64-bit) — don't use a desktop image, you don't need it
+- **Storage**: your microSD card
+
+In **Edit Settings** (gear icon), configure:
+
+- **Hostname**: `pixstars-lamp`
+- **Username**: `pi`
+- **Password**: set one you'll remember
+- **WiFi**: your local network SSID and password
+- **Locale**: your timezone and keyboard layout
+- **Services tab**: Enable SSH (password authentication)
+
+Click **Save**, then **Yes** to write. Takes about 5 minutes.
+
+Insert the card into the Pi, power it on via micro-USB. Give it 2 minutes to boot.
+
+```bash
+ping pixstars-lamp.local
+```
+
+#### Step 2 — SSH into the Pi and update
+
+```bash
+ssh pi@pixstars-lamp.local
+```
+
+First boot optimization:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+Install basics:
+
+```bash
+sudo apt install -y git python3-pip python3-venv alsa-utils
+```
+
+#### Step 3 — Optimize the SD card (important for responsiveness)
+
+Enable TRIM:
+
+```bash
+sudo systemctl enable fstrim.timer
+```
+
+Reduce unnecessary writes — edit `/etc/fstab`:
+
+```bash
+sudo nano /etc/fstab
+```
+
+Find the root (`/`) line and add `noatime,nodiratime` to the options. This reduces
+constant disk writes and improves system smoothness.
+
+Optional but recommended — move logs to RAM to protect the SD card:
+
+```bash
+sudo apt install -y log2ram
+```
+
+#### Step 4 — Install HiveMind satellite
+
+```bash
+bash pi/scripts/install_pi_satellite.sh
+```
+
+#### Step 5 — Configure HiveMind satellite
+
+```bash
+cp pi/config/mycroft.conf.example ~/.config/mycroft/mycroft.conf
+```
+
+Edit the config if needed (STT/TTS plugin, wake word, Mac Mini host IP).
+
+#### Step 6 — Audio sanity check (critical for your project)
+
+Test input (microphone):
+
+```bash
+arecord -d 5 test.wav
+```
+
+Test output (speaker):
+
+```bash
+aplay test.wav
+```
+
+If this is clean, your foundation is solid.
+
+#### Architecture reminder
+
+| Raspberry Pi (lamp) | Mac Mini (brain) |
+|---------------------|------------------|
+| Microphone input | HiveMind server |
+| Speaker output | XTTS voice generation |
+| LED control | Automation pipeline |
+| Trigger playback | Storage of all audio |
+
+Don't push heavy processing into the lamp head — keep the Pi as a thin endpoint.
 
 ### Phase 3 — Pairing
 
