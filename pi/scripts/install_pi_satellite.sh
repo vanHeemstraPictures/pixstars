@@ -10,12 +10,22 @@ python3 -m venv "${VENV_PATH}"
 source "${VENV_PATH}/bin/activate"
 python -m pip install --upgrade pip setuptools wheel
 
-pip install   hivemind-mic-satellite   ovos-microphone-plugin-alsa   ovos-vad-plugin-silero   rpi_ws281x   adafruit-circuitpython-neopixel   numpy   sounddevice
+# Note: ovos-vad-plugin-silero is NOT installed on the Pi because
+# onnxruntime has no pre-built wheel for 32-bit ARM (armv7l).
+# VAD runs on the Mac Mini server side instead.
+pip install \
+  hivemind-mic-satellite \
+  ovos-microphone-plugin-alsa \
+  rpi_ws281x \
+  adafruit-circuitpython-neopixel \
+  numpy \
+  sounddevice
 
 mkdir -p "${HOME}/.config/mycroft"
 
 echo
 echo "Installed Pi satellite environment at ${VENV_PATH}"
+echo "Note: VAD (Silero) runs on the Mac Mini server, not on the Pi."
 echo "Next:"
 echo "  1. Copy pi/config/mycroft.conf.example to ~/.config/mycroft/mycroft.conf"
 echo "  2. Pair with the server using hivemind-client set-identity"

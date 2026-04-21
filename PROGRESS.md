@@ -1,9 +1,6 @@
 # Pixstars — Installation Progress
 
-> Track your progress through the [INSTALL.md](./INSTALL.md) phases.
-> Mark each step as you complete it: change `[ ]` to `[x]`.
-
----
+> Track your progress through the INSTALL.md phases.Mark each step as you complete it: change [ ] to [x].
 
 ## Phase 1 — Mac Mini Foundation
 
@@ -18,19 +15,19 @@
 
 ## Phase 2 — Raspberry Pi Lamp Head
 
-- [ ] Flash microSD card with Raspberry Pi OS Lite (64-bit) via Raspberry Pi Imager
-- [ ] Configure: hostname `pixstars-lamp`, SSH, WiFi, username `pi`
-- [ ] Boot Pi and verify: `ping pixstars-lamp.local`
-- [ ] SSH into Pi: `ssh pi@pixstars-lamp.local`
-- [ ] Update system: `sudo apt update && sudo apt upgrade -y`
-- [ ] Install basics: `sudo apt install -y git python3-pip python3-venv alsa-utils`
-- [ ] Enable TRIM: `sudo systemctl enable fstrim.timer`
-- [ ] Optimize fstab: add `noatime,nodiratime` to root mount
-- [ ] Install log2ram: `sudo apt install -y log2ram`
-- [ ] Run `bash pi/scripts/install_pi_satellite.sh`
-- [ ] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
-- [ ] Test audio input: `arecord -d 5 test.wav`
-- [ ] Test audio output: `aplay test.wav`
+- [x] Flash microSD card with Raspberry Pi OS Lite (32-bit, Debian Trixie) via Raspberry Pi Imager
+- [x] Configure: hostname `pixstars-lamp`, SSH, WiFi, username `pi`, Raspberry Pi Connect (optional)
+- [x] Boot Pi and verify: `ping pixstars-lamp.local`
+- [x] SSH into Pi: `ssh pi@pixstars-lamp.local`
+- [x] Update system: `sudo apt update && sudo apt upgrade -y`
+- [x] Install basics: `sudo apt install -y git python3-pip python3-venv alsa-utils`
+- [x] Enable TRIM: `sudo systemctl enable fstrim.timer`
+- [x] Optimize fstab: add `noatime,nodiratime` to root mount
+- [x] Install log2ram: `sudo apt install -y log2ram`
+- [x] Run `bash pi/scripts/install_pi_satellite.sh`
+- [x] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
+- [ ] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
+- [ ] Test audio output: `aplay test.wav` (needs USB audio hardware)
 
 ## Phase 3 — Pairing
 
@@ -95,13 +92,10 @@
 - [ ] Test one render: `python3 voice/scripts/render_with_coqui_xtts.py --text '"Hello..."' --emotion '"curious"' --output '"voice/output/candidates/test.wav"'`
 - [ ] Run full pipeline: `bash voice/scripts/run_voice_factory_real.sh`
 
----
-
 ## Notes
 
-_Add any notes, blockers, or decisions here as you go._
+*Add any notes, blockers, or decisions here as you go.*
 
-- 2026-04-17: Phase 1 complete. Pi Zero 2 WH ordered (Amazon.nl), arriving 2026-04-18. Phase 2 blocked until hardware arrives.
-
-- 
-
+- 2026-04-17: Phase 1 complete. Pi Zero 2 WH ordered (Amazon.nl).
+- 2026-04-18: Pi Zero 2 WH arrived. USB-C microSD card reader ordered. Phase 2 blocked until reader arrives.
+-

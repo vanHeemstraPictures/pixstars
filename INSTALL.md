@@ -28,10 +28,7 @@ This pack combines:
 
 ### Phase 2 — Raspberry Pi lamp head
 
-> **Recommended SD card:** Use a high-quality A2-rated microSD card (e.g. SanDisk Extreme
-> 64GB A2). A fast card with good random I/O makes the Pi feel responsive instead of
-> "slightly off" — your audience will notice a 20ms jitter that feels wrong, even if
-> they can't name it.
+> Recommended SD card: Use a high-quality A2-rated microSD card (e.g. SanDisk Extreme64GB A2). A fast card with good random I/O makes the Pi feel responsive instead of"slightly off" — your audience will notice a 20ms jitter that feels wrong, even ifthey can't name it.
 
 #### Step 1 — Flash the microSD card
 
@@ -40,7 +37,9 @@ Use **Raspberry Pi Imager** (`brew install --cask raspberry-pi-imager`).
 When flashing:
 
 - **Device**: Raspberry Pi Zero 2 W
-- **OS**: Raspberry Pi OS Lite (64-bit) — don't use a desktop image, you don't need it
+- **OS**: Raspberry Pi OS (other) → **Raspberry Pi OS Lite (32-bit)** (Debian Trixie,
+  no desktop). The 64-bit image may not be listed for the Zero 2 W — the 32-bit
+  version works perfectly with 512MB RAM. Don't use a desktop image, you don't need it.
 - **Storage**: your microSD card
 
 In **Edit Settings** (gear icon), configure:
@@ -51,6 +50,9 @@ In **Edit Settings** (gear icon), configure:
 - **WiFi**: your local network SSID and password
 - **Locale**: your timezone and keyboard layout
 - **Services tab**: Enable SSH (password authentication)
+- **General tab**: Enable Raspberry Pi Connect (optional — allows remote access
+  over the internet via https://connect.raspberrypi.com. Requires a free
+  Raspberry Pi ID, sign in after first boot)
 
 Click **Save**, then **Yes** to write. Takes about 5 minutes.
 
@@ -92,8 +94,7 @@ Reduce unnecessary writes — edit `/etc/fstab`:
 sudo nano /etc/fstab
 ```
 
-Find the root (`/`) line and add `noatime,nodiratime` to the options. This reduces
-constant disk writes and improves system smoothness.
+Find the root (`/`) line and add `noatime,nodiratime` to the options. This reducesconstant disk writes and improves system smoothness.
 
 Optional but recommended — move logs to RAM to protect the SD card:
 
@@ -134,7 +135,7 @@ If this is clean, your foundation is solid.
 #### Architecture reminder
 
 | Raspberry Pi (lamp) | Mac Mini (brain) |
-|---------------------|------------------|
+| --- | --- |
 | Microphone input | HiveMind server |
 | Speaker output | XTTS voice generation |
 | LED control | Automation pipeline |
