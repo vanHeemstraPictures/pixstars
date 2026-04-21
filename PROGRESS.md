@@ -31,24 +31,24 @@
 
 ## Phase 3 — Pairing
 
-- [ ] On Mac Mini: activate venv, run `hivemind-core add-client`
-- [ ] On Pi: activate venv, run `hivemind-client set-identity` with key, password, host, port, siteid
+- [x] On Mac Mini: activate venv, run `hivemind-core add-client`
+- [x] On Pi: activate venv, run `hivemind-client set-identity` with key, password, host, port, siteid
 
-## Phase 4 — LED System
+## Phase 4 — LED System (skipped — optional in Architecture v3)
 
-- [ ] Copy `pi/scripts/led_hivemind_states_filewatch.py` to Pi home directory
-- [ ] Copy `pi/systemd/pixstars-lamp-led.service` to `/etc/systemd/system/`
-- [ ] Run `sudo systemctl daemon-reload`
-- [ ] Run `sudo systemctl enable pixstars-lamp-led`
-- [ ] Run `sudo systemctl start pixstars-lamp-led`
+- [-] Copy `pi/scripts/led_hivemind_states_filewatch.py` to Pi home directory
+- [-] Copy `pi/systemd/pixstars-lamp-led.service` to `/etc/systemd/system/`
+- [-] Run `sudo systemctl daemon-reload`
+- [-] Run `sudo systemctl enable pixstars-lamp-led`
+- [-] Run `sudo systemctl start pixstars-lamp-led`
 
-## Phase 5 — HiveMind Satellite Service
+## Phase 5 — HiveMind Satellite Service (skipped — optional in Architecture v3)
 
-- [ ] Copy `pi/systemd/pixstars-lamp-sat.service` to `/etc/systemd/system/`
-- [ ] Adjust `ExecStart` if needed
-- [ ] Run `sudo systemctl daemon-reload`
-- [ ] Run `sudo systemctl enable pixstars-lamp-sat`
-- [ ] Run `sudo systemctl start pixstars-lamp-sat`
+- [-] Copy `pi/systemd/pixstars-lamp-sat.service` to `/etc/systemd/system/`
+- [-] Adjust `ExecStart` if needed
+- [-] Run `sudo systemctl daemon-reload`
+- [-] Run `sudo systemctl enable pixstars-lamp-sat`
+- [-] Run `sudo systemctl start pixstars-lamp-sat`
 
 ## Phase 6 — Voice Scaffold
 
