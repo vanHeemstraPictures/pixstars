@@ -168,6 +168,7 @@ Synthetic voice creation using Coqui XTTS. Includes dialogue extraction, render 
 - [Installation Guide (incl. OVOS)](./INSTALL.md)
 - [Complete Lamp Build (incl. OVOS)](./docs/PIXSTARS_LAMP_COMPLETE_BUILD.md)
 - [HiveMind Voice Automation](./docs/HIVEMIND_VOICE_AUTOMATION.md)
+- [Raspberry Pi Connect Setup](./docs/PI_CONNECT_SETUP.md)
 
 ## License
 
