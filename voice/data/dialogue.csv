@@ -1,5 +1,1 @@
 id,episode,scene,text,emotion,delivery_notes,filename_hint
-1,1,opening,"Hello...",curious,"soft, hesitant, warm",lamp_001_hello_curious
-2,1,opening,"I am here...",warm,"gentle, intimate",lamp_002_i_am_here_warm
-3,2,conflict,"Please... stay.",fragile,"small, breath-led",lamp_003_please_stay_fragile
-4,3,memory,"I remember... the light.",hopeful,"slightly awed, slow",lamp_004_i_remember_the_light_hopeful

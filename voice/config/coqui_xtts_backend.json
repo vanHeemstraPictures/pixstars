@@ -1,0 +1,13 @@
+{
+  "model_name": "tts_models/multilingual/multi-dataset/xtts_v2",
+  "language_idx": "en",
+  "speaker_id": "lamp_et_inspired",
+  "reference_wavs_dir": "voice/reference_audio",
+  "voice_dir": "voice/models/coqui_cached_voices",
+  "speed": 1.0,
+  "notes": [
+    "Use only reference audio you have the right to use.",
+    "This backend is intended for an E.T.-inspired lamp character voice, not deceptive impersonation.",
+    "XTTS can cache a cloned voice under a speaker ID for reuse."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "backend": "command",
+  "sample_rate": 48000,
+  "channels": 1,
+  "command_template": "python3 voice/scripts/render_with_coqui_xtts.py --text {text_json} --emotion {emotion_json} --output {output_json}",
+  "postprocess_command_template": "",
+  "notes": [
+    "This default backend calls the local Coqui XTTS renderer wrapper in this repository.",
+    "Configure voice/config/coqui_xtts_backend.json before first use.",
+    "The renderer wrapper will create or reuse a cached speaker identity."
+  ]
+}
