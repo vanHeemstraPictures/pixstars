@@ -73,24 +73,24 @@
 
 ## Phase 9 — Real Render Backend and Review Queue
 
-- [ ] Copy `voice/config/render_backend.json.example` → `voice/config/render_backend.json`
-- [ ] Edit `command_template` to call real local voice renderer
-- [ ] Configure review thresholds in `voice/config/review_policy.json`
-- [ ] Run `bash voice/scripts/run_voice_factory_real.sh`
-- [ ] Inspect `voice/review/approved/`
-- [ ] Inspect `voice/review/needs_human_review/`
-- [ ] Inspect `voice/review/rejected/`
-- [ ] Regenerate Ardour cue data after approved batch
+- [x] Copy `voice/config/render_backend.json.example` → `voice/config/render_backend.json`
+- [x] Edit `command_template` to call real local voice renderer (already points to Coqui XTTS)
+- [x] Configure review thresholds in `voice/config/review_policy.json` (defaults accepted)
+- [x] Run `bash voice/scripts/run_voice_factory_real.sh`
+- [x] Inspect `voice/review/approved/` (empty — no source dialogue yet)
+- [x] Inspect `voice/review/needs_human_review/` (empty — no source dialogue yet)
+- [x] Inspect `voice/review/rejected/` (empty — no source dialogue yet)
+- [x] Regenerate Ardour cue data after approved batch (ran as part of pipeline)
 
 ## Phase 10 — Install Coqui XTTS Backend
 
-- [ ] Run `bash mac/scripts/install_voice_backend_coqui.sh`
-- [ ] Copy `voice/config/coqui_xtts_backend.json.example` → `voice/config/coqui_xtts_backend.json`
-- [ ] Put reference WAV files in `voice/reference_audio/`
-- [ ] Ensure `voice/config/render_backend.json` points at `render_with_coqui_xtts.py`
-- [ ] Activate voice venv: `source ~/venvs/pixstars-voice/bin/activate`
-- [ ] Test one render: `python3 voice/scripts/render_with_coqui_xtts.py --text '"Hello..."' --emotion '"curious"' --output '"voice/output/candidates/test.wav"'`
-- [ ] Run full pipeline: `bash voice/scripts/run_voice_factory_real.sh`
+- [x] Run `bash mac/scripts/install_voice_backend_coqui.sh`
+- [x] Copy `voice/config/coqui_xtts_backend.json.example` → `voice/config/coqui_xtts_backend.json`
+- [x] Put reference WAV files in `voice/reference_audio/` (E.T. Phone Home reference clip)
+- [x] Ensure `voice/config/render_backend.json` points at `render_with_coqui_xtts.py`
+- [x] Activate voice venv: `source ~/venvs/pixstars-voice/bin/activate`
+- [x] Test one render: rendered 'Hello...' with curious emotion, 0.535 real-time factor
+- [x] Run full pipeline: `bash voice/scripts/run_voice_factory_real.sh`
 
 ## Notes
 
@@ -102,3 +102,4 @@
 - 2026-04-28: Phase 6 complete. Dialogue CSV kept as placeholder examples (performance is silent). Manifest generated at voice/output/dialogue_manifest.json.
 - 2026-04-28: Phase 7 complete. Cue manifest generated at ardour/cues/cue_manifest.csv. emit_state.py tested with 'idle' state.
 - 2026-04-28: Phase 8 complete. HiveMind installed (Docker + 8-container stack), project 'Pixstars Voice Factory' created with 6 agents (Director, Dialogue Curator, Voice Designer, Render Operator, Evaluator, Publisher). Local pipeline proven with stub scripts.
+- 2026-04-28: Phases 9 & 10 complete. Coqui XTTS v2 installed, voice cloning tested with E.T. reference audio. Real voice factory pipeline runs end-to-end. All 10 installation phases complete!
