@@ -26,8 +26,8 @@
 - [x] Install log2ram: `sudo apt install -y log2ram`
 - [x] Run `bash pi/scripts/install_pi_satellite.sh`
 - [x] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
-- [ ] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
-- [ ] Test audio output: `aplay test.wav` (needs USB audio hardware)
+- [x] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
+- [-] Test audio output: `aplay test.wav` (skipped — no speaker connected, Pi is thin endpoint)
 
 ## Phase 3 — Pairing
 
@@ -52,14 +52,14 @@
 
 ## Phase 6 — Voice Scaffold
 
-- [ ] Run `python3 voice/scripts/extract_dialogue_template.py`
-- [ ] Edit `voice/data/dialogue.csv`
-- [ ] Run `python3 voice/scripts/build_manifest.py`
+- [x] Run `python3 voice/scripts/extract_dialogue_template.py`
+- [x] Edit `voice/data/dialogue.csv` (kept example placeholders — silent performance, revisit later)
+- [x] Run `python3 voice/scripts/build_manifest.py`
 
 ## Phase 7 — Ardour Scaffold
 
-- [ ] Run `python3 ardour/scripts/generate_cue_manifest.py`
-- [ ] Test `ardour/scripts/emit_state.py` or `ardour/scripts/cue_wrapper_example.sh`
+- [x] Run `python3 ardour/scripts/generate_cue_manifest.py`
+- [x] Test `ardour/scripts/emit_state.py` or `ardour/scripts/cue_wrapper_example.sh`
 
 ## Phase 8 — HiveMind Voice Automation
 
@@ -98,4 +98,6 @@
 
 - 2026-04-17: Phase 1 complete. Pi Zero 2 WH ordered (Amazon.nl).
 - 2026-04-18: Pi Zero 2 WH arrived. USB-C microSD card reader ordered. Phase 2 blocked until reader arrives.
--
+- 2026-04-28: Phase 2 audio input test passed (USB PnP Sound Device on card 1). Output test skipped — no speaker; Pi is thin endpoint.
+- 2026-04-28: Phase 6 complete. Dialogue CSV kept as placeholder examples (performance is silent). Manifest generated at voice/output/dialogue_manifest.json.
+- 2026-04-28: Phase 7 complete. Cue manifest generated at ardour/cues/cue_manifest.csv. emit_state.py tested with 'idle' state.
