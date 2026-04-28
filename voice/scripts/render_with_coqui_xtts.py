@@ -55,7 +55,7 @@ def synthesize(text: str, emotion: str, output: Path, cfg: dict):
 
     # first run: clone/cache if refs exist
     if refs:
-        cmd = base_cmd + ["--speaker_idx", speaker_id, "--speaker_wav"] + [str(p) for p in refs]
+        cmd = base_cmd + ["--speaker_wav"] + [str(p) for p in refs]
     else:
         # reuse cached speaker if already present, else fall back to speaker id only
         cmd = base_cmd + ["--speaker_idx", speaker_id]
