@@ -26,8 +26,8 @@
 - [x] Install log2ram: `sudo apt install -y log2ram`
 - [x] Run `bash pi/scripts/install_pi_satellite.sh`
 - [x] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
-- [ ] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
-- [ ] Test audio output: `aplay test.wav` (needs USB audio hardware)
+- [x] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
+- [-] Test audio output: `aplay test.wav` (skipped — no speaker connected, Pi is thin endpoint)
 
 ## Phase 3 — Pairing
 
@@ -98,4 +98,4 @@
 
 - 2026-04-17: Phase 1 complete. Pi Zero 2 WH ordered (Amazon.nl).
 - 2026-04-18: Pi Zero 2 WH arrived. USB-C microSD card reader ordered. Phase 2 blocked until reader arrives.
--
+- 2026-04-28: Phase 2 audio input test passed (USB PnP Sound Device on card 1). Output test skipped — no speaker; Pi is thin endpoint.
