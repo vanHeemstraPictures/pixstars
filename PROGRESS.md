@@ -63,13 +63,13 @@
 
 ## Phase 8 — HiveMind Voice Automation
 
-- [ ] Install HiveMind on Mac Mini via upstream installer
-- [ ] Open `http://localhost:8080` and verify
-- [ ] Create workspace for Pixstars lamp voice workflow
-- [ ] Add agent briefs from `voice/orchestration/agents/`
-- [ ] Populate `voice/orchestration/state/episode_sources.txt`
-- [ ] Run `bash voice/scripts/run_voice_factory.sh` (prove local pipeline)
-- [ ] Move sequence into HiveMind saved workflow or heartbeat-scheduled task
+- [x] Install HiveMind on Mac Mini via upstream installer
+- [x] Open `http://localhost:8080` and verify
+- [x] Create workspace for Pixstars lamp voice workflow
+- [x] Add agent briefs from `voice/orchestration/agents/`
+- [-] Populate `voice/orchestration/state/episode_sources.txt` (skipped — silent performance, no episode sources yet)
+- [x] Run `bash voice/scripts/run_voice_factory.sh` (prove local pipeline)
+- [-] Move sequence into HiveMind saved workflow or heartbeat-scheduled task (deferred — will configure when real content is ready)
 
 ## Phase 9 — Real Render Backend and Review Queue
 
@@ -101,3 +101,4 @@
 - 2026-04-28: Phase 2 audio input test passed (USB PnP Sound Device on card 1). Output test skipped — no speaker; Pi is thin endpoint.
 - 2026-04-28: Phase 6 complete. Dialogue CSV kept as placeholder examples (performance is silent). Manifest generated at voice/output/dialogue_manifest.json.
 - 2026-04-28: Phase 7 complete. Cue manifest generated at ardour/cues/cue_manifest.csv. emit_state.py tested with 'idle' state.
+- 2026-04-28: Phase 8 complete. HiveMind installed (Docker + 8-container stack), project 'Pixstars Voice Factory' created with 6 agents (Director, Dialogue Curator, Voice Designer, Render Operator, Evaluator, Publisher). Local pipeline proven with stub scripts.
