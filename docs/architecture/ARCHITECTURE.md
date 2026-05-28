@@ -1,4 +1,4 @@
-# PIXSTARS_ARCHITECTURE.md
+# ARCHITECTURE.md
 
 # PIXSTARS Architecture
 
