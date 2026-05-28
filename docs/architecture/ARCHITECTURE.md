@@ -1,80 +1,237 @@
-# ARCHITECTURE.md
+# docs/architecture/ARCHITECTURE.md
 
 # PIXSTARS Architecture
 
-> Master architecture documentation for the PIXSTARS performance platform.
-
----
-
-# Vision
-
-PIXSTARS is an AI-powered theatrical performance platform that combines:
-
-* Animatronics
-* Artificial Intelligence
-* Voice Interaction
-* Computer Vision
-* Show Control
-* Lighting
-* Projection Mapping
-* Music Playback
-* Character Performance
-
-The goal is to create the illusion that the lamp is a living character rather than a piece of stage equipment.
+> Master architecture documentation for the PIXSTARS AI-powered animatronic lamp performance platform.
 
 ---
 
 # Design Philosophy
 
+PIXSTARS follows a simple principle:
+
 > "The lamp is a character, not a prop."
 
-Every architectural decision should support:
+The audience should perceive:
 
-* personality
+* intelligence
 * emotion
-* responsiveness
-* audience engagement
-* autonomy
+* curiosity
+* personality
+
+rather than seeing individual technical components.
 
 ---
 
-# System Overview
+# System Architecture
 
-PIXSTARS consists of four major layers:
-
-1. Backstage Director
-2. Lamp Intelligence
-3. Vision & Audience Systems
-4. Show Infrastructure
+PIXSTARS is built using a distributed architecture.
 
 ```text
-Audience
-    │
-    ▼
+                    AUDIENCE
+                         │
+                         ▼
 
-┌──────────────────────────────┐
-│      PIXSTARS LAMP           │
-│     AI Character Layer       │
-└──────────────┬───────────────┘
-               │
-      HiveMind / MQTT / WiFi
-               │
-               ▼
+                ┌────────────────┐
+                │ PIXSTARS LAMP  │
+                │   Character    │
+                └───────┬────────┘
+                        │
+             HiveMind / MQTT / WiFi
+                        │
+                        ▼
 
-┌──────────────────────────────┐
-│    APPLE MAC MINI M4 PRO     │
-│      Backstage Director      │
-└──────────────┬───────────────┘
-               │
-       Ethernet / WiFi
-               │
-               ▼
+┌───────────────────────────────────────────────┐
+│          APPLE MAC MINI M4 PRO                │
+│                "DIRECTOR"                     │
+│                                               │
+│ Ardour                                        │
+│ HiveMind Server                               │
+│ Home Assistant                                │
+│ Projection Control                            │
+│ Lighting Control                              │
+│ Show Timeline Engine                          │
+│ Voice Services                                │
+└───────────────────────────────────────────────┘
+                        │
+                        │
+                        ▼
 
-┌──────────────────────────────┐
-│ RK3576 AI EDGE NODE OPTIONAL │
-│     Vision Processing        │
-└──────────────────────────────┘
+┌───────────────────────────────────────────────┐
+│        OPTIONAL RK3576 VISION NODE            │
+│                                               │
+│ Audience Tracking                             │
+│ YOLO Recognition                              │
+│ Scene Understanding                           │
+│ Visual Analytics                              │
+└───────────────────────────────────────────────┘
 ```
+
+---
+
+# Internal Lamp Architecture
+
+The lamp itself contains two independent computing systems.
+
+```text
+                 Mac Mini M4 Pro
+                     Director
+                         │
+                HiveMind / MQTT
+                         │
+                         ▼
+
+           ┌───────────────────────┐
+           │ RK3576 AI COMPUTER    │
+           │       (BASE)          │
+           │       BRAIN           │
+           └───────────┬───────────┘
+                       │
+             USB / UART / MQTT
+                       │
+                       ▼
+
+           ┌───────────────────────┐
+           │ Raspberry Pi Zero 2 WH│
+           │       (HEAD)          │
+           │   NERVOUS SYSTEM      │
+           └──────┬─────┬─────┬────┘
+                  │     │     │
+                  ▼     ▼     ▼
+
+            Microphone LEDs Speaker
+
+                  │
+                  ▼
+
+                Camera
+```
+
+---
+
+# Lamp Head
+
+## Raspberry Pi Zero 2 WH
+
+### Physical Location
+
+Mounted inside the lamp head.
+
+Located near:
+
+* microphone
+* speaker
+* LED ring
+* camera
+* sensors
+* future servos
+
+This minimizes cable runs through the lamp arm.
+
+---
+
+## Purpose
+
+The Raspberry Pi Zero 2 WH acts as the hardware controller.
+
+Responsibilities:
+
+* microphone management
+* speaker management
+* LED ring control
+* sensor collection
+* servo control
+* diagnostics
+* heartbeat monitoring
+
+The Pi handles physical devices but not heavy AI workloads.
+
+---
+
+## Connected Hardware
+
+### Microphone
+
+Used for:
+
+* performer interaction
+* audience interaction
+* wake-word detection
+
+### Speaker
+
+Used for:
+
+* character voice
+* dialogue
+* sound effects
+
+### WS2812 RGB LED Ring
+
+Mounted inside the lampshade.
+
+Used for:
+
+* emotional state display
+* speech visualization
+* AI activity indication
+* diagnostics
+
+### Camera
+
+Used for:
+
+* face detection
+* performer tracking
+* gesture recognition
+
+### Future Servos
+
+Potential locations:
+
+* neck
+* shoulder
+* head assembly
+
+Used for expressive movement.
+
+---
+
+# Lamp Base
+
+## Seeed Studio reComputer RK3576
+
+### Physical Location
+
+Mounted inside the lamp base.
+
+The base provides:
+
+* cooling capacity
+* power distribution
+* maintenance access
+* expansion space
+
+---
+
+## Purpose
+
+The RK3576 acts as the lamp's AI brain.
+
+Responsibilities:
+
+* OpenVoiceOS
+* HiveMind Client
+* speech recognition
+* speech synthesis
+* computer vision
+* face tracking
+* gesture recognition
+* emotional state engine
+* autonomous behaviour
+* local AI inference
+
+The lamp can continue functioning even if temporarily disconnected from the backstage network.
 
 ---
 
@@ -82,174 +239,21 @@ Audience
 
 ## Apple Mac Mini M4 Pro
 
-The Mac Mini is the central control point of the entire show.
+The Mac Mini acts as the master controller.
 
 Responsibilities:
 
 * Ardour
-* HiveMind Server
 * Home Assistant
+* HiveMind Server
 * Projection Control
 * Lighting Control
+* Camera Routing
 * Show Timeline
-* Voice Services
+* Audio Playback
 * AI Orchestration
-* Camera Management
 
-The Mac Mini acts as the "director" of the performance.
-
----
-
-# Lamp Intelligence
-
-## Seeed Studio reComputer RK3576
-
-Installed inside the lamp base.
-
-Responsibilities:
-
-* Wake Word Detection
-* Speech Recognition
-* Speech Synthesis
-* Vision Processing
-* Face Tracking
-* Gesture Recognition
-* Emotional State Engine
-* Autonomous Behaviour
-
-The RK3576 allows the lamp to remain intelligent even when disconnected from the backstage network.
-
----
-
-# Optional Edge AI Node
-
-## Secondary RK3576
-
-A second RK3576 may be installed backstage.
-
-Responsibilities:
-
-* Audience Tracking
-* Multi-Camera Processing
-* Emotion Detection
-* YOLO Object Recognition
-* Scene Understanding
-* Visual Analytics
-
-Benefits:
-
-* Keeps heavy AI workloads away from the lamp.
-* Improves responsiveness.
-* Allows future expansion.
-
----
-
-# Lamp Hardware
-
-## Inputs
-
-### Microphone
-
-Used for:
-
-* audience interaction
-* performer interaction
-* wake words
-
-### Camera
-
-Used for:
-
-* face tracking
-* gesture recognition
-* performer recognition
-
-### Proximity Sensors
-
-Used for:
-
-* awareness
-* reactions
-* interaction triggers
-
-### Ambient Light Sensor
-
-Used for adaptive brightness.
-
-### Maintenance Buttons
-
-Used for:
-
-* diagnostics
-* emergency override
-
----
-
-## Outputs
-
-### Speaker
-
-Provides:
-
-* voice
-* sound effects
-* AI responses
-
-### Main Lamp Bulb
-
-Used for:
-
-* storytelling
-* mood indication
-
-### RGB LED Ring
-
-Located inside the lampshade.
-
-Used as:
-
-* AI brain visualization
-* emotional state indicator
-* speech visualization
-* system status feedback
-
-### Servo Motors
-
-Future capability:
-
-* head tilt
-* head rotation
-* expressive movement
-
----
-
-# Cameras
-
-## Lamp Camera
-
-Mounted inside the lamp.
-
-Used for:
-
-* local awareness
-* face tracking
-* performer recognition
-
-## Stage Cameras
-
-Used for:
-
-* audience viewing
-* projection screens
-* monitoring
-
-## Audience Camera
-
-Used for:
-
-* audience analysis
-* applause detection
-* engagement metrics
+The Mac Mini is effectively the director of the performance.
 
 ---
 
@@ -261,8 +265,8 @@ Provides:
 
 * wake words
 * speech recognition
-* skills
 * speech synthesis integration
+* skills framework
 
 ---
 
@@ -272,7 +276,7 @@ Provides:
 
 * distributed intelligence
 * inter-device communication
-* multi-agent orchestration
+* agent orchestration
 
 ---
 
@@ -281,9 +285,9 @@ Provides:
 Provides:
 
 * automation
+* event handling
+* lighting integration
 * state management
-* lighting coordination
-* event orchestration
 
 ---
 
@@ -291,111 +295,126 @@ Provides:
 
 Provides:
 
-* music playback
-* synchronized audio
+* November Rain playback
 * dialogue playback
 * sound effects
-
-Detailed setup:
+* synchronized show timing
 
 See:
 
-docs/audio/AUDIO_SETUP.md
+`docs/audio/AUDIO_SETUP.md`
 
 ---
 
 # Communication Architecture
 
-## Network Protocols
+## Director ↔ Brain
 
-Used between systems:
+Protocols:
 
-* MQTT
 * HiveMind
+* MQTT
 * WebSocket
-* REST API
+* REST
 
 ---
 
-## Local Lamp Connections
+## Brain ↔ Nervous System
 
-Interfaces:
+Protocols:
 
-* GPIO
-* I2C
-* UART
 * USB
-* PWM
+* UART
+* MQTT
 
-Connected devices:
-
-* LEDs
-* Sensors
-* Servos
-* Audio hardware
+Final implementation to be selected during hardware integration.
 
 ---
 
-# Audio Architecture
-
-The November Rain soundtrack and supporting audio are rendered using:
-
-* Pianoteq
-* MODO DRUM
-* Ardour
-
-Detailed documentation:
-
-docs/audio/AUDIO_SETUP.md
-
----
-
-# Future Integrations
+# Future Expansion
 
 ## OpenHuman
 
 Potential capabilities:
 
 * persistent memory
-* long-term character development
 * emotional growth
-* contextual learning
+* long-term learning
+* character development
 
 ---
 
-## MIA Desktop Assistant Components
+## Advanced Vision
 
 Potential capabilities:
 
-* multimodal interaction
-* gesture control
-* vision-driven behaviour
-* conversational enhancement
+* audience engagement scoring
+* applause detection
+* audience sentiment analysis
+* performer recognition
 
 ---
 
-# Future Lamp Capabilities
+# Mental Model
 
-Planned enhancements:
+| Component              | Role           |
+| ---------------------- | -------------- |
+| Mac Mini M4 Pro        | Director       |
+| RK3576                 | Brain          |
+| Raspberry Pi Zero 2 WH | Nervous System |
+| Camera                 | Eyes           |
+| Microphone             | Ears           |
+| Speaker                | Voice          |
+| LED Ring               | Emotions       |
+| Servos                 | Muscles        |
 
-* head movement
-* performer tracking
-* audience awareness
-* emotional animation
-* autonomous conversation
-* scene understanding
+This model should guide future hardware and software decisions.
 
----
 
-# Guiding Principle
+LAMP HEAD
+│
+├─ Camera
+├─ USB Microphone
+├─ 40mm Speaker
+├─ WS2812 LED Ring
+├─ Future Servos
+│
+└─ Raspberry Pi Zero 2 WH
+      (Nervous System)
 
-The audience should never experience:
+           │
+           │ Through Lamp Arm
+           │
 
-* a Raspberry Pi
-* an AI model
-* a microphone
-* a camera
+LAMP BASE
+│
+├─ RK3576
+│    (Brain)
+│
+├─ Power Distribution
+├─ USB Audio Interfaces
+├─ Future Expansion
+└─ HiveMind Client
 
-The audience should experience:
+           │ WiFi / MQTT
 
-"A living lamp with personality."
+BACKSTAGE
+│
+├─ Mac Mini M4 Pro
+│    (Director)
+│
+├─ Ardour
+├─ Home Assistant
+├─ HiveMind Server
+├─ Projection Control
+├─ Lighting Control
+└─ Show Timeline
+
+           │
+
+OPTIONAL
+│
+└─ RK3576 Vision Node
+     Audience Tracking
+     YOLO Recognition
+     Analytics
