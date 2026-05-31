@@ -134,7 +134,6 @@
 - [ ] Order MG996R servos (x4) and MG90S servo (x1)
 - [ ] Order Dynamixel AX-12A
 - [ ] Order WS2812 5050 RGB LED Ring 16
-- [ ] Order Arduino Nano
 - [ ] Order MEAN WELL LRS-50-5 PSU
 - [ ] Order Seeed Studio reComputer RK3588-40
 - [ ] Build riser block (120-150mm, match ComXim footprint)
