@@ -75,7 +75,8 @@
 The Pi Zero 2 WH serves as the **lamp head controller**, running:
 
 - HiveMind satellite client (communicating with Mac Mini server)
-- LED state control script (`led_hivemind_states_filewatch.py`)
-- GPIO interface to the WS2812 5050 RGB LED Ring 16 (direct drive)
+- Audio I/O (microphone, speaker), sensor polling, and heartbeat / diagnostics
+
+The Pi does **not** drive the WS2812 LED ring in v3 — the ring is driven from the ESP32 in the cave via GPIO/RMT through the cable column, and powered from the MEAN WELL LRS-50-5 PSU in the cave.
 
 See [Complete Lamp Build Guide](./docs/PIXSTARS_LAMP_COMPLETE_BUILD.md) for integration instructions.See [Raspberry Pi Setup](./pi/) for configuration files and systemd services.
