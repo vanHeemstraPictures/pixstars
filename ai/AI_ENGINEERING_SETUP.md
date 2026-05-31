@@ -409,7 +409,7 @@ Connect lamp.
 
 Wake:
 
-“Hey A.I.”
+"Hey A.I."
 
 ⸻
 
