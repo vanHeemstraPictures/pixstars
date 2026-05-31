@@ -145,3 +145,135 @@ The RK3588-40 is the lamp's **brain** and is responsible for:
 The PCIe / M.2 AI accelerator is reserved for higher-throughput local AI tasks, including:
 
 - multi-model vision inference
+- object and person detection
+- pose and gesture estimation
+- accelerated multimodal pipelines
+- future higher-density local reasoning
+
+## Motion Substrate (Cave Architecture v3)
+
+All physical actuation lives below the lamp, hidden inside a "cave" under the ComXim turntable on a riser block. The lamp itself contains only the head nod servo (AX-12A), the NeoPixel ring, and the Pi-side sensors and audio. The RK3588-40 issues high-level intent (e.g. "turn 30 degrees CW", "raise lower arm to 60%"); the Motion Substrate executes it.
+
+The split of responsibility is:
+
+- **RK3588-40 (Lamp Brain)** - decides what the lamp should do
+- **ESP32 / Maestro / AX-12A** - executes arm, elbow, neck pan, head nod, and LED ring commands
+- **ComXim MTxRUWSLPro** - executes base rotation
+
+### Cave inventory (under turntable, on servo rail)
+
+- **ESP32 DevKit** - WiFi bridge from Mac Mini / RK3588-40, drives Maestro and AX-12A
+- **Pololu Mini Maestro 24-channel** - serial from ESP32
+- **4x MG996R** servos - lower arm (Ch1), elbow (Ch2), spare (Ch3 / Ch4)
+- **1x MG90S** servo - neck pan (Ch3), carbon fibre push-pull rod to lamp head
+- **Arduino Nano** - NeoPixel serial bridge driven from Maestro Ch5
+- **MEAN WELL LRS-50-5** power supply - 5V servo rail, separated from logic
+
+### Base rotation engine
+
+- **ComXim MTxRUWSLPro** programmable turntable - precision base rotation (0.1 degree minimum step), WiFi CT command protocol, controlled **directly from the Mac Mini, not via the ESP32**
+- **Riser block** (120-150mm aluminium or plywood) - creates the cave depth; ComXim mounts on top
+- Maestro **Channel 0 is freed** in v3 (formerly the NEMA 17 stepper in v2)
+
+### Servo channel map (v3)
+
+| Maestro Channel | Joint | Servo | Notes |
+|---|---|---|---|
+| 0 | (spare) | - | Freed in v3 - stepper removed |
+| 1 | Lower arm raise / lower | MG996R | PWM |
+| 2 | Upper arm reach (elbow) | MG996R | PWM |
+| 3 | Neck pan (push-pull rod) | MG90S | PWM |
+| 4 | (spare) | - | PWM |
+| 5 | NeoPixel ring | Arduino Nano serial bridge | Serial |
+| - | Head nod | AX-12A TTL ID=1 | Direct TTL from ESP32, not on Maestro |
+| - | Base rotation | ComXim turntable | WiFi CT, direct from Mac Mini |
+
+## Backstage Core
+
+The Apple Mac Mini M4 Pro is the **director** of the wider environment and coordinates:
+
+- Ardour timeline and audio playback (Pianoteq 9, MODO DRUM)
+- HiveMind server services
+- OpenVoiceOS services as required
+- Home Assistant automations
+- projections and visual outputs
+- live streaming and capture
+- show state, cues, and global orchestration
+- **direct WiFi CT commands to the ComXim turntable** for base rotation
+- **WiFi OSC / control channel to the ESP32** for servo, head nod, and LED ring commands
+
+## Optional Backstage Vision Node
+
+An optional second RK3588-40 can be installed backstage for heavy visual workloads:
+
+- audience tracking
+- stage camera fusion
+- person detection
+- applause or engagement analysis
+- offloading multi-camera processing from the lamp
+
+
+## Connections and Protocols
+
+| From | To | Medium | Protocol / Interface | Purpose |
+|---|---|---|---|---|
+| Mac Mini | Lamp Brain (RK3588-40) | Wi-Fi 6 or wired Ethernet | MQTT, WebSocket, REST, HiveMind | Show control, state sync, commands |
+| Mac Mini | ComXim turntable | WiFi (802.11) | CT command protocol (TCP) | Base rotation - precision stepping, origin return |
+| Mac Mini | ESP32 (cave) | WiFi (802.11) | OSC / lightweight control | Servo and head nod commands, NeoPixel cues |
+| Lamp Brain | Lamp Head Pi | Internal harness | USB 2.0, UART, optional I2C | Audio relay, sensor telemetry, optional camera relay |
+| ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
+| ESP32 | Dynamixel AX-12A | Cable column to lamp head | TTL half-duplex serial | Head nod position commands - NOT on Maestro |
+| Maestro Ch5 | Arduino Nano | Cave harness | Serial (UART) | NeoPixel RGBW frame data bridge |
+| Arduino Nano | Rear NeoPixel ring | Cable column to lamp head | WS2812 / SK6812 single-wire | Rear vent lighting effects |
+| Maestro Ch1-3 | MG996R / MG90S servos | Cave harness | PWM | Arm, elbow, neck pan actuation |
+| Pi Zero 2 WH | Front Olight Sphere | Physical placement only by default | Magnetic mount, optional app control | Forward-facing practical light / bulb replacement |
+| Pi Zero 2 WH | Speaker | Local wiring | I2S / USB audio / amplifier path | Voice and sound output |
+| Pi Zero 2 WH | Microphone | Local wiring | USB or I2S audio | Performer and audience input |
+| Pi Zero 2 WH | Sensors | Local wiring | GPIO / I2C / ADC bridge | Ambient and proximity awareness |
+| Stage Cameras | Vision Node / Director | Backstage network | USB, RTSP, Ethernet | Visual analysis and capture |
+| RK3588-40 | AI accelerator | Internal high-speed expansion | PCIe / M.2 | Extra local AI throughput |
+
+## Power Architecture
+
+The preferred power layout is:
+
+1. **AC mains** into the lamp base and into the ComXim turntable (independent feed)
+2. **Internal PSU** in the lamp base
+3. **MEAN WELL LRS-50-5** in the cave - dedicated 5V rail for the MG996R / MG90S servos and AX-12A, kept separate from logic
+4. **12 V rail** for amplifiers, lighting support, and motor domains where needed
+5. **5 V rail** for RK3588-40, Raspberry Pi Zero 2 WH, ESP32, Arduino Nano, USB peripherals, and logic devices
+6. **Separate charging model for the Olight Sphere**, because the sphere is magnet-mounted and normally battery-powered unless later modified for wired power
+7. The **ComXim turntable** has its own internal power and AC inlet - it is not fed from the cave PSU
+
+## RK3588-40 and RK3576-20 Reference Comparison
+
+| Attribute | RK3588-40 | RK3576-20 |
+|---|---|---|
+| CPU | 4 x Cortex-A76 + 4 x Cortex-A55 | 4 x Cortex-A72 + 4 x Cortex-A53 |
+| GPU | Mali-G610 MC4 | Mali-G52 MC3 |
+| NPU | 6 TOPS | 6 TOPS |
+| RAM on standard Seeed SKU | 16 GB LPDDR5 | 4 GB LPDDR5 |
+| Max memory on family / custom options | Up to 32 GB LPDDR5 | Up to 16 GB LPDDR5 |
+| PCIe AI expansion | Yes, platform expandable to 26 TOPS total | Yes, platform expandable to 26 TOPS total |
+| Networking on Seeed box | 2 x 2.5GbE | 2 x GbE |
+| Fit for PIXSTARS direction | Preferred full AI brain - **confirmed** | Smaller / lower-cost alternative |
+
+## Implementation Notes
+
+- The **rear LED ring** is not the main bulb. It is an expressive lighting element that projects through the rear head vents and is driven from the cave (Arduino Nano), not from the Pi.
+- The **front-facing Olight Sphere** is the practical light replacing the original front bulb position and is magnetically attached inside the lampshade.
+- The Raspberry Pi in the head keeps audio and sensor wiring short. It does not drive servos or the rear LED ring in v3.
+- The RK3588-40 and accelerator stay in the base where cooling, power, and expansion are easier.
+- The optional backstage vision node should mirror the same software stack where possible to reduce operational complexity.
+- The **ComXim turntable is a first-class network device**: it is addressed directly from the Mac Mini over WiFi and is decoupled from the ESP32 / Maestro chain. Losing the ESP32 does not lose base rotation, and vice versa.
+
+## Related Architecture Documents
+
+- `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` - authoritative v3 cave architecture: ComXim turntable as rotation engine, riser block geometry, cave servo rail inventory, control chain, BOM delta from v2, and servo channel map. **This document supersedes any earlier servo / rotation description in the architecture.**
+- `architecture_decision_records/LAMP_ARCHITECTURE_v2.md` - prior v2 cave architecture (custom lazy Susan + NEMA 17), retained for migration context only.
+
+## Related Documents
+
+- `docs/audio/AUDIO_SETUP.md`
+- `docs/architecture/diagrams/pixstars-architecture-v2.svg`
+- `docs/architecture/diagrams/pixstars-architecture-v2-preview.png`
