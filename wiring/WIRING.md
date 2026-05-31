@@ -11,13 +11,14 @@ The goal is to create a reliable, maintainable stage prop inspired by
 Luxo Jr. where the electronics disappear and the audience experiences a
 living character.
 
-This guide covers Raspberry Pi Zero 2 WH GPIO wiring, WS2812 RGB LED
-installation, soldering, JST connectors, Dupont connectors, wire colors,
-speaker wiring, and cable routing. It also documents the cave servo
-stack hidden under the ComXim turntable (ESP32 DevKit, Pololu Mini
-Maestro 24-channel, MG996R and MG90S servos, MEAN WELL LRS-50-5 PSU)
-and the ComXim MTxRUWSLPro programmable turntable used for base
-rotation.
+This guide covers Raspberry Pi Zero 2 WH GPIO wiring (audio, sensors,
+I2C to RK3588-40), WS2812 RGB LED installation (driven by the ESP32 in
+the cave, not the Pi), soldering, JST connectors, Dupont connectors,
+wire colors, speaker wiring, and cable routing. It also documents the
+cave servo stack hidden under the ComXim turntable (ESP32 DevKit,
+Pololu Mini Maestro 24-channel, MG996R and MG90S servos, MEAN WELL
+LRS-50-5 PSU) and the ComXim MTxRUWSLPro programmable turntable used
+for base rotation.
 
 ------------------------------------------------------------------------
 
@@ -64,6 +65,10 @@ Use:
 
 The female Dupont connector slides over the Raspberry Pi pins.
 
+The Pi handles audio I/O, sensors, and I2C to the RK3588-40.
+The LED ring is NOT driven by the Pi -- it is driven by the ESP32
+in the cave (see the WS2812 LED Ring section below).
+
 ------------------------------------------------------------------------
 
 # WS2812 LED Ring
@@ -75,11 +80,16 @@ The LED ring has:
 -   D0
 -   D1
 
-Use:
+The LED ring lives in the lamp head. The driver electronics and power
+sit in the cave. Three wires run through the cable column to reach the
+ring:
 
-    Pi Pin 2  (5V)      -> LED PWR 5V
-    Pi Pin 6  (GND)     -> LED GND
-    Pi Pin 12 (GPIO18)  -> 330 ohm resistor -> LED D0
+    ESP32 GPIO (RMT) -> 330 ohm resistor -> DATA wire (cable column) -> LED D0
+    MEAN WELL LRS-50-5 5V -> 5V wire (cable column) -> LED PWR 5V
+    MEAN WELL LRS-50-5 GND -> GND wire (cable column) -> LED GND
+
+The ESP32 logic ground and the MEAN WELL 5V ground must be tied
+together (common GND) for the WS2812 data signal to be valid.
 
 D1 is unused unless another LED ring is chained.
 
@@ -87,15 +97,19 @@ D1 is unused unless another LED ring is chained.
 
 # 330 Ohm Resistor
 
-Install in the data line:
+Install in the data line at the cave end, on the ESP32 GPIO output
+before the wire enters the cable column:
 
-    GPIO18
+    ESP32 GPIO
      |
     330 ohm resistor
      |
-    LED D0
+    DATA wire (cable column)
+     |
+    LED D0 (in the head)
 
 The resistor protects the first LED from signal spikes.
+Placing it at the cave end keeps the lamp head free of extra parts.
 
 ------------------------------------------------------------------------
 
@@ -113,29 +127,33 @@ Connect:
 
 The stripe on the capacitor indicates the negative side.
 
-Place close to the LED ring.
+Place close to the LED ring, inside the lamp head.
+This is the far end of the cable column 5V run, so the capacitor
+smooths power right where the ring draws it.
 
 ------------------------------------------------------------------------
 
 # JST-SM 3 Pin Connector
 
-Recommended for the removable lamp head:
+Recommended for the removable lamp head. The JST connector sits between
+the cable column wires (coming up from the cave) and the LED ring's
+short soldered tail in the head:
 
-    LED Ring
+    LED Ring (in head)
        |
-    short soldered wires
+    short soldered tail
        |
-    JST connector
+    JST connector (mate point)
        |
-    lamp arm wiring
+    cable column wires
        |
-    Raspberry Pi Zero 2 WH
+    ESP32 / MEAN WELL PSU (in cave)
 
-Typical colors:
+The three pins carry signals that all originate in the cave:
 
-    Red   = 5V
-    Green = Data
-    Black = Ground
+    Red   = 5V    (from MEAN WELL LRS-50-5)
+    Green = Data  (from ESP32 GPIO via 330 ohm resistor)
+    Black = Ground (common with ESP32 logic GND)
 
 ------------------------------------------------------------------------
 
@@ -161,7 +179,7 @@ Avoid heating pads too long.
 
 # LED Ring Final Wiring
 
-    WS2812 Ring
+    WS2812 Ring (in head)
 
     PWR 5V -> Red wire
     D0     -> Green wire
@@ -170,6 +188,15 @@ Avoid heating pads too long.
             |
             |
        JST connector
+            |
+            |
+       Cable column (3 wires: 5V, DATA, GND)
+            |
+            |
+       Cave:
+         - DATA -> 330 ohm resistor -> ESP32 GPIO
+         - 5V   -> MEAN WELL LRS-50-5 +5V
+         - GND  -> MEAN WELL GND (common with ESP32 GND)
 
 ------------------------------------------------------------------------
 
@@ -208,12 +235,13 @@ Place the amplifier in the base.
 
 The head contains:
 
--   WS2812 5050 RGB LED Ring 16 (rear-facing, towards air vents)
+-   WS2812 5050 RGB LED Ring 16 (rear-facing, towards air vents;
+    controlled by ESP32 via cable column, powered by MEAN WELL PSU)
 -   Olight Sphere (front-facing bulb replacement, magnetic mount)
 -   Dynamixel AX-12A (head nod servo, TTL serial from ESP32 in cave)
 -   Logitech C920 webcam
 -   Raspberry Pi Zero 2 WH (nervous system -- audio I/O, sensors,
-    LED ring control)
+    I2C to RK3588-40)
 -   Microphone
 -   40mm speaker
 
@@ -229,11 +257,14 @@ hardware lives here.
 
 The cave contains:
 
--   ESP32 DevKit (WiFi bridge from Mac Mini, drives Maestro and AX-12A)
+-   ESP32 DevKit (WiFi bridge from Mac Mini; drives Maestro, AX-12A,
+    and the WS2812 LED ring via RMT GPIO + 330 ohm resistor through
+    the cable column)
 -   Pololu Mini Maestro 24-channel servo controller
 -   4x MG996R servos (lower arm, elbow, spares)
 -   1x MG90S servo (neck pan, carbon fibre push-pull rod)
--   MEAN WELL LRS-50-5 power supply (5V servo rail)
+-   MEAN WELL LRS-50-5 power supply (5V rail for servos and for the
+    WS2812 LED ring via the cable column)
 -   Seeed Studio reComputer RK3588-40 (lamp brain -- local AI inference)
 
 ------------------------------------------------------------------------
@@ -254,7 +285,7 @@ Base rotation is handled independently from the cave servo stack:
 Recommended:
 
     Lamp Head
-    - LED Ring (Pi GPIO)
+    - WS2812 LED Ring (data + 5V + GND arrive via cable column)
     - Olight Sphere (magnetic, self-contained)
     - AX-12A (TTL serial via cable column)
     - Speaker, Mic
@@ -263,15 +294,18 @@ Recommended:
 
          |
 
-    Cable Column (central)
+    Cable Column (central) -- bundle includes:
+    - LED Ring (ESP32 GPIO via cable column): DATA + 5V + GND
+    - AX-12A TTL serial
+    - Pi audio / sensor lines as needed
 
          |
 
     Cave (under ComXim turntable)
-    - ESP32
+    - ESP32 (drives Maestro, AX-12A, and LED ring via RMT GPIO)
     - Maestro + Servos
     - RK3588-40
-    - MEAN WELL PSU
+    - MEAN WELL PSU (5V to servos and to LED ring via cable column)
 
          |
 
@@ -291,7 +325,7 @@ Recommended:
 
 Test:
 
-1.  LED ring animations (Pi GPIO)
+1.  LED ring animations (ESP32 GPIO via cable column)
 2.  Microphone input
 3.  Speaker output
 4.  AX-12A head nod sweep
