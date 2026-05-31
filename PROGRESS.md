@@ -27,6 +27,7 @@
 - [x] Run `bash pi/scripts/install_pi_satellite.sh`
 - [x] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
 - [x] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
+
 - [-] Test audio output: `aplay test.wav` (skipped — no speaker connected, Pi is thin endpoint)
 
 ## Phase 3 — Pairing
@@ -67,8 +68,11 @@
 - [x] Open `http://localhost:8080` and verify
 - [x] Create workspace for Pixstars lamp voice workflow
 - [x] Add agent briefs from `voice/orchestration/agents/`
+
 - [-] Populate `voice/orchestration/state/episode_sources.txt` (skipped — silent performance, no episode sources yet)
+
 - [x] Run `bash voice/scripts/run_voice_factory.sh` (prove local pipeline)
+
 - [-] Move sequence into HiveMind saved workflow or heartbeat-scheduled task (deferred — will configure when real content is ready)
 
 ## Phase 9 — Real Render Backend and Review Queue
@@ -129,7 +133,7 @@
 - [ ] Order Pololu Mini Maestro 24-channel
 - [ ] Order MG996R servos (x4) and MG90S servo (x1)
 - [ ] Order Dynamixel AX-12A
-- [ ] Order NeoPixel RGBW LED ring
+- [ ] Order WS2812 5050 RGB LED Ring 16
 - [ ] Order Arduino Nano
 - [ ] Order MEAN WELL LRS-50-5 PSU
 - [ ] Order Seeed Studio reComputer RK3588-40

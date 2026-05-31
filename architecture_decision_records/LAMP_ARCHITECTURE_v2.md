@@ -126,7 +126,7 @@ This joint is entirely new in v2. It did not exist in v1.
 | Position feedback | None | Yes — AX-12A reports position, temperature, load |
 | Compliance mode | None | Yes — software-adjustable stiffness for organic movement feel |
 | Range | ~90° | 300° (software-limited to ±150° for safety) |
-| NeoPixel ring | Wired externally | Wired through upper arm tube; rotates with shade, always centred in reflector |
+| WS2812 5050 RGB LED Ring 16 | Wired externally | Wired through upper arm tube; rotates with shade, always centred in reflector |
 
 **Assembly order (v2):**
 1. Left yoke arm (A)
@@ -149,7 +149,7 @@ Mac Mini M4 Pro
   └── USB cable
         └── Pololu Mini Maestro 24-ch
               └── PWM signals to servos (MG996R × 4, MG90S × 2)
-              └── Serial to Arduino Nano → NeoPixel ring
+              └── Serial to Arduino Nano → WS2812 5050 RGB LED Ring 16
 ```
 
 ### v2 control chain
@@ -162,13 +162,13 @@ Mac Mini M4 Pro
                     └── PWM → MG996R × 4 (arm joints, in cave)
                     └── PWM → MG90S × 1 (neck pan rod, in cave)
                     └── PWM → NEMA 17 driver (base rotation)
-                    └── Serial bridge → Arduino Nano → NeoPixel ring
+                    └── Serial bridge → Arduino Nano → WS2812 5050 RGB LED Ring 16
               └── TTL serial (daisy-chain) → AX-12A #1 (head nod, in shade)
 ```
 
 **Removed:** USB cable from Mac Mini to Maestro.
 **Added:** ESP32 WiFi bridge on inner ring. TTL serial bus for AX-12A.
-**Unchanged:** Arduino Nano / NeoPixel ring relationship.
+**Unchanged:** Arduino Nano / WS2812 5050 RGB LED Ring 16 relationship.
 
 ---
 
@@ -183,7 +183,7 @@ Update Maestro configuration and all Python servo control files to reflect this 
 | 2 | Upper arm reach (elbow) | MG996R | 2 |
 | 3 | Neck pan (push-pull rod) | MG90S | — |
 | 4 | (spare) | — | — |
-| 5 | NeoPixel (via Nano serial) | Arduino Nano bridge | 5 |
+| 5 | LED Ring (via Nano serial) | Arduino Nano bridge | 5 |
 | — | Head nod | AX-12A (TTL, ID=1) | 3 |
 
 **Note:** Head nod (AX-12A) is no longer on a Maestro PWM channel. It is addressed directly via TTL serial using the Dynamixel Protocol 1.0 SDK. Update any code that previously called `set_target(3, angle)` for head nod — this must be replaced with a Dynamixel SDK write instruction to ID=1.
@@ -305,7 +305,7 @@ The following remain identical between v1 and v2:
 
 - Mac Mini M4 Pro as show control host
 - Ardour + Pianoteq 9 + MODO DRUM audio stack
-- NeoPixel RGBW ring inside shade, driven by Arduino Nano
+- WS2812 5050 RGB LED Ring 16 inside shade, driven by Arduino Nano
 - Logitech C920 webcam role (gaze / projection source)
 - Ten-act screenplay structure and lamp movement vocabulary
 - Pololu Mini Maestro 24-channel as PWM servo hub

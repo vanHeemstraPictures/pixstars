@@ -22,7 +22,7 @@ When editing the screenplay, preserve the identity shifts and the lamp vocabular
 
 All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
 programmable turntable, mounted on a riser block. The lamp itself contains no motors
-— only a NeoPixel LED ring and a Dynamixel AX-12A for head nod. Cables route through
+— only a WS2812 5050 RGB LED Ring 16 and a Dynamixel AX-12A for head nod. Cables route through
 a single central column.
 
 See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationale.
@@ -42,7 +42,7 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
-- **NeoPixel RGBW LED ring** — driven by Arduino Nano (serial bridge from Maestro Ch5)
+- **WS2812 5050 RGB LED Ring 16** — driven by Arduino Nano (serial bridge from Maestro Ch5)
 - **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
 
 ### Host
@@ -73,7 +73,7 @@ Mac Mini M4 Pro runs:
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
-- Arduino Nano serial bridge for NeoPixel RGBW ring
+- Arduino Nano serial bridge for WS2812 5050 RGB LED Ring 16
 
 ComXim MTxRUWSLPro handles:
 - Base rotation (precision stepping, 0.1° resolution)

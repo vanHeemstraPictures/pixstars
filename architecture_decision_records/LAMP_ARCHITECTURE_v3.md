@@ -128,7 +128,7 @@ Mac Mini M4 Pro
                     └── PWM → MG996R × 4 (arm joints)
                     └── PWM → MG90S × 1 (neck pan rod)
                     └── PWM → NEMA 17 stepper driver (base rotation)
-                    └── Serial bridge → Arduino Nano → NeoPixel ring
+                    └── Serial bridge → Arduino Nano → WS2812 5050 RGB LED Ring 16
               └── TTL serial → AX-12A #1 (head nod)
 ```
 
@@ -143,7 +143,7 @@ Mac Mini M4 Pro
                └── Serial → Pololu Mini Maestro 24-ch
                      └── PWM → MG996R × 4 (arm joints)
                      └── PWM → MG90S × 1 (neck pan rod)
-                     └── Serial bridge → Arduino Nano → NeoPixel ring
+                     └── Serial bridge → Arduino Nano → WS2812 5050 RGB LED Ring 16
                └── TTL serial → AX-12A #1 (head nod)
 ```
 
@@ -164,7 +164,7 @@ The NEMA 17 stepper has been removed from Maestro channel 0. That channel is now
 | 2 | Upper arm reach (elbow) | MG996R | 2 | Unchanged |
 | 3 | Neck pan (push-pull rod) | MG90S | 3 | Unchanged |
 | 4 | (spare) | — | 4 | Unchanged |
-| 5 | NeoPixel (via Nano serial) | Arduino Nano bridge | 5 | Unchanged |
+| 5 | LED Ring (via Nano serial) | Arduino Nano bridge | 5 | Unchanged |
 | — | Head nod | AX-12A TTL ID=1 | — | Unchanged |
 | — | Base rotation | ComXim (WiFi CT) | — | **New — separate device** |
 
@@ -286,7 +286,7 @@ NeoPixel remain valid and require no changes in v3.
 | Pololu Mini Maestro 24-ch | USB servo controller |
 | MEAN WELL LRS-50-5 PSU | 5V / 10A |
 | Arduino Nano | NeoPixel bridge |
-| NeoPixel RGBW ring | Inside shade |
+| WS2812 5050 RGB LED Ring 16 | Inside shade |
 
 ---
 
@@ -317,7 +317,7 @@ The following are identical between v2 and v3:
 - ESP32 WiFi bridge for servo commands
 - Pololu Mini Maestro 24-ch as PWM servo hub
 - MEAN WELL LRS-50-5 power supply
-- Arduino Nano / NeoPixel ring
+- Arduino Nano / WS2812 5050 RGB LED Ring 16
 - TTL daisy-chain to AX-12A
 - Mac Mini M4 Pro as show control host
 - Ardour + Pianoteq 9 + MODO DRUM audio stack
