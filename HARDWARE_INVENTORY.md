@@ -88,6 +88,22 @@ https://www.enttec.com/product/dmx-usb-interfaces/dmx-usb-pro-professional-1u-us
 
 ---
 
+## Lamp Base AI
+
+| Item | Detail |
+|------|--------|
+| Device | Seeed Studio reComputer RK3588-40 |
+| SoC | Rockchip RK3588 (4x Cortex-A76 + 4x Cortex-A55) |
+| NPU | 6 TOPS (INT8), expandable to 26 TOPS via PCIe accelerator |
+| RAM | 16GB LPDDR5 |
+| Storage | 128GB eMMC + M.2 NVMe slot |
+| Connectivity | Gigabit Ethernet, WiFi 6, Bluetooth 5.2 |
+| Role | Local AI brain in lamp base |
+| Runs | Wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client |
+| Status | **PLANNED** — confirmed, not yet procured |
+
+---
+
 ## Projector
 
 | Item | Detail |

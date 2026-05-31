@@ -1,600 +1,147 @@
 # PIXSTARS Architecture
 
-> Master architecture documentation for the PIXSTARS AI-powered animatronic lamp performance platform.
+> Master architecture document for the PIXSTARS animatronic lamp platform.
+> Language policy: **English only** across architecture, diagrams, labels, and future technical documentation.
 
----
+## Design Principle
 
-## Status
+PIXSTARS is designed around a simple theatrical rule:
 
-We are going full-out on local AI.
+> **The lamp is a character, not a prop.**
 
-The PIXSTARS lamp is no longer just a remotely controlled stage prop. It is designed as a distributed AI character with local perception, local voice, local inference, emotional state, and backstage show orchestration.
+The architecture therefore separates the system into three roles:
 
----
+- **Director** - backstage orchestration on the Apple Mac Mini M4 Pro
+- **Brain** - local AI execution in the lamp base on the Seeed Studio reComputer RK3588-40
+- **Nervous System** - local I/O and device control in the lamp head on the Raspberry Pi Zero 2 WH
 
-## Design Philosophy
+A fourth layer - the **Motion Substrate** - sits beneath the lamp in the cave under the ComXim turntable and handles all physical actuation (servos, base rotation, LED ring drive). It is intentionally dumb: it executes commands; it does not decide. See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the v3 cave design.
 
-> "The lamp is a character, not a prop."
+## High-Level Relationship Map
 
-The audience should experience a living stage partner with:
+```mermaid
+flowchart LR
+    Audience[Audience and Performer]
+    Cameras[Stage and Room Cameras]
+    Visuals[Projectors, Stream, Stage Monitors]
 
-- attention
-- emotion
-- curiosity
-- memory
-- timing
-- voice
-- movement
-- visual awareness
+    Mac[Apple Mac Mini M4 Pro\nDirector]
+    HA[Home Assistant]
+    HV[HiveMind Server]
+    OV[OpenVoiceOS Services]
+    Ardour[Ardour Timeline and Audio]
 
-The technical architecture exists to support that illusion.
+    RK[Seeed Studio reComputer RK3588-40\nLamp Brain]
+    ACC[PCIe / M.2 AI Accelerator\nUp to 26 TOPS Total Platform]
+    Pi[Raspberry Pi Zero 2 WH\nLamp Head Nervous System]
 
----
+    ComXim[ComXim MTxRUWSLPro\nBase Rotation Turntable]
+    ESP[ESP32 DevKit\nWiFi Servo Bridge]
+    Maestro[Pololu Mini Maestro 24-ch\nServo Controller]
+    AX[Dynamixel AX-12A\nHead Nod TTL]
+    Nano[Arduino Nano\nNeoPixel Serial Bridge]
+    ArmServos[MG996R x 4 + MG90S x 1\nArm / Elbow / Neck Pan]
 
-## Core Mental Model
+    RearRing[Rear Vent LED Ring]
+    FrontBulb[Front Magnetic Olight Sphere]
+    Mic[Microphone]
+    Speaker[40 mm Speaker]
+    Sensors[Ambient / Proximity / Buttons]
+    Camera[Optional Head Camera / Logitech C920]
 
-| Component | Physical Location | Role |
-|---|---|---|
-| Apple Mac Mini M4 Pro | Backstage | Director |
-| Seeed Studio reComputer RK3588-40 | Lamp base | AI Brain |
-| PCIe AI Accelerator | Lamp base / expansion slot | Vision & inference coprocessor |
-| Raspberry Pi Zero 2 WH | Lamp head | Nervous System |
-| Camera | Lamp head | Eyes |
-| Microphone | Lamp head | Ears |
-| Speaker | Lamp head | Voice |
-| WS2812 RGB LED ring | Lamp head / lampshade | Emotions |
-| Servos | Neck / head / shoulder | Muscles |
+    Vision[Optional Backstage Vision Node\nRK3588-40 + accelerator]
 
----
-
-## High-Level System Architecture
-
-```text
-                              AUDIENCE
-                                  │
-                                  ▼
-
-                         ┌────────────────┐
-                         │ PIXSTARS LAMP  │
-                         │ AI CHARACTER   │
-                         └───────┬────────┘
-                                 │
-                       WiFi / MQTT / HiveMind
-                                 │
-                                 ▼
-
-┌────────────────────────────────────────────────────────────────┐
-│                    APPLE MAC MINI M4 PRO                       │
-│                          "DIRECTOR"                            │
-│                                                                │
-│  - Ardour timeline and music playback                          │
-│  - HiveMind Server                                              │
-│  - Home Assistant                                               │
-│  - Projection control                                           │
-│  - Lighting control                                             │
-│  - Show control timeline                                        │
-│  - Large AI / LLM services                                      │
-│  - Logging and rehearsal tooling                                │
-└────────────────────────────────────────────────────────────────┘
-                                 │
-                                 │ Ethernet / WiFi
-                                 ▼
-
-┌────────────────────────────────────────────────────────────────┐
-│                 OPTIONAL BACKSTAGE AI VISION NODE              │
-│                 RK3588 / AI Accelerator / Mac-side AI          │
-│                                                                │
-│  - Wide stage camera processing                                │
-│  - Audience tracking                                            │
-│  - Applause / attention analysis                                │
-│  - Scene understanding                                          │
-│  - Offloading heavy visual workloads                            │
-└────────────────────────────────────────────────────────────────┘
+    Audience --> Mac
+    Cameras --> Vision
+    Cameras --> Mac
+    Mac --> RK
+    Mac -- WiFi CT --> ComXim
+    Mac -- WiFi OSC --> ESP
+    HA --> Mac
+    HV --> Mac
+    OV --> Mac
+    Ardour --> Mac
+    RK --> ACC
+    RK --> Pi
+    ESP -- Serial --> Maestro
+    ESP -- TTL Serial --> AX
+    Maestro -- PWM --> ArmServos
+    Maestro -- Serial Bridge --> Nano
+    Nano --> RearRing
+    Pi --> FrontBulb
+    Pi --> Mic
+    Pi --> Speaker
+    Pi --> Sensors
+    Pi --> Camera
+    Vision --> Mac
+    Vision --> Visuals
+    RK --> Audience
 ```
 
----
+## System Roles
 
-## Internal Lamp Architecture
+| Layer | Device | Physical Location | Main Role |
+|---|---|---|---|
+| Backstage Core | Apple Mac Mini M4 Pro | Backstage rack / control desk | Show direction, timeline, orchestration, projections, global state |
+| Lamp Brain | Seeed Studio reComputer RK3588-40 | Lamp base | Local AI, speech, vision, behaviour, HiveMind client |
+| Lamp Accelerator | PCIe / M.2 AI accelerator | Lamp base | Extra AI throughput for heavier local inference |
+| Lamp Head Controller | Raspberry Pi Zero 2 WH | Lamp head | Audio I/O, sensor polling, LED state signalling, local device control |
+| Base Rotation Engine | ComXim MTxRUWSLPro turntable | Under lamp (riser block) | Precision base rotation, WiFi CT protocol, direct from Mac Mini |
+| Servo Bridge | ESP32 DevKit | Cave (under turntable) | WiFi receiver for servo commands, drives Maestro and AX-12A |
+| Servo Controller | Pololu Mini Maestro 24-ch | Cave (under turntable) | PWM hub for arm, elbow, neck pan servos and NeoPixel bridge |
+| Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
+| LED Ring Driver | Arduino Nano | Cave (under turntable) | NeoPixel RGBW serial bridge from Maestro Ch5 |
+| Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 
-```text
-                         LAMP HEAD
-┌────────────────────────────────────────────────────────────────┐
-│ Raspberry Pi Zero 2 WH                                         │
-│ "NERVOUS SYSTEM"                                               │
-│                                                                │
-│ Connected locally to:                                          │
-│  - USB microphone                                               │
-│  - 40 mm speaker / audio output                                │
-│  - WS2812 RGB LED ring                                          │
-│  - camera                                                       │
-│  - proximity / IR sensors                                       │
-│  - ambient light sensor                                         │
-│  - future servos                                                │
-│  - physical buttons                                             │
-└───────────────────────────────┬────────────────────────────────┘
-                                │
-                         USB / UART / MQTT
-                                │
-                       Through the lamp arm
-                                │
-                                ▼
+## Lamp Head Layout
 
-                         LAMP BASE
-┌────────────────────────────────────────────────────────────────┐
-│ Seeed Studio reComputer RK3588-40                              │
-│ "AI BRAIN"                                                     │
-│                                                                │
-│  - 16 GB RAM class system                                      │
-│  - integrated NPU                                               │
-│  - Linux / Docker                                               │
-│  - OpenVoiceOS client services                                  │
-│  - HiveMind client                                              │
-│  - local speech processing                                      │
-│  - local vision processing                                      │
-│  - emotional state engine                                       │
-│  - behaviour engine                                             │
-│  - local memory / context store                                 │
-└───────────────────────────────┬────────────────────────────────┘
-                                │
-                         PCIe expansion
-                                │
-                                ▼
+The lamp head contains the hardware that benefits most from short cable runs, plus the head nod actuator:
 
-┌────────────────────────────────────────────────────────────────┐
-│ AI ACCELERATOR                                                  │
-│ "VISION & INFERENCE COPROCESSOR"                               │
-│                                                                │
-│  - object detection                                             │
-│  - face detection                                               │
-│  - pose estimation                                              │
-│  - gesture recognition                                          │
-│  - visual attention                                             │
-│  - multimodal perception                                        │
-└────────────────────────────────────────────────────────────────┘
-```
+- **Raspberry Pi Zero 2 WH** mounted inside the head as the local device controller
+- **Rear LED ring** (NeoPixel RGBW) mounted so it shines **towards the rear air vents** - driven by the Arduino Nano in the cave via the central cable column
+- **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
+- **40 mm speaker**
+- **Microphone**
+- **Ambient and proximity sensing**
+- **Dynamixel AX-12A** - head nod servo, TTL serial daisy-chain back to the ESP32 in the cave
+- **Logitech C920 webcam** - mounted on/near the lamp, role per screenplay
 
----
+### Lamp Head Responsibilities
 
-## Lamp Head
+The Raspberry Pi Zero 2 WH is intentionally not the main AI computer. It is the lamp head's **nervous system** and is responsible for:
 
-### Raspberry Pi Zero 2 WH
+- microphone and speaker handling
+- sensor polling
+- front bulb state signalling if integrated later
+- diagnostics and heartbeat monitoring
+- optional camera capture relay
 
-The Raspberry Pi Zero 2 WH is mounted inside the lamp head.
+The Pi does **not** drive the rear LED ring or any servos in v3. Those responsibilities live in the cave Motion Substrate (Arduino Nano + Maestro + AX-12A).
 
-It sits close to the physical devices that make the lamp feel alive:
+## Lamp Base Layout
 
-- microphone
-- speaker
-- LED ring
-- camera
-- sensors
-- future servos
+The lamp base contains the parts that need power, cooling, and expansion capacity:
 
-This keeps head wiring short and avoids running many delicate signal cables through the lamp arm.
+- **Seeed Studio reComputer RK3588-40**
+- **PCIe / M.2 AI accelerator**
+- power conversion and distribution
+- optional audio amplifier and USB peripherals
+- local storage and service containers
 
-### Purpose
+### Lamp Base Responsibilities
 
-The Raspberry Pi acts as the lamp's nervous system.
+The RK3588-40 is the lamp's **brain** and is responsible for:
 
-It is responsible for direct hardware interaction:
-
-- microphone interface
-- speaker interface
-- LED ring control
-- sensor collection
-- servo control
-- physical button handling
-- diagnostics
-- health monitoring
-- heartbeat reporting
-
-It should not be responsible for heavy AI workloads.
-
-### Why the Pi stays in the head
-
-The Pi is useful because the head is where most expressive hardware lives. It can react quickly to local events and keep low-level hardware behaviour stable even when the AI brain is busy.
-
-Examples:
-
-- keep LED breathing animation alive
-- report microphone status
-- detect button presses
-- monitor sensor state
-- drive future head/neck servos
-- expose a simple hardware API to the RK3588 brain
-
----
-
-## Lamp Base
-
-### Seeed Studio reComputer RK3588-40
-
-The reComputer RK3588-40 is mounted inside the lamp base.
-
-The base provides:
-
-- more physical room
-- better cooling
-- safer power distribution
-- easier maintenance access
-- space for PCIe expansion
-- cable routing to the head
-
-### Purpose
-
-The RK3588-40 is the lamp's AI brain.
-
-It is responsible for:
-
-- OpenVoiceOS
-- HiveMind client
+- wake word detection
 - speech-to-text
 - text-to-speech
-- wake-word logic
-- local LLM experiments
-- local memory
+- local LLM / dialogue logic
+- computer vision
+- face and gesture understanding
 - emotional state engine
-- behaviour selection
-- face tracking
-- gesture recognition
-- object detection
-- attention management
-- autonomous reactions
+- HiveMind client logic
+- autonomous behaviour execution
 
-The RK3588-40 allows the lamp to remain intelligent even when temporarily disconnected from the backstage Mac Mini.
+The PCIe / M.2 AI accelerator is reserved for higher-throughput local AI tasks, including:
 
----
-
-## AI Accelerator
-
-### Purpose
-
-The AI accelerator is reserved for high-throughput perception and inference.
-
-It should be treated as the lamp's visual and multimodal coprocessor.
-
-Responsibilities:
-
-- object detection
-- person detection
-- face detection
-- pose estimation
-- gesture recognition
-- visual attention
-- scene understanding
-- multi-model inference
-- future multimodal AI experiments
-
-### Why include it now
-
-PIXSTARS is intended to grow from a talking lamp into an audience-aware AI character.
-
-The PCIe accelerator path keeps the architecture future-proof. Instead of redesigning the lamp later, the base already reserves space, cooling, and power for an AI expansion module.
-
-### Suggested workload split
-
-| Workload | Preferred Device |
-|---|---|
-| LED animations | Raspberry Pi Zero 2 WH |
-| Sensor polling | Raspberry Pi Zero 2 WH |
-| Servo control | Raspberry Pi Zero 2 WH |
-| Speech-to-text | RK3588-40 |
-| Text-to-speech | RK3588-40 |
-| Wake-word logic | RK3588-40 / Pi depending on latency |
-| Emotional state | RK3588-40 |
-| Behaviour selection | RK3588-40 |
-| Face detection | AI accelerator |
-| Pose estimation | AI accelerator |
-| Gesture recognition | AI accelerator |
-| Object detection | AI accelerator |
-| Large show-level AI | Mac Mini M4 Pro |
-
----
-
-## Backstage Director
-
-### Apple Mac Mini M4 Pro
-
-The Mac Mini is the director of the show.
-
-It is responsible for:
-
-- Ardour session playback
-- November Rain timeline
-- dialogue and sound effects
-- projection cues
-- lighting cues
-- show timeline
-- Home Assistant automations
-- HiveMind Server
-- OpenVoiceOS server-side services
-- larger AI models
-- rehearsal tooling
-- logging
-- fallback control
-
-The Mac Mini owns the show.  
-The lamp owns its character.
-
----
-
-## Software Components
-
-### OpenVoiceOS
-
-Used for:
-
-- wake words
-- voice assistant behaviour
-- skills
-- voice interaction framework
-
-### HiveMind
-
-Used for:
-
-- distributed intelligence
-- communication between Mac Mini and lamp
-- multi-agent orchestration
-- remote skill execution
-
-### Home Assistant
-
-Used for:
-
-- automations
-- lighting state
-- device state
-- event triggers
-- integration glue
-
-### Ardour
-
-Used for:
-
-- November Rain playback
-- piano and drum rendering
-- dialogue playback
-- sound effects
-- timing backbone
-
-Detailed audio setup lives in:
-
-```text
-docs/audio/AUDIO_SETUP.md
-```
-
-### Docker
-
-Used where possible for:
-
-- repeatable deployment
-- isolated services
-- easy recovery
-- reproducible development
-
----
-
-## Communication Architecture
-
-### Director to Brain
-
-Between Mac Mini and RK3588-40:
-
-- HiveMind
-- MQTT
-- WebSocket
-- REST
-- OSC where useful for show control
-
-### Brain to Nervous System
-
-Between RK3588-40 and Raspberry Pi Zero 2 WH:
-
-- USB
-- UART
-- MQTT
-- lightweight local REST API
-
-The final transport can be selected during hardware integration.
-
-### Nervous System to Hardware
-
-Between Raspberry Pi and physical hardware:
-
-- GPIO
-- PWM
-- I2C
-- UART
-- USB
-- audio output
-
----
-
-## Power Architecture
-
-Power should be distributed from the lamp base.
-
-```text
-AC power
-   │
-   ▼
-Power supply in lamp base
-   │
-   ├── RK3588-40
-   ├── AI accelerator
-   ├── Raspberry Pi Zero 2 WH
-   ├── LED ring
-   ├── audio amplifier / speaker
-   ├── sensors
-   └── future servos
-```
-
-The base should include room for:
-
-- 5V rail
-- 12V rail if servos or lighting require it
-- fuse protection
-- cable strain relief
-- service disconnects
-- cooling airflow
-
----
-
-## AI Behaviour Layers
-
-The lamp behaviour should be layered.
-
-```text
-Physical Layer
-  LEDs, speaker, microphone, camera, servos
-
-Reflex Layer
-  fast local responses, heartbeat, sensor reactions
-
-Perception Layer
-  speech, vision, gesture, face, pose
-
-Emotion Layer
-  mood, confidence, fear, curiosity, pride
-
-Character Layer
-  personality, memory, timing, intent
-
-Show Layer
-  scene cues, music sync, projection sync, scripted beats
-```
-
-This layered model prevents the lamp from becoming a fragile one-piece script.
-
----
-
-## Example Interaction Flow
-
-```text
-Performer says: "Hey A.I."
-        │
-        ▼
-Microphone in lamp head captures audio
-        │
-        ▼
-Raspberry Pi forwards audio stream/state
-        │
-        ▼
-RK3588-40 performs wake-word and speech handling
-        │
-        ▼
-AI accelerator checks visual context
-        │
-        ▼
-RK3588-40 selects emotional response
-        │
-        ▼
-Pi drives LED ring and speaker output
-        │
-        ▼
-Mac Mini receives state update for show timeline
-```
-
----
-
-## Failure Modes and Fallbacks
-
-### If Mac Mini connection drops
-
-The lamp should still be able to:
-
-- breathe with LEDs
-- respond with local idle behaviour
-- show status
-- keep basic personality alive
-
-### If RK3588-40 fails
-
-The Pi should still be able to:
-
-- show emergency LED state
-- stop servos safely
-- report heartbeat failure if possible
-
-### If Pi fails
-
-The RK3588-40 should:
-
-- detect missing heartbeat
-- notify Mac Mini
-- disable dependent behaviours
-
-### If AI accelerator is unavailable
-
-The RK3588-40 should fall back to:
-
-- simpler vision models
-- reduced frame rate
-- scripted behaviour
-- Mac Mini assistance
-
----
-
-## Future AI Capabilities
-
-Planned or possible future expansions:
-
-- OpenHuman-based personality memory
-- persistent character history
-- performer recognition
-- audience attention tracking
-- gesture-driven interaction
-- emotional growth
-- local visual question answering
-- scene understanding
-- autonomous improvisation
-- rehearsal learning
-- show analytics
-
----
-
-## Repository Structure
-
-Recommended documentation structure:
-
-```text
-docs/
-├── architecture/
-│   └── ARCHITECTURE.md
-├── audio/
-│   └── AUDIO_SETUP.md
-├── hardware/
-│   ├── LAMP_HEAD.md
-│   ├── LAMP_BASE.md
-│   └── POWER.md
-├── software/
-│   ├── OPENVOICEOS.md
-│   ├── HIVEMIND.md
-│   ├── HOME_ASSISTANT.md
-│   └── DOCKER.md
-└── show-control/
-    ├── ARDOUR.md
-    ├── TIMELINE.md
-    └── CUES.md
-```
-
----
-
-## Final Principle
-
-The architecture should never be optimized only for technical elegance.
-
-It should be optimized for theatrical illusion.
-
-When the audience looks at the stage, they should not see:
-
-- a computer
-- an AI model
-- a GPIO pin
-- a camera
-- a speaker
-
-They should see:
-
-> A living lamp with a soul.
+- multi-model vision inference

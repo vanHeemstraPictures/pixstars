@@ -48,6 +48,10 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 ### Host
 - **Mac Mini M4 Pro** — show control host, runs everything
 
+### Lamp base AI
+- **Seeed Studio reComputer RK3588-40** — local AI brain (6 TOPS NPU, 16GB LPDDR5, expandable to 26 TOPS via PCIe)
+- Runs: wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client
+
 Servo channel map and sequence scripts live in this repo. Update both together when channels shift.
 
 ## Audio stack ("November Rain")
