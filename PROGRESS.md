@@ -92,6 +92,51 @@
 - [x] Test one render: rendered 'Hello...' with curious emotion, 0.535 real-time factor
 - [x] Run full pipeline: `bash voice/scripts/run_voice_factory_real.sh`
 
+## Phase 11 — AI Engineering Setup
+
+- [x] Create ai/ directory structure (agents, memory, knowledge, tools, models)
+- [x] Create lamp personality agent (ai/agents/lamp/personality.md)
+- [x] Create lamp emotional model aligned with 14 lamp states (ai/agents/lamp/emotions.yaml)
+- [x] Create lamp system prompt for Ollama (ai/agents/lamp/system_prompt.md)
+- [x] Create Walt personality agent (ai/agents/walt/)
+- [x] Create director rules referencing conductor/timeline.yaml (ai/agents/director/rules.md)
+- [x] Create safety guardrails (ai/agents/safety/guardrails.md)
+- [x] Create persistent memory scaffold (ai/memory/lamp_memory.yaml)
+- [x] Create knowledge base placeholders (ai/knowledge/)
+- [x] Move AI_ENGINEERING_SETUP.md to ai/AI_ENGINEERING_SETUP.md
+- [ ] Install Ollama on Mac Mini
+- [ ] Pull llama3.1 model
+- [ ] Test Ollama with lamp system prompt
+
+## Phase 12 — RK3588-40 Lamp Brain Integration
+
+- [x] Deep research report completed (docs/architecture/deep-research-report.md)
+- [x] RK3588-40 confirmed as lamp base AI brain
+- [x] ARCHITECTURE.md updated with three-tier model (Director/Brain/Nervous System)
+- [x] CLAUDE.md updated with RK3588-40 in hardware stack
+- [x] HARDWARE_INVENTORY.md updated with RK3588-40 entry
+- [x] ai/ agent files updated to reference RK3588-40 as inference host
+- [ ] Procure Seeed Studio reComputer RK3588-40
+- [ ] Initial OS and software setup on RK3588-40
+- [ ] Test local inference (Whisper STT, Piper TTS)
+
+## Phase 13 — Hardware Procurement and Build
+
+- [x] ComXim MT200RUWSL20ProV3 selected (20cm, White, USB+WiFi, 20kg) — documented in LAMP_ARCHITECTURE_v3.md
+- [ ] Order ComXim MT200RUWSL20ProV3 turntable
+- [x] Olight Sphere received, fully charged, operations verified via iOS Olight App (latest firmware)
+- [ ] Order ESP32 DevKit
+- [ ] Order Pololu Mini Maestro 24-channel
+- [ ] Order MG996R servos (x4) and MG90S servo (x1)
+- [ ] Order Dynamixel AX-12A
+- [ ] Order NeoPixel RGBW LED ring
+- [ ] Order Arduino Nano
+- [ ] Order MEAN WELL LRS-50-5 PSU
+- [ ] Order Seeed Studio reComputer RK3588-40
+- [ ] Build riser block (120-150mm, match ComXim footprint)
+- [ ] Build cave servo rail assembly
+- [ ] Assemble and wire complete lamp
+
 ## Notes
 
 *Add any notes, blockers, or decisions here as you go.*
@@ -103,3 +148,7 @@
 - 2026-04-28: Phase 7 complete. Cue manifest generated at ardour/cues/cue_manifest.csv. emit_state.py tested with 'idle' state.
 - 2026-04-28: Phase 8 complete. HiveMind installed (Docker + 8-container stack), project 'Pixstars Voice Factory' created with 6 agents (Director, Dialogue Curator, Voice Designer, Render Operator, Evaluator, Publisher). Local pipeline proven with stub scripts.
 - 2026-04-28: Phases 9 & 10 complete. Coqui XTTS v2 installed, voice cloning tested with E.T. reference audio. Real voice factory pipeline runs end-to-end. All 10 installation phases complete!
+- 2026-05-31: Phase 11 (AI Engineering Setup) Wave 1 complete. ai/ directory created with 14 content files. PR #26 merged. Ollama install pending (Wave 2).
+- 2026-05-31: RK3588-40 confirmed as lamp base AI brain. Three-tier architecture: Director (Mac Mini) / Brain (RK3588-40) / Nervous System (Pi Zero 2 WH). Architecture docs updated.
+- 2026-05-31: Olight Sphere arrived, fully charged, operations verified via iOS Olight App (latest firmware). Ready for front-facing magnetic bulb integration.
+- 2026-05-31: ComXim MT200RUWSL20ProV3 (20cm, White) confirmed as base rotation turntable. Documented in LAMP_ARCHITECTURE_v3.md section 12.
