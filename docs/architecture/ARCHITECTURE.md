@@ -133,6 +133,12 @@ Operational notes:
 - The Sphere C has its own internal 700mAh battery (USB-C rechargeable); it is not fed from the cave PSU
 - The Obounds gateway needs a USB power source backstage
 
+References:
+
+- Home Assistant community guide: https://community.home-assistant.io/t/integrating-olight-spheres-in-ha/907929
+- Obounds user manual: docs/olight/OLIGHT-OBOUNDS-UserManual.pdf
+- Video walkthrough: https://youtu.be/iRx4gJucEPI?si=fNBU-3CUkbJNBtOu
+
 ## Lamp Base Layout
 
 The lamp base contains the parts that need power, cooling, and expansion capacity:
