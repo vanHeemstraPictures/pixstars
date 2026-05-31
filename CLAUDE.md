@@ -37,12 +37,11 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **Arduino Nano** — NeoPixel serial bridge (Ch5 on Maestro)
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos, separated from logic)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
-- **WS2812 5050 RGB LED Ring 16** — driven by Arduino Nano (serial bridge from Maestro Ch5)
+- **WS2812 5050 RGB LED Ring 16** — driven by Raspberry Pi Zero 2 WH GPIO
 - **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
 
 ### Host
@@ -73,7 +72,6 @@ Mac Mini M4 Pro runs:
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
-- Arduino Nano serial bridge for WS2812 5050 RGB LED Ring 16
 
 ComXim MTxRUWSLPro handles:
 - Base rotation (precision stepping, 0.1° resolution)
