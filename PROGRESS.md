@@ -143,6 +143,37 @@
 - [ ] Configure Obounds in Home Assistant (tuya-local integration)
 - [ ] Test Sphere C control via Home Assistant automation
 
+## Phase 14 -- Olight Sphere C Integration Spike (ESP32 BLE Proxy)
+
+Time-boxed feasibility spike: prove or disprove that an ESP32 running ESPHome `bluetooth_proxy` + the `11z4t/tuya-ble-mesh` HACS integration can pair and control the Sphere C without an Obounds gateway. Budget: 4 hours of hands-on time. Hardware arrives 2026-06-01.
+
+Phase A -- ESPHome Bluetooth proxy on M5Stack Atom Lite (~1h)
+- [x] Order M5Stack Atom Lite (Amazon.nl, EUR 19.35, ASIN B0CTGKJPRW)
+- [ ] Confirm Atom Lite arrival and USB-C enumeration on Mac Mini (`/dev/cu.usbserial-*`)
+- [ ] Install ESPHome (HA add-on or standalone CLI)
+- [ ] Flash Atom Lite with `bluetooth_proxy:` + `esp32_ble_tracker:` config (board: `m5stack-atom`)
+- [ ] Verify Atom Lite is online in HA -> Devices & Services -> ESPHome
+- [ ] Smoke test: any nearby BLE device shows up in HA via the proxy
+
+Phase B -- Install tuya-ble-mesh HACS integration (~30 min)
+- [ ] Add `https://github.com/11z4t/tuya-ble-mesh` as custom HACS repository
+- [ ] Install integration, restart HA, confirm no startup errors
+- [ ] Add integration via UI, configure ESPHome BLE proxy mode (not RPi bridge)
+
+Phase C -- Pair and control the Sphere C (~1-2h, highest uncertainty)
+- [ ] Un-pair Sphere C from Olight Hub app (triple-click to re-enter pairing mode)
+- [ ] Place Sphere C within ~1 m of Atom Lite
+- [ ] Run tuya-ble-mesh auto-discovery, or manual provisioning if discovery fails
+- [ ] Record outcome: discovered+controllable / discovered+pairing-fails / not-discovered
+
+Phase D -- Decide and document (~30 min)
+- [ ] Write ADR in `architecture_decision_records/` capturing chosen path + rejected path
+- [ ] Update `docs/architecture/ARCHITECTURE.md` "Front-facing Olight Sphere C Integration" subsection
+- [ ] Update `HARDWARE_INVENTORY.md` (Obounds + Atom Lite statuses)
+- [ ] Update Phase 13 Obounds items (remove, keep as fallback, or mark superseded)
+
+Abort criterion: if Phase C is inconclusive after 2 hours of attempts, stop and fall back to ordering the Obounds via eBay Techno Toys.
+
 ## Notes
 
 *Add any notes, blockers, or decisions here as you go.*
@@ -158,3 +189,4 @@
 - 2026-05-31: RK3588-40 confirmed as lamp base AI brain. Three-tier architecture: Director (Mac Mini) / Brain (RK3588-40) / Nervous System (Pi Zero 2 WH). Architecture docs updated.
 - 2026-05-31: Olight Sphere arrived, fully charged, operations verified via iOS Olight App (latest firmware). Ready for front-facing magnetic bulb integration.
 - 2026-05-31: ComXim MT200RUWSL20ProV3 (20cm, White) confirmed as base rotation turntable. Documented in LAMP_ARCHITECTURE_v3.md section 12.
+- 2026-05-31: M5Stack Atom Lite (ESP32-PICO-D4, BLE 4.2) ordered from Amazon.nl (EUR 19.35, ASIN B0CTGKJPRW), arriving 2026-06-01. Phase 14 spike planned: test ESPHome `bluetooth_proxy` + `11z4t/tuya-ble-mesh` HACS integration as a vendor-neutral alternative to the discontinued Olight Obounds gateway. Obounds remains as documented fallback until the spike concludes.

@@ -139,6 +139,22 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Price | EUR 25-42 (varies by store) |
 | Status | PLANNED -- to be ordered |
 
+## M5Stack Atom Lite (ESP32 BLE Proxy)
+
+| Item | Detail |
+| --- | --- |
+| Product | M5Stack Atom Lite ESP32 IoT Development Kit (C008) |
+| ASIN | B0CTGKJPRW |
+| MCU | ESP32-PICO-D4 (dual-core 240 MHz, 4 MB flash) |
+| Radios | 2.4 GHz WiFi, Bluetooth 4.2 LE |
+| Connectivity | USB-C, HY2.0 (Grove-compatible), 6 GPIO |
+| Form factor | 24 x 24 mm enclosed plastic case |
+| Firmware | ESPHome `bluetooth_proxy` (board target: `m5stack-atom`) |
+| Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the `11z4t/tuya-ble-mesh` HACS integration |
+| Source | Amazon.nl |
+| Price | EUR 19.35 |
+| Status | ORDERED -- arriving 2026-06-01 |
+
 ## Summary
 
 | Component | Status |
@@ -155,6 +171,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Projector | 🟡 MOCKED (connect when available) |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
-| Olight Obounds gateway | PLANNED (to order) |
+| Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
+| M5Stack Atom Lite (BLE proxy) | ORDERED (arriving 2026-06-01) |
 
 *Last updated: May 2026*
