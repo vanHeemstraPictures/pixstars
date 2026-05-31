@@ -127,6 +127,18 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Price | EUR 15.99 |
 | Status | ORDERED -- arriving soon |
 
+## Olight Obounds Smart Wireless Gateway
+
+| Property | Value |
+|---|---|
+| Model | Obounds Smart Wireless Multi-Protocol Gateway |
+| Manufacturer | Olight |
+| Protocols | WiFi (2.4G), Bluetooth SIG Mesh, Zigbee |
+| Capacity | Up to 128 sub-devices |
+| Purpose | BLE Mesh bridge for Olight Sphere C front light -- enables Home Assistant control via tuya-local integration |
+| Price | EUR 25-42 (varies by store) |
+| Status | PLANNED -- to be ordered |
+
 ## Summary
 
 | Component | Status |
@@ -143,5 +155,6 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Projector | 🟡 MOCKED (connect when available) |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
+| Olight Obounds gateway | PLANNED (to order) |
 
 *Last updated: May 2026*

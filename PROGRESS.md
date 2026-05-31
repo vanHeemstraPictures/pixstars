@@ -139,6 +139,9 @@
 - [ ] Build riser block (120-150mm, match ComXim footprint)
 - [ ] Build cave servo rail assembly
 - [ ] Assemble and wire complete lamp
+- [ ] Order Olight Obounds gateway
+- [ ] Configure Obounds in Home Assistant (tuya-local integration)
+- [ ] Test Sphere C control via Home Assistant automation
 
 ## Notes
 

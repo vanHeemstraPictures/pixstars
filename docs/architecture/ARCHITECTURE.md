@@ -116,6 +116,23 @@ The Raspberry Pi Zero 2 WH is intentionally not the main AI computer. It is the 
 
 The Pi does **not** drive any servos and does **not** drive the rear LED ring in v3 - servo and LED responsibilities live in the cave Motion Substrate (ESP32 + Maestro + AX-12A). The Pi handles audio I/O, sensors, and heartbeat only.
 
+### Front-facing Olight Sphere C Integration
+
+The front-facing Olight Sphere C is a self-contained battery-powered BLE Mesh light. It cannot be driven directly by GPIO, serial, or WiFi -- it uses Bluetooth SIG Mesh as its only control transport. To bring it under show control, an **Olight Obounds Smart Wireless Gateway** bridges BLE Mesh to WiFi, enabling Home Assistant control.
+
+The integration path is:
+
+Mac Mini -> Home Assistant -> tuya-local integration -> WiFi -> Obounds gateway -> BLE Mesh -> Sphere C
+
+This allows programmatic on/off, color, and brightness control per show cue. The Obounds gateway sits backstage, plugged into power and connected to the 2.4G WiFi network.
+
+Operational notes:
+
+- The Sphere C must be pre-charged via USB-C before each show (~2h charge, 4-40h runtime depending on mode)
+- Sleep mode should be disabled in the Olight app to prevent BLE disconnection during the show
+- The Sphere C has its own internal 700mAh battery (USB-C rechargeable); it is not fed from the cave PSU
+- The Obounds gateway needs a USB power source backstage
+
 ## Lamp Base Layout
 
 The lamp base contains the parts that need power, cooling, and expansion capacity:
@@ -223,6 +240,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | ESP32 | Rear WS2812 5050 RGB LED Ring 16 | Cable column to lamp head | GPIO / RMT single-wire (WS2812 protocol) | Rear vent lighting effects - data from ESP32, 5V power from MEAN WELL PSU |
 | Maestro Ch1-3 | MG996R / MG90S servos | Cave harness | PWM | Arm, elbow, neck pan actuation |
 | Pi Zero 2 WH | Front Olight Sphere | Physical placement only by default | Magnetic mount, optional app control | Forward-facing practical light / bulb replacement |
+| Obounds Gateway | Olight Sphere C | Backstage WiFi / BLE Mesh | Bluetooth SIG Mesh | Front light on/off, color, brightness cues |
 | Pi Zero 2 WH | Speaker | Local wiring | I2S / USB audio / amplifier path | Voice and sound output |
 | Pi Zero 2 WH | Microphone | Local wiring | USB or I2S audio | Performer and audience input |
 | Pi Zero 2 WH | Sensors | Local wiring | GPIO / I2C / ADC bridge | Ambient and proximity awareness |
@@ -238,8 +256,9 @@ The preferred power layout is:
 3. **MEAN WELL LRS-50-5** in the cave - dedicated 5V rail for the MG996R / MG90S servos, AX-12A, and the WS2812 LED ring (data and 5V routed to the head via the cable column), kept separate from logic
 4. **12 V rail** for amplifiers, lighting support, and motor domains where needed
 5. **5 V rail** for RK3588-40, Raspberry Pi Zero 2 WH, ESP32, USB peripherals, and logic devices
-6. **Separate charging model for the Olight Sphere**, because the sphere is magnet-mounted and normally battery-powered unless later modified for wired power
+6. **Separate charging model for the Olight Sphere**, because the sphere is magnet-mounted and normally battery-powered unless later modified for wired power. The **Olight Sphere C** has its own internal 700mAh battery (USB-C rechargeable) and must be pre-charged before each show
 7. The **ComXim turntable** has its own internal power and AC inlet - it is not fed from the cave PSU
+8. The **Olight Obounds gateway** needs a USB power source backstage (separate from the cave PSU and the lamp base)
 
 ## RK3588-40 and RK3576-20 Reference Comparison
 
