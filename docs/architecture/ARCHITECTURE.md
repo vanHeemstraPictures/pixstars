@@ -39,7 +39,6 @@ flowchart LR
     ESP[ESP32 DevKit\nWiFi Servo Bridge]
     Maestro[Pololu Mini Maestro 24-ch\nServo Controller]
     AX[Dynamixel AX-12A\nHead Nod TTL]
-    Nano[Arduino Nano\nNeoPixel Serial Bridge]
     ArmServos[MG996R x 4 + MG90S x 1\nArm / Elbow / Neck Pan]
 
     RearRing[Rear Vent LED Ring]
@@ -66,8 +65,7 @@ flowchart LR
     ESP -- Serial --> Maestro
     ESP -- TTL Serial --> AX
     Maestro -- PWM --> ArmServos
-    Maestro -- Serial Bridge --> Nano
-    Nano --> RearRing
+    Pi --> RearRing
     Pi --> FrontBulb
     Pi --> Mic
     Pi --> Speaker
@@ -90,7 +88,7 @@ flowchart LR
 | Servo Bridge | ESP32 DevKit | Cave (under turntable) | WiFi receiver for servo commands, drives Maestro and AX-12A |
 | Servo Controller | Pololu Mini Maestro 24-ch | Cave (under turntable) | PWM hub for arm, elbow, neck pan servos and NeoPixel bridge |
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
-| LED Ring Driver | Arduino Nano | Cave (under turntable) | WS2812 RGB LED serial bridge from Maestro Ch5 |
+| LED Ring Driver | Raspberry Pi Zero 2 WH | Lamp head | WS2812 5050 RGB LED Ring 16 direct GPIO drive |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 
 ## Lamp Head Layout
@@ -98,7 +96,7 @@ flowchart LR
 The lamp head contains the hardware that benefits most from short cable runs, plus the head nod actuator:
 
 - **Raspberry Pi Zero 2 WH** mounted inside the head as the local device controller
-- **Rear LED ring** (WS2812 5050 RGB) mounted so it shines **towards the rear air vents** - driven by the Arduino Nano in the cave via the central cable column
+- **Rear LED ring** (WS2812 5050 RGB LED Ring 16) mounted so it shines **towards the rear air vents** - driven directly by the Raspberry Pi Zero 2 WH via GPIO
 - **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
 - **40 mm speaker**
 - **Microphone**
@@ -116,7 +114,7 @@ The Raspberry Pi Zero 2 WH is intentionally not the main AI computer. It is the 
 - diagnostics and heartbeat monitoring
 - optional camera capture relay
 
-The Pi does **not** drive the rear LED ring or any servos in v3. Those responsibilities live in the cave Motion Substrate (Arduino Nano + Maestro + AX-12A).
+The Pi **does** drive the rear LED ring directly via GPIO. It does **not** drive any servos in v3 - those responsibilities live in the cave Motion Substrate (Maestro + AX-12A).
 
 ## Lamp Base Layout
 
@@ -157,7 +155,8 @@ All physical actuation lives below the lamp, hidden inside a "cave" under the Co
 The split of responsibility is:
 
 - **RK3588-40 (Lamp Brain)** - decides what the lamp should do
-- **ESP32 / Maestro / AX-12A** - executes arm, elbow, neck pan, head nod, and LED ring commands
+- **ESP32 / Maestro / AX-12A** - executes arm, elbow, neck pan, and head nod commands
+- **Pi Zero 2 WH (lamp head)** - drives the WS2812 5050 RGB LED Ring 16 directly via GPIO
 - **ComXim MTxRUWSLPro** - executes base rotation
 
 ### Cave inventory (under turntable, on servo rail)
@@ -166,7 +165,6 @@ The split of responsibility is:
 - **Pololu Mini Maestro 24-channel** - serial from ESP32
 - **4x MG996R** servos - lower arm (Ch1), elbow (Ch2), spare (Ch3 / Ch4)
 - **1x MG90S** servo - neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **Arduino Nano** - NeoPixel serial bridge driven from Maestro Ch5
 - **MEAN WELL LRS-50-5** power supply - 5V servo rail, separated from logic
 
 ### Base rotation engine
@@ -184,7 +182,7 @@ The split of responsibility is:
 | 2 | Upper arm reach (elbow) | MG996R | PWM |
 | 3 | Neck pan (push-pull rod) | MG90S | PWM |
 | 4 | (spare) | - | PWM |
-| 5 | WS2812 5050 RGB LED Ring 16 | Arduino Nano serial bridge | Serial |
+| 5 | (spare) | - | Freed in v3 - LED ring moved to Pi GPIO |
 | - | Head nod | AX-12A TTL ID=1 | Direct TTL from ESP32, not on Maestro |
 | - | Base rotation | ComXim turntable | WiFi CT, direct from Mac Mini |
 
@@ -223,8 +221,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Lamp Brain | Lamp Head Pi | Internal harness | USB 2.0, UART, optional I2C | Audio relay, sensor telemetry, optional camera relay |
 | ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
 | ESP32 | Dynamixel AX-12A | Cable column to lamp head | TTL half-duplex serial | Head nod position commands - NOT on Maestro |
-| Maestro Ch5 | Arduino Nano | Cave harness | Serial (UART) | WS2812 RGB frame data bridge |
-| Arduino Nano | Rear WS2812 5050 RGB LED Ring 16 | Cable column to lamp head | WS2812 / SK6812 single-wire | Rear vent lighting effects |
+| Pi Zero 2 WH | Rear WS2812 5050 RGB LED Ring 16 | Lamp head GPIO | WS2812 / SK6812 single-wire | Rear vent lighting effects |
 | Maestro Ch1-3 | MG996R / MG90S servos | Cave harness | PWM | Arm, elbow, neck pan actuation |
 | Pi Zero 2 WH | Front Olight Sphere | Physical placement only by default | Magnetic mount, optional app control | Forward-facing practical light / bulb replacement |
 | Pi Zero 2 WH | Speaker | Local wiring | I2S / USB audio / amplifier path | Voice and sound output |
@@ -241,7 +238,7 @@ The preferred power layout is:
 2. **Internal PSU** in the lamp base
 3. **MEAN WELL LRS-50-5** in the cave - dedicated 5V rail for the MG996R / MG90S servos and AX-12A, kept separate from logic
 4. **12 V rail** for amplifiers, lighting support, and motor domains where needed
-5. **5 V rail** for RK3588-40, Raspberry Pi Zero 2 WH, ESP32, Arduino Nano, USB peripherals, and logic devices
+5. **5 V rail** for RK3588-40, Raspberry Pi Zero 2 WH, ESP32, USB peripherals, and logic devices
 6. **Separate charging model for the Olight Sphere**, because the sphere is magnet-mounted and normally battery-powered unless later modified for wired power
 7. The **ComXim turntable** has its own internal power and AC inlet - it is not fed from the cave PSU
 
@@ -260,7 +257,7 @@ The preferred power layout is:
 
 ## Implementation Notes
 
-- The **rear LED ring** is not the main bulb. It is an expressive lighting element that projects through the rear head vents and is driven from the cave (Arduino Nano), not from the Pi.
+- The **rear LED ring** is not the main bulb. It is an expressive lighting element that projects through the rear head vents and is driven directly by the Pi Zero 2 WH in the lamp head via GPIO.
 - The **front-facing Olight Sphere** is the practical light replacing the original front bulb position and is magnetically attached inside the lampshade.
 - The Raspberry Pi in the head keeps audio and sensor wiring short. It does not drive servos or the rear LED ring in v3.
 - The RK3588-40 and accelerator stay in the base where cooling, power, and expansion are easier.

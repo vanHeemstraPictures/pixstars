@@ -39,7 +39,7 @@ completely decoupled from the ESP32/Maestro servo chain.
 
     Inside cave (hanging from servo rail under ComXim top plate):
       ESP32 DevKit, Maestro 24-ch, 4x MG996R, 1x MG90S,
-      Arduino Nano, MEAN WELL LRS-50-5 PSU
+      MEAN WELL LRS-50-5 PSU
 ```
 
 ### Control Architecture
@@ -53,8 +53,8 @@ Mac Mini M4 Pro
                  +-- Serial --> Pololu Mini Maestro 24-ch
                  |     +-- PWM --> MG996R x 4 (arm joints)
                  |     +-- PWM --> MG90S x 1 (neck pan rod)
-                 |     +-- Serial bridge --> Arduino Nano --> WS2812 5050 RGB LED Ring 16
                  +-- TTL serial --> AX-12A #1 (head nod)
+  +-- (via Pi Zero 2 WH in lamp head) --> WS2812 5050 RGB LED Ring 16 (GPIO direct drive)
 ```
 
 ## Bill of Materials
@@ -77,7 +77,6 @@ Mac Mini M4 Pro
 | Pololu Mini Maestro 24-channel | 1 | Servo controller (serial from ESP32) |
 | MG996R servo | 4 | Lower arm (Ch1), elbow (Ch2), spare (Ch3-4) |
 | MG90S servo | 1 | Neck pan (Ch3), push-pull rod to lamp head |
-| Arduino Nano | 1 | NeoPixel serial bridge (Maestro Ch5) |
 | MEAN WELL LRS-50-5 | 1 | 5V power supply for servos and logic |
 | Servo bracket rail | 1 | Aluminium plate, ~280x100mm |
 | Hanger rods (x4) | 4 | M4 threaded, 100mm |
@@ -88,7 +87,7 @@ Mac Mini M4 Pro
 | Component | Qty | Purpose |
 |-----------|-----|---------|
 | Dynamixel AX-12A | 1 | Head nod (TTL serial via ESP32, NOT on Maestro) |
-| WS2812 5050 RGB LED Ring 16 | 1 | Lamp "eye" light (via Arduino Nano serial bridge) |
+| WS2812 5050 RGB LED Ring 16 | 1 | Lamp "eye" light (direct GPIO drive from Pi Zero 2 WH in head) |
 | Logitech C920 webcam | 1 | Gaze / projection source (role TBD) |
 | 3D-printed AX-12A shade cradle | 1 | PLA or PETG |
 | Steel rod (10mm, 200mm) | 1 | Head nod axle |
@@ -134,7 +133,7 @@ See `docs/LAMP_SPECIFICATIONS.md` for lamp product details.
 | 2 | Upper arm reach (elbow) | MG996R | Cable routed through column |
 | 3 | Neck pan (push-pull rod) | MG90S | Carbon fibre rod to lamp head |
 | 4 | (spare) | -- | Available |
-| 5 | WS2812 5050 RGB LED Ring 16 | Arduino Nano bridge | Serial from Maestro |
+| 5 | (spare) | -- | Freed in v3 - LED ring moved to Pi GPIO |
 | TTL | Head nod | AX-12A (ID=1) | TTL serial via ESP32 |
 | WiFi CT | Base rotation | ComXim MTxRUWSLPro | Separate device, Mac Mini direct |
 
@@ -145,7 +144,7 @@ See `docs/LAMP_SPECIFICATIONS.md` for lamp product details.
 | TX1 | Maestro serial TX |
 | RX1 | Maestro serial RX |
 | TX2 | AX-12A TTL serial |
-| GPIO_NEO | NeoPixel data (if driving directly, else via Nano) |
+| (unused) | LED ring data is driven from the Pi Zero 2 WH GPIO in the lamp head, not from the ESP32 |
 
 > Note: ESP32 no longer drives a stepper. NEMA 17 step/dir pins are removed in v3.
 
@@ -184,7 +183,7 @@ CT+STOP();
 3. Attach inner ring adapter plate to ComXim top plate
 4. Build servo bracket rail with hanger rods
 5. Mount 4x MG996R and 1x MG90S on servo rail
-6. Mount Maestro 24-channel, ESP32, Arduino Nano, PSU on servo rail
+6. Mount Maestro 24-channel, ESP32, PSU on servo rail
 7. Attach servo rail under inner ring (hanging into cave)
 8. Route string/rod linkages through central column to lamp joints
 9. Install AX-12A in lamp head for head nod
@@ -204,7 +203,7 @@ CT+STOP();
 2. Prove ESP32 connects to Mac Mini WiFi and receives OSC
 3. Prove Maestro serial control from ESP32 (one servo moves)
 4. Prove AX-12A head nod from ESP32
-5. Prove WS2812 5050 RGB LED Ring 16 via Arduino Nano bridge
+5. Prove WS2812 5050 RGB LED Ring 16 via Pi Zero 2 WH GPIO direct drive
 6. Prove all 6 DOF move in coordination
 7. Integrate with Show Conductor timeline
 8. Add HiveMind satellite (optional, on separate Pi)
