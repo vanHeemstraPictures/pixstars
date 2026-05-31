@@ -1,7 +1,7 @@
 # Pixstars Lamp - Emotional / Behavioral States
 #
 # These 14 states are the canonical lamp states defined in lamp/states.py.
-# Each state maps to an LED treatment (NeoPixel RGBW ring driven by the
+# Each state maps to an LED treatment (WS2812 5050 RGB LED Ring 16 driven by the
 # Arduino Nano on Maestro Ch5) and a movement description that pairs with
 # the motion parameters in lamp/states.py (energy, speed, range, jitter,
 # tilt_bias).
