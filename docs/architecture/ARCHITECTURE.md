@@ -90,7 +90,7 @@ flowchart LR
 | Servo Bridge | ESP32 DevKit | Cave (under turntable) | WiFi receiver for servo commands, drives Maestro and AX-12A |
 | Servo Controller | Pololu Mini Maestro 24-ch | Cave (under turntable) | PWM hub for arm, elbow, neck pan servos and NeoPixel bridge |
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
-| LED Ring Driver | Arduino Nano | Cave (under turntable) | NeoPixel RGBW serial bridge from Maestro Ch5 |
+| LED Ring Driver | Arduino Nano | Cave (under turntable) | WS2812 RGB LED serial bridge from Maestro Ch5 |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 
 ## Lamp Head Layout
@@ -98,7 +98,7 @@ flowchart LR
 The lamp head contains the hardware that benefits most from short cable runs, plus the head nod actuator:
 
 - **Raspberry Pi Zero 2 WH** mounted inside the head as the local device controller
-- **Rear LED ring** (NeoPixel RGBW) mounted so it shines **towards the rear air vents** - driven by the Arduino Nano in the cave via the central cable column
+- **Rear LED ring** (WS2812 5050 RGB) mounted so it shines **towards the rear air vents** - driven by the Arduino Nano in the cave via the central cable column
 - **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
 - **40 mm speaker**
 - **Microphone**
@@ -152,7 +152,7 @@ The PCIe / M.2 AI accelerator is reserved for higher-throughput local AI tasks, 
 
 ## Motion Substrate (Cave Architecture v3)
 
-All physical actuation lives below the lamp, hidden inside a "cave" under the ComXim turntable on a riser block. The lamp itself contains only the head nod servo (AX-12A), the NeoPixel ring, and the Pi-side sensors and audio. The RK3588-40 issues high-level intent (e.g. "turn 30 degrees CW", "raise lower arm to 60%"); the Motion Substrate executes it.
+All physical actuation lives below the lamp, hidden inside a "cave" under the ComXim turntable on a riser block. The lamp itself contains only the head nod servo (AX-12A), the WS2812 5050 RGB LED Ring 16, and the Pi-side sensors and audio. The RK3588-40 issues high-level intent (e.g. "turn 30 degrees CW", "raise lower arm to 60%"); the Motion Substrate executes it.
 
 The split of responsibility is:
 
@@ -184,7 +184,7 @@ The split of responsibility is:
 | 2 | Upper arm reach (elbow) | MG996R | PWM |
 | 3 | Neck pan (push-pull rod) | MG90S | PWM |
 | 4 | (spare) | - | PWM |
-| 5 | NeoPixel ring | Arduino Nano serial bridge | Serial |
+| 5 | WS2812 5050 RGB LED Ring 16 | Arduino Nano serial bridge | Serial |
 | - | Head nod | AX-12A TTL ID=1 | Direct TTL from ESP32, not on Maestro |
 | - | Base rotation | ComXim turntable | WiFi CT, direct from Mac Mini |
 
@@ -223,8 +223,8 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Lamp Brain | Lamp Head Pi | Internal harness | USB 2.0, UART, optional I2C | Audio relay, sensor telemetry, optional camera relay |
 | ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
 | ESP32 | Dynamixel AX-12A | Cable column to lamp head | TTL half-duplex serial | Head nod position commands - NOT on Maestro |
-| Maestro Ch5 | Arduino Nano | Cave harness | Serial (UART) | NeoPixel RGBW frame data bridge |
-| Arduino Nano | Rear NeoPixel ring | Cable column to lamp head | WS2812 / SK6812 single-wire | Rear vent lighting effects |
+| Maestro Ch5 | Arduino Nano | Cave harness | Serial (UART) | WS2812 RGB frame data bridge |
+| Arduino Nano | Rear WS2812 5050 RGB LED Ring 16 | Cable column to lamp head | WS2812 / SK6812 single-wire | Rear vent lighting effects |
 | Maestro Ch1-3 | MG996R / MG90S servos | Cave harness | PWM | Arm, elbow, neck pan actuation |
 | Pi Zero 2 WH | Front Olight Sphere | Physical placement only by default | Magnetic mount, optional app control | Forward-facing practical light / bulb replacement |
 | Pi Zero 2 WH | Speaker | Local wiring | I2S / USB audio / amplifier path | Voice and sound output |

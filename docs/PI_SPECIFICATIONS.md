@@ -76,6 +76,6 @@ The Pi Zero 2 WH serves as the **lamp head controller**, running:
 
 - HiveMind satellite client (communicating with Mac Mini server)
 - LED state control script (`led_hivemind_states_filewatch.py`)
-- GPIO interface to the Arduino Nano (serial bridge for NeoPixel RGBW ring)
+- GPIO interface to the Arduino Nano (serial bridge for WS2812 5050 RGB LED Ring 16)
 
 See [Complete Lamp Build Guide](./docs/PIXSTARS_LAMP_COMPLETE_BUILD.md) for integration instructions.See [Raspberry Pi Setup](./pi/) for configuration files and systemd services.

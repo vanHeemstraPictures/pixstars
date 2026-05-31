@@ -8,7 +8,7 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the v2->v3 migra
 
 All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
 programmable turntable, mounted on a riser block. The lamp itself contains only a
-NeoPixel LED ring and a Dynamixel AX-12A for head nod. Cables route through a single
+WS2812 5050 RGB LED Ring 16 and a Dynamixel AX-12A for head nod. Cables route through a single
 central column. No USB cable connects to the lamp.
 
 Base rotation is handled by the ComXim turntable (WiFi CT commands from Mac Mini),
@@ -17,7 +17,7 @@ completely decoupled from the ESP32/Maestro servo chain.
 ```
                     +--- Lamp Head ---+
                     |  AX-12A (nod)   |
-                    |  NeoPixel ring  |
+                    | WS2812 LED ring |
                     |  Webcam (C920)  |
                     +--------+--------+
                              | cables through column
@@ -53,7 +53,7 @@ Mac Mini M4 Pro
                  +-- Serial --> Pololu Mini Maestro 24-ch
                  |     +-- PWM --> MG996R x 4 (arm joints)
                  |     +-- PWM --> MG90S x 1 (neck pan rod)
-                 |     +-- Serial bridge --> Arduino Nano --> NeoPixel ring
+                 |     +-- Serial bridge --> Arduino Nano --> WS2812 5050 RGB LED Ring 16
                  +-- TTL serial --> AX-12A #1 (head nod)
 ```
 
@@ -88,7 +88,7 @@ Mac Mini M4 Pro
 | Component | Qty | Purpose |
 |-----------|-----|---------|
 | Dynamixel AX-12A | 1 | Head nod (TTL serial via ESP32, NOT on Maestro) |
-| NeoPixel RGBW LED ring | 1 | Lamp "eye" light (via Arduino Nano serial bridge) |
+| WS2812 5050 RGB LED Ring 16 | 1 | Lamp "eye" light (via Arduino Nano serial bridge) |
 | Logitech C920 webcam | 1 | Gaze / projection source (role TBD) |
 | 3D-printed AX-12A shade cradle | 1 | PLA or PETG |
 | Steel rod (10mm, 200mm) | 1 | Head nod axle |
@@ -134,7 +134,7 @@ See `docs/LAMP_SPECIFICATIONS.md` for lamp product details.
 | 2 | Upper arm reach (elbow) | MG996R | Cable routed through column |
 | 3 | Neck pan (push-pull rod) | MG90S | Carbon fibre rod to lamp head |
 | 4 | (spare) | -- | Available |
-| 5 | NeoPixel | Arduino Nano bridge | Serial from Maestro |
+| 5 | WS2812 5050 RGB LED Ring 16 | Arduino Nano bridge | Serial from Maestro |
 | TTL | Head nod | AX-12A (ID=1) | TTL serial via ESP32 |
 | WiFi CT | Base rotation | ComXim MTxRUWSLPro | Separate device, Mac Mini direct |
 
@@ -188,7 +188,7 @@ CT+STOP();
 7. Attach servo rail under inner ring (hanging into cave)
 8. Route string/rod linkages through central column to lamp joints
 9. Install AX-12A in lamp head for head nod
-10. Install NeoPixel RGBW ring in lamp shade
+10. Install WS2812 5050 RGB LED Ring 16 in lamp shade
 11. Mount Anglepoise 1227 on inner ring
 12. Connect PSU (5V) and ComXim power
 13. Flash ESP32 firmware
@@ -204,7 +204,7 @@ CT+STOP();
 2. Prove ESP32 connects to Mac Mini WiFi and receives OSC
 3. Prove Maestro serial control from ESP32 (one servo moves)
 4. Prove AX-12A head nod from ESP32
-5. Prove NeoPixel LED ring via Arduino Nano bridge
+5. Prove WS2812 5050 RGB LED Ring 16 via Arduino Nano bridge
 6. Prove all 6 DOF move in coordination
 7. Integrate with Show Conductor timeline
 8. Add HiveMind satellite (optional, on separate Pi)
