@@ -257,7 +257,7 @@ NeoPixel remain valid and require no changes in v3.
 
 | Item | Specification | Purpose |
 |---|---|---|
-| ComXim MTxRUWSLPro | 20cm platform, USB+WiFi model | Precision rotation engine |
+| ComXim MTxRUWSLPro | MT200RUWSL20ProV3, 20cm (7.9"), White, USB+WiFi, 20kg load | Precision rotation engine |
 | Riser block | AL tube or 18mm ply, 120–150mm tall | Creates cave depth below ComXim |
 | Riser-to-piano fixings | M6 bolts or clamp system | Non-destructive piano attachment |
 | Inner ring adapter plate | AL plate, matches ComXim top bolt pattern | Couples inner ring to ComXim top plate |
@@ -339,6 +339,16 @@ The following should be resolved before fabrication begins:
 | What is the exact CT command syntax for the MTxRUWSLPro WiFi mode? | Required before writing Python control code |
 | What is the ComXim's maximum load in stepping mode with the full cave hanging below? | Must not exceed 20kg rated limit |
 | Can the riser block attach to the piano non-destructively? | Stage requirement — no permanent piano modification |
+
+---
+
+## 12. Confirmed Procurement
+
+| Item | Model | Variant | Status |
+|---|---|---|---|
+| ComXim turntable | MT200RUWSL20ProV3 | 20cm / White / USB+WiFi / 20kg | Selected 2026-05-25 |
+
+**Rationale:** 20cm platform matches the lamp's natural foot diameter and preserves keyboard inner space. White color matches the lamp body. 20kg load rating is sufficient for the lamp assembly (lamp head + column + cave electronics). The turntable base will be partially visible above the riser block, so white integrates visually.
 
 ---
 

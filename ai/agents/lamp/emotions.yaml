@@ -1,0 +1,96 @@
+# Pixstars Lamp - Emotional / Behavioral States
+#
+# These 14 states are the canonical lamp states defined in lamp/states.py.
+# Each state maps to an LED treatment (NeoPixel RGBW ring driven by the
+# Arduino Nano on Maestro Ch5) and a movement description that pairs with
+# the motion parameters in lamp/states.py (energy, speed, range, jitter,
+# tilt_bias).
+#
+# Do not rename keys here without also updating lamp/states.py and
+# conductor/timeline.yaml. The three files must stay in sync.
+
+states:
+
+  "INERT":
+    led:
+      color: "off"
+      effect: "none"
+    movement: "Completely still. Powered down. No twitch, no breath."
+
+  "FUNCTIONAL":
+    led:
+      color: "warm_white"
+      effect: "steady"
+    movement: "Minimal neutral idle. A working desk lamp doing its job."
+
+  "CURIOUS":
+    led:
+      color: "soft_amber"
+      effect: "slow_breathe"
+    movement: "Tilts head, looks around, leans toward whatever caught it."
+
+  "DISMISSIVE":
+    led:
+      color: "cool_white"
+      effect: "steady_dim"
+    movement: "Turns away. Slight downward tilt. Refuses eye contact."
+
+  "PLEASED":
+    led:
+      color: "warm_gold"
+      effect: "gentle_pulse"
+    movement: "Leans forward. Small rhythmic nods. Open posture."
+
+  "ARROGANT":
+    led:
+      color: "bright_white"
+      effect: "steady_full"
+    movement: "Chest-out poses, exaggerated proud sweeps, slow show-off arcs."
+
+  "OVERHEATING":
+    led:
+      color: "red_orange"
+      effect: "fast_flicker"
+    movement: "Erratic jitter. Shaking. Rapid unstable corrections."
+
+  "DYING":
+    led:
+      color: "red_dim"
+      effect: "irregular_flicker"
+    movement: "Slowing. Drooping. Intermittent spasms. Losing the thread."
+
+  "DEAD":
+    led:
+      color: "off"
+      effect: "none"
+    movement: "Collapsed forward and down. No movement. Fully dropped."
+
+  "WEAK":
+    led:
+      color: "pale_blue"
+      effect: "very_slow_breathe"
+    movement: "Faint twitches. Barely alive. Tries to lift and fails small."
+
+  "REBORN":
+    led:
+      color: "soft_white"
+      effect: "slow_rise"
+    movement: "Rises up. Rediscovers movement. Strength returning."
+
+  "LEARNING":
+    led:
+      color: "cool_amber"
+      effect: "slow_pulse"
+    movement: "Tentative exploration. Tests a gesture, holds, tries again."
+
+  "CELEBRATE":
+    led:
+      color: "rainbow"
+      effect: "rhythmic_chase"
+    movement: "Joyful swinging. Rhythmic celebration on the beat."
+
+  "OFF":
+    led:
+      color: "off"
+      effect: "none"
+    movement: "Power off. Show complete. The lamp is a lamp again."
