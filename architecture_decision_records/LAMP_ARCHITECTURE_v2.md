@@ -161,10 +161,14 @@ Mac Mini M4 Pro
                     └── PWM → MG90S × 1 (neck pan rod, in cave)
                     └── PWM → NEMA 17 driver (base rotation)
               └── TTL serial (daisy-chain) → AX-12A #1 (head nod, in shade)
+              └── GPIO (RMT peripheral) → WS2812 5050 RGB LED Ring 16 (in lamp head)
+                    └── 5V/GND/DATA via cable column, JST-SM 3-pin at head junction
+                    └── 330Ω series resistor on DATA at ESP32 end, 1000µF cap near ring
+                    └── 5V rail from cave MEAN WELL LRS-50-5
 ```
 
 **Removed:** USB cable from Mac Mini to Maestro.
-**Added:** ESP32 WiFi bridge on inner ring. TTL serial bus for AX-12A.
+**Added:** ESP32 WiFi bridge on inner ring. TTL serial bus for AX-12A. ESP32 GPIO drive (RMT peripheral) for the WS2812 LED ring — the ring is physically inside the lamp shade, but its control signal and 5V power both originate in the cave and route through the central cable column. The LED ring is NOT on a Maestro channel; the ESP32 drives it directly because the WS2812 protocol is timing-critical. The Mac Mini orchestrates LED cues over the same WiFi channel used for servo commands.
 
 ---
 

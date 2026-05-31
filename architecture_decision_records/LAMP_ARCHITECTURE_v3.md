@@ -108,8 +108,8 @@ In v3, the ComXim unit sits at piano level. Its top plate is approximately at pi
 | ~~NEMA 17 stepper~~ | ~~Cave servo rail~~ | **Removed** | Replaced by ComXim internal stepper |
 | ~~Stepper driver (A4988/TMC2209)~~ | ~~Cave servo rail~~ | **Removed** | Internal to ComXim |
 | Pololu Mini Maestro 24-ch | Cave servo rail | Cave servo rail | Unchanged |
-| MEAN WELL LRS-50-5 PSU | Cave servo rail | Cave servo rail | Unchanged |
-| ESP32 (WiFi bridge) | Cave servo rail | Cave servo rail | Unchanged — still handles servo commands |
+| MEAN WELL LRS-50-5 PSU | Cave servo rail | Cave servo rail | Unchanged — now also powers the WS2812 LED ring 5V rail |
+| ESP32 (WiFi bridge) | Cave servo rail | Cave servo rail | Expanded responsibility — handles servo commands AND drives the WS2812 LED ring directly via GPIO (RMT peripheral) |
 
 **Net result:** Two components removed from the cave (NEMA 17 + driver board), creating additional space and reducing heat load.
 
@@ -142,13 +142,14 @@ Mac Mini M4 Pro
                      └── PWM → MG996R × 4 (arm joints)
                      └── PWM → MG90S × 1 (neck pan rod)
                └── TTL serial → AX-12A #1 (head nod)
-
-Raspberry Pi Zero 2 WH (in lamp head)
-  └── GPIO18 → WS2812 5050 RGB LED Ring 16 (in lamp head, direct, no cave routing)
+               └── GPIO (RMT peripheral) → WS2812 5050 RGB LED Ring 16 (in lamp head)
+                     └── 5V/GND/DATA via cable column, JST-SM 3-pin at head junction
+                     └── 330Ω series resistor on DATA at ESP32 end, 1000µF cap near ring
+                     └── 5V rail from cave MEAN WELL LRS-50-5
 ```
 
 **Removed from v2:** ESP32 generating step pulses to NEMA 17 driver.
-**Added in v3:** Direct WiFi CT command channel from Mac Mini to ComXim.
+**Added in v3:** Direct WiFi CT command channel from Mac Mini to ComXim. ESP32 also drives the WS2812 LED ring directly via GPIO (RMT peripheral) — the ring is physically in the lamp head, but control and power both originate in the cave, routed through the central cable column. The Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands. The ring is NOT on a Maestro channel — the ESP32 drives it directly via GPIO because the WS2812 protocol is timing-critical.
 **Result:** Base rotation is now a first-class, independently addressable device with its own WiFi connection — decoupled from the ESP32/Maestro chain entirely.
 
 ---
@@ -164,9 +165,10 @@ The NEMA 17 stepper has been removed from Maestro channel 0. That channel is now
 | 2 | Upper arm reach (elbow) | MG996R | 2 | Unchanged |
 | 3 | Neck pan (push-pull rod) | MG90S | 3 | Unchanged |
 | 4 | (spare) | — | 4 | Unchanged |
-| 5 | (spare) | — | LED Ring bridge | **Freed — LED ring now driven by Pi Zero 2 WH GPIO** |
+| 5 | (spare) | — | LED Ring bridge | **Freed — LED ring now driven by ESP32 GPIO (RMT), not via Maestro** |
 | — | Head nod | AX-12A TTL ID=1 | — | Unchanged |
 | — | Base rotation | ComXim (WiFi CT) | — | **New — separate device** |
+| — | WS2812 LED ring (16 px) | ESP32 GPIO (RMT) | — | **New responsibility for ESP32** |
 
 ---
 
@@ -285,7 +287,7 @@ NeoPixel remain valid and require no changes in v3.
 | 1× MG90S servo | Metal gear |
 | Pololu Mini Maestro 24-ch | USB servo controller |
 | MEAN WELL LRS-50-5 PSU | 5V / 10A |
-| WS2812 5050 RGB LED Ring 16 | Inside shade, driven by Pi Zero 2 WH GPIO |
+| WS2812 5050 RGB LED Ring 16 | Inside shade, driven by ESP32 GPIO (RMT peripheral) from the cave; 5V/GND/DATA route through cable column; powered from cave MEAN WELL LRS-50-5 |
 
 ---
 

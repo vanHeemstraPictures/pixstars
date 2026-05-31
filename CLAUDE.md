@@ -33,15 +33,15 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **Riser block** (120–150mm AL or plywood) — creates cave depth, ComXim mounts on top
 
 ### Cave (under turntable, on servo rail)
-- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A
+- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral)
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **MEAN WELL LRS-50-5** power supply (5V rail for servos, separated from logic)
+- **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
-- **WS2812 5050 RGB LED Ring 16** — driven by Raspberry Pi Zero 2 WH GPIO
+- **WS2812 5050 RGB LED Ring 16** — physically in the lamp head, driven by ESP32 DevKit GPIO (RMT peripheral) in the cave, powered from the cave MEAN WELL LRS-50-5; 5V/GND/DATA route through the central cable column with a JST-SM 3-pin connector at the lamp head junction, 330Ω series resistor on the data line at the ESP32 end, 1000µF capacitor near the ring
 - **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
 
 ### Host
@@ -72,6 +72,7 @@ Mac Mini M4 Pro runs:
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
+- WS2812 LED ring drive via GPIO (RMT peripheral); the Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands
 
 ComXim MTxRUWSLPro handles:
 - Base rotation (precision stepping, 0.1° resolution)
