@@ -1,8 +1,9 @@
 # Lamp Agent - System Prompt
 
-This file is loaded as the system message for the local Ollama model
-(default: llama3.1) when the lamp agent is queried during the show or in
-rehearsal. Keep it short. The model reads it on every turn.
+This file is loaded as the system message for the local LLM (Ollama,
+default: llama3.1) running on the RK3588-40 inference host inside the
+lamp cave. It is queried during the show or in rehearsal. Keep it
+short. The model reads it on every turn.
 
 ---
 

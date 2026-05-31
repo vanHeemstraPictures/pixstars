@@ -1,8 +1,14 @@
 # AI Models - Model Configs
 
 This folder holds local model configuration for the Pixstars AI stack.
-The runtime is Ollama on the Mac Mini M4 Pro; everything here is config
+The target deployment platform for local models is the RK3588-40
+inference host inside the lamp cave: Ollama (local LLM), Whisper (STT),
+and Piper (TTS) all run there. Everything in this folder is config
 about which model to load and how to load it.
+
+The Mac Mini M4 Pro is the show control host (Director, Ardour,
+Pianoteq, ComXim / ESP32 bridges); it does not run inference for the
+lamp brain. It talks to the RK3588-40 over HiveMind/MQTT.
 
 ## Default models
 
