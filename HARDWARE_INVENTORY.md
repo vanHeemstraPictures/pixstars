@@ -115,6 +115,36 @@ https://www.enttec.com/product/dmx-usb-interfaces/dmx-usb-pro-professional-1u-us
 
 ---
 
+## LED Strip Connectors
+
+| Item | Detail |
+|------|--------|
+| Product | JST SM 3-pin LED strip connectors (20 pcs) |
+| ASIN | B0DXQ23CKB |
+| Specs | 3-pin, 22 AWG, 15-16cm cable, male+female pairs |
+| Compatible | WS2812B, WS2811, WS2812, WS2814, SK6812, CCT LED strips |
+| Purpose | NeoPixel RGBW LED ring wiring connections |
+| Source | Amazon.nl |
+| Price | EUR 9.99 |
+| Status | **ORDERED** -- arriving soon |
+
+---
+
+## Soldering Station
+
+| Item | Detail |
+|------|--------|
+| Product | Grantop 14-in-1 soldering iron kit |
+| ASIN | B0DHJQ4NTX |
+| Specs | 60W/220V, adjustable 200-450C, on/off switch |
+| Includes | 5 soldering tips, desoldering pump, solder wire, tweezers, wire stripper, cutter, stand with sponge, carry case |
+| Purpose | Assembly and wiring of lamp electronics (cave servos, NeoPixel ring, ESP32 connections) |
+| Source | Amazon.nl |
+| Price | EUR 15.99 |
+| Status | **ORDERED** -- arriving soon |
+
+---
+
 ## Summary
 
 | Component | Status |
@@ -129,7 +159,9 @@ https://www.enttec.com/product/dmx-usb-interfaces/dmx-usb-pro-professional-1u-us
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
 | Projector | 🟡 MOCKED (connect when available) |
+| LED strip connectors | ORDERED (arriving soon) |
+| Soldering station | ORDERED (arriving soon) |
 
 ---
 
-*Last updated: March 2026*
+*Last updated: May 2026*
