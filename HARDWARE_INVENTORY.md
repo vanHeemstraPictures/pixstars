@@ -97,12 +97,14 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Item | Detail |
 | --- | --- |
 | Galvo scanner set | 20kpps closed-loop galvanometer pair with X/Y mirrors and driver board |
-| RGB laser module | RGB laser diode module, 100-200mW combined output, analog modulation per channel |
-| ILDA DAC | ESP32-based ILDA-compatible DAC in cave, generates X/Y analog and RGB/blanking signals |
+| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); ORDERED (purchase date: 2 June 2026) |
+| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ORDERED (purchase date: 2 June 2026) |
+| ILDA DAC | ESP32-based ILDA-compatible DAC in cave; generates X/Y analog (+/-5V) for galvos and RGB analog (0-5V) modulation for the LPLDD-1A-16V-3CH driver (not TTL) |
 | Galvo PSU | Dedicated +/-15V linear PSU in cave for galvo driver board |
+| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH laser diode driver in the cave; PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
-| Status | PLANNED |
+| Status | ORDERED (laser module + driver, 2 June 2026); galvo set, ILDA DAC, and 12V PSU PLANNED |
 
 ## LED Strip Connectors
 
@@ -201,7 +203,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Laser galvo scanner (20kpps galvos, RGB laser module 100-200mW, ESP32 ILDA DAC, +/-15V PSU) | PLANNED |
+| Laser galvo scanner (20kpps galvos, Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH, ESP32 ILDA DAC, +/-15V PSU, 12V PSU for driver) | ORDERED (laser module + driver); galvos / DAC / PSUs PLANNED |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
