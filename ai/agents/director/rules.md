@@ -6,6 +6,15 @@ and dispatches cues to Ardour, the lamp, the projection system, and the
 lighting rig. The lamp LLM and the Walt LLM only speak when the Director
 gives them a window.
 
+## Host topology
+
+- The Director runs on the Mac Mini M4 Pro (show control host),
+  alongside Ardour, Pianoteq, and the ComXim / ESP32 bridges.
+- The lamp's local AI (Ollama LLM, Whisper STT, Piper TTS) runs on the
+  RK3588-40 inference host inside the lamp cave. The Director reaches
+  it over HiveMind/MQTT - it does not call Ollama directly on the Mac
+  Mini.
+
 ## Source of truth
 
 - conductor/timeline.yaml is the contract. It defines every cue with a

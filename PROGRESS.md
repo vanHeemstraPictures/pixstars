@@ -27,6 +27,7 @@
 - [x] Run `bash pi/scripts/install_pi_satellite.sh`
 - [x] Copy `pi/config/mycroft.conf.example` → `~/.config/mycroft/mycroft.conf`
 - [x] Test audio input: `arecord -d 5 test.wav` (needs USB audio hardware)
+
 - [-] Test audio output: `aplay test.wav` (skipped — no speaker connected, Pi is thin endpoint)
 
 ## Phase 3 — Pairing
@@ -67,8 +68,11 @@
 - [x] Open `http://localhost:8080` and verify
 - [x] Create workspace for Pixstars lamp voice workflow
 - [x] Add agent briefs from `voice/orchestration/agents/`
+
 - [-] Populate `voice/orchestration/state/episode_sources.txt` (skipped — silent performance, no episode sources yet)
+
 - [x] Run `bash voice/scripts/run_voice_factory.sh` (prove local pipeline)
+
 - [-] Move sequence into HiveMind saved workflow or heartbeat-scheduled task (deferred — will configure when real content is ready)
 
 ## Phase 9 — Real Render Backend and Review Queue
@@ -92,6 +96,86 @@
 - [x] Test one render: rendered 'Hello...' with curious emotion, 0.535 real-time factor
 - [x] Run full pipeline: `bash voice/scripts/run_voice_factory_real.sh`
 
+## Phase 11 — AI Engineering Setup
+
+- [x] Create ai/ directory structure (agents, memory, knowledge, tools, models)
+- [x] Create lamp personality agent (ai/agents/lamp/personality.md)
+- [x] Create lamp emotional model aligned with 14 lamp states (ai/agents/lamp/emotions.yaml)
+- [x] Create lamp system prompt for Ollama (ai/agents/lamp/system_prompt.md)
+- [x] Create Walt personality agent (ai/agents/walt/)
+- [x] Create director rules referencing conductor/timeline.yaml (ai/agents/director/rules.md)
+- [x] Create safety guardrails (ai/agents/safety/guardrails.md)
+- [x] Create persistent memory scaffold (ai/memory/lamp_memory.yaml)
+- [x] Create knowledge base placeholders (ai/knowledge/)
+- [x] Move AI_ENGINEERING_SETUP.md to ai/AI_ENGINEERING_SETUP.md
+- [ ] Install Ollama on Mac Mini
+- [ ] Pull llama3.1 model
+- [ ] Test Ollama with lamp system prompt
+
+## Phase 12 — RK3588-40 Lamp Brain Integration
+
+- [x] Deep research report completed (docs/architecture/deep-research-report.md)
+- [x] RK3588-40 confirmed as lamp base AI brain
+- [x] ARCHITECTURE.md updated with three-tier model (Director/Brain/Nervous System)
+- [x] CLAUDE.md updated with RK3588-40 in hardware stack
+- [x] HARDWARE_INVENTORY.md updated with RK3588-40 entry
+- [x] ai/ agent files updated to reference RK3588-40 as inference host
+- [ ] Procure Seeed Studio reComputer RK3588-40
+- [ ] Initial OS and software setup on RK3588-40
+- [ ] Test local inference (Whisper STT, Piper TTS)
+
+## Phase 13 — Hardware Procurement and Build
+
+- [x] ComXim MT200RUWSL20ProV3 selected (20cm, White, USB+WiFi, 20kg) — documented in LAMP_ARCHITECTURE_v3.md
+- [ ] Order ComXim MT200RUWSL20ProV3 turntable
+- [x] Olight Sphere received, fully charged, operations verified via iOS Olight App (latest firmware)
+- [ ] Order ESP32 DevKit
+- [ ] Order Pololu Mini Maestro 24-channel
+- [ ] Order MG996R servos (x4) and MG90S servo (x1)
+- [ ] Order Dynamixel AX-12A
+- [ ] Order WS2812 5050 RGB LED Ring 16
+- [ ] Order MEAN WELL LRS-50-5 PSU
+- [ ] Order Seeed Studio reComputer RK3588-40
+- [ ] Build riser block (120-150mm, match ComXim footprint)
+- [ ] Build cave servo rail assembly
+- [ ] Assemble and wire complete lamp
+- [ ] Order Olight Obounds gateway
+- [ ] Configure Obounds in Home Assistant (tuya-local integration)
+- [ ] Test Sphere C control via Home Assistant automation
+- [x] M5Stack Atom Echo received -- wake word satellite for development and backup stage input
+- [ ] WS2812B 35-LED front cone beam ring -- ordered, arriving 2 June 2026
+
+## Phase 14 -- Olight Sphere C Integration Spike (ESP32 BLE Proxy)
+
+Time-boxed feasibility spike: prove or disprove that an ESP32 running ESPHome `bluetooth_proxy` + the `11z4t/tuya-ble-mesh` HACS integration can pair and control the Sphere C without an Obounds gateway. Budget: 4 hours of hands-on time. Hardware arrives 2026-06-01.
+
+Phase A -- ESPHome Bluetooth proxy on M5Stack Atom Lite (~1h)
+- [x] Order M5Stack Atom Lite (Amazon.nl, EUR 19.35, ASIN B0CTGKJPRW)
+- [ ] Confirm Atom Lite arrival and USB-C enumeration on Mac Mini (`/dev/cu.usbserial-*`)
+- [ ] Install ESPHome (HA add-on or standalone CLI)
+- [ ] Flash Atom Lite with `bluetooth_proxy:` + `esp32_ble_tracker:` config (board: `m5stack-atom`)
+- [ ] Verify Atom Lite is online in HA -> Devices & Services -> ESPHome
+- [ ] Smoke test: any nearby BLE device shows up in HA via the proxy
+
+Phase B -- Install tuya-ble-mesh HACS integration (~30 min)
+- [ ] Add `https://github.com/11z4t/tuya-ble-mesh` as custom HACS repository
+- [ ] Install integration, restart HA, confirm no startup errors
+- [ ] Add integration via UI, configure ESPHome BLE proxy mode (not RPi bridge)
+
+Phase C -- Pair and control the Sphere C (~1-2h, highest uncertainty)
+- [ ] Un-pair Sphere C from Olight Hub app (triple-click to re-enter pairing mode)
+- [ ] Place Sphere C within ~1 m of Atom Lite
+- [ ] Run tuya-ble-mesh auto-discovery, or manual provisioning if discovery fails
+- [ ] Record outcome: discovered+controllable / discovered+pairing-fails / not-discovered
+
+Phase D -- Decide and document (~30 min)
+- [ ] Write ADR in `architecture_decision_records/` capturing chosen path + rejected path
+- [ ] Update `docs/architecture/ARCHITECTURE.md` "Front-facing Olight Sphere C Integration" subsection
+- [ ] Update `HARDWARE_INVENTORY.md` (Obounds + Atom Lite statuses)
+- [ ] Update Phase 13 Obounds items (remove, keep as fallback, or mark superseded)
+
+Abort criterion: if Phase C is inconclusive after 2 hours of attempts, stop and fall back to ordering the Obounds via eBay Techno Toys.
+
 ## Notes
 
 *Add any notes, blockers, or decisions here as you go.*
@@ -103,3 +187,10 @@
 - 2026-04-28: Phase 7 complete. Cue manifest generated at ardour/cues/cue_manifest.csv. emit_state.py tested with 'idle' state.
 - 2026-04-28: Phase 8 complete. HiveMind installed (Docker + 8-container stack), project 'Pixstars Voice Factory' created with 6 agents (Director, Dialogue Curator, Voice Designer, Render Operator, Evaluator, Publisher). Local pipeline proven with stub scripts.
 - 2026-04-28: Phases 9 & 10 complete. Coqui XTTS v2 installed, voice cloning tested with E.T. reference audio. Real voice factory pipeline runs end-to-end. All 10 installation phases complete!
+- 2026-05-31: Phase 11 (AI Engineering Setup) Wave 1 complete. ai/ directory created with 14 content files. PR #26 merged. Ollama install pending (Wave 2).
+- 2026-05-31: RK3588-40 confirmed as lamp base AI brain. Three-tier architecture: Director (Mac Mini) / Brain (RK3588-40) / Nervous System (Pi Zero 2 WH). Architecture docs updated.
+- 2026-05-31: Olight Sphere arrived, fully charged, operations verified via iOS Olight App (latest firmware). Ready for front-facing magnetic bulb integration.
+- 2026-05-31: ComXim MT200RUWSL20ProV3 (20cm, White) confirmed as base rotation turntable. Documented in LAMP_ARCHITECTURE_v3.md section 12.
+- 2026-05-31: M5Stack Atom Lite (ESP32-PICO-D4, BLE 4.2) ordered from Amazon.nl (EUR 19.35, ASIN B0CTGKJPRW), arriving 2026-06-01. Phase 14 spike planned: test ESPHome `bluetooth_proxy` + `11z4t/tuya-ble-mesh` HACS integration as a vendor-neutral alternative to the discontinued Olight Obounds gateway. Obounds remains as documented fallback until the spike concludes.
+- 2026-06-01: M5Stack Atom Echo arrived. Designated as optional wake word satellite ("Hey A.I."). Setup guide at ears/WAKE_WORD_SATELLITE_SETUP.md.
+- 2026-06-01: WS2812B 35-LED ring ordered for front cone beam effect. 96mm outer diameter, fits around Olight Sphere C (60mm). Will be driven by ESP32 in cave alongside the rear 16-LED ring.

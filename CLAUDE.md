@@ -22,7 +22,7 @@ When editing the screenplay, preserve the identity shifts and the lamp vocabular
 
 All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
 programmable turntable, mounted on a riser block. The lamp itself contains no motors
-— only a NeoPixel LED ring and a Dynamixel AX-12A for head nod. Cables route through
+— only a WS2812 5050 RGB LED Ring 16 and a Dynamixel AX-12A for head nod. Cables route through
 a single central column.
 
 See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationale.
@@ -33,20 +33,29 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **Riser block** (120–150mm AL or plywood) — creates cave depth, ComXim mounts on top
 
 ### Cave (under turntable, on servo rail)
-- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A
+- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral)
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **Arduino Nano** — NeoPixel serial bridge (Ch5 on Maestro)
-- **MEAN WELL LRS-50-5** power supply (5V rail for servos, separated from logic)
+- **ILDA DAC (ESP32-based, e.g. ILDAC-32)** — generates analog +/-5V X/Y galvo signals and analog 0-5V RGB laser modulation from WiFi/OSC cues
+- **Galvo driver board** (~75x63x28mm) — drives the X/Y galvo motors in the lamp head
+- **Laser diode driver (Opt Lasers LPLDD-1A-16V-3CH, 55 x 23.5 mm, 3-channel analog 0-5V, 100 kHz)** — modulates the RGB laser diode in the lamp head from the ILDA DAC analog 0-5V lines
+- **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
+- **+/-15V galvo PSU** — dedicated dual-rail supply for the galvo driver board
+- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for Opt Lasers LPLDD-1A-16V-3CH laser diode driver
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
-- **NeoPixel RGBW LED ring** — driven by Arduino Nano (serial bridge from Maestro Ch5)
+- **WS2812 5050 RGB LED Ring 16** — physically in the lamp head, driven by ESP32 DevKit GPIO (RMT peripheral) in the cave, powered from the cave MEAN WELL LRS-50-5; 5V/GND/DATA route through the central cable column with a JST-SM 3-pin connector at the lamp head junction, 330Ω series resistor on the data line at the ESP32 end, 1000µF capacitor near the ring
+- **RGB Laser Galvo Scanner** — Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) + X/Y galvo mirrors, projects along the lamp eye-line (vector laser drawing), signal cables route through cable column to ILDA DAC and galvo driver in the cave
 - **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
 
 ### Host
 - **Mac Mini M4 Pro** — show control host, runs everything
+
+### Lamp base AI
+- **Seeed Studio reComputer RK3588-40** — local AI brain (6 TOPS NPU, 16GB LPDDR5, expandable to 26 TOPS via PCIe)
+- Runs: wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client
 
 Servo channel map and sequence scripts live in this repo. Update both together when channels shift.
 
@@ -69,7 +78,8 @@ Mac Mini M4 Pro runs:
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
-- Arduino Nano serial bridge for NeoPixel RGBW ring
+- WS2812 LED ring drive via GPIO (RMT peripheral); the Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands
+- ILDA DAC (ESP32-based) feeds analog +/-5V X/Y galvo signals and analog 0-5V RGB modulation through the cable column to the laser galvo scanner in the lamp head; laser cues come from the Mac Mini over WiFi/OSC
 
 ComXim MTxRUWSLPro handles:
 - Base rotation (precision stepping, 0.1° resolution)

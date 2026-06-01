@@ -4,6 +4,15 @@ This folder holds the Python tool functions the local LLM (Ollama) can
 call when the Director gives it a speaking / acting window. Tools are
 how the lamp acts on the world.
 
+## Where these run
+
+The lamp brain (Ollama LLM + tool runtime) lives on the RK3588-40
+inference host inside the lamp cave. Tool calls do not execute on the
+Mac Mini directly; they are emitted as intents over HiveMind/MQTT and
+delivered to the conductor (Director) on the Mac Mini M4 Pro, which
+decides whether to honour them and then dispatches the resulting cues
+to Ardour, lighting, projection, and the lamp hardware bus.
+
 ## Planned tools
 
 Stubs to be implemented (do not exist yet):

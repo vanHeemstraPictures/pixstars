@@ -58,7 +58,7 @@ The Original 1227 remains the most recognisable lamp in the Anglepoise range, an
 This lamp will be modified with:
 - **4x MG996R servos** (base rotation, shoulder, elbow, head tilt)
 - **2x MG90S servos** (fine motion)
-- **NeoPixel RGBW LED ring** (replacing the original E27 bulb)
+- **WS2812 5050 RGB LED Ring 16** (replacing the original E27 bulb)
 - **Pololu Mini Maestro 24-channel servo controller**
 - **Raspberry Pi Zero 2 WH** mounted inside or near the base
 
