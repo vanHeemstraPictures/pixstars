@@ -37,9 +37,9 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **ILDA DAC (ESP32-based, e.g. ILDAC-32)** — generates analog +/-5V X/Y galvo signals and TTL RGB laser modulation from WiFi/OSC cues
+- **ILDA DAC (ESP32-based, e.g. ILDAC-32)** — generates analog +/-5V X/Y galvo signals and analog 0-5V RGB laser modulation from WiFi/OSC cues
 - **Galvo driver board** (~75x63x28mm) — drives the X/Y galvo motors in the lamp head
-- **Laser diode driver (Opt Lasers LPLDD-1A-16V-3CH, 55 x 23.5 mm, 3-channel analog 0-5V, 100 kHz)** — modulates the RGB laser diode in the lamp head from the ILDA DAC TTL lines
+- **Laser diode driver (Opt Lasers LPLDD-1A-16V-3CH, 55 x 23.5 mm, 3-channel analog 0-5V, 100 kHz)** — modulates the RGB laser diode in the lamp head from the ILDA DAC analog 0-5V lines
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
 - **+/-15V galvo PSU** — dedicated dual-rail supply for the galvo driver board
 - **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for Opt Lasers LPLDD-1A-16V-3CH laser diode driver
