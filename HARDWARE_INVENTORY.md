@@ -96,10 +96,15 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 
 | Item | Detail |
 | --- | --- |
-| Type | External projector via HDMI/DisplayPort |
-| Connection | Second display output from Mac Mini |
-| Software | pygame fullscreen on secondary display |
-| Status | MOCKED — using windowed pygame display |
+| Model | Nebra AnyBeam HAT (Standalone/Pico variant) |
+| Technology | MEMS laser (focus-free, fanless, silent) |
+| Dimensions | 103 x 60 x 19 mm |
+| Weight | 140g |
+| Resolution | 1280x720 |
+| Input | Micro HDMI |
+| Power | 5V / 1.5A via Micro USB |
+| Purpose | In-head laser projector for theatrical visuals during performance |
+| Status | PLANNED |
 
 ## LED Strip Connectors
 
@@ -198,7 +203,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Projector | 🟡 MOCKED (connect when available) |
+| Projector (Nebra AnyBeam HAT, MEMS laser, 1280x720) | PLANNED |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
