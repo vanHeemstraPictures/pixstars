@@ -41,7 +41,8 @@ flowchart LR
     AX[Dynamixel AX-12A\nHead Nod TTL]
     ArmServos[MG996R x 4 + MG90S x 1\nArm / Elbow / Neck Pan]
 
-    RearRing[Rear Vent LED Ring]
+    RearRing[Rear Vent LED Ring\nWS2812 16-LED]
+    FrontRing[Front Cone Beam LED Ring\nWS2812B 35-LED, 96mm]
     FrontBulb[Front Magnetic Olight Sphere]
     Mic[Microphone]
     Speaker[40 mm Speaker]
@@ -67,6 +68,7 @@ flowchart LR
     ESP -- Serial --> Maestro
     ESP -- TTL Serial --> AX
     ESP -- GPIO/RMT --> RearRing
+    ESP -- GPIO/RMT --> FrontRing
     Maestro -- PWM --> ArmServos
     Pi --> FrontBulb
     Pi --> Mic
@@ -91,6 +93,7 @@ flowchart LR
 | Servo Controller | Pololu Mini Maestro 24-ch | Cave (under turntable) | PWM hub for arm, elbow, neck pan servos |
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
 | LED Ring Driver | ESP32 DevKit GPIO (RMT) | Cave (under turntable) | WS2812 5050 RGB LED Ring 16 driven via cable column to lamp head |
+| Front Cone Beam LED Ring | WS2812B 35-LED Pixel Ring (96mm Ø) | Inside lampshade, around Olight Sphere C | Forward-projecting cone beam, stage-light effect, halo around Olight eye |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 | Wake Word Satellite | M5Stack Atom Echo | Backstage or near lamp | Optional dedicated wake word listener ("Hey A.I."), backup mic input, development testing |
 
@@ -100,6 +103,7 @@ The lamp head contains the hardware that benefits most from short cable runs, pl
 
 - **Raspberry Pi Zero 2 WH** mounted inside the head as the local device controller
 - **Rear LED ring** (WS2812 5050 RGB LED Ring 16) mounted so it shines **towards the rear air vents** - physically in the head, but data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire)
+- **Front cone beam LED ring** (WS2812B 35-LED Pixel Ring, 96mm outer diameter) mounted inside the lampshade around the Olight Sphere C to create a **forward-projecting cone beam effect**. The Olight serves as the visible "eye" from the side, while the ring provides the directional stage-light cone from the front. Data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire), same as the rear ring
 - **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
 - **40 mm speaker**
 - **Microphone**
@@ -250,6 +254,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
 | ESP32 | Dynamixel AX-12A | Cable column to lamp head | TTL half-duplex serial | Head nod position commands - NOT on Maestro |
 | ESP32 | Rear WS2812 5050 RGB LED Ring 16 | Cable column to lamp head | GPIO / RMT single-wire (WS2812 protocol) | Rear vent lighting effects - data from ESP32, 5V power from MEAN WELL PSU |
+| ESP32 | Front WS2812B 35-LED Pixel Ring (96mm) | Cable column to lamp head | GPIO / RMT single-wire (WS2812 protocol) | Forward cone beam / stage-light halo around Olight Sphere C - independent GPIO from rear ring, 5V power from MEAN WELL PSU |
 | Maestro Ch1-3 | MG996R / MG90S servos | Cave harness | PWM | Arm, elbow, neck pan actuation |
 | Pi Zero 2 WH | Front Olight Sphere | Physical placement only by default | Magnetic mount, optional app control | Forward-facing practical light / bulb replacement |
 | Obounds Gateway | Olight Sphere C | Backstage WiFi / BLE Mesh | Bluetooth SIG Mesh | Front light on/off, color, brightness cues |

@@ -169,6 +169,22 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Manufacturer site | https://shop.m5stack.com/ |
 | Status | IN HAND |
 
+## Front Cone Beam LED Ring
+
+| Property | Value |
+|---|---|
+| Model | WS2812B 35-LED Pixel Ring |
+| Manufacturer | TOPXCDZ |
+| Protocol | WS2812B (single-wire, 800kHz) |
+| LED count | 35 |
+| Outer diameter | 96mm |
+| Inner diameter | 78mm |
+| PCB width | 9mm |
+| Voltage | DC 5V |
+| Purpose | Forward-projecting cone beam from lampshade front -- frames the Olight Sphere C as a halo, creates stage-light cone effect |
+| Amazon | https://www.amazon.nl/-/en/WS2812B-16-241-Leds-Addressable/dp/B0DZD6B9RC/ |
+| Status | ORDERED -- arriving 2 June 2026 |
+
 ## Summary
 
 | Component | Status |
@@ -188,5 +204,6 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | ORDERED (arriving 2026-06-01) |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
+| WS2812B 35-LED front cone beam ring | ORDERED (arriving 2 June 2026) |
 
 *Last updated: May 2026*
