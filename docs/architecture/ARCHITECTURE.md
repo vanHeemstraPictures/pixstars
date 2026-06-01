@@ -94,7 +94,7 @@ flowchart LR
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
 | LED Ring Driver | ESP32 DevKit GPIO (RMT) | Cave (under turntable) | WS2812 5050 RGB LED Ring 16 driven via cable column to lamp head |
 | Front Cone Beam LED Ring | WS2812B 35-LED Pixel Ring (96mm Ø) | Inside lampshade, around Olight Sphere C | Forward-projecting cone beam, stage-light effect, halo around Olight eye |
-| Lamp Head Projector | Nebra AnyBeam | Lamp head (lower interior) | MEMS laser projection for theatrical visuals, video from Pi mini-HDMI |
+| Lamp Head Projector | RGB Laser Galvo Scanner | Lamp head (lower interior) | Vector laser with galvo mirrors for theatrical projection, controlled via ILDA DAC in cave |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 | Wake Word Satellite | M5Stack Atom Echo | Backstage or near lamp | Optional dedicated wake word listener ("Hey A.I."), backup mic input, development testing |
 
@@ -106,7 +106,7 @@ The lamp head contains the hardware that benefits most from short cable runs, pl
 - **Rear LED ring** (WS2812 5050 RGB LED Ring 16) mounted so it shines **towards the rear air vents** - physically in the head, but data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire)
 - **Front cone beam LED ring** (WS2812B 35-LED Pixel Ring, 96mm outer diameter) mounted inside the lampshade around the Olight Sphere C to create a **forward-projecting cone beam effect**. The Olight serves as the visible "eye" from the side, while the ring provides the directional stage-light cone from the front. Data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire), same as the rear ring
 - **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
-- **Nebra AnyBeam** - MEMS laser projector (103 x 60 x 19 mm), positioned in the lower interior of the shade below the raised Olight, receives video from the Pi Zero 2 WH mini-HDMI, powered from the cave MEAN WELL LRS-50-5 5V rail via the cable column
+- **RGB Laser Galvo Scanner** - vector laser projector (RGB laser diode module plus X/Y galvo mirrors), mounted in the lower interior of the shade below the raised Olight and projecting along the eye-line. Analog X/Y/blanking and RGB signals are routed through the cable column to the ILDA DAC in the cave; galvo driver board is powered from a dedicated +/-15V PSU in the cave
 - **40 mm speaker**
 - **Microphone**
 - **Ambient and proximity sensing**
@@ -263,8 +263,8 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Pi Zero 2 WH | Speaker | Local wiring | I2S / USB audio / amplifier path | Voice and sound output |
 | Pi Zero 2 WH | Microphone | Local wiring | USB or I2S audio | Performer and audience input |
 | Pi Zero 2 WH | Sensors | Local wiring | GPIO / I2C / ADC bridge | Ambient and proximity awareness |
-| Pi Zero 2 WH | Nebra AnyBeam | Short HDMI cable inside lamp head | mini-HDMI to micro-HDMI | Projection content delivery |
-| MEAN WELL LRS-50-5 | Nebra AnyBeam | Cable column (5V + GND) | DC 5V / 1.5A | AnyBeam power |
+| Pi Zero 2 WH | (no video projector) | n/a | n/a | Pi no longer drives a video projector; laser projection is vector-driven from the ILDA DAC in the cave |
+| MEAN WELL LRS-50-5 | Galvo driver board (+/-15V PSU in cave) | Cave harness | DC +/-15V via dedicated galvo PSU | Galvo scanner driver power |
 | Stage Cameras | Vision Node / Director | Backstage network | USB, RTSP, Ethernet | Visual analysis and capture |
 | RK3588-40 | AI accelerator | Internal high-speed expansion | PCIe / M.2 | Extra local AI throughput |
 

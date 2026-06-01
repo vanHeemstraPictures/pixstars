@@ -92,18 +92,16 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Runs | Wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client |
 | Status | PLANNED — confirmed, not yet procured |
 
-## Projector
+## Laser Galvo Scanner
 
 | Item | Detail |
 | --- | --- |
-| Model | Nebra AnyBeam HAT (Standalone/Pico variant) |
-| Technology | MEMS laser (focus-free, fanless, silent) |
-| Dimensions | 103 x 60 x 19 mm |
-| Weight | 140g |
-| Resolution | 1280x720 |
-| Input | Micro HDMI |
-| Power | 5V / 1.5A via Micro USB |
-| Purpose | In-head laser projector for theatrical visuals during performance |
+| Galvo scanner set | 20kpps closed-loop galvanometer pair with X/Y mirrors and driver board |
+| RGB laser module | RGB laser diode module, 100-200mW combined output, analog modulation per channel |
+| ILDA DAC | ESP32-based ILDA-compatible DAC in cave, generates X/Y analog and RGB/blanking signals |
+| Galvo PSU | Dedicated +/-15V linear PSU in cave for galvo driver board |
+| Purpose | In-head vector laser projector for theatrical visuals during performance |
+| Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
 | Status | PLANNED |
 
 ## LED Strip Connectors
@@ -203,7 +201,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Projector (Nebra AnyBeam HAT, MEMS laser, 1280x720) | PLANNED |
+| Laser galvo scanner (20kpps galvos, RGB laser module 100-200mW, ESP32 ILDA DAC, +/-15V PSU) | PLANNED |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
