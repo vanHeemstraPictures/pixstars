@@ -49,6 +49,7 @@ flowchart LR
     Camera[Optional Head Camera / Logitech C920]
 
     Vision[Optional Backstage Vision Node\nRK3588-40 + accelerator]
+    AtomEcho[M5Stack Atom Echo\nWake Word Satellite]
 
     Audience --> Mac
     Cameras --> Vision
@@ -56,6 +57,7 @@ flowchart LR
     Mac --> RK
     Mac -- WiFi CT --> ComXim
     Mac -- WiFi OSC --> ESP
+    AtomEcho -- WiFi --> Mac
     HA --> Mac
     HV --> Mac
     OV --> Mac
@@ -90,6 +92,7 @@ flowchart LR
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
 | LED Ring Driver | ESP32 DevKit GPIO (RMT) | Cave (under turntable) | WS2812 5050 RGB LED Ring 16 driven via cable column to lamp head |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
+| Wake Word Satellite | M5Stack Atom Echo | Backstage or near lamp | Optional dedicated wake word listener ("Hey A.I."), backup mic input, development testing |
 
 ## Lamp Head Layout
 
@@ -103,6 +106,8 @@ The lamp head contains the hardware that benefits most from short cable runs, pl
 - **Ambient and proximity sensing**
 - **Dynamixel AX-12A** - head nod servo, TTL serial daisy-chain back to the ESP32 in the cave
 - **Logitech C920 webcam** - mounted on/near the lamp, role per screenplay
+
+An **M5Stack Atom Echo** serves as an optional dedicated wake word satellite. It contains an ESP32, microphone, WiFi, and a small speaker. During development it provides a standalone "Hey A.I." listener for testing the AI interaction pipeline before the full lamp is assembled. In performance it can serve as a backup microphone input path. It connects to the Mac Mini via WiFi and forwards detected wake words to OpenVoiceOS / HiveMind. See ears/WAKE_WORD_SATELLITE_SETUP.md for setup details.
 
 ### Lamp Head Responsibilities
 
@@ -240,6 +245,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Mac Mini | Lamp Brain (RK3588-40) | Wi-Fi 6 or wired Ethernet | MQTT, WebSocket, REST, HiveMind | Show control, state sync, commands |
 | Mac Mini | ComXim turntable | WiFi (802.11) | CT command protocol (TCP) | Base rotation - precision stepping, origin return |
 | Mac Mini | ESP32 (cave) | WiFi (802.11) | OSC / lightweight control | Servo, head nod, and LED ring commands |
+| M5Stack Atom Echo | Mac Mini | WiFi (802.11) | HTTP / WebSocket | Wake word detection, voice capture, backup mic input |
 | Lamp Brain | Lamp Head Pi | Internal harness | USB 2.0, UART, optional I2C | Audio relay, sensor telemetry, optional camera relay |
 | ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
 | ESP32 | Dynamixel AX-12A | Cable column to lamp head | TTL half-duplex serial | Head nod position commands - NOT on Maestro |
