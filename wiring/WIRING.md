@@ -242,11 +242,13 @@ The head contains:
     ring, 5V from MEAN WELL PSU via cable column)
 -   RGB Laser Galvo Scanner (vector laser galvo scanner that draws
     shapes/patterns via a steered laser beam -- NOT a video projector;
-    2x galvo motors + mirrors and an RGB laser diode in the head,
-    ~100-130 g total; analog X/Y signals (+/-5V differential, 4 wires),
-    RGB TTL modulation (3 wires), and galvo motor power (+/-15V, 2
-    wires) all arrive via the cable column from the cave galvo driver
-    + ILDA DAC)
+    2x galvo motors + mirrors and the Opt Lasers 300mW Micro RGB laser
+    module in the head, ~130-150 g total (~50 g module + ~60-80 g
+    galvo heads + bracket); analog X/Y signals (+/-5V differential,
+    4 wires), RGB analog 0-5V modulation (3 wires, from ILDA DAC to
+    Opt Lasers LPLDD-1A-16V-3CH driver in the cave), and galvo motor
+    power (+/-15V, 2 wires) all arrive via the cable column from the
+    cave galvo driver + ILDA DAC)
 -   M5Stack Atom Echo (wake word capture; USB-serial / I2S audio to
     Pi Zero 2 WH)
 -   Olight Sphere (front-facing bulb replacement, magnetic mount)
@@ -277,6 +279,11 @@ The cave contains:
 -   1x MG90S servo (neck pan, carbon fibre push-pull rod)
 -   MEAN WELL LRS-50-5 power supply (5V rail for servos and for the
     WS2812 LED ring via the cable column)
+-   MEAN WELL LRS-35-12 power supply (12V rail for the Opt Lasers
+    LPLDD-1A-16V-3CH laser diode driver; cave-internal wiring only --
+    the 12V line does NOT route up the cable column, only the analog
+    0-5V RGB modulation lines from the LPLDD driver feed the laser
+    module in the lamp head)
 -   Seeed Studio reComputer RK3588-40 (lamp brain -- local AI inference)
 
 ------------------------------------------------------------------------
@@ -300,9 +307,10 @@ Recommended:
     - WS2812 LED Ring (rear, data + 5V + GND arrive via cable column)
     - WS2812B 35-LED front ring (data + 5V + GND, separate JST-SM
       3-pin from the rear ring)
-    - RGB Laser Galvo Scanner (galvo motors + mirrors + RGB laser
-      diode in the head; analog X/Y signals, RGB TTL modulation and
-      galvo motor power all arrive via the cable column from the cave)
+    - RGB Laser Galvo Scanner (galvo motors + mirrors + Opt Lasers
+      300mW Micro RGB module in the head; analog X/Y signals,
+      RGB analog 0-5V modulation and galvo motor power all arrive
+      via the cable column from the cave)
     - M5Stack Atom Echo (USB/serial to Pi Zero 2 WH inside the head)
     - Olight Sphere (magnetic, self-contained)
     - AX-12A (TTL serial via cable column)
@@ -316,7 +324,9 @@ Recommended:
     - LED Ring rear (ESP32 GPIO via cable column): DATA + 5V + GND
     - LED Ring front 35-LED (separate JST-SM 3-pin): DATA + 5V + GND
     - Galvo X/Y analog signals: 4 wires (+/-5V differential)
-    - Laser RGB TTL: 3 wires
+    - Laser RGB analog: 3 wires (0-5V to LPLDD driver in cave; the
+      LPLDD's 12V supply from the cave MEAN WELL LRS-35-12 is
+      cave-internal and does NOT enter the cable column)
     - Galvo motor power: 2 wires (+/-15V from cave PSU)
     - AX-12A TTL serial
     - Pi audio / sensor lines as needed

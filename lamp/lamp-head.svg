@@ -500,7 +500,7 @@
          inkscape:label="laser-galvo-body"
          x="370"
          y="138"
-         width="282"
+         width="165"
          height="71" /><rect
          style="fill:#000000;fill-opacity:0.3;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1"
          id="rect-laser-galvo-lens"
@@ -515,8 +515,8 @@
          d="M 370,173 215,80" /><path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.980574px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#RoundedArrow);marker-end:url(#RoundedArrow)"
          id="path-laser-galvo-dim"
-         inkscape:label="laser-galvo-dim-75mm"
-         d="m 377.44495,202.11865 h 267.11"
+         inkscape:label="laser-galvo-dim-44mm"
+         d="m 377.44495,202.11865 h 155.77"
          inkscape:connector-type="polyline"
          inkscape:connector-curvature="0" /><text
          xml:space="preserve"
@@ -526,7 +526,7 @@
          y="76.271187"><tspan
            x="511"
            y="197.27118"
-           id="tspan-laser-galvo-dim">75 mm</tspan></text></g><g
+           id="tspan-laser-galvo-dim">44 mm</tspan></text></g><g
        inkscape:groupmode="layer"
        id="layer-pi"
        inkscape:label="raspberry-pi"
@@ -729,7 +729,7 @@
        sodipodi:insensitive="true"><tspan
          x="335.47519"
          y="391.36984"
-         id="tspan-laser-galvo-annot">Laser Galvo</tspan></text><text
+         id="tspan-laser-galvo-annot">Opt Lasers uRGB</tspan></text><text
        xml:space="preserve"
        id="text-pi-annot"
        style="font-size:13.3333px;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;display:inline;opacity:1;vector-effect:non-scaling-stroke;fill:#000000;fill-opacity:1;stroke:none"

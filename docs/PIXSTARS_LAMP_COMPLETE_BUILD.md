@@ -90,8 +90,9 @@ Mac Mini M4 Pro
 | MEAN WELL LRS-50-5 | 1 | 5V power supply for servos and logic |
 | Galvo driver board (75 x 63 x 28 mm) | 1 | Drives galvo motors from analog X/Y signals |
 | +/-15V PSU for galvo motors | 1 | Powers the galvo driver board (galvo motor power into the head) |
-| ILDA DAC (ESP32-based, e.g. ILDAC-32) | 1 | Generates analog X/Y + RGB TTL for the laser galvo scanner; controlled by Mac Mini via WiFi/OSC |
-| Laser diode driver | 1 | TTL-modulated RGB laser diode driver in the cave |
+| ILDA DAC (ESP32-based, e.g. ILDAC-32) | 1 | Generates analog X/Y + RGB analog 0-5V modulation for the laser galvo scanner; controlled by Mac Mini via WiFi/OSC |
+| Opt Lasers LPLDD-1A-16V-3CH | 1 | 3-channel laser diode driver (55 x 23.5 mm, 0-5V analog modulation, 100 kHz, 7-16V input) for the Opt Lasers Micro RGB module in the lamp head |
+| MEAN WELL LRS-35-12 | 1 | 12V PSU for the LPLDD-1A-16V-3CH laser diode driver (cave-internal, separate from the 5V servo/LED rail) |
 | Servo bracket rail | 1 | Aluminium plate, ~280x100mm |
 | Hanger rods (x4) | 4 | M4 threaded, 100mm |
 | Carbon fibre push-pull rod | 1 | Neck pan mechanical linkage (3mm CF tube, 400mm) |
@@ -103,7 +104,7 @@ Mac Mini M4 Pro
 | Dynamixel AX-12A | 1 | Head nod (TTL serial via ESP32, NOT on Maestro) |
 | WS2812 5050 RGB LED Ring 16 | 1 | Rear "eye" light (GPIO/RMT drive from ESP32 in the cave via cable column; 5V from MEAN WELL PSU) |
 | WS2812B 35-LED ring | 1 | Front cone beam halo around laser galvo aperture (separate JST-SM 3-pin from rear ring; 5V from MEAN WELL PSU) |
-| RGB laser diode module | 1 | RGB laser source for the galvo scanner (~20-30 g), driven by TTL modulation from the cave laser driver |
+| RGB laser diode module | 1 | Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, ~50 g, 638/520/450 nm, 300 mW combined), driven by 0-5V analog modulation from the LPLDD-1A-16V-3CH in the cave |
 | Galvo motor + mirror pair (X/Y) | 1 set | 2x galvo motors with mirrors (~60-80 g), steer the laser beam to draw vector shapes/patterns; analog +/-5V differential X/Y signals and motor power via cable column |
 | Galvo + laser mounting bracket | 1 | ~20 g bracket securing galvo pair, laser diode, and aperture alignment in the lamp head |
 | M5Stack Atom Echo | 1 | Wake word capture in lamp head |
@@ -211,7 +212,8 @@ CT+STOP();
 9. Install AX-12A in lamp head for head nod
 10. Install WS2812 5050 RGB LED Ring 16 (rear) in lamp shade
 11. Mount the RGB Laser Galvo Scanner in the lamp head: secure the
-    galvo motor + mirror pair (X/Y) and the RGB laser diode on the
+    galvo motor + mirror pair (X/Y) and the Opt Lasers 300mW Micro
+    RGB module (44 x 39 x 27 mm) on the
     mounting bracket, aperture facing forward along the lamp's
     eye-line (the "E.T. luminous finger"); confirm the beam exits
     the shade opening cleanly and that the shade physically blocks
@@ -222,9 +224,11 @@ CT+STOP();
     (the Pi handles audio I/O, sensors, and I2C to the RK3588-40 only)
 14. Route the laser galvo wiring through the cable column to the
     cave: galvo X/Y analog signals (4 wires, +/-5V differential) to
-    the ILDA DAC, laser RGB TTL (3 wires) to the laser diode driver,
-    and galvo motor power (2 wires, +/-15V) from the cave galvo PSU
-    to the galvo driver board
+    the ILDA DAC, laser RGB analog 0-5V modulation (3 wires) to the
+    Opt Lasers LPLDD-1A-16V-3CH driver (powered cave-internally by
+    the MEAN WELL LRS-35-12 12V PSU), and galvo motor power
+    (2 wires, +/-15V) from the cave galvo PSU to the galvo driver
+    board
 15. Mount Anglepoise 1227 on inner ring
 16. Connect PSU (5V) and ComXim power
 17. Flash ESP32 firmware
