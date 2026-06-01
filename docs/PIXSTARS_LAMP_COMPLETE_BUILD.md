@@ -7,20 +7,28 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the v2->v3 migra
 ## System Overview — Cave Architecture v3
 
 All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
-programmable turntable, mounted on a riser block. The lamp itself contains only a
-WS2812 5050 RGB LED Ring 16 and a Dynamixel AX-12A for head nod. Cables route through a single
+programmable turntable, mounted on a riser block. The lamp head contains a
+WS2812 5050 RGB LED Ring 16 (rear), a WS2812B 35-LED front ring around the
+projector aperture, a Nebra AnyBeam laser MEMS projector, an M5Stack Atom Echo
+wake-word module, a Raspberry Pi Zero 2 WH (nervous system, feeds mini-HDMI to
+the AnyBeam), and a Dynamixel AX-12A for head nod. Cables route through a single
 central column. No USB cable connects to the lamp.
 
 Base rotation is handled by the ComXim turntable (WiFi CT commands from Mac Mini),
 completely decoupled from the ESP32/Maestro servo chain.
 
 ```
-                    +--- Lamp Head ---+
-                    |  AX-12A (nod)   |
-                    | WS2812 LED ring |
-                    |  Webcam (C920)  |
-                    +--------+--------+
-                             | cables through column
+                    +--- Lamp Head ----------+
+                    |  AX-12A (nod)          |
+                    |  WS2812 rear ring (16) |
+                    |  WS2812B front ring 35 |
+                    |  Nebra AnyBeam (laser) |
+                    |  Pi Zero 2 WH (HDMI -> |
+                    |     AnyBeam, inside)   |
+                    |  M5Stack Atom Echo     |
+                    |  Webcam (C920)         |
+                    +-----------+------------+
+                                | cables through column
                     +--------+--------+
                     |  ComXim top     |
                     |  plate (rotates)|
@@ -89,7 +97,13 @@ Mac Mini M4 Pro
 | Component | Qty | Purpose |
 |-----------|-----|---------|
 | Dynamixel AX-12A | 1 | Head nod (TTL serial via ESP32, NOT on Maestro) |
-| WS2812 5050 RGB LED Ring 16 | 1 | Lamp "eye" light (GPIO/RMT drive from ESP32 in the cave via cable column; 5V from MEAN WELL PSU) |
+| WS2812 5050 RGB LED Ring 16 | 1 | Rear "eye" light (GPIO/RMT drive from ESP32 in the cave via cable column; 5V from MEAN WELL PSU) |
+| WS2812B 35-LED ring | 1 | Front cone beam halo around AnyBeam aperture (separate JST-SM 3-pin from rear ring; 5V from MEAN WELL PSU) |
+| Nebra AnyBeam | 1 | Laser MEMS projector (103 x 60 x 19 mm); video from Pi Zero 2 WH mini-HDMI inside head; 5V from MEAN WELL PSU via cable column |
+| M5Stack Atom Echo | 1 | Wake word capture in lamp head |
+| Raspberry Pi Zero 2 WH | 1 | Lamp head nervous system (audio I/O, sensors, I2C to RK3588-40, mini-HDMI to AnyBeam) |
+| Microphone | 1 | Head mic input |
+| 40mm 4 Ohm 3W speaker | 1 | Head speaker (PAM8403 amp in base) |
 | Logitech C920 webcam | 1 | Gaze / projection source (role TBD) |
 | 3D-printed AX-12A shade cradle | 1 | PLA or PETG |
 | Steel rod (10mm, 200mm) | 1 | Head nod axle |
@@ -189,15 +203,23 @@ CT+STOP();
 7. Attach servo rail under inner ring (hanging into cave)
 8. Route string/rod linkages through central column to lamp joints
 9. Install AX-12A in lamp head for head nod
-10. Install WS2812 5050 RGB LED Ring 16 in lamp shade
-11. Mount Anglepoise 1227 on inner ring
-12. Connect PSU (5V) and ComXim power
-13. Flash ESP32 firmware
-14. Configure ComXim WiFi (static IP, confirm CT commands)
-15. Attach decorative skirt around riser + ComXim base
-16. Fix riser to piano top (non-destructive)
-17. Calibrate servo ranges and home positions
-18. Test ComXim origin return
+10. Install WS2812 5050 RGB LED Ring 16 (rear) in lamp shade
+11. Mount Nebra AnyBeam in lamp head, aperture facing forward
+12. Install WS2812B 35-LED front ring as a halo around the AnyBeam
+    aperture (separate JST-SM 3-pin from the rear ring)
+13. Mount M5Stack Atom Echo and Pi Zero 2 WH inside the lamp head;
+    connect Pi mini-HDMI to AnyBeam with a short cable (kept inside
+    the head, NOT routed through the cable column)
+14. Run AnyBeam 5V + GND through the cable column to the MEAN WELL
+    LRS-50-5 in the cave
+15. Mount Anglepoise 1227 on inner ring
+16. Connect PSU (5V) and ComXim power
+17. Flash ESP32 firmware
+18. Configure ComXim WiFi (static IP, confirm CT commands)
+19. Attach decorative skirt around riser + ComXim base
+20. Fix riser to piano top (non-destructive)
+21. Calibrate servo ranges and home positions
+22. Test ComXim origin return
 
 ## Recommended First Milestones
 

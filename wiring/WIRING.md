@@ -237,11 +237,20 @@ The head contains:
 
 -   WS2812 5050 RGB LED Ring 16 (rear-facing, towards air vents;
     controlled by ESP32 via cable column, powered by MEAN WELL PSU)
+-   WS2812B 35-LED front ring (front-facing cone beam halo around
+    the AnyBeam projector aperture; separate data line from the rear
+    ring, 5V from MEAN WELL PSU via cable column)
+-   Nebra AnyBeam (103 x 60 x 19 mm laser MEMS projector;
+    video input via Pi Zero 2 WH mini-HDMI (short cable inside the
+    head, NOT through cable column); 5V power from MEAN WELL PSU
+    via cable column)
+-   M5Stack Atom Echo (wake word capture; USB-serial / I2S audio to
+    Pi Zero 2 WH)
 -   Olight Sphere (front-facing bulb replacement, magnetic mount)
 -   Dynamixel AX-12A (head nod servo, TTL serial from ESP32 in cave)
 -   Logitech C920 webcam
 -   Raspberry Pi Zero 2 WH (nervous system -- audio I/O, sensors,
-    I2C to RK3588-40)
+    I2C to RK3588-40, mini-HDMI to AnyBeam)
 -   Microphone
 -   40mm speaker
 
@@ -285,7 +294,13 @@ Base rotation is handled independently from the cave servo stack:
 Recommended:
 
     Lamp Head
-    - WS2812 LED Ring (data + 5V + GND arrive via cable column)
+    - WS2812 LED Ring (rear, data + 5V + GND arrive via cable column)
+    - WS2812B 35-LED front ring (data + 5V + GND, separate JST-SM
+      3-pin from the rear ring)
+    - Nebra AnyBeam (5V + GND via cable column; mini-HDMI video from
+      Pi Zero 2 WH is a short cable inside the head, NOT through the
+      cable column)
+    - M5Stack Atom Echo (USB/serial to Pi Zero 2 WH inside the head)
     - Olight Sphere (magnetic, self-contained)
     - AX-12A (TTL serial via cable column)
     - Speaker, Mic
@@ -295,7 +310,11 @@ Recommended:
          |
 
     Cable Column (central) -- bundle includes:
-    - LED Ring (ESP32 GPIO via cable column): DATA + 5V + GND
+    - LED Ring rear (ESP32 GPIO via cable column): DATA + 5V + GND
+    - LED Ring front 35-LED (separate JST-SM 3-pin): DATA + 5V + GND
+    - AnyBeam power: 5V + GND from MEAN WELL LRS-50-5
+      (AnyBeam video does NOT run through the cable column --
+       it is a short Pi mini-HDMI cable inside the lamp head)
     - AX-12A TTL serial
     - Pi audio / sensor lines as needed
 
