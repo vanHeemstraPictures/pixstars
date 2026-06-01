@@ -142,6 +142,7 @@
 - [ ] Order Olight Obounds gateway
 - [ ] Configure Obounds in Home Assistant (tuya-local integration)
 - [ ] Test Sphere C control via Home Assistant automation
+- [x] M5Stack Atom Echo received -- wake word satellite for development and backup stage input
 
 ## Phase 14 -- Olight Sphere C Integration Spike (ESP32 BLE Proxy)
 
@@ -190,3 +191,4 @@ Abort criterion: if Phase C is inconclusive after 2 hours of attempts, stop and 
 - 2026-05-31: Olight Sphere arrived, fully charged, operations verified via iOS Olight App (latest firmware). Ready for front-facing magnetic bulb integration.
 - 2026-05-31: ComXim MT200RUWSL20ProV3 (20cm, White) confirmed as base rotation turntable. Documented in LAMP_ARCHITECTURE_v3.md section 12.
 - 2026-05-31: M5Stack Atom Lite (ESP32-PICO-D4, BLE 4.2) ordered from Amazon.nl (EUR 19.35, ASIN B0CTGKJPRW), arriving 2026-06-01. Phase 14 spike planned: test ESPHome `bluetooth_proxy` + `11z4t/tuya-ble-mesh` HACS integration as a vendor-neutral alternative to the discontinued Olight Obounds gateway. Obounds remains as documented fallback until the spike concludes.
+- 2026-06-01: M5Stack Atom Echo arrived. Designated as optional wake word satellite ("Hey A.I."). Setup guide at ears/WAKE_WORD_SATELLITE_SETUP.md.

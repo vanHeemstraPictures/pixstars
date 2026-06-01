@@ -155,6 +155,20 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Price | EUR 19.35 |
 | Status | ORDERED -- arriving 2026-06-01 |
 
+## Wake Word Satellite
+
+| Property | Value |
+|---|---|
+| Model | M5Stack Atom Echo Programmable Smart Speaker |
+| Manufacturer | M5Stack |
+| Controller | ESP32 (built-in) |
+| Connectivity | WiFi, Bluetooth |
+| Features | Microphone, small speaker, RGB LED, button |
+| Purpose | Wake word satellite -- dedicated "Hey A.I." listener for development and backup stage input |
+| Amazon | https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/ |
+| Manufacturer site | https://shop.m5stack.com/ |
+| Status | IN HAND |
+
 ## Summary
 
 | Component | Status |
@@ -173,5 +187,6 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | ORDERED (arriving 2026-06-01) |
+| M5Stack Atom Echo (wake word satellite) | IN HAND |
 
 *Last updated: May 2026*
