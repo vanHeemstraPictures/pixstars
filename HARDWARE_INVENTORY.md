@@ -97,11 +97,11 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Item | Detail |
 | --- | --- |
 | Galvo scanner set | 20kpps closed-loop galvanometer pair with X/Y mirrors and driver board |
-| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); ORDERED (purchase date: 2 June 2026) |
-| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ORDERED (purchase date: 2 June 2026) |
-| ILDA DAC | ESP32-based ILDA-compatible DAC in cave; generates X/Y analog (+/-5V) for galvos and RGB analog (0-5V) modulation for the LPLDD-1A-16V-3CH driver (not TTL) |
+| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); SUPERSEDED (originally ORDERED 2 June 2026) -- SUPERSEDED by SM5 6W RGB (see SM5 entry below). Original Opt Lasers module ordered but may be repurposed or returned pending Opt Lasers reply on projection suitability. |
+| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); SUPERSEDED (originally ORDERED 2 June 2026) -- no longer needed; SM5 6W module has integrated driver electronics. May be returned. |
+| ILDA DAC | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC) in cave; generates ILDA DB25 output (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) via Ether Dream or IDN protocol from Mac Mini |
 | Galvo PSU | Dedicated +/-15V linear PSU in cave for galvo driver board |
-| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH laser diode driver in the cave; PLANNED |
+| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the SM5 6W RGB laser module (DC 12V input) via cable column; PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
 | Status | ORDERED (laser module + driver, 2 June 2026); galvo set, ILDA DAC, and 12V PSU PLANNED |
@@ -205,9 +205,9 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Project page | https://stanleyprojects.com/projects/ildawavex16v2 |
 | GitHub | https://github.com/stanleyondrus/ILDAWaveX16V2 |
 | Location in lamp | Cave (on servo rail, under ComXim turntable) |
-| Purpose | Replaces generic "ILDAC-32" as the ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
+| Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
 | V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
-| Notes | Awaiting confirmation from Opt Lasers on whether their Micro RGB module is suitable for laser projection (vs etching/cutting). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
+| Notes | Opt Lasers Micro RGB has been superseded by SM5 6W RGB (Starshine) as the primary laser module. Awaiting Opt Lasers reply on projection suitability for potential secondary use. |
 | Status | EVALUATING |
 
 ## SM5 6W RGB Laser Module
@@ -224,7 +224,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Supplier | starshinelights.com |
 | Product page | https://www.starshinelights.com/collections/accessories (SM5 listing) |
 | Location in lamp | Lamp head (projects beam into galvo mirrors along lamp eye-line) |
-| Purpose | RGB laser source for vector laser projection from the lamp head. Paired with 40kpps galvo scanner set for full animation quality. Replaces Opt Lasers 300mW Micro RGB (which may not be suitable for projection -- awaiting Opt Lasers reply). |
+| Purpose | RGB laser source for vector laser projection from the lamp head. Paired with 40kpps galvo scanner set for full animation quality. Primary RGB laser source for vector laser projection from the lamp head. |
 | Notes | 6W variant is same price as 4W. 94 x 67 x 36 mm needs to fit inside lampshade -- verify against lamphead SVG. Needs 12V DC power routed through cable column. Heat dissipation via lampshade air vents. |
 | Status | EVALUATING |
 
@@ -260,7 +260,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Laser galvo scanner (20kpps galvos, Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH, ESP32 ILDA DAC, +/-15V PSU, 12V PSU for driver) | ORDERED (laser module + driver); galvos / DAC / PSUs PLANNED |
+| Laser galvo scanner (SM5 6W RGB (Starshine) + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for SM5) | EVALUATING (SM5 + ILDAWaveX16 V2 + 40kpps galvo); Opt Lasers + LPLDD SUPERSEDED |
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | SM5 6W RGB Laser Module (Starshine Lighting) | EVALUATING |
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
