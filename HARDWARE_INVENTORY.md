@@ -117,7 +117,8 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | WS2812 5050 RGB LED Ring 16 wiring connections |
 | Source | Amazon.nl |
 | Price | EUR 9.99 |
-| Status | ORDERED -- arriving soon |
+| Notes | Pack of 20 3-wire cables (red/green/white) with JST SM 3-pin connectors attached. |
+| Status | IN HAND |
 
 ## Soldering Station
 
@@ -158,7 +159,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the `11z4t/tuya-ble-mesh` HACS integration |
 | Source | Amazon.nl |
 | Price | EUR 19.35 |
-| Status | ORDERED -- arriving 2026-06-01 |
+| Status | IN HAND |
 
 ## Wake Word Satellite
 
@@ -188,7 +189,8 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Voltage | DC 5V |
 | Purpose | Forward-projecting cone beam from lampshade front -- frames the Olight Sphere C as a halo, creates stage-light cone effect |
 | Amazon | https://www.amazon.nl/-/en/WS2812B-16-241-Leds-Addressable/dp/B0DZD6B9RC/ |
-| Status | ORDERED -- arriving 2 June 2026 |
+| Notes | Arrived with two pre-soldered 3-wire cables (red/green/white) with JST SM 3-pin connectors attached. |
+| Status | IN HAND |
 
 ## ILDAWaveX16 V2 (ILDA Laser DAC)
 
@@ -264,11 +266,11 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | SM5 6W RGB Laser Module (Starshine Lighting) | EVALUATING |
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
-| LED strip connectors | ORDERED (arriving soon) |
+| LED strip connectors | IN HAND |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
-| M5Stack Atom Lite (BLE proxy) | ORDERED (arriving 2026-06-01) |
+| M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
-| WS2812B 35-LED front cone beam ring | ORDERED (arriving 2 June 2026) |
+| WS2812B 35-LED front cone beam ring | IN HAND |
 
 *Last updated: June 2026*
