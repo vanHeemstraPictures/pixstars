@@ -190,6 +190,26 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Amazon | https://www.amazon.nl/-/en/WS2812B-16-241-Leds-Addressable/dp/B0DZD6B9RC/ |
 | Status | ORDERED -- arriving 2 June 2026 |
 
+## ILDAWaveX16 V2 (ILDA Laser DAC)
+
+| Property | Value |
+|---|---|
+| Component | ILDAWaveX16 V2 |
+| Type | ILDA Laser DAC |
+| Manufacturer | StanleyProjects (Stanley Ondrus) |
+| Description | All-in-one, dual-processor (ESP32-S3 + RP2354), high-resolution 16-bit laser DAC platform |
+| Features | ILDA DB25 output, SD-card playback, Ethernet, Wi-Fi, USB, JST XH connectors, Ether Dream compatible, IDN (ILDA Digital Network), web UI, GPLv3 open-source firmware |
+| Unit price | EUR 145 (excl. shipping) |
+| Supplier stock | 2 units available |
+| Supplier | Tindie / StanleyProjects |
+| Project page | https://stanleyprojects.com/projects/ildawavex16v2 |
+| GitHub | https://github.com/stanleyondrus/ILDAWaveX16V2 |
+| Location in lamp | Cave (on servo rail, under ComXim turntable) |
+| Purpose | Replaces generic "ILDAC-32" as the ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
+| V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
+| Notes | Awaiting confirmation from Opt Lasers on whether their Micro RGB module is suitable for laser projection (vs etching/cutting). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
+| Status | EVALUATING |
+
 ## Summary
 
 | Component | Status |
@@ -204,6 +224,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
 | Laser galvo scanner (20kpps galvos, Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH, ESP32 ILDA DAC, +/-15V PSU, 12V PSU for driver) | ORDERED (laser module + driver); galvos / DAC / PSUs PLANNED |
+| ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
@@ -211,4 +232,4 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
 | WS2812B 35-LED front cone beam ring | ORDERED (arriving 2 June 2026) |
 
-*Last updated: May 2026*
+*Last updated: June 2026*
