@@ -88,7 +88,6 @@ Mac Mini M4 Pro
 | MG996R servo | 4 | Lower arm (Ch1), elbow (Ch2), spare (Ch3-4) |
 | MG90S servo | 1 | Neck pan (Ch3), push-pull rod to lamp head |
 | MEAN WELL LRS-50-5 | 1 | 5V power supply for servos and logic |
-| 40kpps galvo driver board (110 x 68 x 35 mm, Teclulu GH40 or equivalent) | 1 | Drives the X/Y galvo motors in the lamp head from +/-5V analog signals from the ILDAWaveX16 V2 DB25 |
 | +/-24V PSU for galvo motors | 1 | Powers the 40kpps galvo driver board (galvo motor power into the head) |
 | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit ILDA DAC) | 1 | 16-bit ILDA DAC, receives laser cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet/USB; outputs standard ILDA DB25 (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) |
 | 40kpps galvo driver board (Teclulu GH40) | 1 | Drives X/Y galvo motors from +/-5V analog signals on the ILDAWaveX16 V2 DB25 output; powered from the +/-24V cave PSU |
