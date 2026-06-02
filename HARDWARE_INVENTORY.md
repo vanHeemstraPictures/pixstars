@@ -210,6 +210,43 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Notes | Awaiting confirmation from Opt Lasers on whether their Micro RGB module is suitable for laser projection (vs etching/cutting). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
 | Status | EVALUATING |
 
+## SM5 6W RGB Laser Module
+
+| Property | Value |
+|---|---|
+| Component | SM5 6W RGB Laser Module |
+| Type | OEM RGB Laser Module (show-grade) |
+| Manufacturer | Starshine Lighting |
+| Description | Compact fiber-shaped beam RGB laser module for laser projector integration. Designed for show/projection use with smooth analog modulation. |
+| Specifications | 6W total (R 1.4W @ 638nm, G 1.6W @ 525nm, B 3.2W @ 450nm), 0-5V analog modulation per channel (~0.2-4.8V), fiber-shaped beam profile, DC 12V input, <1 min warmup, laser class 4 |
+| Dimensions | 94 x 67 x 36 mm |
+| Unit price | USD 530 (~EUR 490) |
+| Supplier | starshinelights.com |
+| Product page | https://www.starshinelights.com/collections/accessories (SM5 listing) |
+| Location in lamp | Lamp head (projects beam into galvo mirrors along lamp eye-line) |
+| Purpose | RGB laser source for vector laser projection from the lamp head. Paired with 40kpps galvo scanner set for full animation quality. Replaces Opt Lasers 300mW Micro RGB (which may not be suitable for projection -- awaiting Opt Lasers reply). |
+| Notes | 6W variant is same price as 4W. 94 x 67 x 36 mm needs to fit inside lampshade -- verify against lamphead SVG. Needs 12V DC power routed through cable column. Heat dissipation via lampshade air vents. |
+| Status | EVALUATING |
+
+## 40kpps High Speed Galvo Scanner Set
+
+| Property | Value |
+|---|---|
+| Component | 40kpps High Speed Galvo Scanner Set |
+| Type | ILDA Galvo Scanner (X/Y) |
+| Manufacturer | Teclulu (GH40) or equivalent |
+| Description | Complete galvo scanner kit for full-animation laser projection. Closed-loop moving magnet galvanometers with driver boards and PSU. |
+| Specifications | 40kpps ILDA @ 8 degrees, scan angle +/-30 degrees (or larger), mirror size 7 x 12 x 0.8 mm, reflectivity >99% @ 400-700nm, input signal +/-5V (ILDA standard, matches ILDAWaveX16 V2 DB25 output), PSU +/-24V @ 1A |
+| Driver board size | 110 x 68 x 35 mm |
+| Kit includes | 2x galvo motors, 2x driver boards, 1x motor bracket/mount, 2x signal cables, 2x motor cables, 1x PSU (+/-24V), 1x PSU cable |
+| Unit price | USD 150-230 (~EUR 140-210) |
+| Supplier | teclulu.com |
+| Product page | https://teclulu.com/products/40k-pps-high-speed-galvo-scanner-for-laser-show-lighting-rgb-laser-system-scanner |
+| Location in lamp | Galvo motors + mirrors in lamp head (lightweight, ~50g); driver boards + PSU in cave (on servo rail) |
+| Purpose | X/Y beam deflection for full-animation vector laser projection. 40kpps chosen over 30kpps for smooth animations, flowing text, logos, and organic shapes -- high entertainment value. Signal chain: ILDAWaveX16 V2 (cave) -> DB25 -> galvo driver (cave) -> cable column -> galvo motors (lamp head). |
+| Notes | 40kpps is the professional animation sweet spot. 30kpps does clean graphics but animations look jittery with complex shapes. Only the galvo motors and mirrors go in the lamp head -- driver boards and PSU stay in the cave to keep head weight low. |
+| Status | EVALUATING |
+
 ## Summary
 
 | Component | Status |
@@ -225,6 +262,8 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Servo controller | 🟡 MOCKED (connect USB servo) |
 | Laser galvo scanner (20kpps galvos, Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH, ESP32 ILDA DAC, +/-15V PSU, 12V PSU for driver) | ORDERED (laser module + driver); galvos / DAC / PSUs PLANNED |
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
+| SM5 6W RGB Laser Module (Starshine Lighting) | EVALUATING |
+| 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | ORDERED (arriving soon) |
 | Soldering station | ORDERED (arriving soon) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
