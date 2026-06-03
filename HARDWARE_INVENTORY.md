@@ -97,14 +97,14 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Item | Detail |
 | --- | --- |
 | Galvo scanner set | 20kpps closed-loop galvanometer pair with X/Y mirrors and driver board |
-| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); SUPERSEDED (originally ORDERED 2 June 2026) -- SUPERSEDED by SM5 6W RGB (see SM5 entry below). Original Opt Lasers module ordered but may be repurposed or returned pending Opt Lasers reply on projection suitability. |
-| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); SUPERSEDED (originally ORDERED 2 June 2026) -- no longer needed; SM5 6W module has integrated driver electronics. May be returned. |
+| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); SUPERSEDED -- replaced by SM5 6W RGB (see SM5 entry below). Opt Lasers confirmed the module is suitable for laser projection (June 2026, Dr. Michal Piotrowicz, Lead Diode Laser Engineer), but SM5 6W offers significantly more power for the same price. |
+| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); SUPERSEDED -- not needed; SM5 6W module has integrated driver electronics. |
 | ILDA DAC | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC) in cave; generates ILDA DB25 output (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) via Ether Dream or IDN protocol from Mac Mini |
 | Galvo PSU | Dedicated +/-24V PSU in cave for 40kpps galvo driver board (included in galvo scanner set) |
 | Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the SM5 6W RGB laser module (DC 12V input) via cable column; PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
-| Status | ORDERED (laser module + driver, 2 June 2026); galvo set, ILDA DAC, and 12V PSU PLANNED |
+| Status | EVALUATING -- SM5 6W RGB + ILDAWaveX16 V2 + 40kpps galvo selected; to be ordered |
 
 ## LED Strip Connectors
 
