@@ -209,7 +209,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Location in lamp | Cave (on servo rail, under ComXim turntable) |
 | Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
 | V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
-| Notes | Opt Lasers Micro RGB has been superseded by SM5 6W RGB (Starshine) as the primary laser module. Awaiting Opt Lasers reply on projection suitability for potential secondary use. |
+| Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). SM5 6W RGB (Starshine) selected instead for higher power output at comparable price. The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
 | Status | EVALUATING |
 
 ## SM5 6W RGB Laser Module
