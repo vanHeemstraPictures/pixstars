@@ -250,6 +250,35 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Notes | 40kpps is the professional animation sweet spot. 30kpps does clean graphics but animations look jittery with complex shapes. Only the galvo motors and mirrors go in the lamp head -- driver boards and PSU stay in the cave to keep head weight low. |
 | Status | EVALUATING |
 
+## Epson EB-W05 Projector
+
+| Property | Value |
+| --- | --- |
+| Component | Epson EB-W05 3LCD Projector |
+| Type | Rear projection (behind screen) |
+| Manufacturer | Epson |
+| Description | 3LCD WXGA rear projector for theater-scale imagery on rear-projection screen. Connected to Mac Mini via HDMI. Controlled via remote or Mac Mini. |
+| Specifications | 3,300 lumens (white and colour), WXGA (1280x800, 16:10), 15,000:1 contrast, 3LCD, projection ratio 1.30-1.56:1, image size 33-320 inches, 1.2x optical zoom, manual focus, horizontal keystone slider |
+| Dimensions | 302 x 237 x 82 mm |
+| Weight | 2.5 kg |
+| Connectivity | HDMI, VGA, USB-B, USB-A (WiFi dongle), composite video, audio in |
+| Power | AC mains |
+| Location in lamp | Backstage (behind rear-projection screen) |
+| Purpose | Projects theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures) onto rear-projection screen. Driven by the projection/ subsystem (pygame, OSC port 9002) on the Mac Mini via HDMI. |
+| Status | IN HAND |
+
+## Rear-Projection Screen
+
+| Property | Value |
+| --- | --- |
+| Component | Rear-projection screen |
+| Type | Rear-projection surface |
+| Description | Translucent screen placed between the rear projector and the audience. Receives imagery from behind (Epson EB-W05) and laser vector drawings from the front (lamp laser). |
+| Specifications | TBD -- size depends on venue. Should support both rear projection and front laser marking. |
+| Location in lamp | Stage (between performer/lamp and audience backdrop) |
+| Purpose | Primary visual surface for all projected imagery and lamp laser drawings. |
+| Status | PLANNED -- to be purchased or rented for the October 2026 performance |
+
 ## Summary
 
 | Component | Status |
@@ -275,5 +304,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
 | WS2812B 35-LED front cone beam ring | IN HAND |
+| Epson EB-W05 3LCD projector (rear projection) | IN HAND |
+| Rear-projection screen | PLANNED (to be purchased or rented) |
 
 *Last updated: June 2026*

@@ -134,6 +134,16 @@ Mac Mini M4 Pro
 
 See `docs/LAMP_SPECIFICATIONS.md` for lamp product details.
 
+### Stage Projection
+
+| Component | Qty | Purpose |
+|-----------|-----|---------|
+| Epson EB-W05 3LCD projector | 1 | Rear projector (behind screen); theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures); HDMI from Mac Mini, driven by projection/ subsystem (pygame, OSC port 9002) |
+| Rear-projection screen | 1 | Translucent stage screen between performer/lamp and audience backdrop; size TBD by venue; receives Epson imagery from behind and lamp laser vector drawings from the front |
+| HDMI cable (Mac Mini -> Epson) | 1 | Video link from Mac Mini to Epson EB-W05 |
+
+Staging note: the Epson EB-W05 sits backstage behind the rear-projection screen and lights it from behind; the lamp laser galvo (Opt Lasers 300mW Micro RGB) sits in the lamp head on stage and projects vector drawings onto the front of the same screen. The two systems share one screen from opposite sides.
+
 ### Host
 
 | Component | Qty | Purpose |

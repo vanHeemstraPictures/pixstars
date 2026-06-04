@@ -74,6 +74,15 @@ Mac Mini M4 Pro runs:
 - ESP32 WiFi communication (OSC commands to lamp cave servos)
 - ComXim WiFi communication (CT commands for base rotation)
 - Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
+- projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
+
+### Dual projection system
+
+The performance uses two projection systems sharing one rear-projection screen:
+- **Rear projector (Epson EB-W05)** -- HDMI from Mac Mini, projects large theater-readable imagery onto the back of the screen from backstage
+- **Lamp laser (Opt Lasers 300mW Micro RGB + 40kpps galvo)** -- projects small vector drawings (lamp's "thoughts": stick figures, text) onto the front of the same screen from the lamp head
+
+Both systems target the same rear-projection screen from opposite sides.
 
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos

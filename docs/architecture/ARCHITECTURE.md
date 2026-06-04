@@ -97,6 +97,8 @@ flowchart LR
 | Lamp Head Projector | RGB Laser Galvo Scanner (Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) with 40kpps X/Y galvo mirrors, 0-5V analog modulation per channel from ILDAWaveX16 V2 DB25) | Lamp head (lower interior) | Vector laser with galvo mirrors for theatrical projection, controlled via ILDAWaveX16 V2 ILDA DAC in cave |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 | Wake Word Satellite | M5Stack Atom Echo | Backstage or near lamp | Optional dedicated wake word listener ("Hey A.I."), backup mic input, development testing |
+| Rear Projector | Epson EB-W05 3LCD (WXGA, 3,300 lumens) | Backstage, behind rear-projection screen | Theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures) on rear-projection screen; HDMI from Mac Mini, driven by the projection/ subsystem (pygame, OSC port 9002) |
+| Rear-Projection Screen | Translucent rear-projection surface | Stage, between performer/lamp and audience backdrop | Primary visual surface; receives Epson imagery from behind and lamp laser vector drawings from the front |
 
 ## Lamp Head Layout
 
@@ -232,6 +234,16 @@ The Apple Mac Mini M4 Pro is the **director** of the wider environment and coord
 - show state, cues, and global orchestration
 - **direct WiFi CT commands to the ComXim turntable** for base rotation
 - **WiFi OSC / control channel to the ESP32** for servo, head nod, and LED ring commands
+- **HDMI to the Epson EB-W05 rear projector** for theater-scale imagery, driven by the projection/ subsystem (pygame, OSC port 9002)
+
+### Dual Projection System
+
+PIXSTARS uses two projection systems that share a single rear-projection screen:
+
+- **Rear projector (Epson EB-W05)** -- projects theater-scale imagery (Disney castle, GNR logo, Mickey drawing, AI iterations, signatures) onto the back of the screen from backstage. HDMI from the Mac Mini, driven by the projection/ subsystem (pygame, OSC port 9002).
+- **Lamp laser (Opt Lasers 300mW Micro RGB + 40kpps galvo)** -- projects small vector drawings (the lamp's "thoughts": stick figures, text) onto the front of the same screen from the lamp head. Driven by the ILDAWaveX16 V2 ILDA DAC in the cave via Ether Dream or IDN protocol from the Mac Mini.
+
+The two systems are complementary: the Epson carries the large, theater-readable imagery; the lamp laser carries the intimate, character-specific marks. Both target the same rear-projection screen from opposite sides.
 
 ## Optional Backstage Vision Node
 
@@ -251,6 +263,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Mac Mini | Lamp Brain (RK3588-40) | Wi-Fi 6 or wired Ethernet | MQTT, WebSocket, REST, HiveMind | Show control, state sync, commands |
 | Mac Mini | ComXim turntable | WiFi (802.11) | CT command protocol (TCP) | Base rotation - precision stepping, origin return |
 | Mac Mini | ESP32 (cave) | WiFi (802.11) | OSC / lightweight control | Servo, head nod, and LED ring commands |
+| Mac Mini | Epson EB-W05 rear projector | HDMI cable | HDMI video out | Theater-scale rear-projection imagery; driven by projection/ subsystem (pygame, OSC port 9002) |
 | M5Stack Atom Echo | Mac Mini | WiFi (802.11) | HTTP / WebSocket | Wake word detection, voice capture, backup mic input |
 | Lamp Brain | Lamp Head Pi | Internal harness | USB 2.0, UART, optional I2C | Audio relay, sensor telemetry, optional camera relay |
 | ESP32 | Pololu Mini Maestro | Cave harness | Serial (UART) | PWM channel commands for arm / elbow / neck pan |
