@@ -268,7 +268,7 @@
        class="contour"
        d="m 214.03013,559.07237 c 60.00001,4 170.4762,-36.85714 212.69842,-101.55556 19.50693,-25.60236 108.08899,1.00328 195.1746,-12.53968 7.90498,-1.22933 179.2673,-31.03311 181.84127,-51.68254 l 4.25397,-34.12698"
        id="path5"
-       sodipodi:nodetypes="ccssc" /></g><!-- Layer: air-vents  -  the rear section where the shade narrows; small stepped features represent the vent ribs --><!-- Layer: neck  -  the narrow cylindrical pivot/attachment area at the rear (right side) --><!-- Layer: annotations  -  reserved for text labels (callouts, dimensions). Intentionally empty. --><!-- Layer: components  -  reserved for future overlays: Olight torch, NeoPixel ring, Logitech C920 webcam, AX-12A. Intentionally empty. --><g
+       sodipodi:nodetypes="ccssc" /></g><!-- Layer: air-vents  -  the rear section where the shade narrows; small stepped features represent the vent ribs --><!-- Layer: neck  -  the narrow cylindrical pivot/attachment area at the rear (right side) --><!-- Layer: annotations  -  reserved for text labels (callouts, dimensions). Intentionally empty. --><!-- Layer: components  -  reserved for future overlays: Olight torch, NeoPixel ring, OV2640 webcam, AX-12A. Intentionally empty. --><g
      id="components"
      inkscape:label="components"
      inkscape:groupmode="layer"
@@ -500,7 +500,7 @@
          inkscape:label="laser-galvo-body"
          x="370"
          y="104"
-         width="360"
+         width="168"
          height="138" /><rect
          style="fill:#000000;fill-opacity:0.3;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1"
          id="rect-laser-galvo-lens"
@@ -515,8 +515,8 @@
          d="M 370,173 215,80" /><path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.980574px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#RoundedArrow);marker-end:url(#RoundedArrow)"
          id="path-laser-galvo-dim"
-         inkscape:label="laser-galvo-dim-94mm"
-         d="m 377.44495,240 h 348"
+         inkscape:label="laser-galvo-dim-44mm"
+         d="m 377.44495,240 h 154"
          inkscape:connector-type="polyline"
          inkscape:connector-curvature="0" /><text
          xml:space="preserve"
@@ -524,9 +524,9 @@
          style="font-size:13.3333px;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;display:inline;opacity:1;vector-effect:non-scaling-stroke;fill:#000000;fill-opacity:1;stroke:none"
          x="3.3898306"
          y="76.271187"><tspan
-           x="551"
+           x="454"
            y="237"
-           id="tspan-laser-galvo-dim">94 mm</tspan></text></g><g
+           id="tspan-laser-galvo-dim">44 mm</tspan></text></g><g
        inkscape:groupmode="layer"
        id="layer-pi"
        inkscape:label="raspberry-pi"
@@ -729,7 +729,7 @@
        sodipodi:insensitive="true"><tspan
          x="335.47519"
          y="391.36984"
-         id="tspan-laser-galvo-annot">SM5 6W RGB</tspan></text><text
+         id="tspan-laser-galvo-annot">Opt Lasers uRGB</tspan></text><text
        xml:space="preserve"
        id="text-pi-annot"
        style="font-size:13.3333px;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;display:inline;opacity:1;vector-effect:non-scaling-stroke;fill:#000000;fill-opacity:1;stroke:none"

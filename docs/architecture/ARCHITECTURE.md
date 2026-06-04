@@ -47,7 +47,7 @@ flowchart LR
     Mic[Microphone]
     Speaker[40 mm Speaker]
     Sensors[Ambient / Proximity / Buttons]
-    Camera[Optional Head Camera / Logitech C920]
+    Camera[Optional Head Camera / OV2640 module]
 
     Vision[Optional Backstage Vision Node\nRK3588-40 + accelerator]
     AtomEcho[M5Stack Atom Echo\nWake Word Satellite]
@@ -94,7 +94,7 @@ flowchart LR
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
 | LED Ring Driver | ESP32 DevKit GPIO (RMT) | Cave (under turntable) | WS2812 5050 RGB LED Ring 16 driven via cable column to lamp head |
 | Front Cone Beam LED Ring | WS2812B 35-LED Pixel Ring (96mm Ø) | Inside lampshade, around Olight Sphere C | Forward-projecting cone beam, stage-light effect, halo around Olight eye |
-| Lamp Head Projector | RGB Laser Galvo Scanner (SM5 6W RGB laser module (94 x 67 x 36 mm, 638/525/450nm, Starshine) with 40kpps X/Y galvo mirrors, 0-5V analog modulation per channel from ILDAWaveX16 V2 DB25) | Lamp head (lower interior) | Vector laser with galvo mirrors for theatrical projection, controlled via ILDAWaveX16 V2 ILDA DAC in cave |
+| Lamp Head Projector | RGB Laser Galvo Scanner (Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) with 40kpps X/Y galvo mirrors, 0-5V analog modulation per channel from ILDAWaveX16 V2 DB25) | Lamp head (lower interior) | Vector laser with galvo mirrors for theatrical projection, controlled via ILDAWaveX16 V2 ILDA DAC in cave |
 | Optional Vision Node | RK3588-40 plus accelerator | Backstage | Multi-camera analysis, audience tracking, offloaded vision AI |
 | Wake Word Satellite | M5Stack Atom Echo | Backstage or near lamp | Optional dedicated wake word listener ("Hey A.I."), backup mic input, development testing |
 
@@ -106,12 +106,12 @@ The lamp head contains the hardware that benefits most from short cable runs, pl
 - **Rear LED ring** (WS2812 5050 RGB LED Ring 16) mounted so it shines **towards the rear air vents** - physically in the head, but data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire)
 - **Front cone beam LED ring** (WS2812B 35-LED Pixel Ring, 96mm outer diameter) mounted inside the lampshade around the Olight Sphere C to create a **forward-projecting cone beam effect**. The Olight serves as the visible "eye" from the side, while the ring provides the directional stage-light cone from the front. Data and 5V power are routed from the ESP32 and MEAN WELL PSU in the cave through the cable column (GPIO/RMT single-wire), same as the rear ring
 - **Front-facing magnetic Olight Sphere** used as the **bulb replacement**, attached magnetically inside the shade and facing forward
-- **RGB Laser Galvo Scanner** - vector laser projector (SM5 6W RGB laser module (94 x 67 x 36 mm, 638/525/450nm, Starshine) plus 40kpps X/Y galvo mirrors (7 x 12 mm)), mounted in the lower interior of the shade below the raised Olight and projecting along the eye-line. RGB modulation (0-5V) is supplied from the ILDAWaveX16 V2 DB25 output in the cave through the cable column; analog X/Y signals (+/-5V) from the ILDAWaveX16 V2 drive the 40kpps galvo driver board (110 x 68 x 35 mm) in the cave, which is powered from a dedicated +/-24V PSU in the cave; the SM5 6W laser module is powered from a separate 12V PSU (MEAN WELL LRS-35-12 or equivalent) in the cave
+- **RGB Laser Galvo Scanner** - vector laser projector (Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, ~55g, 638/520/450nm) plus 40kpps X/Y galvo mirrors (7 x 12 mm)), mounted in the lower interior of the shade below the raised Olight and projecting along the eye-line. RGB modulation (0-5V) is supplied from the ILDAWaveX16 V2 DB25 output in the cave through the cable column; analog X/Y signals (+/-5V) from the ILDAWaveX16 V2 drive the 40kpps galvo driver board (110 x 68 x 35 mm) in the cave, which is powered from a dedicated +/-24V PSU in the cave; the Opt Lasers 300mW Micro RGB module is powered from a separate 12V PSU (MEAN WELL LRS-35-12 or equivalent) in the cave via the LPLDD-1A-16V-3CH driver
 - **40 mm speaker**
 - **Microphone**
 - **Ambient and proximity sensing**
 - **Dynamixel AX-12A** - head nod servo, TTL serial daisy-chain back to the ESP32 in the cave
-- **Logitech C920 webcam** - mounted on/near the lamp, role per screenplay
+- **OV2640 camera module** (~3g, on Pi Zero 2 WH) - mounted on/near the lamp, role per screenplay
 
 An **M5Stack Atom Echo** serves as an optional dedicated wake word satellite. It contains an ESP32, microphone, WiFi, and a small speaker. During development it provides a standalone "Hey A.I." listener for testing the AI interaction pipeline before the full lamp is assembled. In performance it can serve as a backup microphone input path. It connects to the Mac Mini via WiFi and forwards detected wake words to OpenVoiceOS / HiveMind. See ears/WAKE_WORD_SATELLITE_SETUP.md for setup details.
 
@@ -265,7 +265,7 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 | Pi Zero 2 WH | Sensors | Local wiring | GPIO / I2C / ADC bridge | Ambient and proximity awareness |
 | Pi Zero 2 WH | (no video projector) | n/a | n/a | Pi no longer drives a video projector; laser projection is vector-driven from the ILDA DAC in the cave |
 | MEAN WELL LRS-50-5 | Galvo driver board (+/-24V PSU in cave) | Cave harness | DC +/-24V via dedicated galvo PSU | Galvo scanner driver power |
-| MEAN WELL LRS-35-12 | SM5 6W RGB laser module | Cave harness | DC 12V via dedicated laser PSU | Powers the SM5 6W laser module in the lamp head via 12V DC through cable column |
+| MEAN WELL LRS-35-12 | Opt Lasers 300mW Micro RGB laser module (via LPLDD-1A-16V-3CH driver) | Cave harness | DC 12V via dedicated laser PSU | Powers the Opt Lasers 300mW Micro RGB module in the lamp head via the LPLDD driver and the 0-5V RGB modulation lines through the cable column |
 | Stage Cameras | Vision Node / Director | Backstage network | USB, RTSP, Ethernet | Visual analysis and capture |
 | RK3588-40 | AI accelerator | Internal high-speed expansion | PCIe / M.2 | Extra local AI throughput |
 
