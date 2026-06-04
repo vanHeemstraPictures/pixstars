@@ -131,12 +131,12 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Assembly and wiring of lamp electronics (cave servos, WS2812 5050 RGB LED Ring 16, ESP32 connections) |
 | Source | Amazon.nl |
 | Price | EUR 15.99 |
-| Status | ORDERED -- arriving soon |
+| Status | IN HAND |
 
 ## Olight Obounds Smart Wireless Gateway
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | Obounds Smart Wireless Multi-Protocol Gateway |
 | Manufacturer | Olight |
 | Protocols | WiFi (2.4G), Bluetooth SIG Mesh, Zigbee |
@@ -155,8 +155,8 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Radios | 2.4 GHz WiFi, Bluetooth 4.2 LE |
 | Connectivity | USB-C, HY2.0 (Grove-compatible), 6 GPIO |
 | Form factor | 24 x 24 mm enclosed plastic case |
-| Firmware | ESPHome `bluetooth_proxy` (board target: `m5stack-atom`) |
-| Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the `11z4t/tuya-ble-mesh` HACS integration |
+| Firmware | ESPHome bluetooth_proxy (board target: m5stack-atom) |
+| Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the 11z4t/tuya-ble-mesh HACS integration |
 | Source | Amazon.nl |
 | Price | EUR 19.35 |
 | Status | IN HAND |
@@ -164,7 +164,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## Wake Word Satellite
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | M5Stack Atom Echo Programmable Smart Speaker |
 | Manufacturer | M5Stack |
 | Controller | ESP32 (built-in) |
@@ -178,7 +178,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## Front Cone Beam LED Ring
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | WS2812B 35-LED Pixel Ring |
 | Manufacturer | TOPXCDZ |
 | Protocol | WS2812B (single-wire, 800kHz) |
@@ -195,7 +195,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## ILDAWaveX16 V2 (ILDA Laser DAC)
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Component | ILDAWaveX16 V2 |
 | Type | ILDA Laser DAC |
 | Manufacturer | StanleyProjects (Stanley Ondrus) |
@@ -215,7 +215,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## SM5 6W RGB Laser Module
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Component | SM5 6W RGB Laser Module |
 | Type | OEM RGB Laser Module (show-grade) |
 | Manufacturer | Starshine Lighting |
@@ -233,7 +233,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## 40kpps High Speed Galvo Scanner Set
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Component | 40kpps High Speed Galvo Scanner Set |
 | Type | ILDA Galvo Scanner (X/Y) |
 | Manufacturer | Teclulu (GH40) or equivalent |
@@ -267,7 +267,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | SM5 6W RGB Laser Module (Starshine Lighting) | EVALUATING |
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
-| Soldering station | ORDERED (arriving soon) |
+| Soldering station | IN HAND |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
