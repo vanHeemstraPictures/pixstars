@@ -26,7 +26,7 @@ completely decoupled from the ESP32/Maestro servo chain.
                     |  Laser Galvo (RGB)     |
                     |  Pi Zero 2 WH          |
                     |  M5Stack Atom Echo     |
-                    |  Webcam (C920)         |
+                    |  OV2640 cam (on Pi)    |
                     +-----------+------------+
                                 | cables through column
                     +--------+--------+
@@ -88,11 +88,10 @@ Mac Mini M4 Pro
 | MG996R servo | 4 | Lower arm (Ch1), elbow (Ch2), spare (Ch3-4) |
 | MG90S servo | 1 | Neck pan (Ch3), push-pull rod to lamp head |
 | MEAN WELL LRS-50-5 | 1 | 5V power supply for servos and logic |
-| Galvo driver board (75 x 63 x 28 mm) | 1 | Drives galvo motors from analog X/Y signals |
-| +/-15V PSU for galvo motors | 1 | Powers the galvo driver board (galvo motor power into the head) |
-| ILDA DAC (ESP32-based, e.g. ILDAC-32) | 1 | Generates analog X/Y + RGB analog 0-5V modulation for the laser galvo scanner; controlled by Mac Mini via WiFi/OSC |
-| Opt Lasers LPLDD-1A-16V-3CH | 1 | 3-channel laser diode driver (55 x 23.5 mm, 0-5V analog modulation, 100 kHz, 7-16V input) for the Opt Lasers Micro RGB module in the lamp head |
-| MEAN WELL LRS-35-12 | 1 | 12V PSU for the LPLDD-1A-16V-3CH laser diode driver (cave-internal, separate from the 5V servo/LED rail) |
+| +/-24V PSU for galvo motors | 1 | Powers the 40kpps galvo driver board (galvo motor power into the head) |
+| ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit ILDA DAC) | 1 | 16-bit ILDA DAC, receives laser cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet/USB; outputs standard ILDA DB25 (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) |
+| 40kpps galvo driver board (Teclulu GH40) | 1 | Drives X/Y galvo motors from +/-5V analog signals on the ILDAWaveX16 V2 DB25 output; powered from the +/-24V cave PSU |
+| MEAN WELL LRS-35-12 | 1 | 12V PSU for LPLDD-1A-16V-3CH laser driver, which powers the Opt Lasers 300mW Micro RGB module (DC 12V input; cave-internal, separate from the 5V servo/LED rail) |
 | Servo bracket rail | 1 | Aluminium plate, ~280x100mm |
 | Hanger rods (x4) | 4 | M4 threaded, 100mm |
 | Carbon fibre push-pull rod | 1 | Neck pan mechanical linkage (3mm CF tube, 400mm) |
@@ -104,14 +103,14 @@ Mac Mini M4 Pro
 | Dynamixel AX-12A | 1 | Head nod (TTL serial via ESP32, NOT on Maestro) |
 | WS2812 5050 RGB LED Ring 16 | 1 | Rear "eye" light (GPIO/RMT drive from ESP32 in the cave via cable column; 5V from MEAN WELL PSU) |
 | WS2812B 35-LED ring | 1 | Front cone beam halo around laser galvo aperture (separate JST-SM 3-pin from rear ring; 5V from MEAN WELL PSU) |
-| RGB laser diode module | 1 | Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, ~50 g, 638/520/450 nm, 300 mW combined), driven by 0-5V analog modulation from the LPLDD-1A-16V-3CH in the cave |
+| RGB laser diode module | 1 | Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, ~55g, 638/520/450 nm) + 40kpps galvo mirrors (7 x 12 mm), 0-5V analog modulation from ILDAWaveX16 V2 DB25 in the cave via LPLDD-1A-16V-3CH driver, 12V DC power through cable column |
 | Galvo motor + mirror pair (X/Y) | 1 set | 2x galvo motors with mirrors (~60-80 g), steer the laser beam to draw vector shapes/patterns; analog +/-5V differential X/Y signals and motor power via cable column |
 | Galvo + laser mounting bracket | 1 | ~20 g bracket securing galvo pair, laser diode, and aperture alignment in the lamp head |
 | M5Stack Atom Echo | 1 | Wake word capture in lamp head |
 | Raspberry Pi Zero 2 WH | 1 | Lamp head nervous system (audio I/O, sensors, I2C to RK3588-40) |
 | Microphone | 1 | Head mic input |
 | 40mm 4 Ohm 3W speaker | 1 | Head speaker (PAM8403 amp in base) |
-| Logitech C920 webcam | 1 | Gaze / projection source (role TBD) |
+| OV2640 camera module | 1 | Camera input on Pi Zero 2 WH (CSI/SPI, ~3g) -- role TBD |
 | 3D-printed AX-12A shade cradle | 1 | PLA or PETG |
 | Steel rod (10mm, 200mm) | 1 | Head nod axle |
 
@@ -134,6 +133,16 @@ Mac Mini M4 Pro
 | Anglepoise Original 1227 (Linen White) | 1 | Physical lamp body |
 
 See `docs/LAMP_SPECIFICATIONS.md` for lamp product details.
+
+### Stage Projection
+
+| Component | Qty | Purpose |
+|-----------|-----|---------|
+| Epson EB-W05 3LCD projector | 1 | Rear projector (behind screen); theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures); HDMI from Mac Mini, driven by projection/ subsystem (pygame, OSC port 9002) |
+| Rear-projection screen | 1 | Translucent stage screen between performer/lamp and audience backdrop; size TBD by venue; receives Epson imagery from behind and lamp laser vector drawings from the front |
+| HDMI cable (Mac Mini -> Epson) | 1 | Video link from Mac Mini to Epson EB-W05 |
+
+Staging note: the Epson EB-W05 sits backstage behind the rear-projection screen and lights it from behind; the lamp laser galvo (Opt Lasers 300mW Micro RGB) sits in the lamp head on stage and projects vector drawings onto the front of the same screen. The two systems share one screen from opposite sides.
 
 ### Host
 
@@ -212,8 +221,8 @@ CT+STOP();
 9. Install AX-12A in lamp head for head nod
 10. Install WS2812 5050 RGB LED Ring 16 (rear) in lamp shade
 11. Mount the RGB Laser Galvo Scanner in the lamp head: secure the
-    galvo motor + mirror pair (X/Y) and the Opt Lasers 300mW Micro
-    RGB module (44 x 39 x 27 mm) on the
+    galvo motor + mirror pair (X/Y) and the Opt Lasers 300mW Micro RGB
+    module (44 x 39 x 27 mm) on the
     mounting bracket, aperture facing forward along the lamp's
     eye-line (the "E.T. luminous finger"); confirm the beam exits
     the shade opening cleanly and that the shade physically blocks
@@ -224,11 +233,12 @@ CT+STOP();
     (the Pi handles audio I/O, sensors, and I2C to the RK3588-40 only)
 14. Route the laser galvo wiring through the cable column to the
     cave: galvo X/Y analog signals (4 wires, +/-5V differential) to
-    the ILDA DAC, laser RGB analog 0-5V modulation (3 wires) to the
-    Opt Lasers LPLDD-1A-16V-3CH driver (powered cave-internally by
-    the MEAN WELL LRS-35-12 12V PSU), and galvo motor power
-    (2 wires, +/-15V) from the cave galvo PSU to the galvo driver
-    board
+    the ILDAWaveX16 V2 DB25 RGB lines, laser RGB analog 0-5V
+    modulation (3 wires) to the ILDAWaveX16 V2 DB25 RGB lines (Opt
+    Lasers 300mW Micro RGB module powered cave-internally by the
+    MEAN WELL LRS-35-12 12V PSU via the LPLDD-1A-16V-3CH driver),
+    and galvo motor power (2 wires, +/-24V) from the cave galvo PSU
+    to the 40kpps galvo driver board
 15. Mount Anglepoise 1227 on inner ring
 16. Connect PSU (5V) and ComXim power
 17. Flash ESP32 firmware

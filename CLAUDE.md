@@ -37,18 +37,18 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
-- **ILDA DAC (ESP32-based, e.g. ILDAC-32)** — generates analog +/-5V X/Y galvo signals and analog 0-5V RGB laser modulation from WiFi/OSC cues
-- **Galvo driver board** (~75x63x28mm) — drives the X/Y galvo motors in the lamp head
-- **Laser diode driver (Opt Lasers LPLDD-1A-16V-3CH, 55 x 23.5 mm, 3-channel analog 0-5V, 100 kHz)** — modulates the RGB laser diode in the lamp head from the ILDA DAC analog 0-5V lines
+- **ILDAWaveX16 V2** (ESP32-S3 + RP2354, 16-bit DAC) — ILDA DAC with WiFi/Ethernet/USB, receives laser cues from Mac Mini via Ether Dream or IDN protocol, outputs standard ILDA DB25 (+/-5V X/Y galvo signals, 0-5V RGB laser modulation)
+- **40kpps galvo driver board** (110 x 68 x 35 mm, Teclulu GH40 or equivalent) — drives the X/Y galvo motors in the lamp head, +/-5V input from ILDAWaveX16 V2 DB25
+- **LPLDD-1A-16V-3CH laser driver** — drives the Opt Lasers 300mW Micro RGB module; 0-5V analog modulation per channel from the ILDAWaveX16 V2 DB25 RGB lines
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
-- **+/-15V galvo PSU** — dedicated dual-rail supply for the galvo driver board
-- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for Opt Lasers LPLDD-1A-16V-3CH laser diode driver
+- **+/-24V galvo PSU** — dedicated dual-rail supply for the 40kpps galvo driver board (included in galvo scanner set)
+- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module; DC 12V input)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
 - **WS2812 5050 RGB LED Ring 16** — physically in the lamp head, driven by ESP32 DevKit GPIO (RMT peripheral) in the cave, powered from the cave MEAN WELL LRS-50-5; 5V/GND/DATA route through the central cable column with a JST-SM 3-pin connector at the lamp head junction, 330Ω series resistor on the data line at the ESP32 end, 1000µF capacitor near the ring
-- **RGB Laser Galvo Scanner** — Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) + X/Y galvo mirrors, projects along the lamp eye-line (vector laser drawing), signal cables route through cable column to ILDA DAC and galvo driver in the cave
-- **Logitech C920** webcam — mounted on/near the lamp, role TBD in script
+- **RGB Laser Galvo Scanner** — Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) + 40kpps X/Y galvo mirrors (7 x 12 mm), projects along the lamp eye-line (vector laser drawing); 0-5V RGB modulation + galvo motor signal cables route through cable column to ILDAWaveX16 V2 and galvo driver in the cave; 12V DC power through cable column
+- **OV2640 camera module** (~3g) — on Pi Zero 2 WH (CSI/SPI), role TBD in script
 
 ### Host
 - **Mac Mini M4 Pro** — show control host, runs everything
@@ -74,12 +74,21 @@ Mac Mini M4 Pro runs:
 - ESP32 WiFi communication (OSC commands to lamp cave servos)
 - ComXim WiFi communication (CT commands for base rotation)
 - Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
+- projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
+
+### Dual projection system
+
+The performance uses two projection systems sharing one rear-projection screen:
+- **Rear projector (Epson EB-W05)** -- HDMI from Mac Mini, projects large theater-readable imagery onto the back of the screen from backstage
+- **Lamp laser (Opt Lasers 300mW Micro RGB + 40kpps galvo)** -- projects small vector drawings (lamp's "thoughts": stick figures, text) onto the front of the same screen from the lamp head
+
+Both systems target the same rear-projection screen from opposite sides.
 
 ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
 - WS2812 LED ring drive via GPIO (RMT peripheral); the Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands
-- ILDA DAC (ESP32-based) feeds analog +/-5V X/Y galvo signals and analog 0-5V RGB modulation through the cable column to the laser galvo scanner in the lamp head; laser cues come from the Mac Mini over WiFi/OSC
+- ILDAWaveX16 V2 (16-bit ILDA DAC) receives cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet; outputs ILDA DB25 signals (+/-5V X/Y to galvo driver, 0-5V RGB to Opt Lasers laser module) through the cable column to the lamp head
 
 ComXim MTxRUWSLPro handles:
 - Base rotation (precision stepping, 0.1° resolution)

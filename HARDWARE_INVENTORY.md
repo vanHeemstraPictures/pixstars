@@ -97,14 +97,14 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Item | Detail |
 | --- | --- |
 | Galvo scanner set | 20kpps closed-loop galvanometer pair with X/Y mirrors and driver board |
-| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~50g estimated; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); ORDERED (purchase date: 2 June 2026) |
-| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ORDERED (purchase date: 2 June 2026) |
-| ILDA DAC | ESP32-based ILDA-compatible DAC in cave; generates X/Y analog (+/-5V) for galvos and RGB analog (0-5V) modulation for the LPLDD-1A-16V-3CH driver (not TTL) |
-| Galvo PSU | Dedicated +/-15V linear PSU in cave for galvo driver board |
-| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH laser diode driver in the cave; PLANNED |
+| RGB laser module | Opt Lasers 300mW Micro RGB (SKU 001311); 44 x 39 x 27 mm; ~55g; R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; 4x M3 mounting screws; Class 4 laser; source https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module ; $539 (tax excl.); PRIMARY -- selected for low head weight. Opt Lasers confirmed (June 2026, Dr. Michal Piotrowicz, Lead Diode Laser Engineer) the module is suitable for laser projection / laser show use. |
+| Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ACTIVE -- drives the Opt Lasers 300mW Micro RGB module from the cave 12V rail. |
+| ILDA DAC | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC) in cave; generates ILDA DB25 output (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) via Ether Dream or IDN protocol from Mac Mini |
+| Galvo PSU | Dedicated +/-24V PSU in cave for 40kpps galvo driver board (included in galvo scanner set) |
+| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH driver, which in turn powers the Opt Lasers 300mW Micro RGB module (DC 12V input); PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
-| Status | ORDERED (laser module + driver, 2 June 2026); galvo set, ILDA DAC, and 12V PSU PLANNED |
+| Status | EVALUATING -- Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected; pending physical fit check in lamp head |
 
 ## LED Strip Connectors
 
@@ -117,7 +117,8 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | WS2812 5050 RGB LED Ring 16 wiring connections |
 | Source | Amazon.nl |
 | Price | EUR 9.99 |
-| Status | ORDERED -- arriving soon |
+| Notes | Pack of 20 3-wire cables (red/green/white) with JST SM 3-pin connectors attached. |
+| Status | IN HAND |
 
 ## Soldering Station
 
@@ -130,12 +131,12 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Assembly and wiring of lamp electronics (cave servos, WS2812 5050 RGB LED Ring 16, ESP32 connections) |
 | Source | Amazon.nl |
 | Price | EUR 15.99 |
-| Status | ORDERED -- arriving soon |
+| Status | IN HAND |
 
 ## Olight Obounds Smart Wireless Gateway
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | Obounds Smart Wireless Multi-Protocol Gateway |
 | Manufacturer | Olight |
 | Protocols | WiFi (2.4G), Bluetooth SIG Mesh, Zigbee |
@@ -154,16 +155,16 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Radios | 2.4 GHz WiFi, Bluetooth 4.2 LE |
 | Connectivity | USB-C, HY2.0 (Grove-compatible), 6 GPIO |
 | Form factor | 24 x 24 mm enclosed plastic case |
-| Firmware | ESPHome `bluetooth_proxy` (board target: `m5stack-atom`) |
-| Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the `11z4t/tuya-ble-mesh` HACS integration |
+| Firmware | ESPHome bluetooth_proxy (board target: m5stack-atom) |
+| Purpose | Spike candidate to replace Olight Obounds -- ESP32 BLE proxy that bridges the Sphere C to Home Assistant via the 11z4t/tuya-ble-mesh HACS integration |
 | Source | Amazon.nl |
 | Price | EUR 19.35 |
-| Status | ORDERED -- arriving 2026-06-01 |
+| Status | IN HAND |
 
 ## Wake Word Satellite
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | M5Stack Atom Echo Programmable Smart Speaker |
 | Manufacturer | M5Stack |
 | Controller | ESP32 (built-in) |
@@ -177,7 +178,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 ## Front Cone Beam LED Ring
 
 | Property | Value |
-|---|---|
+| --- | --- |
 | Model | WS2812B 35-LED Pixel Ring |
 | Manufacturer | TOPXCDZ |
 | Protocol | WS2812B (single-wire, 800kHz) |
@@ -188,7 +189,95 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Voltage | DC 5V |
 | Purpose | Forward-projecting cone beam from lampshade front -- frames the Olight Sphere C as a halo, creates stage-light cone effect |
 | Amazon | https://www.amazon.nl/-/en/WS2812B-16-241-Leds-Addressable/dp/B0DZD6B9RC/ |
-| Status | ORDERED -- arriving 2 June 2026 |
+| Notes | Arrived with two pre-soldered 3-wire cables (red/green/white) with JST SM 3-pin connectors attached. |
+| Status | IN HAND |
+
+## ILDAWaveX16 V2 (ILDA Laser DAC)
+
+| Property | Value |
+| --- | --- |
+| Component | ILDAWaveX16 V2 |
+| Type | ILDA Laser DAC |
+| Manufacturer | StanleyProjects (Stanley Ondrus) |
+| Description | All-in-one, dual-processor (ESP32-S3 + RP2354), high-resolution 16-bit laser DAC platform |
+| Features | ILDA DB25 output, SD-card playback, Ethernet, Wi-Fi, USB, JST XH connectors, Ether Dream compatible, IDN (ILDA Digital Network), web UI, GPLv3 open-source firmware |
+| Unit price | EUR 145 (excl. shipping) |
+| Supplier stock | 2 units available |
+| Supplier | Tindie / StanleyProjects |
+| Project page | https://stanleyprojects.com/projects/ildawavex16v2 |
+| GitHub | https://github.com/stanleyondrus/ILDAWaveX16V2 |
+| Location in lamp | Cave (on servo rail, under ComXim turntable) |
+| Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
+| V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
+| Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
+| Status | EVALUATING |
+
+## SM5 6W RGB Laser Module (SUPERSEDED)
+
+| Property | Value |
+| --- | --- |
+| Component | SM5 6W RGB Laser Module |
+| Type | OEM RGB Laser Module (show-grade) |
+| Manufacturer | Starshine Lighting |
+| Description | Compact fiber-shaped beam RGB laser module for laser projector integration. Designed for show/projection use with smooth analog modulation. |
+| Specifications | 6W total (R 1.4W @ 638nm, G 1.6W @ 525nm, B 3.2W @ 450nm), 0-5V analog modulation per channel (~0.2-4.8V), fiber-shaped beam profile, DC 12V input, <1 min warmup, laser class 4 |
+| Dimensions | 94 x 67 x 36 mm |
+| Weight | ~200g |
+| Unit price | USD 530 (~EUR 490) |
+| Supplier | starshinelights.com |
+| Product page | https://www.starshinelights.com/collections/accessories (SM5 listing) |
+| Location in lamp | Lamp head (projects beam into galvo mirrors along lamp eye-line) |
+| Purpose | RGB laser source for vector laser projection from the lamp head. |
+| Notes | 6W variant is same price as 4W. |
+| Status | SUPERSEDED -- too heavy for lamp head (200g); Opt Lasers 300mW Micro RGB (55g) selected instead. |
+
+## 40kpps High Speed Galvo Scanner Set
+
+| Property | Value |
+| --- | --- |
+| Component | 40kpps High Speed Galvo Scanner Set |
+| Type | ILDA Galvo Scanner (X/Y) |
+| Manufacturer | Teclulu (GH40) or equivalent |
+| Description | Complete galvo scanner kit for full-animation laser projection. Closed-loop moving magnet galvanometers with driver boards and PSU. |
+| Specifications | 40kpps ILDA @ 8 degrees, scan angle +/-30 degrees (or larger), mirror size 7 x 12 x 0.8 mm, reflectivity >99% @ 400-700nm, input signal +/-5V (ILDA standard, matches ILDAWaveX16 V2 DB25 output), PSU +/-24V @ 1A |
+| Driver board size | 110 x 68 x 35 mm |
+| Kit includes | 2x galvo motors, 2x driver boards, 1x motor bracket/mount, 2x signal cables, 2x motor cables, 1x PSU (+/-24V), 1x PSU cable |
+| Unit price | USD 150-230 (~EUR 140-210) |
+| Supplier | teclulu.com |
+| Product page | https://teclulu.com/products/40k-pps-high-speed-galvo-scanner-for-laser-show-lighting-rgb-laser-system-scanner |
+| Location in lamp | Galvo motors + mirrors in lamp head (lightweight, ~50g); driver boards + PSU in cave (on servo rail) |
+| Purpose | X/Y beam deflection for full-animation vector laser projection. 40kpps chosen over 30kpps for smooth animations, flowing text, logos, and organic shapes -- high entertainment value. Signal chain: ILDAWaveX16 V2 (cave) -> DB25 -> galvo driver (cave) -> cable column -> galvo motors (lamp head). |
+| Notes | 40kpps is the professional animation sweet spot. 30kpps does clean graphics but animations look jittery with complex shapes. Only the galvo motors and mirrors go in the lamp head -- driver boards and PSU stay in the cave to keep head weight low. |
+| Status | EVALUATING |
+
+## Epson EB-W05 Projector
+
+| Property | Value |
+| --- | --- |
+| Component | Epson EB-W05 3LCD Projector |
+| Type | Rear projection (behind screen) |
+| Manufacturer | Epson |
+| Description | 3LCD WXGA rear projector for theater-scale imagery on rear-projection screen. Connected to Mac Mini via HDMI. Controlled via remote or Mac Mini. |
+| Specifications | 3,300 lumens (white and colour), WXGA (1280x800, 16:10), 15,000:1 contrast, 3LCD, projection ratio 1.30-1.56:1, image size 33-320 inches, 1.2x optical zoom, manual focus, horizontal keystone slider |
+| Dimensions | 302 x 237 x 82 mm |
+| Weight | 2.5 kg |
+| Connectivity | HDMI, VGA, USB-B, USB-A (WiFi dongle), composite video, audio in |
+| Power | AC mains |
+| Location in lamp | Backstage (behind rear-projection screen) |
+| Purpose | Projects theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures) onto rear-projection screen. Driven by the projection/ subsystem (pygame, OSC port 9002) on the Mac Mini via HDMI. |
+| Status | IN HAND |
+
+## Rear-Projection Screen
+
+| Property | Value |
+| --- | --- |
+| Component | Rear-projection screen |
+| Type | Rear-projection surface |
+| Description | Translucent screen placed between the rear projector and the audience. Receives imagery from behind (Epson EB-W05) and laser vector drawings from the front (lamp laser). |
+| Specifications | TBD -- size depends on venue. Should support both rear projection and front laser marking. |
+| Location in lamp | Stage (between performer/lamp and audience backdrop) |
+| Purpose | Primary visual surface for all projected imagery and lamp laser drawings. |
+| Status | PLANNED -- to be purchased or rented for the October 2026 performance |
 
 ## Summary
 
@@ -203,12 +292,19 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Laser galvo scanner (20kpps galvos, Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH, ESP32 ILDA DAC, +/-15V PSU, 12V PSU for driver) | ORDERED (laser module + driver); galvos / DAC / PSUs PLANNED |
-| LED strip connectors | ORDERED (arriving soon) |
-| Soldering station | ORDERED (arriving soon) |
+| Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | EVALUATING (Opt Lasers + LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
+| ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
+| Opt Lasers 300mW Micro RGB Laser Module | EVALUATING (PRIMARY) |
+| Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
+| SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
+| 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
+| LED strip connectors | IN HAND |
+| Soldering station | IN HAND |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
-| M5Stack Atom Lite (BLE proxy) | ORDERED (arriving 2026-06-01) |
+| M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
-| WS2812B 35-LED front cone beam ring | ORDERED (arriving 2 June 2026) |
+| WS2812B 35-LED front cone beam ring | IN HAND |
+| Epson EB-W05 3LCD projector (rear projection) | IN HAND |
+| Rear-projection screen | PLANNED (to be purchased or rented) |
 
-*Last updated: May 2026*
+*Last updated: June 2026*
