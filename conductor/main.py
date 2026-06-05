@@ -115,6 +115,14 @@ def run_show(
             print("\nAborted.")
             return
 
+    if rehearse:
+        # Reset Ardour to beginning for clean rehearsal sync
+        ardour.stop()
+        time.sleep(0.1)
+        ardour.goto_start()
+        time.sleep(0.3)
+        print("  Ardour transport reset to start")
+
     show_start = time.time()
     cue_index = 0
     last_cue_name = "—"
@@ -199,9 +207,13 @@ def _dispatch_cue(cue: dict, index: int, total: int, sender: OSCSender, ardour: 
     if "cave" in cue and cue["cave"]:
         _dispatch_cave_commands(cue["cave"], sender)
 
-    # Laser (ILDAWaveX16 V2) commands - placeholder, TODO integrate DAC
+    # Laser (ILDAWaveX16 V2) commands
     if "laser" in cue and cue["laser"]:
-        print(f"  [LASER TODO] {cue['laser']}")
+        cmd = cue["laser"]
+        if cmd.upper() == "BLACKOUT":
+            sender.laser_clear()
+        else:
+            sender.laser_scene(cmd)
 
     # Always broadcast current transport state to digital twin
     transport_state = "PLAYING" if sender._ardour_rolling else "STOPPED"
