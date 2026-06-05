@@ -20,20 +20,31 @@ When editing the screenplay, preserve the identity shifts and the lamp vocabular
 
 ## Hardware stack (Pinokio lamp) — Cave Architecture v3
 
-All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
-programmable turntable, mounted on a riser block. The lamp itself contains no motors
+All servos and electronics are hidden inside a "cave" under a DIY ESP32-driven
+turntable (NEMA 17 + TMC2209 + GT2 belt friction-drive on a 200mm lazy Susan bearing),
+mounted on a riser block. The lamp itself contains no motors
 — only a WS2812 5050 RGB LED Ring 16 and a Dynamixel AX-12A for head nod. Cables route through
 a single central column.
 
-See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationale.
+See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original cave rationale
+(note: the v3 ComXim turntable has been superseded by the DIY ESP32-driven turntable below).
 
 ### Base rotation
-- **ComXim MTxRUWSLPro** programmable turntable — precision base rotation (0.1°),
-  WiFi CT command protocol, controlled directly from Mac Mini (not via ESP32)
-- **Riser block** (120–150mm AL or plywood) — creates cave depth, ComXim mounts on top
+- **DIY ESP32-driven turntable** — NEMA 17 stepper (1.8°, 200 steps/rev) driven by **TMC2209**
+  (StealthChop for silent operation, 1/16 microstepping) via the cave ESP32 (STEP/DIR pins).
+  **GT2 belt friction-drive** wrapped directly around a **200mm lazy Susan bearing** outer race
+  (no ring gear/pulley needed) — ~15.7:1 ratio (628mm bearing circumference / 40mm 20T pulley),
+  yielding **~0.00717° per microstep** (~50,240 steps/rev). **Hall effect sensor** (SS49E/A3144)
+  + neodymium magnet for origin detection. Bilateral belt tensioner maintains friction grip.
+  Controlled via **OSC** from Mac Mini through the same cave ESP32
+  (endpoints: `/turntable/rotate`, `/turntable/origin`, `/turntable/stop`).
+  Firmware uses FastAccelStepper (hardware pulse generation).
+  Reference design: github.com/MGX3D/Turntable.
+- **Riser block** (120–150mm AL or plywood) — creates cave depth, turntable platform mounts on top
 
 ### Cave (under turntable, on servo rail)
-- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral)
+- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral) + TMC2209/NEMA 17 turntable stepper (STEP/DIR/ENABLE + Hall sensor input)
+- **TMC2209 stepper driver** — silent (StealthChop) microstepping driver for the NEMA 17 turntable motor, 12V from shared 12V rail, STEP/DIR/EN from ESP32
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
 - **1x MG90S** servo — neck pan (Ch3), carbon fibre push-pull rod to lamp head
@@ -42,7 +53,13 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the full rationa
 - **LPLDD-1A-16V-3CH laser driver** — drives the Opt Lasers 300mW Micro RGB module; 0-5V analog modulation per channel from the ILDAWaveX16 V2 DB25 RGB lines
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
 - **+/-24V galvo PSU** — dedicated dual-rail supply for the 40kpps galvo driver board (included in galvo scanner set)
-- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module; DC 12V input)
+- **MEAN WELL LRS-50-12** — 12V PSU (4.2A) shared between the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module) and the TMC2209/NEMA 17 turntable stepper. Upgraded from LRS-35-12 to provide headroom for both loads.
+
+### ESP32 pin assignments (turntable)
+- **GPIO 25** — STEP signal to TMC2209
+- **GPIO 26** — DIR signal to TMC2209
+- **GPIO 27** — Hall sensor input (origin detect)
+- **GPIO 14** — TMC2209 ENABLE (optional, motor idle)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
@@ -71,8 +88,7 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
-- ESP32 WiFi communication (OSC commands to lamp cave servos)
-- ComXim WiFi communication (CT commands for base rotation)
+- ESP32 WiFi communication (OSC commands to lamp cave servos, LED ring, and DIY turntable stepper)
 - Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
 - projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
 
@@ -88,12 +104,13 @@ ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
 - WS2812 LED ring drive via GPIO (RMT peripheral); the Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands
+- DIY turntable stepper drive — TMC2209 STEP/DIR/ENABLE outputs and Hall sensor input for base rotation and origin detect; the Mac Mini orchestrates rotation cues via OSC (`/turntable/rotate`, `/turntable/origin`, `/turntable/stop`) over the same WiFi/OSC channel
 - ILDAWaveX16 V2 (16-bit ILDA DAC) receives cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet; outputs ILDA DB25 signals (+/-5V X/Y to galvo driver, 0-5V RGB to Opt Lasers laser module) through the cable column to the lamp head
 
-ComXim MTxRUWSLPro handles:
-- Base rotation (precision stepping, 0.1° resolution)
-- Origin return on command
-- Controlled directly from Mac Mini via WiFi CT protocol
+Base rotation (DIY turntable) handles:
+- Precision stepping (~0.00717° per microstep) via the cave ESP32 -> TMC2209 -> NEMA 17, with GT2 belt friction-drive on a 200mm lazy Susan bearing
+- Origin return on command via Hall effect sensor (SS49E/A3144) + magnet
+- Controlled from Mac Mini via OSC through the same cave ESP32 (no separate device or protocol)
 
 Timecode strategy and cue routing should live in `docs/` or a top-level `SHOW_CONTROL.md` — check what's there before assuming.
 
