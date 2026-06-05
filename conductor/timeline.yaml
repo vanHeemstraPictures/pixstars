@@ -13,6 +13,9 @@
 #   cave:       list of ESP32 cave controller commands (optional)
 #               supported cmds: head_nod, servo, led_rear, led_front,
 #                               turntable_rotate, turntable_origin
+#   laser:      single laser scene cmd dict (placeholder, logs only)
+#               format: {cmd: "LASER_SWEEP"}, "LASER_STICK_FIGURE",
+#                       "LASER_AI_TEXT", "LASER_SIGNATURE"
 #
 # Head (Dynamixel AX-12A) angles: 0-300 deg, neutral = 150
 #   tilt down  -> angle < 150 (e.g. 147 = 3 deg down, 135 = 15 deg down)
@@ -237,6 +240,11 @@ cues:
     cave:
       - {cmd: "led_rear", r: 220, g: 240, b: 255, mode: "solid"}
 
+  - time: 210.0
+    name: "LASER_SWEEP_CUE"
+    act: 5
+    laser: {cmd: "LASER_SWEEP"}
+
   - time: 230.0
     name: "LAMP_LIGHTHOUSE_SWEEP"
     act: 5
@@ -438,10 +446,20 @@ cues:
     act: 9
     projection: "AI_SIGNATURE"
 
+  - time: 435.0
+    name: "LASER_STICK_FIGURE_CUE"
+    act: 9
+    laser: {cmd: "LASER_STICK_FIGURE"}
+
   - time: 436.0
     name: "AI_TEXT_TYPES"
     act: 9
     projection: "AI_SIGNATURE"
+
+  - time: 450.0
+    name: "LASER_AI_TEXT_CUE"
+    act: 9
+    laser: {cmd: "LASER_AI_TEXT"}
 
   - time: 446.0
     name: "WALT_WRITES_NAME"
@@ -488,6 +506,11 @@ cues:
   - time: 496.0
     name: "BANDANA_TIED"
     act: 10
+
+  - time: 500.0
+    name: "LASER_SIGNATURE_CUE"
+    act: 10
+    laser: {cmd: "LASER_SIGNATURE"}
 
   - time: 502.0
     name: "AXEL_DUTCH_NAMING"
