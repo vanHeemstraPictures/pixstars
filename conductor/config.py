@@ -13,7 +13,7 @@ ARDOUR_OSC_PORT = 3819
 # Jess+ Lamp Adapter (legacy — superseded by ESP32 cave controller)
 LAMP_OSC_PORT = 9001
 
-# ESP32 Cave Controller (A.I. lamp servos, head, LED rings, turntable)
+# ESP32 Cave Controller (Pinokio lamp servos, head, LED rings, turntable)
 # Hostname resolves on the local network via mDNS; override for static IPs.
 ESP32_CAVE_HOST = "pixstars-cave.local"
 ESP32_CAVE_PORT = 8000

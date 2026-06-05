@@ -37,13 +37,6 @@ TEXT_COLOR = (200, 200, 200)
 DIM_COLOR = (20, 20, 20)
 
 
-def _format_timecode(elapsed: float) -> str:
-    """Format elapsed seconds as MM:SS.s (e.g. '03:45.2')."""
-    m = int(elapsed) // 60
-    s = elapsed - m * 60
-    return f"{m:02d}:{s:04.1f}"
-
-
 @dataclass
 class RingState:
     r: int = 0
@@ -63,7 +56,6 @@ class CaveSimulator:
         self.rear = RingState()
         self.front = RingState()
         self.last_command = "(waiting for OSC commands on port %d)" % port
-        self.timecode = 0.0
         self._lock = threading.Lock()
 
         self._dispatcher = dispatcher.Dispatcher()
@@ -77,7 +69,6 @@ class CaveSimulator:
         self._dispatcher.map("/turntable/origin", self._handle_turntable_origin)
         self._dispatcher.map("/turntable/stop", self._handle_turntable_stop)
         self._dispatcher.map("/ping", self._handle_ping)
-        self._dispatcher.map("/timecode", self._handle_timecode)
 
     # -- OSC handlers -----------------------------------------------------
 
@@ -134,15 +125,6 @@ class CaveSimulator:
     def _handle_ping(self, address, *args):
         self._log_cmd("/ping")
 
-    def _handle_timecode(self, address, *args):
-        if not args:
-            return
-        try:
-            with self._lock:
-                self.timecode = float(args[0])
-        except (TypeError, ValueError):
-            pass
-
     # -- LED rendering ----------------------------------------------------
 
     def _led_color(self, ring: RingState, index: int, count: int, now: float):
@@ -198,7 +180,6 @@ class CaveSimulator:
         screen = pygame.display.set_mode(WINDOW_SIZE)
         font = pygame.font.Font(None, 22)
         small = pygame.font.Font(None, 18)
-        tc_font = pygame.font.SysFont("monospace", 20, bold=True)
         clock = pygame.time.Clock()
 
         print("=" * 50)
@@ -222,7 +203,6 @@ class CaveSimulator:
                 rear_snapshot = RingState(self.rear.r, self.rear.g, self.rear.b, self.rear.mode, self.rear.set_at)
                 front_snapshot = RingState(self.front.r, self.front.g, self.front.b, self.front.mode, self.front.set_at)
                 last_cmd = self.last_command
-                tc = self.timecode
 
             self._draw_ring(screen, front_snapshot, FRONT_COUNT, FRONT_RADIUS, now)
             self._draw_ring(screen, rear_snapshot, REAR_COUNT, REAR_RADIUS, now)
@@ -238,10 +218,6 @@ class CaveSimulator:
             # Bottom overlay: last non-LED command
             overlay = font.render(last_cmd, True, TEXT_COLOR)
             screen.blit(overlay, (12, WINDOW_SIZE[1] - 28))
-
-            # Top-right timecode overlay
-            tc_surf = tc_font.render(_format_timecode(tc), True, (255, 255, 255))
-            screen.blit(tc_surf, (WINDOW_SIZE[0] - tc_surf.get_width() - 10, 8))
 
             pygame.display.flip()
             clock.tick(30)

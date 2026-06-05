@@ -199,11 +199,9 @@ def _dispatch_cue(cue: dict, index: int, total: int, sender: OSCSender, ardour: 
     if "cave" in cue and cue["cave"]:
         _dispatch_cave_commands(cue["cave"], sender)
 
-    # Laser (ILDAWaveX16 V2 / galvo simulator)
+    # Laser (ILDAWaveX16 V2) commands - placeholder, TODO integrate DAC
     if "laser" in cue and cue["laser"]:
-        cmd = cue["laser"]["cmd"]
-        sender.laser_scene(cmd)
-        print(f"  [LASER] {cmd}")
+        print(f"  [LASER TODO] {cue['laser']}")
 
     # Always broadcast current transport state to digital twin
     transport_state = "PLAYING" if sender._ardour_rolling else "STOPPED"
