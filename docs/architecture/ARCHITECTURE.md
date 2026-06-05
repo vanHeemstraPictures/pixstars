@@ -15,7 +15,7 @@ The architecture therefore separates the system into three roles:
 - **Brain** - local AI execution in the lamp base on the Seeed Studio reComputer RK3588-40
 - **Nervous System** - local I/O and device control in the lamp head on the Raspberry Pi Zero 2 WH
 
-A fourth layer - the **Motion Substrate** - sits beneath the lamp in the cave under the ComXim turntable and handles all physical actuation (servos, base rotation, LED ring drive). It is intentionally dumb: it executes commands; it does not decide. See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the v3 cave design.
+A fourth layer - the **Motion Substrate** - sits beneath the lamp in the cave under the DIY ESP32-driven turntable and handles all physical actuation (servos, base rotation stepper, LED ring drive). It is intentionally dumb: it executes commands; it does not decide. See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original v3 cave design (the v3 ComXim turntable has been superseded by the DIY ESP32 + TMC2209 + NEMA 17 turntable described below).
 
 ## High-Level Relationship Map
 
@@ -35,7 +35,7 @@ flowchart LR
     ACC[PCIe / M.2 AI Accelerator\nUp to 26 TOPS Total Platform]
     Pi[Raspberry Pi Zero 2 WH\nLamp Head Nervous System]
 
-    ComXim[ComXim MTxRUWSLPro\nBase Rotation Turntable]
+    Turntable[DIY Turntable\nNEMA 17 + TMC2209 + GT2 Belt]
     ESP[ESP32 DevKit\nWiFi Servo Bridge]
     Maestro[Pololu Mini Maestro 24-ch\nServo Controller]
     AX[Dynamixel AX-12A\nHead Nod TTL]
@@ -56,8 +56,8 @@ flowchart LR
     Cameras --> Vision
     Cameras --> Mac
     Mac --> RK
-    Mac -- WiFi CT --> ComXim
     Mac -- WiFi OSC --> ESP
+    ESP -- STEP/DIR --> Turntable
     AtomEcho -- WiFi --> Mac
     HA --> Mac
     HV --> Mac
@@ -88,8 +88,8 @@ flowchart LR
 | Lamp Brain | Seeed Studio reComputer RK3588-40 | Lamp base | Local AI, speech, vision, behaviour, HiveMind client |
 | Lamp Accelerator | PCIe / M.2 AI accelerator | Lamp base | Extra AI throughput for heavier local inference |
 | Lamp Head Controller | Raspberry Pi Zero 2 WH | Lamp head | Audio I/O, sensor polling, heartbeat, local device control |
-| Base Rotation Engine | ComXim MTxRUWSLPro turntable | Under lamp (riser block) | Precision base rotation, WiFi CT protocol, direct from Mac Mini |
-| Servo Bridge | ESP32 DevKit | Cave (under turntable) | WiFi receiver for servo commands, drives Maestro, AX-12A, and LED ring |
+| Base Rotation Engine | DIY ESP32-driven turntable (NEMA 17 + TMC2209 + GT2 belt friction-drive on 200mm lazy Susan bearing) | Under lamp (riser block) | Precision base rotation (~0.00717 degree per microstep), OSC via the cave ESP32 |
+| Servo Bridge | ESP32 DevKit | Cave (under turntable) | WiFi receiver for servo commands, drives Maestro, AX-12A, LED ring, and TMC2209 turntable stepper |
 | Servo Controller | Pololu Mini Maestro 24-ch | Cave (under turntable) | PWM hub for arm, elbow, neck pan servos |
 | Head Nod Actuator | Dynamixel AX-12A | Lamp head | Head nod via TTL serial from ESP32 (not on Maestro) |
 | LED Ring Driver | ESP32 DevKit GPIO (RMT) | Cave (under turntable) | WS2812 5050 RGB LED Ring 16 driven via cable column to lamp head |
@@ -186,27 +186,46 @@ The PCIe / M.2 AI accelerator is reserved for higher-throughput local AI tasks, 
 
 ## Motion Substrate (Cave Architecture v3)
 
-All physical actuation lives below the lamp, hidden inside a "cave" under the ComXim turntable on a riser block. The lamp itself contains only the head nod servo (AX-12A), the WS2812 5050 RGB LED Ring 16, and the Pi-side sensors and audio. The RK3588-40 issues high-level intent (e.g. "turn 30 degrees CW", "raise lower arm to 60%"); the Motion Substrate executes it.
+All physical actuation lives below the lamp, hidden inside a "cave" under the DIY ESP32-driven turntable on a riser block. The lamp itself contains only the head nod servo (AX-12A), the WS2812 5050 RGB LED Ring 16, and the Pi-side sensors and audio. The RK3588-40 issues high-level intent (e.g. "turn 30 degrees CW", "raise lower arm to 60%"); the Motion Substrate executes it.
 
 The split of responsibility is:
 
 - **RK3588-40 (Lamp Brain)** - decides what the lamp should do
 - **ESP32 / Maestro / AX-12A** - executes arm, elbow, neck pan, head nod, and WS2812 LED ring drive (GPIO/RMT)
-- **ComXim MTxRUWSLPro** - executes base rotation
+- **ESP32 / TMC2209 / NEMA 17** - executes base rotation via the DIY turntable (STEP/DIR from the same cave ESP32, Hall sensor for origin)
 
 ### Cave inventory (under turntable, on servo rail)
 
-- **ESP32 DevKit** - WiFi bridge from Mac Mini / RK3588-40, drives Maestro, AX-12A, and the WS2812 LED ring (GPIO/RMT single-wire to head)
+- **ESP32 DevKit** - WiFi bridge from Mac Mini / RK3588-40, drives Maestro, AX-12A, the WS2812 LED ring (GPIO/RMT single-wire to head), and the TMC2209 turntable stepper (STEP/DIR/ENABLE + Hall sensor input)
+- **TMC2209 stepper driver** - silent (StealthChop) microstepping driver for the NEMA 17 turntable motor; STEP/DIR/EN from ESP32, 12V from the shared cave 12V rail
 - **Pololu Mini Maestro 24-channel** - serial from ESP32
 - **4x MG996R** servos - lower arm (Ch1), elbow (Ch2), spare (Ch3 / Ch4)
 - **1x MG90S** servo - neck pan (Ch3), carbon fibre push-pull rod to lamp head
 - **MEAN WELL LRS-50-5** power supply - 5V rail for the MG996R / MG90S servos and the WS2812 LED ring (delivered to the head via the cable column), kept separate from logic
+- **MEAN WELL LRS-50-12** power supply - 12V rail (4.2A) shared between the LPLDD-1A-16V-3CH laser driver and the TMC2209 / NEMA 17 turntable stepper (upgraded from LRS-35-12 to provide headroom for both loads)
 
 ### Base rotation engine
 
-- **ComXim MTxRUWSLPro** programmable turntable - precision base rotation (0.1 degree minimum step), WiFi CT command protocol, controlled **directly from the Mac Mini, not via the ESP32**
-- **Riser block** (120-150mm aluminium or plywood) - creates the cave depth; ComXim mounts on top
-- Maestro **Channel 0 is freed** in v3 (formerly the NEMA 17 stepper in v2)
+- **DIY ESP32-driven turntable**:
+  - **NEMA 17 stepper motor** (1.8 degree, 200 steps/rev)
+  - **TMC2209 driver** (StealthChop for silent operation, 1/16 microstepping)
+  - **GT2 belt friction-drive** - belt wraps directly around the 200mm lazy Susan bearing outer race (no ring gear/pulley needed); ~15.7:1 ratio (628mm bearing circumference / ~40mm 20T GT2 pulley); ~0.00717 degree per microstep (~50,240 steps/rev)
+  - **Lazy Susan bearing** - 200mm aluminium swivel plate
+  - **Bilateral belt tensioner** maintains friction grip on the bearing race
+  - **Hall effect sensor** (SS49E / A3144) + neodymium magnet for origin detection
+  - **Control:** OSC via the **cave ESP32** (endpoints: `/turntable/rotate`, `/turntable/origin`, `/turntable/stop`); firmware uses FastAccelStepper for hardware pulse generation
+  - **Reference design:** github.com/MGX3D/Turntable (100kg+ load, zero backlash, proven)
+- **Riser block** (120-150mm aluminium or plywood) - creates the cave depth; turntable platform mounts on top
+- Maestro **Channel 0 is freed** (formerly the NEMA 17 stepper in v2; the DIY turntable's NEMA 17 is driven directly from the ESP32 via TMC2209, not via Maestro)
+
+### ESP32 pin assignments (turntable)
+
+| ESP32 GPIO | Signal | Destination |
+|---|---|---|
+| GPIO 25 | STEP | TMC2209 |
+| GPIO 26 | DIR | TMC2209 |
+| GPIO 27 | Hall sensor input | SS49E / A3144 (origin detect) |
+| GPIO 14 | ENABLE (optional) | TMC2209 (motor idle) |
 
 ### Servo channel map (v3)
 
@@ -219,7 +238,7 @@ The split of responsibility is:
 | 4 | (spare) | - | PWM |
 | 5 | (spare) | - | LED ring is driven from ESP32 GPIO/RMT, not from Maestro |
 | - | Head nod | AX-12A TTL ID=1 | Direct TTL from ESP32, not on Maestro |
-| - | Base rotation | ComXim turntable | WiFi CT, direct from Mac Mini |
+| - | Base rotation | DIY turntable (NEMA 17 + TMC2209) | OSC via the cave ESP32 (STEP/DIR pins) |
 
 ## Backstage Core
 
@@ -286,13 +305,13 @@ An optional second RK3588-40 can be installed backstage for heavy visual workloa
 
 The preferred power layout is:
 
-1. **AC mains** into the lamp base and into the ComXim turntable (independent feed)
+1. **AC mains** into the lamp base (the DIY turntable is fed from the shared cave 12V rail, not a separate AC inlet)
 2. **Internal PSU** in the lamp base
 3. **MEAN WELL LRS-50-5** in the cave - dedicated 5V rail for the MG996R / MG90S servos, AX-12A, and the WS2812 LED ring (data and 5V routed to the head via the cable column), kept separate from logic
 4. **12 V rail** for amplifiers, lighting support, and motor domains where needed
 5. **5 V rail** for RK3588-40, Raspberry Pi Zero 2 WH, ESP32, USB peripherals, and logic devices
 6. **Separate charging model for the Olight Sphere**, because the sphere is magnet-mounted and normally battery-powered unless later modified for wired power. The **Olight Sphere C** has its own internal 700mAh battery (USB-C rechargeable) and must be pre-charged before each show
-7. The **ComXim turntable** has its own internal power and AC inlet - it is not fed from the cave PSU
+7. The **DIY turntable** (TMC2209 + NEMA 17) is powered from the cave **MEAN WELL LRS-50-12** (12V rail), shared with the LPLDD laser driver; no separate AC inlet required
 8. The **Olight Obounds gateway** needs a USB power source backstage (separate from the cave PSU and the lamp base)
 
 ## RK3588-40 and RK3576-20 Reference Comparison
@@ -315,11 +334,11 @@ The preferred power layout is:
 - The Raspberry Pi in the head keeps audio and sensor wiring short. It does not drive servos or the rear LED ring in v3.
 - The RK3588-40 and accelerator stay in the base where cooling, power, and expansion are easier.
 - The optional backstage vision node should mirror the same software stack where possible to reduce operational complexity.
-- The **ComXim turntable is a first-class network device**: it is addressed directly from the Mac Mini over WiFi and is decoupled from the ESP32 / Maestro chain. Losing the ESP32 does not lose base rotation, and vice versa.
+- The **DIY turntable** is driven by the same cave ESP32 that handles servos, head nod, and the LED ring. Base rotation therefore shares the OSC control channel and the ESP32 failure domain with the rest of the Motion Substrate (a deliberate simplification from the earlier v3 design, where the turntable was a separate WiFi device).
 
 ## Related Architecture Documents
 
-- `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` - authoritative v3 cave architecture: ComXim turntable as rotation engine, riser block geometry, cave servo rail inventory, control chain, BOM delta from v2, and servo channel map. **This document supersedes any earlier servo / rotation description in the architecture.**
+- `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` - original v3 cave architecture: riser block geometry, cave servo rail inventory, control chain, BOM delta from v2, and servo channel map. The v3 base rotation engine (a ComXim MTxRUWSLPro turntable on WiFi CT) has since been **SUPERSEDED** by the DIY ESP32 + TMC2209 + NEMA 17 turntable described above; the rest of the v3 cave design (servo rail, ESP32, Maestro, AX-12A, LED ring) remains current.
 - `architecture_decision_records/LAMP_ARCHITECTURE_v2.md` - prior v2 cave architecture (custom lazy Susan + NEMA 17), retained for migration context only.
 
 ## Related Documents

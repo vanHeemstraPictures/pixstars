@@ -6,17 +6,20 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the v2->v3 migra
 
 ## System Overview — Cave Architecture v3
 
-All servos and electronics are hidden inside a "cave" under a ComXim MTxRUWSLPro
-programmable turntable, mounted on a riser block. The lamp head contains a
-WS2812 5050 RGB LED Ring 16 (rear), a WS2812B 35-LED front ring around the
-laser galvo aperture, an RGB Laser Galvo Scanner (vector laser galvo scanner
-that draws shapes/patterns via a steered laser beam), an M5Stack Atom Echo
-wake-word module, a Raspberry Pi Zero 2 WH (nervous system: audio I/O, sensors,
-I2C to RK3588-40), and a Dynamixel AX-12A for head nod. Cables route through a
+All servos and electronics are hidden inside a "cave" under a DIY rotating
+platform on a 200mm Lazy Susan bearing, mounted on a riser block. Base
+rotation is driven by a NEMA 17 stepper + TMC2209 driver in the cave, with a
+GT2 belt friction-coupled to the bearing's outer race (inspired by the
+MGX3D open-source turntable). The lamp head contains a WS2812 5050 RGB LED
+Ring 16 (rear), a WS2812B 35-LED front ring around the laser galvo aperture,
+an RGB Laser Galvo Scanner (vector laser galvo scanner that draws
+shapes/patterns via a steered laser beam), an M5Stack Atom Echo wake-word
+module, a Raspberry Pi Zero 2 WH (nervous system: audio I/O, sensors, I2C to
+RK3588-40), and a Dynamixel AX-12A for head nod. Cables route through a
 single central column. No USB cable connects to the lamp.
 
-Base rotation is handled by the ComXim turntable (WiFi CT commands from Mac Mini),
-completely decoupled from the ESP32/Maestro servo chain.
+Base rotation is driven by the cave ESP32 (WiFi/OSC from Mac Mini, STEP/DIR
+to TMC2209), unified with the servo/LED/laser control path on the same ESP32.
 
 ```
                     +--- Lamp Head ----------+
@@ -30,12 +33,13 @@ completely decoupled from the ESP32/Maestro servo chain.
                     +-----------+------------+
                                 | cables through column
                     +--------+--------+
-                    |  ComXim top     |
-                    |  plate (rotates)|
+                    |  Rotating top   |
+                    |  plate (lamp)   |
                     +--------+--------+
-                    |  ComXim internal|
-                    |  stepper + drive|
-                    |  ComXim base    |
+                    |  Lazy Susan     |
+                    |  bearing (200mm)|
+                    |  GT2 belt around|
+                    |  outer race     |
                     +--------+--------+
                     |                 |
                     |  RISER BLOCK    |
@@ -45,23 +49,25 @@ completely decoupled from the ESP32/Maestro servo chain.
                     +-----------------+
                          piano top
 
-    Inside cave (hanging from servo rail under ComXim top plate):
+    Inside cave (hanging from servo rail under rotating top plate):
       ESP32 DevKit, Maestro 24-ch, 4x MG996R, 1x MG90S,
-      MEAN WELL LRS-50-5 PSU
+      NEMA 17 + TMC2209 (base rotation drive),
+      Hall sensor (origin detect), bilateral belt tensioner,
+      MEAN WELL LRS-50-5 PSU (5V), MEAN WELL LRS-50-12 PSU (12V)
 ```
 
 ### Control Architecture
 
 ```
 Mac Mini M4 Pro
-  +-- WiFi --> ComXim MTxRUWSLPro (base rotation, CT commands)
-  |              +-- Internal stepper executes rotation
-  |              +-- Confirms completion back to Mac Mini
-  +-- WiFi --> ESP32 (on servo rail, rotating with cave)
+  +-- WiFi/OSC --> ESP32 (cave)
                  +-- Serial --> Pololu Mini Maestro 24-ch
                  |     +-- PWM --> MG996R x 4 (arm joints)
                  |     +-- PWM --> MG90S x 1 (neck pan rod)
                  +-- TTL serial --> AX-12A #1 (head nod)
+                 +-- STEP/DIR --> TMC2209 --> NEMA 17 (base rotation)
+                 |     +-- GT2 belt friction-drive --> Lazy Susan bearing
+                 |     +-- Hall sensor (origin detect)
                  +-- GPIO/RMT --> WS2812 5050 RGB LED Ring 16
                                   (single-wire data through cable column;
                                    5V from MEAN WELL LRS-50-5 in cave)
@@ -69,15 +75,23 @@ Mac Mini M4 Pro
 
 ## Bill of Materials
 
-### Base Rotation Platform
+### Base Rotation Platform (DIY)
 
 | Component | Qty | Purpose |
 |-----------|-----|---------|
-| ComXim MTxRUWSLPro | 1 | Programmable turntable (20cm, USB+WiFi, 0.1 deg precision) |
-| Riser block (AL tube or 18mm plywood) | 1 | Creates cave depth (120-150mm), ComXim mounts on top |
+| NEMA 17 stepper motor (1.8 deg, 200 steps/rev) | 1 | Base rotation drive (in cave) |
+| TMC2209 stepper driver | 1 | StealthChop silent drive, 1/16 microstepping; STEP/DIR from ESP32 |
+| GT2 timing belt (closed loop or open-ended, 6mm width) | 1 | Friction-drive belt wrapping the lazy susan bearing outer race |
+| GT2 20T pulley (5mm bore) | 1 | Mounted on NEMA 17 shaft, drives the GT2 belt |
+| Lazy Susan bearing (200mm aluminum swivel plate) | 1 | Rotates the lamp platform; outer race is the belt friction surface |
+| Bilateral belt tensioner (idler pulleys or sprung blocks) | 1 set | Maintains friction grip on bearing race (MGX3D-style) |
+| Hall effect sensor (SS49E or A3144) + neodymium magnet | 1 set | Origin detect for homing |
+| Riser block (AL tube or 18mm plywood) | 1 | Creates cave depth (120-150mm); bearing + drive mount on top |
 | Riser-to-piano fixings | 1 set | M6 bolts or clamp system (non-destructive) |
-| Inner ring adapter plate | 1 | AL plate, couples inner ring to ComXim top bolt pattern |
-| Decorative skirt | 1 | Fabric or formed AL, conceals riser + ComXim base |
+| Inner ring adapter plate | 1 | AL plate, couples inner ring to lazy susan bearing top |
+| Decorative skirt | 1 | Fabric or formed AL, conceals riser + cave |
+
+Reference design: github.com/MGX3D/Turntable (100kg+ load, zero backlash, proven).
 
 ### Cave (under turntable, on servo rail)
 
@@ -160,16 +174,16 @@ Staging note: the Epson EB-W05 sits backstage behind the rear-projection screen 
 
 | Maestro Channel | Joint | Servo | Notes |
 |-----------------|-------|-------|-------|
-| 0 | (spare) | -- | Freed in v3 (was NEMA 17 in v2) |
+| 0 | (spare) | -- | Available |
 | 1 | Lower arm raise/lower | MG996R | Cable routed through column |
 | 2 | Upper arm reach (elbow) | MG996R | Cable routed through column |
 | 3 | Neck pan (push-pull rod) | MG90S | Carbon fibre rod to lamp head |
 | 4 | (spare) | -- | Available |
 | 5 | (spare) | -- | LED ring driven from ESP32 GPIO/RMT, not from Maestro |
 | TTL | Head nod | AX-12A (ID=1) | TTL serial via ESP32 |
-| WiFi CT | Base rotation | ComXim MTxRUWSLPro | Separate device, Mac Mini direct |
+| ESP32 STEP/DIR | Base rotation | NEMA 17 via TMC2209 | DIY turntable in cave, OSC from Mac Mini |
 
-## ESP32 Pin Assignments (TBD)
+## ESP32 Pin Assignments
 
 | Pin | Function |
 |-----|----------|
@@ -177,36 +191,38 @@ Staging note: the Epson EB-W05 sits backstage behind the rear-projection screen 
 | RX1 | Maestro serial RX |
 | TX2 | AX-12A TTL serial |
 | GPIO (RMT) | WS2812 LED ring data line (single wire via cable column to lamp head; 330 ohm series resistor at the ESP32 end, 1000 uF cap near the ring) |
+| GPIO 25 | Base rotation STEP -> TMC2209 |
+| GPIO 26 | Base rotation DIR -> TMC2209 |
+| GPIO 27 | Hall effect sensor input (origin detect) |
+| GPIO 14 | TMC2209 ENABLE (optional; pulls motor out of idle hold) |
 
-> Note: ESP32 no longer drives a stepper. NEMA 17 step/dir pins are removed in v3.
+Stepper pulse generation uses the FastAccelStepper library (hardware RMT/MCPWM
+pulse generation on the ESP32), keeping CPU free for OSC and other I/O.
 
-## ComXim CT Command Reference
+## OSC Turntable Commands
 
-> Verify against ComXim SDK documentation before use in performance.
+The Mac Mini drives base rotation by sending OSC messages to the cave ESP32
+over WiFi. The ESP32 translates OSC into STEP/DIR pulses for the TMC2209.
 
-```python
-# Precise rotation (stepping mode)
-CT+START(direction, 2, 1, degrees, speed, 1);
-# direction: 1=CW, 0=CCW | speed: 1-5 | degrees: 0.1 deg resolution
-
-# Return to origin
-CT+ORIGIN();
-
-# Continuous rotation (atmospheric spin)
-CT+START(direction, 1, 0, 0, speed, 0);
-
-# Stop all rotation
-CT+STOP();
-```
+| OSC Endpoint | Args | Behaviour |
+|--------------|------|-----------|
+| `/turntable/rotate` | `float degrees`, `float speed_dps` | Move by `degrees` (signed: + = CW, - = CCW) at `speed_dps` deg/sec. Acknowledged when target reached. |
+| `/turntable/origin` | (none) | Home to the Hall-sensor origin magnet, then zero the internal step counter. |
+| `/turntable/stop` | (none) | Decelerate to a stop and hold position. |
 
 | Parameter | Value |
 |-----------|-------|
-| ComXim IP | 192.168.1.YYY (set static) |
-| ComXim Port | 8080 (confirm from docs) |
-| Protocol | TCP socket, CT command strings |
-| Precision | 0.1 deg minimum step |
-| Load rating | 20kg (stepping mode) |
-| Noise | <55dB |
+| Motor | NEMA 17, 1.8 deg / 200 steps/rev |
+| Driver | TMC2209, 1/16 microstepping (StealthChop) |
+| Transmission | GT2 belt friction-drive around 200mm lazy susan bearing outer race |
+| Ratio | ~15.7:1 (200mm bearing circumference ~628mm / 20T GT2 pulley ~40mm) |
+| Resolution | 200 x 16 x 15.7 = ~50,240 microsteps/rev = ~0.00717 deg/microstep |
+| Origin detection | Hall effect sensor (SS49E/A3144) + neodymium magnet |
+| Protocol | OSC over WiFi (shared cave ESP32) |
+| Library (ESP32) | FastAccelStepper (hardware pulse generation) |
+| Noise | StealthChop near-silent during slow moves |
+
+Reference design: github.com/MGX3D/Turntable.
 
 ## Assembly Order
 
@@ -227,11 +243,11 @@ CT+STOP();
     eye-line (the "E.T. luminous finger"); confirm the beam exits
     the shade opening cleanly and that the shade physically blocks
     the beam when the head nods above horizontal
-12. Install WS2812B 35-LED front ring as a halo around the laser
+15. Install WS2812B 35-LED front ring as a halo around the laser
     galvo aperture (separate JST-SM 3-pin from the rear ring)
-13. Mount M5Stack Atom Echo and Pi Zero 2 WH inside the lamp head
+16. Mount M5Stack Atom Echo and Pi Zero 2 WH inside the lamp head
     (the Pi handles audio I/O, sensors, and I2C to the RK3588-40 only)
-14. Route the laser galvo wiring through the cable column to the
+17. Route the laser galvo wiring through the cable column to the
     cave: galvo X/Y analog signals (4 wires, +/-5V differential) to
     the ILDAWaveX16 V2 DB25 RGB lines, laser RGB analog 0-5V
     modulation (3 wires) to the ILDAWaveX16 V2 DB25 RGB lines (Opt
@@ -250,7 +266,8 @@ CT+STOP();
 
 ## Recommended First Milestones
 
-1. Prove ComXim WiFi receives CT commands from Mac Mini (rotation works)
+1. Prove ESP32 stepper rotation via OSC (`/turntable/rotate` and
+   `/turntable/origin` move the platform and home to the Hall magnet)
 2. Prove ESP32 connects to Mac Mini WiFi and receives OSC
 3. Prove Maestro serial control from ESP32 (one servo moves)
 4. Prove AX-12A head nod from ESP32
@@ -263,11 +280,11 @@ CT+STOP();
 
 | Question | Impact |
 |----------|--------|
-| Does ComXim top plate have accessible bolt holes for inner ring? | Determines adapter plate design |
-| Exact height of ComXim unit? | Determines riser block height |
-| Does ComXim WiFi receiver rotate with top plate? | Confirms no slip ring needed |
-| Exact CT command syntax for MTxRUWSLPro WiFi mode? | Required before Python control code |
-| Max load in stepping mode with full cave hanging below? | Must not exceed 20kg |
+| Belt friction-drive backlash on the bearing outer race under full lamp load? | Determines if a positive-engagement ring gear is needed |
+| TMC2209 StealthChop motor noise at performance speeds vs. SpreadCycle audibility? | Stage silence requirement; may dictate driver mode and microstep choice |
+| Lazy susan bearing alignment / wobble with cave load hanging below? | Affects laser/camera pointing stability from the lamp head |
+| Hall sensor / magnet mounting repeatability (origin drift between shows)? | Determines whether a secondary index or re-home cadence is needed |
+| Riser block height vs. cave component stack (NEMA 17 + bracket + tensioner)? | Final riser dimension |
 | Can riser attach to piano non-destructively? | Stage requirement |
 
 See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for full design rationale.

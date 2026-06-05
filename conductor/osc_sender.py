@@ -15,17 +15,22 @@ from conductor import config
 class OSCSender:
     """Manages OSC clients for all Pixstars subsystems."""
 
-    def __init__(self, dry_run: bool = False):
+    def __init__(self, dry_run: bool = False, rehearse: bool = False):
         self.dry_run = dry_run
+        self.rehearse = rehearse
         self.clients = {}
         self._ardour_rolling = False  # Track Ardour transport state
 
         if not dry_run:
+            cave_host = config.OSC_HOST if rehearse else config.ESP32_CAVE_HOST
             self.clients["ardour"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.ARDOUR_OSC_PORT
             )
             self.clients["lamp"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.LAMP_OSC_PORT
+            )
+            self.clients["cave"] = udp_client.SimpleUDPClient(
+                cave_host, config.ESP32_CAVE_PORT
             )
             self.clients["projection"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.PROJECTION_OSC_PORT
@@ -86,8 +91,55 @@ class OSCSender:
     # ── Subsystem Convenience Methods ────────────────────────────────────
 
     def lamp_state(self, state: str):
-        """Send lamp state change to Jess+ adapter."""
+        """Send lamp state change to Jess+ adapter (legacy)."""
         self.send("lamp", "/lamp/state", state)
+
+    # ── ESP32 Cave Controller ────────────────────────────────────────────
+    # Channels: Ch1=lower arm, Ch2=elbow, Ch3=neck pan, Ch4-5=spare.
+    # LED modes: "solid", "breathe", "pulse", "rainbow", "off".
+
+    def cave_servo(self, channel: int, angle: int):
+        """Maestro servo position (channel, angle in degrees)."""
+        self.send("cave", "/servo/set", int(channel), int(angle))
+
+    def cave_servo_speed(self, channel: int, speed: int):
+        """Maestro servo speed (channel, speed in Maestro units)."""
+        self.send("cave", "/servo/speed", int(channel), int(speed))
+
+    def cave_head_nod(self, angle: float, speed: int | None = None):
+        """AX-12A head nod position (0-300 deg), optional speed."""
+        if speed is None:
+            self.send("cave", "/head/nod", float(angle))
+        else:
+            self.send("cave", "/head/nod", float(angle), int(speed))
+
+    def cave_led_rear(self, r: int, g: int, b: int, mode: str = "solid"):
+        """Rear LED ring (16 LEDs): RGB 0-255 + mode."""
+        self.send("cave", "/led/rear", int(r), int(g), int(b), str(mode))
+
+    def cave_led_front(self, r: int, g: int, b: int, mode: str = "solid"):
+        """Front LED ring (35 LEDs): RGB 0-255 + mode."""
+        self.send("cave", "/led/front", int(r), int(g), int(b), str(mode))
+
+    def cave_turntable_rotate(self, degrees: float, speed: int):
+        """Turntable relative rotation in degrees at given step speed."""
+        self.send("cave", "/turntable/rotate", float(degrees), int(speed))
+
+    def cave_turntable_goto(self, degrees: float, speed: int):
+        """Turntable absolute position in degrees at given step speed."""
+        self.send("cave", "/turntable/goto", float(degrees), int(speed))
+
+    def cave_turntable_origin(self):
+        """Home the turntable to the hall sensor origin."""
+        self.send("cave", "/turntable/origin")
+
+    def cave_turntable_stop(self):
+        """Emergency stop the turntable."""
+        self.send("cave", "/turntable/stop")
+
+    def cave_ping(self):
+        """Health check ping to the ESP32 cave controller."""
+        self.send("cave", "/ping")
 
     def projection_scene(self, scene: str):
         """Send projection scene change."""

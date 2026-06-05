@@ -1,0 +1,71 @@
+Board: Raspberry Pi Zero 2 WH
+
+I need a wiring diagram only (no code). This is the lamp head of an animatronic desk lamp. All control electronics are in a cave below -- this diagram shows only what is physically inside the lamp head and what arrives through a central cable column from below.
+
+Components in the lamp head:
+
+1. WS2812 5050 RGB LED Ring 16 (rear-facing, shines through air vents):
+   - DI <- DATA wire from cable column (driven by ESP32 GPIO 9 in cave, through 330 ohm resistor at cave end)
+   - 5V <- from cable column (MEAN WELL LRS-50-5 in cave)
+   - GND <- from cable column
+   - 1000uF 10V electrolytic capacitor across 5V and GND at the ring
+   - JST-SM 3-pin connector at lamp head junction (mate point between cable column and ring)
+
+2. WS2812B 35-LED Pixel Ring (front-facing, 96mm outer diameter):
+   - DI <- DATA wire from cable column (driven by ESP32 GPIO 10 in cave)
+   - 5V <- from cable column (same MEAN WELL LRS-50-5)
+   - GND <- from cable column
+   - Separate JST-SM 3-pin connector from the rear ring
+
+3. Dynamixel AX-12A (head nod servo):
+   - DATA <- TTL serial from cable column (ESP32 GPIO 15/16 via tri-state buffer in cave)
+   - 12V <- from cable column (MEAN WELL LRS-50-12 in cave)
+   - GND <- from cable column
+   - 3-pin Dynamixel connector (DATA, 12V, GND)
+
+4. Opt Lasers 300mW Micro RGB laser module (44 x 39 x 27 mm):
+   - Red laser diode <- 0-5V analog modulation from cable column (channel 1 from LPLDD driver in cave)
+   - Green laser diode <- 0-5V analog modulation from cable column (channel 2)
+   - Blue laser diode <- 0-5V analog modulation from cable column (channel 3)
+   - 12V DC power <- from cable column (MEAN WELL LRS-50-12 in cave, through LPLDD driver)
+   - GND <- from cable column
+
+5. X/Y Galvo mirror pair (40kpps, 7 x 12 mm mirrors):
+   - X galvo motor <- +/-5V analog signal from cable column (from galvo driver in cave)
+   - Y galvo motor <- +/-5V analog signal from cable column (from galvo driver in cave)
+   - Motor power <- +/-24V from cable column (from dedicated galvo PSU in cave)
+   - 4 signal wires + 2 power wires total
+
+6. Raspberry Pi Zero 2 WH (lamp head controller):
+   - 5V power <- from cable column (shared LRS-50-5 rail)
+   - GND <- from cable column
+   - GPIO 18 (I2S BCK) -> PAM8403 amplifier
+   - GPIO 19 (I2S LRCK) -> PAM8403 amplifier
+   - GPIO 21 (I2S DOUT) -> PAM8403 amplifier
+   - CSI/SPI -> OV2640 camera module
+   - USB -> M5Stack Atom Echo (wake word satellite)
+   - I2C (SDA GPIO 2, SCL GPIO 3) -> cable column -> RK3588-40 in lamp base
+
+7. OV2640 camera module (~3g):
+   - Connected to Pi Zero 2 WH via CSI ribbon or SPI
+
+8. 40mm 4 ohm 3W speaker:
+   - Connected via PAM8403 amplifier from Pi Zero I2S output
+
+9. M5Stack Atom Echo:
+   - USB connection to Pi Zero 2 WH
+   - Self-powered via USB (5V from Pi)
+
+Cable column bundle (arrives from cave below):
+- Wire 1-3: WS2812 rear ring (DATA + 5V + GND) -- JST-SM 3-pin
+- Wire 4-6: WS2812 front ring (DATA + 5V + GND) -- JST-SM 3-pin
+- Wire 7-9: AX-12A (DATA + 12V + GND)
+- Wire 10-13: Galvo X/Y analog signals (4 wires, +/-5V)
+- Wire 14-15: Galvo motor power (+/-24V)
+- Wire 16-18: Laser RGB modulation (3 wires, 0-5V analog)
+- Wire 19-20: Laser power (12V + GND)
+- Wire 21-22: Pi power (5V + GND)
+- Wire 23-24: Pi I2C to RK3588-40 (SDA + SCL)
+- Wire 25: AX-12A direction control (if separate from DATA)
+
+Use color-coded wires: red=5V, orange=12V, black=GND, yellow=signal/data, blue=analog, purple=+/-24V. Show the cable column as a single bundle entering from below. Include a connection table below the diagram.

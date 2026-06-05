@@ -10,8 +10,13 @@ OSC_HOST = "127.0.0.1"
 # Ardour DAW (built-in OSC control surface, default port)
 ARDOUR_OSC_PORT = 3819
 
-# Jess+ Lamp Adapter
+# Jess+ Lamp Adapter (legacy — superseded by ESP32 cave controller)
 LAMP_OSC_PORT = 9001
+
+# ESP32 Cave Controller (Pinokio lamp servos, head, LED rings, turntable)
+# Hostname resolves on the local network via mDNS; override for static IPs.
+ESP32_CAVE_HOST = "pixstars-cave.local"
+ESP32_CAVE_PORT = 8000
 
 # Projection Controller
 PROJECTION_OSC_PORT = 9002

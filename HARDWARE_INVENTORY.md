@@ -71,12 +71,19 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 
 | Item | Detail |
 | --- | --- |
-| Type | Direct USB servo controller |
-| Connection | USB serial |
-| Python library | pyserial |
-| Serial port | /dev/tty.usbmodem* or /dev/tty.usbserial-* (when connected) |
-| Protocol | Serial commands (TBD based on specific controller) |
-| Status | MOCKED — controller to be connected |
+| Model | Pololu Mini Maestro 24-Channel USB Servo Controller (Assembled), item #1356 |
+| Channels | 24 |
+| Interface | USB + TTL serial (300-200000 bps) |
+| Servo resolution | 0.25 us |
+| Pulse rate | up to 333 Hz |
+| Operating voltage | 5-16V |
+| Script memory | 8 KB |
+| Connection to ESP32-S3 | UART1 (TX=GPIO 17, RX=GPIO 18, 9600 baud, compact binary protocol) |
+| Python library | pyserial (for direct USB control during bench testing) |
+| Serial port | /dev/tty.usbmodem* or /dev/tty.usbserial-* (when connected via USB) |
+| Unit price | EUR 70.40 (incl. BTW) |
+| Supplier | Opencircuit.nl -- https://opencircuit.nl/product/mini-maestro-24-kanaals-usb-servo-controller-2 |
+| Status | ORDERED (Opencircuit.nl, EUR 70.40) |
 
 ## Lamp Base AI
 
@@ -91,6 +98,148 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Role | Local AI brain in lamp base |
 | Runs | Wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client |
 | Status | PLANNED — confirmed, not yet procured |
+
+## Base Rotation Turntable (DIY)
+
+The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D open-source design (https://github.com/MGX3D/Turntable). A GT2 belt is driven by a NEMA 17 / TMC2209 / ESP32 chain and wraps directly around the outer race of a 200mm lazy susan bearing (friction drive -- no 200T ring gear). A bilateral idler-bearing + spring tensioner maintains belt grip. Origin is detected by a Hall effect sensor + neodymium magnet. Replaces the previously planned ComXim MTxRUWSLPro (see SUPERSEDED entry below).
+
+### ComXim MTxRUWSLPro Turntable (SUPERSEDED)
+
+| Property | Value |
+| --- | --- |
+| Component | ComXim MTxRUWSLPro programmable turntable |
+| Type | WiFi-controlled motorised turntable (CT command protocol) |
+| Intended role | Lamp base rotation (precision 0.1 deg, controlled directly from Mac Mini via WiFi) |
+| Status | SUPERSEDED -- supplier payment issues blocked procurement; DIY ESP32-driven turntable (NEMA 17 + TMC2209 + GT2 belt friction-drive on 200mm lazy susan) preferred. DIY solution integrates directly into existing OSC/ESP32 control stack (no separate CT protocol), costs ~EUR 50, and achieves ~0.007 deg resolution (better than 0.1 deg). |
+
+### NEMA 17 Stepper Motor
+
+| Property | Value |
+| --- | --- |
+| Component | NEMA 17 bipolar stepper motor |
+| Step angle | 1.8 deg (200 steps/rev) |
+| Drive | Microstepped 1/16 via TMC2209 -> 3,200 microsteps/rev |
+| Effective resolution at turntable | ~50,240 steps/rev = ~0.00717 deg (after ~15.7:1 belt ratio: 200mm bearing circumference ~628mm / 20T GT2 pulley ~40mm) |
+| Power | 12V (shared with LPLDD laser driver from MEAN WELL LRS-50-12); ~1.5A during rotation |
+| Location in lamp | Cave (on servo rail), drives GT2 pulley up to turntable bearing |
+| Purpose | Primary motive force for base rotation in the DIY turntable |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED |
+
+### TMC2209 Stepper Driver
+
+| Property | Value |
+| --- | --- |
+| Component | TMC2209 silent stepper driver (Trinamic) |
+| Interface | STEP / DIR / ENABLE from ESP32 (GPIO 25 STEP, GPIO 26 DIR, GPIO 14 EN) |
+| Features | StealthChop2 (near-silent operation), CoolStep, 1/16 microstepping (configured), up to 2A RMS |
+| Software | FastAccelStepper library on ESP32 (hardware pulse generation) |
+| Power | 12V motor supply (MEAN WELL LRS-50-12), 3.3V logic from ESP32 |
+| Location in lamp | Cave (on servo rail, next to ESP32 DevKit) |
+| Purpose | Silent, microstepped drive for the NEMA 17 turntable motor |
+| Status | PLANNED |
+
+### Hall Effect Sensor + Magnet (Turntable Origin)
+
+| Property | Value |
+| --- | --- |
+| Component | Hall effect sensor (SS49E linear or A3144 digital) + small neodymium magnet |
+| Interface | Single GPIO input to ESP32 (GPIO 27) |
+| Mounting | Sensor fixed to cave/turntable frame; magnet bonded to underside of rotating platform |
+| Purpose | Origin detection / home position for the DIY turntable; triggered each revolution as the magnet passes the sensor. Used by ESP32 firmware to handle `/turntable/origin` OSC command and to absolutely reference the stepper position. |
+| Status | PLANNED |
+
+### GT2 20T Pulley
+
+| Property | Value |
+| --- | --- |
+| Component | GT2 timing pulley, 20 teeth |
+| Bore | 5mm (matches NEMA 17 shaft) |
+| Belt width | 6mm (matches GT2 6mm belt) |
+| Pitch circumference | ~40mm (20T x 2mm pitch) |
+| Mounting | Direct on NEMA 17 motor shaft (set screw on flat) |
+| Purpose | Drives the GT2 belt that wraps around the 200mm lazy susan bearing outer race (friction drive); establishes the ~15.7:1 reduction ratio |
+| Status | PLANNED |
+
+### GT2 Closed-Loop Belt
+
+| Property | Value |
+| --- | --- |
+| Component | GT2 closed-loop timing belt, 6mm wide |
+| Pitch | 2mm GT2 |
+| Length | TBD -- sized to wrap once around the 200mm lazy susan bearing outer race (~628mm circumference) + reach NEMA 17 pulley + idler tensioners (likely ~800-900mm closed-loop, exact length set during build) |
+| Drive style | Friction drive -- belt wraps around the smooth outer race of the lazy susan bearing (no 200T ring gear / no toothed engagement with the platform). Tensioner provides the friction grip. |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED -- exact length finalised during physical build |
+
+### Lazy Susan 200mm Aluminum Bearing
+
+| Property | Value |
+| --- | --- |
+| Component | Lazy Susan swivel plate bearing, 200mm |
+| Material | Aluminum |
+| Outer diameter | 200mm (~628mm circumference -- acts as the "large pulley" for the friction belt drive) |
+| Load capacity | Sized for lamp + cave assembly (reference design supports 100kg+) |
+| Mounting | Top of riser block; lamp platform mounts on rotating top plate; static plate fixed to cave/riser |
+| Purpose | Primary rotational bearing for the lamp platform; its smooth aluminum outer race is the friction-drive surface the GT2 belt wraps around |
+| Status | PLANNED |
+
+### Bilateral Belt Tensioner Hardware
+
+| Property | Value |
+| --- | --- |
+| Component | Bilateral belt tensioner assembly (idler bearings + tension spring) |
+| Parts | 2x small ball-bearing idler pulleys (one each side of the NEMA 17 pulley), mounting bracket, extension/compression spring, adjustment hardware |
+| Purpose | Maintains belt tension and friction grip against the 200mm lazy susan bearing outer race; bilateral layout (idlers on both sides of the drive pulley) increases belt wrap angle around the bearing and equalises load on the motor shaft |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED |
+
+
+## ESP32-S3 N16R8 DevKitC (Cave Controller)
+
+| Property | Value |
+| --- | --- |
+| Component | ESP32-S3 N16R8 DevKitC (ESP32-S3-WROOM-1-N16R8) |
+| Type | Cave controller / central nervous system for all physical actuators |
+| SoC | ESP32-S3 (Xtensa LX7 dual-core @ 240 MHz) |
+| Memory | 512 KB SRAM, 8 MB PSRAM, 16 MB flash |
+| Radios | 2.4 GHz WiFi 802.11 b/g/n (40 MHz bandwidth), Bluetooth 5.0 LE + Mesh |
+| GPIO | 44 programmable pins |
+| UARTs | 3 |
+| RMT channels | 8 |
+| USB | Dual USB-C (CH343P serial + USB OTG) |
+| AI | Vector instructions for ML inference |
+| Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART), Dynamixel AX-12A head nod (UART half-duplex), WS2812 LED rings (RMT), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
+| Pin assignments | Turntable (TMC2209): STEP=GPIO 4, DIR=GPIO 5, EN=GPIO 6, HALL=GPIO 7. AX-12A: DIR=GPIO 8, UART2 TX=GPIO 15, UART2 RX=GPIO 16. WS2812 rings (RMT): rear (16 LEDs)=GPIO 9, front (35 LEDs)=GPIO 10. Maestro (UART1): TX=GPIO 17, RX=GPIO 18. Status LED: GPIO 48 (onboard WS2812). Reserved/unavailable on N16R8: GPIO 19/20 (USB), 22-25 (do not exist), 26-37 (octal SPI flash/PSRAM), 43/44 (UART0/USB-UART), 0/3/45/46 (strapping). See `firmware/cave-esp32/src/config.h.example` for the full pin map. |
+| Location in lamp | Cave (on servo rail, next to Maestro and TMC2209) |
+| Power | 5V via USB-C or VIN; logic 3.3V |
+| Firmware | Arduino / PlatformIO -- FastAccelStepper (stepper), Dynamixel2Arduino (AX-12A), FastLED or Adafruit_NeoPixel (WS2812), python-osc compatible OSC server |
+| Unit price | EUR 12.95 |
+| Supplier | Otronic.nl -- https://www.otronic.nl/en/esp32-s3-n16r8-devboard-16mb-flash-en-8mb-psram.html |
+| Notes | Replaces the originally planned ESP32 DevKit V1 (WROOM-32). The S3 offers 44 GPIOs (vs 34), 16 MB flash (vs 4 MB), 8 MB PSRAM, USB OTG, BT 5.0, and AI vector instructions for EUR 12.95. The M5Stack Atom Lite (IN HAND) remains as a WiFi/OSC test device. |
+| Status | ORDERED (Otronic.nl, EUR 12.95) |
+
+
+## Dynamixel AX-12A (Head Nod Servo)
+
+| Property | Value |
+| --- | --- |
+| Component | ROBOTIS Dynamixel AX-12A |
+| Model | AX-12A (item 902-0003-001) |
+| Protocol | Dynamixel Protocol 1.0 (half-duplex TTL serial) |
+| Baud | 1 Mbps (default) |
+| Resolution | 1024 positions (0-300 degrees) |
+| Stall torque | 1.5 N*m (12V) |
+| Gear ratio | 254:1 |
+| Operating voltage | 9-12V |
+| Weight | 53.5g |
+| Feedback | Position, speed, load, voltage, temperature |
+| Connection to ESP32-S3 | UART2 half-duplex (TX=GPIO 15, RX=GPIO 16, DIR=GPIO 8, 1 Mbps) |
+| Role | Head nod actuator in lamp head |
+| Location in lamp | Lamp head (cable through central column to ESP32 in cave) |
+| Unit price | EUR 59.08 |
+| Supplier | Reichelt.nl -- https://www.reichelt.com/nl/nl/shop/product/servomotor_robotica_9_0_-_12_v_dc-249909 |
+| Status | ORDERED (Reichelt.nl, EUR 59.08) |
 
 ## Laser Galvo Scanner
 
@@ -173,6 +322,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Wake word satellite -- dedicated "Hey A.I." listener for development and backup stage input |
 | Amazon | https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/ |
 | Manufacturer site | https://shop.m5stack.com/ |
+| Notes | Ships with ESPHome firmware pre-installed (device label: "ESPHome FW Pre-installed for Home Assistant"). No manual flashing needed for initial Home Assistant voice satellite setup. |
 | Status | IN HAND |
 
 ## Front Cone Beam LED Ring

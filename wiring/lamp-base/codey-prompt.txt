@@ -1,0 +1,56 @@
+Board: ESP32-S3 N16R8 DevKitC
+
+I need a wiring diagram only (no code). This is a "cave" enclosure under a turntable that holds all the electronics for an animatronic desk lamp. Please draw the complete wiring diagram showing all connections between these components:
+
+ESP32-S3 N16R8 DevKitC (central controller):
+- GPIO 4 -> STEP on TMC2209 stepper driver
+- GPIO 5 -> DIR on TMC2209 stepper driver
+- GPIO 6 -> ENABLE on TMC2209 (active low)
+- GPIO 7 <- Hall effect sensor (A3144) signal (origin detect)
+- GPIO 8 -> AX-12A direction pin (half-duplex TTL serial)
+- GPIO 9 -> WS2812 rear LED ring DATA (through 330 ohm resistor, then cable column to lamp head, 16 LEDs)
+- GPIO 10 -> WS2812 front LED ring DATA (through 330 ohm resistor, then cable column to lamp head, 35 LEDs)
+- GPIO 15 (UART2 TX) -> AX-12A DATA via tri-state buffer
+- GPIO 16 (UART2 RX) <- AX-12A DATA via tri-state buffer
+- GPIO 17 (UART1 TX) -> Pololu Mini Maestro 24ch RX (serial)
+- GPIO 18 (UART1 RX) <- Pololu Mini Maestro 24ch TX (serial)
+- GPIO 48 -> onboard status WS2812 LED
+
+Pololu Mini Maestro 24-channel servo controller (serial from ESP32):
+- Ch0 -> MG996R servo (lower arm)
+- Ch1 -> MG996R servo (elbow)
+- Ch2 -> MG90S servo (neck pan, carbon fibre push-pull rod)
+- Ch3-4 -> MG996R servos (spare)
+- Servo power from MEAN WELL LRS-50-5 (5V)
+
+TMC2209 stepper driver (silent StealthChop mode):
+- STEP <- GPIO 4
+- DIR <- GPIO 5
+- EN <- GPIO 6
+- Motor out -> NEMA 17 stepper (4 wires, A1/A2/B1/B2)
+- VMOT -> 12V from MEAN WELL LRS-50-12
+- GND -> common ground
+
+Dynamixel AX-12A (head nod servo, in lamp head):
+- TTL serial half-duplex via tri-state buffer on GPIO 8/15/16
+- Power: 12V from LRS-50-12 (AX-12A accepts 9-12V)
+
+Power supplies:
+- MEAN WELL LRS-50-5 (5V, 10A): servo power, WS2812 LED rings
+- MEAN WELL LRS-50-12 (12V, 4.2A): TMC2209 stepper motor, AX-12A servo, LPLDD laser driver
+- All grounds tied together (common GND bus)
+
+Cable column (routes from cave up through lamp arm to head):
+- WS2812 rear ring: DATA + 5V + GND (JST-SM 3-pin)
+- WS2812 front ring: DATA + 5V + GND (JST-SM 3-pin)
+- AX-12A: DATA + 12V + GND
+- Galvo X/Y: 4 wires (+/-5V analog from ILDA DAC DB25)
+- Galvo motor power: 2 wires (+/-24V from dedicated galvo PSU)
+- Laser RGB modulation: 3 wires (0-5V from LPLDD driver)
+
+Also in cave but NOT connected to ESP32:
+- ILDAWaveX16 V2 (ILDA DAC, separate ESP32-S3 board) -- receives cues from Mac Mini via WiFi, outputs ILDA DB25 to galvo driver and RGB to LPLDD driver
+- 40kpps galvo driver board -- powered by +/-24V dedicated PSU
+- LPLDD-1A-16V-3CH laser driver -- powered by 12V (shared LRS-50-12), 0-5V analog modulation from ILDAWaveX16 V2
+
+Use color-coded wires: red=5V, black=GND, orange=12V, yellow=signal, blue=data. Include a connection table below the diagram.
