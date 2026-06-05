@@ -1,12 +1,12 @@
 # ============================================================================
 # Pixstars - Show Timeline
 # ============================================================================
-# Aligned with screenplays/screenplay.md (10 acts, ~9:17 total).
+# Aligned with screenplays/screenplay.md (11 acts, ~9:17 total).
 #
 # Each cue may include:
 #   time:       seconds from show start
 #   name:       human-readable cue name
-#   act:        screenplay act number (1-10)
+#   act:        screenplay act number (1-11)
 #   ardour:     OSC command for Ardour (optional)
 #   projection: projection scene name (optional)
 #   lighting:   lighting state name (optional)
@@ -368,6 +368,8 @@ cues:
   - time: 330.0
     name: "LONG_STILL_MOMENT"
     act: 7
+    cave:
+      - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
   - time: 345.0
     name: "MAN_LOOKS_AT_AUDIENCE"
@@ -534,47 +536,47 @@ cues:
   # --------------------------------------------------------------------------
   - time: 520.0
     name: "FINAL_CHORDS_BEGIN"
-    act: 10
+    act: 11
     projection: "TEAM_ROCKSTARS"
     lighting: "FINALE"
 
   - time: 525.0
     name: "LAMP_SWING_DOWNBEAT"
-    act: 10
+    act: 11
     cave:
       - {cmd: "turntable_rotate", degrees: -30, speed: 30}
       - {cmd: "head_nod", angle: 155}
 
   - time: 528.0
     name: "LAMP_SWING_UPBEAT"
-    act: 10
+    act: 11
     cave:
       - {cmd: "turntable_rotate", degrees: 30, speed: 30}
       - {cmd: "head_nod", angle: 150}
 
   - time: 532.0
     name: "FINAL_PROJECTIONS_GNR"
-    act: 10
+    act: 11
     projection: "GNR_LOGO"
 
   - time: 536.0
     name: "FINAL_PROJECTIONS_CASTLE"
-    act: 10
+    act: 11
     projection: "DISNEY_CASTLE"
 
   - time: 540.0
     name: "FINAL_PROJECTIONS_LAMP"
-    act: 10
+    act: 11
     projection: "LAMP_DRAWING"
 
   - time: 544.0
     name: "FINAL_PROJECTIONS_TEAM"
-    act: 10
+    act: 11
     projection: "TEAM_ROCKSTARS"
 
   - time: 548.0
     name: "FINAL_CHORD"
-    act: 10
+    act: 11
     cave:
       - {cmd: "servo", ch: 1, angle: 120}
       - {cmd: "servo", ch: 2, angle: 120}
@@ -583,7 +585,7 @@ cues:
 
   - time: 549.5
     name: "LAMP_INSTANT_OFF"
-    act: 10
+    act: 11
     projection: "TEAM_ROCKSTARS"
     lighting: "BLACKOUT"
     cave:
@@ -591,33 +593,33 @@ cues:
 
   - time: 552.5
     name: "PROJECTIONS_SEQUENTIAL_DARK"
-    act: 10
+    act: 11
     projection: "DISNEY_CASTLE"
 
   - time: 553.5
     name: "DISNEY_CASTLE_LAST_OFF"
-    act: 10
+    act: 11
     projection: "BLACKOUT"
 
   - time: 555.0
     name: "SILENCE_BEAT"
-    act: 10
+    act: 11
 
   - time: 556.0
     name: "LAMP_FINAL_RETURN"
-    act: 10
+    act: 11
     cave:
       - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "solid"}
 
   - time: 557.0
     name: "LAMP_FINAL_OFF"
-    act: 10
+    act: 11
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
   - time: 557.5
     name: "SHOW_END"
-    act: 10
+    act: 11
     projection: "BLACKOUT"
     lighting: "BLACKOUT"
     ardour:
