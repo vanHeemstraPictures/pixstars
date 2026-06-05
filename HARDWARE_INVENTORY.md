@@ -203,7 +203,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | USB | Dual USB-C (CH343P serial + USB OTG) |
 | AI | Vector instructions for ML inference |
 | Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART), Dynamixel AX-12A head nod (UART half-duplex), WS2812 LED rings (RMT), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
-| Pin assignments | TBD -- GPIO remapping required (S3 has different pin layout than original ESP32; previous map was GPIO 25/26/14/27 + UART1/UART2/RMT on WROOM-32) |
+| Pin assignments | Turntable (TMC2209): STEP=GPIO 4, DIR=GPIO 5, EN=GPIO 6, HALL=GPIO 7. AX-12A: DIR=GPIO 8, UART2 TX=GPIO 15, UART2 RX=GPIO 16. WS2812 rings (RMT): rear (16 LEDs)=GPIO 9, front (35 LEDs)=GPIO 10. Maestro (UART1): TX=GPIO 17, RX=GPIO 18. Status LED: GPIO 48 (onboard WS2812). Reserved/unavailable on N16R8: GPIO 19/20 (USB), 22-25 (do not exist), 26-37 (octal SPI flash/PSRAM), 43/44 (UART0/USB-UART), 0/3/45/46 (strapping). See `firmware/cave-esp32/src/config.h.example` for the full pin map. |
 | Location in lamp | Cave (on servo rail, next to Maestro and TMC2209) |
 | Power | 5V via USB-C or VIN; logic 3.3V |
 | Firmware | Arduino / PlatformIO -- FastAccelStepper (stepper), Dynamixel2Arduino (AX-12A), FastLED or Adafruit_NeoPixel (WS2812), python-osc compatible OSC server |

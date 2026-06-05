@@ -19,27 +19,91 @@
 // Serial baud rate for the debug monitor
 #define SERIAL_BAUD 115200
 
-// -------------------------------------------------------------------------
-// Turntable GPIO pin assignments (TMC2209 stepper driver + Hall origin)
-// -------------------------------------------------------------------------
-// Verify pin availability on ESP32-S3-WROOM-1-N16R8 - some GPIOs used by
-// PSRAM/flash. N16R8 uses octal SPI PSRAM which occupies GPIO 33-37
-// internally; GPIO 26 is also typically reserved by the SPI flash on the
-// WROOM-1 module. ESP32-S3 lacks GPIOs 22-25 entirely, so the original
-// ESP32 pin map below WILL need remapping before wiring up real hardware.
-// The defines are kept here for source compatibility while drivers are
-// being ported; do not assume they are usable as-is on the S3.
-#define TURNTABLE_STEP_PIN    25  // STEP signal to TMC2209  (REMAP for S3)
-#define TURNTABLE_DIR_PIN     26  // DIR signal to TMC2209   (REMAP for S3)
-#define TURNTABLE_HALL_PIN    27  // Hall sensor input        (REMAP for S3)
-#define TURNTABLE_ENABLE_PIN  14  // TMC2209 ENABLE (optional, motor idle)
+// =========================================================================
+// ESP32-S3-WROOM-1-N16R8 cave controller -- full GPIO pin map
+// =========================================================================
+//
+// Module:  ESP32-S3-WROOM-1-N16R8 on ESP32-S3-DevKitC-1
+//          16 MB QIO flash, 8 MB OCTAL SPI PSRAM, USB OTG, dual USB-C.
+//
+// UNAVAILABLE GPIOs on this module / board:
+//   GPIO 22-25 : do not exist on ESP32-S3
+//   GPIO 26-32 : used internally by the 16 MB octal SPI flash
+//   GPIO 33-37 : used internally by the 8 MB octal SPI PSRAM
+//   GPIO 19,20 : USB OTG D-/D+ on the DevKitC-1 (USB serial / native USB)
+//   GPIO 43,44 : default UART0 TX/RX (USB-UART bridge used by pio monitor)
+//
+// AVOID FOR CRITICAL OUTPUTS (strapping pins, sampled at reset):
+//   GPIO 0   : boot-mode select (must be HIGH at boot for normal flash boot)
+//   GPIO 3   : JTAG source select (floats at boot)
+//   GPIO 45  : VDD_SPI voltage select
+//   GPIO 46  : ROM message print select
+//
+// FREELY USABLE for project I/O (verified against ESP32-S3 datasheet
+// "Pin Definitions" table for the WROOM-1-N16R8 variant):
+//   GPIO 1, 2, 4-18, 21, 38-42, 47, 48
+//
+// Pin map (group related signals on adjacent pins for clean wiring):
+//
+//   --- Turntable (TMC2209 + Hall origin) on GPIO 4-7 ---
+//     GPIO 4   STEP    -> TMC2209 STEP   (FastAccelStepper on S3 uses RMT/
+//                                          MCPWM hardware pulse generation;
+//                                          any output GPIO is acceptable)
+//     GPIO 5   DIR     -> TMC2209 DIR
+//     GPIO 6   ENABLE  -> TMC2209 EN     (active LOW; HIGH = motor idle)
+//     GPIO 7   HALL    <- SS49E / A3144  (interrupt-capable input; every
+//                                          ESP32-S3 GPIO supports GPIO_INT)
+//
+//   --- AX-12A direction control on GPIO 8 ---
+//     GPIO 8   AX12_DIR -> RS-485 / half-duplex direction (TX_EN)
+//
+//   --- WS2812 LED rings (RMT) on GPIO 9-10 ---
+//     GPIO 9   LED_RING_REAR  -> 16-LED ring DIN (via 330R + 1000uF)
+//     GPIO 10  LED_RING_FRONT -> 35-LED ring DIN (via 330R + 1000uF)
+//
+//   --- UART2 to Dynamixel AX-12A (half-duplex, tied via direction GPIO 8) ---
+//     GPIO 15  UART2 TX -> AX-12A data line (via 74HC126/buffer)
+//     GPIO 16  UART2 RX <- AX-12A data line (via 74HC126/buffer)
+//
+//   --- UART1 to Pololu Mini Maestro 24ch ---
+//     GPIO 17  UART1 TX -> Maestro RX
+//     GPIO 18  UART1 RX <- Maestro TX (optional, only for feedback reads)
+//
+//   --- Onboard status LED ---
+//     GPIO 48  STATUS_LED (onboard WS2812; driven via neopixelWrite())
+//
+// Notes:
+//   * UART1 and UART2 on the S3 can be matrix-routed to any GPIO; the
+//     choices above are for adjacency/wiring, not silicon constraints.
+//   * RMT has 8 channels on the S3 and can drive any output GPIO.
+// =========================================================================
 
-// -------------------------------------------------------------------------
-// Onboard status LED
-// -------------------------------------------------------------------------
-// The ESP32-S3-DevKitC-1 has an addressable WS2812/SK6812 RGB LED on
-// GPIO 48 (no plain digital LED_BUILTIN). Status indication uses
-// neopixelWrite() from the Arduino-ESP32 core; no extra library required.
+// --- Turntable stepper (TMC2209) ---
+#define TURNTABLE_STEP_PIN    4   // STEP signal to TMC2209
+#define TURNTABLE_DIR_PIN     5   // DIR signal to TMC2209
+#define TURNTABLE_ENABLE_PIN  6   // TMC2209 ENABLE (active LOW)
+#define TURNTABLE_HALL_PIN    7   // Hall sensor input (origin detect, interrupt)
+
+// --- Dynamixel AX-12A head nod (UART2 half-duplex) ---
+#define AX12_DIR_PIN          8   // TX_EN / direction control GPIO
+#define AX12_UART_NUM         2   // UART2
+#define AX12_TX_PIN           15  // UART2 TX -> AX-12A data line (via buffer)
+#define AX12_RX_PIN           16  // UART2 RX <- AX-12A data line (via buffer)
+
+// --- WS2812 LED rings (RMT-driven) ---
+#define LED_RING_REAR_PIN     9   // 16-LED ring (lamp head rear / base)
+#define LED_RING_REAR_COUNT   16
+#define LED_RING_FRONT_PIN    10  // 35-LED ring (lamp head front)
+#define LED_RING_FRONT_COUNT  35
+
+// --- Pololu Mini Maestro 24ch servo controller (UART1) ---
+#define MAESTRO_UART_NUM      1   // UART1
+#define MAESTRO_TX_PIN        17  // UART1 TX -> Maestro RX
+#define MAESTRO_RX_PIN        18  // UART1 RX <- Maestro TX (optional feedback)
+
+// --- Onboard status LED (WS2812 on the DevKitC-1) ---
+// Status indication uses neopixelWrite() from the Arduino-ESP32 core;
+// no extra library required.
 #ifndef STATUS_LED_PIN
 #define STATUS_LED_PIN 48
 #endif
