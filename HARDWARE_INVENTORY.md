@@ -173,6 +173,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Wake word satellite -- dedicated "Hey A.I." listener for development and backup stage input |
 | Amazon | https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/ |
 | Manufacturer site | https://shop.m5stack.com/ |
+| Notes | Ships with ESPHome firmware pre-installed (device label: "ESPHome FW Pre-installed for Home Assistant"). No manual flashing needed for initial Home Assistant voice satellite setup. |
 | Status | IN HAND |
 
 ## Front Cone Beam LED Ring
