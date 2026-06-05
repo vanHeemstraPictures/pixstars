@@ -15,10 +15,11 @@ This guide covers Raspberry Pi Zero 2 WH GPIO wiring (audio, sensors,
 I2C to RK3588-40), WS2812 RGB LED installation (driven by the ESP32 in
 the cave, not the Pi), soldering, JST connectors, Dupont connectors,
 wire colors, speaker wiring, and cable routing. It also documents the
-cave servo stack hidden under the ComXim turntable (ESP32 DevKit,
-Pololu Mini Maestro 24-channel, MG996R and MG90S servos, MEAN WELL
-LRS-50-5 PSU) and the ComXim MTxRUWSLPro programmable turntable used
-for base rotation.
+cave servo stack hidden under the DIY base rotation turntable (ESP32
+DevKit, Pololu Mini Maestro 24-channel, MG996R and MG90S servos, MEAN
+WELL LRS-50-5 PSU) and the DIY ESP32-driven turntable (NEMA 17 stepper
+motor, TMC2209 driver, GT2 belt friction-drive on a lazy susan bearing,
+hall effect origin sensor) used for base rotation.
 
 ------------------------------------------------------------------------
 
@@ -263,40 +264,111 @@ Keep weight low.
 
 ------------------------------------------------------------------------
 
-# Cave Components (Under ComXim Turntable)
+# Cave Components (Under DIY Turntable)
 
-The cave is the hidden enclosure beneath the ComXim turntable, sitting
-on the riser block. The lamp itself contains no motors -- all servo
-hardware lives here.
+The cave is the hidden enclosure beneath the DIY base rotation
+turntable, sitting on the riser block. The lamp itself contains no
+motors -- all servo hardware lives here, alongside the stepper driver
+that rotates the turntable above.
 
 The cave contains:
 
 -   ESP32 DevKit (WiFi bridge from Mac Mini; drives Maestro, AX-12A,
-    and the WS2812 LED ring via RMT GPIO + 330 ohm resistor through
-    the cable column)
+    the WS2812 LED ring via RMT GPIO + 330 ohm resistor through
+    the cable column, and the TMC2209 stepper driver for base rotation)
 -   Pololu Mini Maestro 24-channel servo controller
 -   4x MG996R servos (lower arm, elbow, spares)
 -   1x MG90S servo (neck pan, carbon fibre push-pull rod)
+-   TMC2209 stepper driver (StealthChop, 1/16 microstepping; drives
+    the NEMA 17 turntable motor mounted under the lazy susan bearing)
 -   MEAN WELL LRS-50-5 power supply (5V rail for servos and for the
     WS2812 LED ring via the cable column)
--   MEAN WELL LRS-35-12 power supply (12V rail for the LPLDD-1A-16V-3CH
-    laser driver, which powers the Opt Lasers 300mW Micro RGB module
-    (DC 12V input); cave-internal wiring only -- the 12V line does NOT
-    route up the cable column, only the analog 0-5V RGB modulation lines
-    from the ILDAWaveX16 V2 DB25 (via the LPLDD driver) feed the laser
-    module in the lamp head)
+-   MEAN WELL LRS-50-12 power supply (12V rail shared between the
+    LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW
+    Micro RGB module, DC 12V input) and the TMC2209 stepper driver
+    VMOT input for the NEMA 17 turntable motor; cave-internal wiring
+    only -- the 12V line does NOT route up the cable column, only the
+    analog 0-5V RGB modulation lines from the ILDAWaveX16 V2 DB25
+    (via the LPLDD driver) feed the laser module in the lamp head)
 -   Seeed Studio reComputer RK3588-40 (lamp brain -- local AI inference)
 
 ------------------------------------------------------------------------
 
 # Base Rotation
 
-Base rotation is handled independently from the cave servo stack:
+Base rotation is handled by a DIY ESP32-driven turntable. The stepper
+driver and ESP32 live in the cave; the motor and bearing sit on top of
+the riser block, hidden under the platform that the lamp stands on:
 
--   ComXim MTxRUWSLPro programmable turntable
--   Controlled via WiFi CT commands from Mac Mini (separate from
-    ESP32 / Maestro)
+-   NEMA 17 stepper motor (1.8 deg, 200 steps/rev), mounted under the
+    lazy susan bearing on the riser block
+-   TMC2209 stepper driver in the cave (StealthChop for silent
+    operation, 1/16 microstepping)
+-   GT2 belt friction-drive: belt wraps directly around the 200mm
+    lazy susan bearing outer race (no ring gear/pulley required) with
+    a 20T GT2 pulley on the NEMA 17 shaft; ~15.7:1 reduction giving
+    ~0.00717 deg per microstep (50,240 microsteps/rev)
+-   Bilateral belt tensioner maintains friction grip on the bearing race
+-   Hall effect sensor (SS49E or A3144) + neodymium magnet on the
+    bearing for origin detection
+-   Controlled via WiFi/OSC from Mac Mini to the same cave ESP32 that
+    runs Maestro / AX-12A / LED ring (OSC endpoints: /turntable/rotate,
+    /turntable/origin, /turntable/stop). No separate device, no CT
+    protocol.
 -   Riser block (120-150mm) creates cave depth
+
+## ESP32 -> TMC2209 Wiring
+
+All four signal lines are 3.3V logic from the ESP32 GPIO header,
+connected with 2.54mm Dupont jumpers to the TMC2209 breakout. The
+ESP32 GND and TMC2209 GND must share a common ground with the
+MEAN WELL LRS-50-12 12V return.
+
+        ESP32 GPIO 25 -> TMC2209 STEP
+        ESP32 GPIO 26 -> TMC2209 DIR
+        ESP32 GPIO 14 -> TMC2209 EN   (active low; idle motor when high)
+        ESP32 GND     -> TMC2209 GND  (logic ground, common with PSU GND)
+
+## TMC2209 Motor Power
+
+The TMC2209 motor supply rail (VMOT / VM) comes from the cave
+MEAN WELL LRS-50-12, the same 12V PSU that feeds the LPLDD laser
+driver. The 12V rail is cave-internal and does NOT enter the cable
+column.
+
+        MEAN WELL LRS-50-12 +12V -> TMC2209 VMOT
+        MEAN WELL LRS-50-12 GND  -> TMC2209 GND (common with ESP32 GND)
+
+Place a 100uF (or larger) electrolytic capacitor across VMOT / GND
+close to the TMC2209 to absorb back-EMF from the stepper coils.
+
+## TMC2209 -> NEMA 17 Coils
+
+The NEMA 17 has two coils (A and B). Match the coil pairs from the
+motor datasheet to the TMC2209 outputs:
+
+        TMC2209 A1 -> NEMA 17 Coil A wire 1
+        TMC2209 A2 -> NEMA 17 Coil A wire 2
+        TMC2209 B1 -> NEMA 17 Coil B wire 1
+        TMC2209 B2 -> NEMA 17 Coil B wire 2
+
+If the motor vibrates without rotating, one coil pair is swapped --
+flip either A1/A2 or B1/B2 (not both).
+
+## Hall Sensor Wiring (Origin Detect)
+
+A single hall effect sensor (SS49E linear or A3144 digital) is mounted
+on the cave side of the bearing, with a neodymium magnet on the
+rotating turntable. The sensor is powered from the ESP32 3.3V rail
+and signals into GPIO 27.
+
+        ESP32 3.3V    -> Hall sensor VCC
+        ESP32 GND     -> Hall sensor GND
+        ESP32 GPIO 27 -> Hall sensor OUT (signal)
+
+For the A3144 (open-collector digital), add a 10k pull-up resistor
+between OUT and 3.3V. The SS49E (linear analog) does not need a
+pull-up but reads as an analog value; treat the threshold in firmware.
 
 ------------------------------------------------------------------------
 
@@ -327,7 +399,7 @@ Recommended:
     - Galvo X/Y analog signals: 4 wires (+/-5V differential)
     - Laser RGB analog: 3 wires (0-5V from ILDAWaveX16 V2 DB25 in cave
       via the LPLDD-1A-16V-3CH driver; the Opt Lasers module's 12V
-      supply from the cave MEAN WELL LRS-35-12 is cave-internal and
+      supply from the cave MEAN WELL LRS-50-12 is cave-internal and
       does NOT enter the cable column)
     - Galvo motor power: 2 wires (+/-24V from cave PSU)
     - AX-12A TTL serial
@@ -335,15 +407,19 @@ Recommended:
 
          |
 
-    Cave (under ComXim turntable)
-    - ESP32 (drives Maestro, AX-12A, and LED ring via RMT GPIO)
+    Cave (under DIY turntable)
+    - ESP32 (drives Maestro, AX-12A, LED ring via RMT GPIO,
+      and TMC2209 stepper driver for base rotation)
     - Maestro + Servos
+    - TMC2209 stepper driver (12V VMOT, drives NEMA 17 above)
     - RK3588-40
-    - MEAN WELL PSU (5V to servos and to LED ring via cable column)
+    - MEAN WELL LRS-50-5 (5V to servos and to LED ring via cable column)
+    - MEAN WELL LRS-50-12 (12V to LPLDD laser driver and TMC2209)
 
          |
 
-    ComXim Turntable (base rotation)
+    DIY Turntable (base rotation: NEMA 17 + GT2 belt + lazy susan
+    bearing + hall sensor; driven by cave ESP32 over OSC)
 
          |
 
@@ -364,7 +440,8 @@ Test:
 3.  Speaker output
 4.  AX-12A head nod sweep
 5.  MG996R / MG90S servo sweep via Maestro
-6.  ComXim base rotation (CW / CCW, origin return)
+6.  DIY turntable base rotation via OSC (CW / CCW, origin return
+    via hall sensor)
 7.  ESP32 WiFi connectivity
 8.  Cable reliability during full motion
 9.  JST connector hold under vibration
