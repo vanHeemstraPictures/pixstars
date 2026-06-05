@@ -27,6 +27,7 @@
 #include "handlers.h"
 #include "leds.h"
 #include "maestro.h"
+#include "turntable.h"
 
 #ifdef CONFIG_IDF_TARGET_ESP32S3
   #ifndef STATUS_LED_PIN
@@ -144,6 +145,7 @@ void setup() {
   maestro::begin();
   dynamixel::begin();
   leds::begin();
+  turntable::begin();
 }
 
 void loop() {
@@ -172,5 +174,6 @@ void loop() {
   }
 
   leds::update();
+  turntable::update();
   updateStatusLed();
 }

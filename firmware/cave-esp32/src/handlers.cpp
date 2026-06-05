@@ -10,6 +10,7 @@
 #include "dynamixel.h"
 #include "leds.h"
 #include "maestro.h"
+#include "turntable.h"
 
 #if __has_include("config.h")
 #include "config.h"
@@ -158,6 +159,40 @@ void led(OSCMessage &msg, int offset) {
   if (msg.dispatch("/front", handleLedFront, offset)) return;
   logMessage("led", msg);
 }
-void turntable(OSCMessage &msg, int /*offset*/) { logMessage("turntable", msg); }
+static void handleTurntableRotate(OSCMessage &msg) {
+  if (msg.size() < 1) {
+    Serial.println("[turntable] /turntable/rotate needs (degrees[, speedDps])");
+    return;
+  }
+  float degrees = argAsFloat(msg, 0, 0.0f);
+  float speed   = msg.size() >= 2 ? argAsFloat(msg, 1, 0.0f) : 0.0f;
+  ::turntable::rotate(degrees, speed);
+}
+
+static void handleTurntableGoto(OSCMessage &msg) {
+  if (msg.size() < 1) {
+    Serial.println("[turntable] /turntable/goto needs (degreesAbs[, speedDps])");
+    return;
+  }
+  float degrees = argAsFloat(msg, 0, 0.0f);
+  float speed   = msg.size() >= 2 ? argAsFloat(msg, 1, 0.0f) : 0.0f;
+  ::turntable::gotoAbs(degrees, speed);
+}
+
+static void handleTurntableOrigin(OSCMessage & /*msg*/) {
+  ::turntable::originSeek();
+}
+
+static void handleTurntableStop(OSCMessage & /*msg*/) {
+  ::turntable::stop();
+}
+
+void turntable(OSCMessage &msg, int offset) {
+  if (msg.dispatch("/rotate", handleTurntableRotate, offset)) return;
+  if (msg.dispatch("/goto",   handleTurntableGoto,   offset)) return;
+  if (msg.dispatch("/origin", handleTurntableOrigin, offset)) return;
+  if (msg.dispatch("/stop",   handleTurntableStop,   offset)) return;
+  logMessage("turntable", msg);
+}
 
 }  // namespace handlers
