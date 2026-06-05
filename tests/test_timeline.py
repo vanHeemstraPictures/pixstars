@@ -9,7 +9,14 @@ from unittest.mock import MagicMock, patch, call
 # Ensure project root is on path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from conductor.main import load_timeline, format_time, _dispatch_cue
+import subprocess
+
+from conductor.main import (
+    load_timeline,
+    format_time,
+    _dispatch_cue,
+    _RehearsalArdourOSC,
+)
 from conductor.osc_sender import OSCSender
 from conductor.ardour_osc import ArdourOSC
 
@@ -358,6 +365,42 @@ class TestCueDispatchingCaveLaser(unittest.TestCase):
         self.sender.cave_servo.assert_not_called()
         self.sender.cave_head_nod.assert_not_called()
         self.sender.cave_led_rear.assert_not_called()
+
+
+class TestRehearseMode(unittest.TestCase):
+    """Test --rehearse flag plumbing and the no-op Ardour wrapper."""
+
+    def test_rehearse_flag_in_help(self):
+        """--rehearse is exposed via the CLI --help output."""
+        result = subprocess.run(
+            [sys.executable, "-m", "conductor.main", "--help"],
+            capture_output=True, text=True,
+            cwd=str(Path(__file__).parent.parent),
+        )
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("--rehearse", result.stdout)
+
+    def test_rehearse_and_dry_run_are_mutually_exclusive(self):
+        """Combining --rehearse and --dry-run is rejected by argparse."""
+        result = subprocess.run(
+            [sys.executable, "-m", "conductor.main",
+             "--rehearse", "--dry-run"],
+            capture_output=True, text=True,
+            cwd=str(Path(__file__).parent.parent),
+        )
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_rehearsal_ardour_logs_and_skips(self):
+        """_RehearsalArdourOSC prints a skipped marker for every cue."""
+        rehearsal = _RehearsalArdourOSC()
+        with patch("builtins.print") as mock_print:
+            rehearsal.process_cue({"command": "transport_play"})
+            rehearsal.process_cue({"command": "locate", "seconds": 30.0})
+        printed = " ".join(str(c.args[0]) for c in mock_print.call_args_list)
+        self.assertIn("REHEARSAL", printed)
+        self.assertIn("transport_play", printed)
+        self.assertIn("locate", printed)
+        self.assertIn("skipped", printed)
 
 
 if __name__ == "__main__":

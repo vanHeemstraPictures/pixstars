@@ -10,6 +10,7 @@ Usage:
     source .venv/bin/activate
     python -m conductor.main              # Run the show (live)
     python -m conductor.main --dry-run    # Print all cues without sending OSC
+    python -m conductor.main --rehearse   # Real-time run without Ardour or ENTER prompt
 """
 
 import argparse
@@ -53,18 +54,45 @@ def format_time(seconds: float) -> str:
     return f"{int(m):02d}:{s:05.2f}"
 
 
-def run_show(cues: list[dict], sender: OSCSender, ardour: ArdourOSC, dry_run: bool = False):
+class _RehearsalArdourOSC:
+    """No-op stand-in for ArdourOSC used during --rehearse runs.
+
+    Logs every Ardour cue but does not send any OSC, so the show can be
+    rehearsed end-to-end without Ardour running.
+    """
+
+    def process_cue(self, ardour_data: dict):
+        command = ardour_data.get("command", "")
+        print(f"  [REHEARSAL] Ardour: {command} (skipped)")
+
+
+def run_show(
+    cues: list[dict],
+    sender: OSCSender,
+    ardour: ArdourOSC,
+    dry_run: bool = False,
+    rehearse: bool = False,
+):
     """Run through the show timeline, dispatching cues at the correct times.
 
     In dry-run mode, prints all cues immediately without waiting.
+    In rehearse mode, runs in real-time but skips Ardour transport and the
+    ENTER prompt; all other OSC subsystems still receive cues normally.
     """
     total_cues = len(cues)
     show_duration = cues[-1]["time"] if cues else 0
 
+    if dry_run:
+        mode_label = "DRY RUN"
+    elif rehearse:
+        mode_label = "REHEARSAL"
+    else:
+        mode_label = "LIVE"
+
     print("=" * 70)
     print(f"  PIXSTARS SHOW CONDUCTOR")
     print(f"  Cues: {total_cues}  |  Duration: {format_time(show_duration)}")
-    print(f"  Mode: {'DRY RUN' if dry_run else 'LIVE'}")
+    print(f"  Mode: {mode_label}")
     print("=" * 70)
     print()
 
@@ -78,18 +106,23 @@ def run_show(cues: list[dict], sender: OSCSender, ardour: ArdourOSC, dry_run: bo
         print("=" * 70)
         return
 
-    # Live mode — wait for real time
-    print("Press ENTER to start the show (Ctrl+C to abort)...")
-    try:
-        input()
-    except KeyboardInterrupt:
-        print("\nAborted.")
-        return
+    if rehearse:
+        # Swap in a no-op Ardour so transport commands are logged, not sent
+        ardour = _RehearsalArdourOSC()
+    else:
+        # Live mode — wait for real time
+        print("Press ENTER to start the show (Ctrl+C to abort)...")
+        try:
+            input()
+        except KeyboardInterrupt:
+            print("\nAborted.")
+            return
 
     show_start = time.time()
     cue_index = 0
+    last_cue_name = "—"
 
-    print(f"  SHOW STARTED at {time.strftime('%H:%M:%S')}")
+    print(f"  {'REHEARSAL' if rehearse else 'SHOW'} STARTED at {time.strftime('%H:%M:%S')}")
     print("-" * 70)
 
     try:
@@ -100,27 +133,41 @@ def run_show(cues: list[dict], sender: OSCSender, ardour: ArdourOSC, dry_run: bo
             if elapsed >= cue["time"]:
                 _dispatch_cue(cue, cue_index, total_cues, sender, ardour)
                 print()
+                last_cue_name = cue["name"]
                 cue_index += 1
             else:
                 # Show status line
                 next_in = cue["time"] - elapsed
-                status = (
-                    f"\r  [{format_time(elapsed)}] "
-                    f"Next: {cue['name']} in {next_in:.1f}s"
-                )
+                if rehearse:
+                    status = (
+                        f"\r  [{format_time(elapsed)}] "
+                        f"Last: {last_cue_name}  |  "
+                        f"Next: {cue['name']} in {next_in:.1f}s   "
+                    )
+                else:
+                    status = (
+                        f"\r  [{format_time(elapsed)}] "
+                        f"Next: {cue['name']} in {next_in:.1f}s"
+                    )
                 print(status, end="", flush=True)
                 time.sleep(0.05)
 
     except KeyboardInterrupt:
         elapsed = time.time() - show_start
-        print(f"\n\n  SHOW STOPPED at {format_time(elapsed)}")
-        sender.ardour_stop()
+        if rehearse:
+            print(f"\n\n  REHEARSAL STOPPED at {format_time(elapsed)}")
+        else:
+            print(f"\n\n  SHOW STOPPED at {format_time(elapsed)}")
+            sender.ardour_stop()
         return
 
     elapsed = time.time() - show_start
     print("=" * 70)
-    sender.ardour_stop()
-    print(f"  SHOW COMPLETE — Total time: {format_time(elapsed)}")
+    if rehearse:
+        print(f"  REHEARSAL COMPLETE — Total time: {format_time(elapsed)}")
+    else:
+        sender.ardour_stop()
+        print(f"  SHOW COMPLETE — Total time: {format_time(elapsed)}")
     print("=" * 70)
 
 
@@ -203,10 +250,16 @@ def _dispatch_cave_commands(commands: list, sender: OSCSender):
 
 def main():
     parser = argparse.ArgumentParser(description="Pixstars Show Conductor")
-    parser.add_argument(
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument(
         "--dry-run",
         action="store_true",
         help="Print all cues without sending OSC or waiting",
+    )
+    mode_group.add_argument(
+        "--rehearse",
+        action="store_true",
+        help="Real-time run without Ardour transport or ENTER prompt",
     )
     parser.add_argument(
         "--timeline",
@@ -218,12 +271,15 @@ def main():
     # Load timeline
     cues = load_timeline(args.timeline)
 
-    # Create OSC sender
+    # Create OSC sender (rehearse still sends real OSC to non-Ardour subsystems)
     sender = OSCSender(dry_run=args.dry_run)
     ardour = ArdourOSC(sender)
 
     # Run the show
-    run_show(cues, sender, ardour, dry_run=args.dry_run)
+    run_show(
+        cues, sender, ardour,
+        dry_run=args.dry_run, rehearse=args.rehearse,
+    )
 
 
 if __name__ == "__main__":
