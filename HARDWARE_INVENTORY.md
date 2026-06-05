@@ -188,24 +188,29 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Status | PLANNED |
 
 
-## ESP32 DevKit V1 (Cave Controller)
+## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
 | --- | --- |
-| Component | ESP32 DevKit V1 (ESP32-WROOM-32) |
+| Component | ESP32-S3 N16R8 DevKitC (ESP32-S3-WROOM-1-N16R8) |
 | Type | Cave controller / central nervous system for all physical actuators |
-| MCU | Dual-core Xtensa LX6 @ 240 MHz |
-| Memory | 520 KB SRAM, 4 MB flash |
-| Radios | 2.4 GHz WiFi, Bluetooth 4.2 LE |
-| GPIO | 25+ usable pins (sufficient for Maestro UART, AX-12A UART, 2x WS2812 RMT, TMC2209 STEP/DIR/EN, Hall sensor) |
-| Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART1), Dynamixel AX-12A head nod (UART2 half-duplex), WS2812 LED rings (RMT GPIO), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
-| Pin assignments | GPIO 25 (TMC2209 STEP), GPIO 26 (TMC2209 DIR), GPIO 14 (TMC2209 ENABLE), GPIO 27 (Hall sensor input), plus UART1 TX/RX (Maestro), UART2 TX/RX (AX-12A), 2x RMT GPIO (WS2812 LED rings) |
+| SoC | ESP32-S3 (Xtensa LX7 dual-core @ 240 MHz) |
+| Memory | 512 KB SRAM, 8 MB PSRAM, 16 MB flash |
+| Radios | 2.4 GHz WiFi 802.11 b/g/n (40 MHz bandwidth), Bluetooth 5.0 LE + Mesh |
+| GPIO | 44 programmable pins |
+| UARTs | 3 |
+| RMT channels | 8 |
+| USB | Dual USB-C (CH343P serial + USB OTG) |
+| AI | Vector instructions for ML inference |
+| Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART), Dynamixel AX-12A head nod (UART half-duplex), WS2812 LED rings (RMT), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
+| Pin assignments | TBD -- GPIO remapping required (S3 has different pin layout than original ESP32; previous map was GPIO 25/26/14/27 + UART1/UART2/RMT on WROOM-32) |
 | Location in lamp | Cave (on servo rail, next to Maestro and TMC2209) |
-| Power | 5V via USB or VIN; logic 3.3V |
+| Power | 5V via USB-C or VIN; logic 3.3V |
 | Firmware | Arduino / PlatformIO -- FastAccelStepper (stepper), Dynamixel2Arduino (AX-12A), FastLED or Adafruit_NeoPixel (WS2812), python-osc compatible OSC server |
-| Approx price | EUR 8-12 |
-| Notes | The M5Stack Atom Lite (IN HAND) has only 6 GPIOs -- insufficient for the cave role but usable for WiFi/OSC bring-up testing. The DevKit V1 is the production cave controller. |
-| Status | NEEDED -- not yet ordered |
+| Unit price | EUR 12.95 |
+| Supplier | Otronic.nl -- https://www.otronic.nl/en/esp32-s3-n16r8-devboard-16mb-flash-en-8mb-psram.html |
+| Notes | Replaces the originally planned ESP32 DevKit V1 (WROOM-32). The S3 offers 44 GPIOs (vs 34), 16 MB flash (vs 4 MB), 8 MB PSRAM, USB OTG, BT 5.0, and AI vector instructions for EUR 12.95. The M5Stack Atom Lite (IN HAND) remains as a WiFi/OSC test device. |
+| Status | ORDERED (Otronic.nl, EUR 12.95) |
 
 
 ## Laser Galvo Scanner
@@ -469,6 +474,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Lazy Susan 200mm aluminum bearing | PLANNED |
 | Bilateral belt tensioner hardware (idler bearings + spring) | PLANNED |
 | MEAN WELL LRS-50-12 (12V, 4.2A shared rail) | PLANNED -- upgrades LRS-35-12 to power LPLDD laser driver + TMC2209 stepper |
-| ESP32 DevKit V1 (ESP32-WROOM-32, cave controller) | NEEDED -- not yet ordered |
+| ESP32-S3 N16R8 DevKitC (ESP32-S3-WROOM-1-N16R8, cave controller) | ORDERED (Otronic.nl, EUR 12.95) |
 
 *Last updated: June 2026*
