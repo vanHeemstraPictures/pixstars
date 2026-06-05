@@ -24,6 +24,7 @@
 #endif
 
 #include "handlers.h"
+#include "maestro.h"
 
 #ifdef CONFIG_IDF_TARGET_ESP32S3
   #ifndef STATUS_LED_PIN
@@ -137,6 +138,8 @@ void setup() {
 
   udp.begin(OSC_LISTEN_PORT);
   Serial.printf("[osc] listening on UDP port %d\n", OSC_LISTEN_PORT);
+
+  maestro::begin();
 }
 
 void loop() {
