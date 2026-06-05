@@ -115,6 +115,14 @@ def run_show(
             print("\nAborted.")
             return
 
+    if rehearse:
+        # Reset Ardour to beginning for clean rehearsal sync
+        ardour.stop()
+        time.sleep(0.1)
+        ardour.goto_start()
+        time.sleep(0.3)
+        print("  Ardour transport reset to start")
+
     show_start = time.time()
     cue_index = 0
     last_cue_name = "—"
