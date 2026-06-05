@@ -41,6 +41,9 @@ class OSCSender:
             self.clients["twin"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.DIGITAL_TWIN_OSC_PORT
             )
+            self.clients["laser"] = udp_client.SimpleUDPClient(
+                config.OSC_HOST, config.LASER_OSC_PORT
+            )
 
     def send(self, target: str, address: str, *args):
         """Send an OSC message to a target subsystem.
@@ -148,3 +151,21 @@ class OSCSender:
     def lighting_state(self, state: str):
         """Send lighting state change."""
         self.send("lighting", "/lighting/state", state)
+
+    def laser_scene(self, scene: str):
+        """Send laser scene change to galvo simulator."""
+        self.send("laser", "/laser/scene", scene)
+
+    def laser_clear(self):
+        """Clear the laser display."""
+        self.send("laser", "/laser/clear")
+
+    # ── Timecode broadcast ───────────────────────────────────────────────
+
+    def broadcast_timecode(self, elapsed: float):
+        """Send current show timecode to all visual subsystems."""
+        if self.dry_run:
+            return
+        for target in ("cave", "laser", "projection"):
+            if target in self.clients:
+                self.clients[target].send_message("/timecode", [float(elapsed)])

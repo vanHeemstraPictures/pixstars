@@ -101,7 +101,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 
 ## Base Rotation Turntable (DIY)
 
-The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D open-source design (https://github.com/MGX3D/Turntable). A GT2 belt is driven by a NEMA 17 / TMC2209 / ESP32 chain and wraps directly around the outer race of a 200mm lazy susan bearing (friction drive -- no 200T ring gear). A bilateral idler-bearing + spring tensioner maintains belt grip. Origin is detected by a Hall effect sensor + neodymium magnet. Replaces the previously planned ComXim MTxRUWSLPro (see SUPERSEDED entry below).
+The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D open-source design ([https://github.com/MGX3D/Turntable](https://github.com/MGX3D/Turntable)). A GT2 belt is driven by a NEMA 17 / TMC2209 / ESP32 chain and wraps directly around the outer race of a 200mm lazy susan bearing (friction drive -- no 200T ring gear). A bilateral idler-bearing + spring tensioner maintains belt grip. Origin is detected by a Hall effect sensor + neodymium magnet. Replaces the previously planned ComXim MTxRUWSLPro (see SUPERSEDED entry below).
 
 ### ComXim MTxRUWSLPro Turntable (SUPERSEDED)
 
@@ -146,7 +146,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Component | Hall effect sensor (SS49E linear or A3144 digital) + small neodymium magnet |
 | Interface | Single GPIO input to ESP32 (GPIO 27) |
 | Mounting | Sensor fixed to cave/turntable frame; magnet bonded to underside of rotating platform |
-| Purpose | Origin detection / home position for the DIY turntable; triggered each revolution as the magnet passes the sensor. Used by ESP32 firmware to handle `/turntable/origin` OSC command and to absolutely reference the stepper position. |
+| Purpose | Origin detection / home position for the DIY turntable; triggered each revolution as the magnet passes the sensor. Used by ESP32 firmware to handle /turntable/origin OSC command and to absolutely reference the stepper position. |
 | Status | PLANNED |
 
 ### GT2 20T Pulley
@@ -194,7 +194,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
 | Status | PLANNED |
 
-
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
@@ -210,7 +209,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | USB | Dual USB-C (CH343P serial + USB OTG) |
 | AI | Vector instructions for ML inference |
 | Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART), Dynamixel AX-12A head nod (UART half-duplex), WS2812 LED rings (RMT), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
-| Pin assignments | Turntable (TMC2209): STEP=GPIO 4, DIR=GPIO 5, EN=GPIO 6, HALL=GPIO 7. AX-12A: DIR=GPIO 8, UART2 TX=GPIO 15, UART2 RX=GPIO 16. WS2812 rings (RMT): rear (16 LEDs)=GPIO 9, front (35 LEDs)=GPIO 10. Maestro (UART1): TX=GPIO 17, RX=GPIO 18. Status LED: GPIO 48 (onboard WS2812). Reserved/unavailable on N16R8: GPIO 19/20 (USB), 22-25 (do not exist), 26-37 (octal SPI flash/PSRAM), 43/44 (UART0/USB-UART), 0/3/45/46 (strapping). See `firmware/cave-esp32/src/config.h.example` for the full pin map. |
+| Pin assignments | Turntable (TMC2209): STEP=GPIO 4, DIR=GPIO 5, EN=GPIO 6, HALL=GPIO 7. AX-12A: DIR=GPIO 8, UART2 TX=GPIO 15, UART2 RX=GPIO 16. WS2812 rings (RMT): rear (16 LEDs)=GPIO 9, front (35 LEDs)=GPIO 10. Maestro (UART1): TX=GPIO 17, RX=GPIO 18. Status LED: GPIO 48 (onboard WS2812). Reserved/unavailable on N16R8: GPIO 19/20 (USB), 22-25 (do not exist), 26-37 (octal SPI flash/PSRAM), 43/44 (UART0/USB-UART), 0/3/45/46 (strapping). See firmware/cave-esp32/src/config.h.example for the full pin map. |
 | Location in lamp | Cave (on servo rail, next to Maestro and TMC2209) |
 | Power | 5V via USB-C or VIN; logic 3.3V |
 | Firmware | Arduino / PlatformIO -- FastAccelStepper (stepper), Dynamixel2Arduino (AX-12A), FastLED or Adafruit_NeoPixel (WS2812), python-osc compatible OSC server |
@@ -218,7 +217,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Supplier | Otronic.nl -- https://www.otronic.nl/en/esp32-s3-n16r8-devboard-16mb-flash-en-8mb-psram.html |
 | Notes | Replaces the originally planned ESP32 DevKit V1 (WROOM-32). The S3 offers 44 GPIOs (vs 34), 16 MB flash (vs 4 MB), 8 MB PSRAM, USB OTG, BT 5.0, and AI vector instructions for EUR 12.95. The M5Stack Atom Lite (IN HAND) remains as a WiFi/OSC test device. |
 | Status | ORDERED (Otronic.nl, EUR 12.95) |
-
 
 ## Dynamixel AX-12A (Head Nod Servo)
 
