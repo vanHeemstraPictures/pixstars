@@ -73,6 +73,54 @@ class TestProjectionScenes(unittest.TestCase):
                 self.assertIn(cue["projection"], SCENES,
                               f"Timeline scene '{cue['projection']}' not in SCENES")
 
+    def test_no_unused_scenes(self):
+        """Every scene in SCENES is referenced by at least one timeline cue."""
+        import yaml
+        with open("conductor/timeline.yaml") as f:
+            data = yaml.safe_load(f)
+        used = {cue["projection"] for cue in data["cues"]
+                if cue.get("projection")}
+        for name in SCENES:
+            self.assertIn(name, used,
+                          f"Scene '{name}' is defined but never used in timeline")
+
+    def test_all_scene_image_files_exist(self):
+        """Every non-BLACKOUT scene's image_file exists in assets/projection/."""
+        from projection.scenes import ASSETS_DIR
+        for scene in SCENES.values():
+            if not scene.image_file:
+                continue
+            path = ASSETS_DIR / scene.image_file
+            self.assertTrue(path.exists(),
+                            f"{scene.name}: missing asset {path}")
+
+    def test_all_scene_images_load_with_pygame(self):
+        """Every scene image loads via pygame.image.load() without error."""
+        import os
+        os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
+        import pygame
+        from projection.scenes import ASSETS_DIR
+        pygame.init()
+        try:
+            pygame.display.set_mode((1, 1))
+            for scene in SCENES.values():
+                if not scene.image_file:
+                    continue
+                path = ASSETS_DIR / scene.image_file
+                try:
+                    img = pygame.image.load(str(path))
+                    self.assertIsNotNone(img.get_size())
+                except pygame.error as e:
+                    self.fail(f"{scene.name}: pygame failed to load {path}: {e}")
+        finally:
+            pygame.quit()
+
+    def test_get_scene_case_insensitive_lowercase(self):
+        """get_scene uppercases input — lowercase names must resolve."""
+        for name in SCENES:
+            scene = get_scene(name.lower())
+            self.assertEqual(scene.name, name)
+
 
 class TestLightingStates(unittest.TestCase):
     """Test lighting state definitions (imported here for convenience)."""
