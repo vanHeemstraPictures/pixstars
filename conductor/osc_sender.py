@@ -15,12 +15,14 @@ from conductor import config
 class OSCSender:
     """Manages OSC clients for all Pixstars subsystems."""
 
-    def __init__(self, dry_run: bool = False):
+    def __init__(self, dry_run: bool = False, rehearse: bool = False):
         self.dry_run = dry_run
+        self.rehearse = rehearse
         self.clients = {}
         self._ardour_rolling = False  # Track Ardour transport state
 
         if not dry_run:
+            cave_host = config.OSC_HOST if rehearse else config.ESP32_CAVE_HOST
             self.clients["ardour"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.ARDOUR_OSC_PORT
             )
@@ -28,7 +30,7 @@ class OSCSender:
                 config.OSC_HOST, config.LAMP_OSC_PORT
             )
             self.clients["cave"] = udp_client.SimpleUDPClient(
-                config.ESP32_CAVE_HOST, config.ESP32_CAVE_PORT
+                cave_host, config.ESP32_CAVE_PORT
             )
             self.clients["projection"] = udp_client.SimpleUDPClient(
                 config.OSC_HOST, config.PROJECTION_OSC_PORT

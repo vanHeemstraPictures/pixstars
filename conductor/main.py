@@ -269,7 +269,7 @@ def main():
     cues = load_timeline(args.timeline)
 
     # Create OSC sender (all modes send real OSC to all subsystems including Ardour)
-    sender = OSCSender(dry_run=args.dry_run)
+    sender = OSCSender(dry_run=args.dry_run, rehearse=args.rehearse)
     ardour = ArdourOSC(sender)
 
     # Run the show
