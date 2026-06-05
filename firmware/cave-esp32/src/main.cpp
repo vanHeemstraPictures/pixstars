@@ -23,7 +23,9 @@
 #error "config.h not found. Copy src/config.h.example to src/config.h and fill in your WiFi credentials."
 #endif
 
+#include "dynamixel.h"
 #include "handlers.h"
+#include "leds.h"
 #include "maestro.h"
 
 #ifdef CONFIG_IDF_TARGET_ESP32S3
@@ -140,6 +142,8 @@ void setup() {
   Serial.printf("[osc] listening on UDP port %d\n", OSC_LISTEN_PORT);
 
   maestro::begin();
+  dynamixel::begin();
+  leds::begin();
 }
 
 void loop() {
@@ -167,5 +171,6 @@ void loop() {
     }
   }
 
+  leds::update();
   updateStatusLed();
 }

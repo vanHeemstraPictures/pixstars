@@ -85,10 +85,12 @@
 #define TURNTABLE_HALL_PIN    7   // Hall sensor input (origin detect, interrupt)
 
 // --- Dynamixel AX-12A head nod (UART2 half-duplex) ---
-#define AX12_DIR_PIN          8   // TX_EN / direction control GPIO
-#define AX12_UART_NUM         2   // UART2
-#define AX12_TX_PIN           15  // UART2 TX -> AX-12A data line (via buffer)
-#define AX12_RX_PIN           16  // UART2 RX <- AX-12A data line (via buffer)
+#define AX12_DIR_PIN          8       // TX_EN / direction control GPIO
+#define AX12_UART_NUM         2       // UART2
+#define AX12_TX_PIN           15      // UART2 TX -> AX-12A data line (via buffer)
+#define AX12_RX_PIN           16      // UART2 RX <- AX-12A data line (via buffer)
+#define AX12_BAUD             1000000 // AX-12A factory default 1 Mbps
+#define AX12_ID               1       // Unicast ID of the head nod servo
 
 // --- WS2812 LED rings (RMT-driven) ---
 #define LED_RING_REAR_PIN     9   // 16-LED ring (lamp head rear / base)
