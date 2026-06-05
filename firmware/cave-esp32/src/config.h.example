@@ -1,5 +1,8 @@
 // Copy this file to src/config.h and fill in your values.
 // src/config.h is gitignored so credentials never end up in the repo.
+//
+// Board: ESP32-S3-DevKitC-1 with ESP32-S3-WROOM-1-N16R8 module
+//        (16 MB QIO flash, 8 MB octal PSRAM, addressable RGB LED on GPIO 48)
 
 #pragma once
 
@@ -15,3 +18,28 @@
 
 // Serial baud rate for the debug monitor
 #define SERIAL_BAUD 115200
+
+// -------------------------------------------------------------------------
+// Turntable GPIO pin assignments (TMC2209 stepper driver + Hall origin)
+// -------------------------------------------------------------------------
+// Verify pin availability on ESP32-S3-WROOM-1-N16R8 - some GPIOs used by
+// PSRAM/flash. N16R8 uses octal SPI PSRAM which occupies GPIO 33-37
+// internally; GPIO 26 is also typically reserved by the SPI flash on the
+// WROOM-1 module. ESP32-S3 lacks GPIOs 22-25 entirely, so the original
+// ESP32 pin map below WILL need remapping before wiring up real hardware.
+// The defines are kept here for source compatibility while drivers are
+// being ported; do not assume they are usable as-is on the S3.
+#define TURNTABLE_STEP_PIN    25  // STEP signal to TMC2209  (REMAP for S3)
+#define TURNTABLE_DIR_PIN     26  // DIR signal to TMC2209   (REMAP for S3)
+#define TURNTABLE_HALL_PIN    27  // Hall sensor input        (REMAP for S3)
+#define TURNTABLE_ENABLE_PIN  14  // TMC2209 ENABLE (optional, motor idle)
+
+// -------------------------------------------------------------------------
+// Onboard status LED
+// -------------------------------------------------------------------------
+// The ESP32-S3-DevKitC-1 has an addressable WS2812/SK6812 RGB LED on
+// GPIO 48 (no plain digital LED_BUILTIN). Status indication uses
+// neopixelWrite() from the Arduino-ESP32 core; no extra library required.
+#ifndef STATUS_LED_PIN
+#define STATUS_LED_PIN 48
+#endif
