@@ -147,9 +147,58 @@ def _dispatch_cue(cue: dict, index: int, total: int, sender: OSCSender, ardour: 
     if "lighting" in cue and cue["lighting"]:
         sender.lighting_state(cue["lighting"])
 
+    # Cave (ESP32) commands
+    if "cave" in cue and cue["cave"]:
+        _dispatch_cave_commands(cue["cave"], sender)
+
+    # Laser (ILDAWaveX16 V2) commands - placeholder, TODO integrate DAC
+    if "laser" in cue and cue["laser"]:
+        print(f"  [LASER TODO] {cue['laser']}")
+
     # Always broadcast current transport state to digital twin
     transport_state = "PLAYING" if sender._ardour_rolling else "STOPPED"
     sender.send("twin", "/transport/state", transport_state)
+
+
+def _dispatch_cave_commands(commands: list, sender: OSCSender):
+    """Dispatch a list of cave sub-commands to the ESP32 via OSCSender.
+
+    Each command is a dict with a "cmd" key plus command-specific parameters.
+    Unknown commands are logged as warnings but do not raise.
+    """
+    for cmd_dict in commands:
+        cmd = cmd_dict.get("cmd")
+        if cmd == "servo":
+            sender.cave_servo(cmd_dict["ch"], cmd_dict["angle"])
+        elif cmd == "servo_speed":
+            sender.cave_servo_speed(cmd_dict["ch"], cmd_dict["speed"])
+        elif cmd == "head_nod":
+            if "speed" in cmd_dict:
+                sender.cave_head_nod(cmd_dict["angle"], cmd_dict["speed"])
+            else:
+                sender.cave_head_nod(cmd_dict["angle"])
+        elif cmd == "led_rear":
+            sender.cave_led_rear(
+                cmd_dict["r"], cmd_dict["g"], cmd_dict["b"],
+                cmd_dict.get("mode", "solid"),
+            )
+        elif cmd == "led_front":
+            sender.cave_led_front(
+                cmd_dict["r"], cmd_dict["g"], cmd_dict["b"],
+                cmd_dict.get("mode", "solid"),
+            )
+        elif cmd == "turntable_rotate":
+            sender.cave_turntable_rotate(cmd_dict["degrees"], cmd_dict["speed"])
+        elif cmd == "turntable_goto":
+            sender.cave_turntable_goto(cmd_dict["degrees"], cmd_dict["speed"])
+        elif cmd == "turntable_origin":
+            sender.cave_turntable_origin()
+        elif cmd == "turntable_stop":
+            sender.cave_turntable_stop()
+        elif cmd == "ping":
+            sender.cave_ping()
+        else:
+            print(f"  [CAVE WARNING] Unknown cmd: {cmd!r} in {cmd_dict}")
 
 
 def main():
