@@ -18,13 +18,9 @@ M5Stack Atom Echo Programmable Smart Speaker
 
 Purchase references:
 
-Amazon Netherlands:
-https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/
+Amazon Netherlands:[https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/](https://www.amazon.nl/-/en/M5Stack-Atom-Echo-Programmable-Mini-Smart/dp/B0F6M8L6XF/)
 
-Manufacturer:
-https://shop.m5stack.com/
-
----
+Manufacturer:[https://shop.m5stack.com/](https://shop.m5stack.com/)
 
 # Architecture Decision
 
@@ -39,8 +35,6 @@ It does NOT replace:
 - Mac Mini M4 Pro AI processing
 
 Instead, it becomes an optional dedicated voice satellite.
-
----
 
 # Final Pixstars Architecture
 
@@ -64,7 +58,6 @@ Instead, it becomes an optional dedicated voice satellite.
  - heartbeat monitor                    - voice capture
  - local device management              - experiments
 
-
  ESP32 DevKit (Cave)
 
  Controls:
@@ -74,7 +67,6 @@ Instead, it becomes an optional dedicated voice satellite.
  - AX-12A head nod
  - lamp expressions
 
-
  Seeed Studio reComputer RK3588-40
 
  Controls:
@@ -83,7 +75,6 @@ Instead, it becomes an optional dedicated voice satellite.
  - wake word processing
  - STT / TTS
  - behavior and state logic
-
 
 Audio:
 
@@ -99,8 +90,6 @@ Mac Mini M4 Pro
            40mm full range speaker
            (lamp head)
 ```
-
----
 
 # Why Use a Separate Wake Word Satellite?
 
@@ -120,8 +109,6 @@ The Raspberry Pi performs.
 
 The Mac Mini thinks and speaks.
 
----
-
 # What Is Inside Atom Echo?
 
 The device contains:
@@ -139,8 +126,6 @@ For Pixstars we mainly use:
 - microphone experiments
 - wake word detection
 - WiFi communication
-
----
 
 # Why Not Use The Atom Echo Speaker?
 
@@ -164,8 +149,6 @@ The base speaker creates warmth.
 
 Together they create the illusion.
 
----
-
 # Why Keep The Raspberry Pi Zero 2 WH?
 
 The Raspberry Pi remains the lamp nervous system.
@@ -178,8 +161,6 @@ Responsibilities:
 - HiveMind communication
 
 The Pi is better suited for physical control.
-
----
 
 # Why Keep The WS2812 LED Ring?
 
@@ -209,8 +190,6 @@ Error:
 
 Red flicker
 
----
-
 # Development Usage
 
 Before the physical lamp is complete:
@@ -239,8 +218,6 @@ AI response
 
 This allows the AI interaction pipeline to be tested independently.
 
----
-
 # Stage Usage
 
 The Atom Echo can become a backup input path.
@@ -250,8 +227,6 @@ If another microphone fails:
 - commands can still be received
 - show control remains possible
 - debugging is easier
-
----
 
 # Home Assistant Assist Compatibility
 
@@ -263,8 +238,6 @@ This fits the Pixstars philosophy:
 - modular
 - replaceable components
 - no single point of failure
-
----
 
 # Recommended Placement
 
@@ -290,21 +263,17 @@ Use Atom Echo as:
 - experimental satellite
 - additional controller
 
----
-
 # Setup Flow
 
 1. Install Atom Echo firmware
-
 2. Connect Atom Echo to WiFi
-
 3. Configure wake phrase:
 
 ```
 Hey A.I.
 ```
 
-4. Send detected commands to:
+1. Send detected commands to:
 
 ```
 Mac Mini M4 Pro
@@ -312,15 +281,12 @@ Mac Mini M4 Pro
 OpenVoiceOS / HiveMind
 ```
 
-5. Generate voice response
-
-6. Trigger:
+1. Generate voice response
+2. Trigger:
 
 - speech
 - LED emotion
 - movement
-
----
 
 # Final Decision
 
