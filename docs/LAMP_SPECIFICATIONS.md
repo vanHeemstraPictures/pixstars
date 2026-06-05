@@ -6,7 +6,7 @@
 
 ### Overview
 
-The Anglepoise Original 1227 is the lamp used as the physical reference for the Pixstars "Pinokio" desk lamp character. Its iconic spring-balanced articulated arm and recognisable industrial silhouette make it the ideal base for the animatronic conversion described in `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`.
+The Anglepoise Original 1227 is the lamp used as the physical reference for the Pixstars "A.I." desk lamp character. Its iconic spring-balanced articulated arm and recognisable industrial silhouette make it the ideal base for the animatronic conversion described in `docs/PIXSTARS_LAMP_COMPLETE_BUILD.md`.
 
 ### Product Details
 
