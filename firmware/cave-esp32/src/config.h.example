@@ -100,6 +100,7 @@
 #define MAESTRO_UART_NUM      1   // UART1
 #define MAESTRO_TX_PIN        17  // UART1 TX -> Maestro RX
 #define MAESTRO_RX_PIN        18  // UART1 RX <- Maestro TX (optional feedback)
+#define MAESTRO_BAUD          9600  // Maestro compact-protocol default; 8N1
 
 // --- Onboard status LED (WS2812 on the DevKitC-1) ---
 // Status indication uses neopixelWrite() from the Arduino-ESP32 core;
