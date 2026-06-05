@@ -71,12 +71,19 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 
 | Item | Detail |
 | --- | --- |
-| Type | Direct USB servo controller |
-| Connection | USB serial |
-| Python library | pyserial |
-| Serial port | /dev/tty.usbmodem* or /dev/tty.usbserial-* (when connected) |
-| Protocol | Serial commands (TBD based on specific controller) |
-| Status | MOCKED — controller to be connected |
+| Model | Pololu Mini Maestro 24-Channel USB Servo Controller (Assembled), item #1356 |
+| Channels | 24 |
+| Interface | USB + TTL serial (300-200000 bps) |
+| Servo resolution | 0.25 us |
+| Pulse rate | up to 333 Hz |
+| Operating voltage | 5-16V |
+| Script memory | 8 KB |
+| Connection to ESP32-S3 | UART1 (TX=GPIO 17, RX=GPIO 18, 9600 baud, compact binary protocol) |
+| Python library | pyserial (for direct USB control during bench testing) |
+| Serial port | /dev/tty.usbmodem* or /dev/tty.usbserial-* (when connected via USB) |
+| Unit price | EUR 70.40 (incl. BTW) |
+| Supplier | Opencircuit.nl -- https://opencircuit.nl/product/mini-maestro-24-kanaals-usb-servo-controller-2 |
+| Status | ORDERED (Opencircuit.nl, EUR 70.40) |
 
 ## Lamp Base AI
 
@@ -450,7 +457,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | PyYAML | ✅ Installed |
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
-| Servo controller | 🟡 MOCKED (connect USB servo) |
+| Servo controller | ORDERED (Pololu Mini Maestro 24ch, Opencircuit.nl, EUR 70.40) |
 | Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | EVALUATING (Opt Lasers + LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | Opt Lasers 300mW Micro RGB Laser Module | EVALUATING (PRIMARY) |
