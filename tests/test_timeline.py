@@ -112,10 +112,10 @@ class TestTimelineLoading(unittest.TestCase):
         cues = load_timeline("conductor/timeline.yaml")
         laser_cues = [c for c in cues if "laser" in c and c["laser"]]
         self.assertGreaterEqual(len(laser_cues), 4)
-        # Each laser cue has a cmd
+        # Each laser cue is a string starting with LASER_
         for cue in laser_cues:
-            self.assertIn("cmd", cue["laser"])
-            self.assertTrue(cue["laser"]["cmd"].startswith("LASER_"))
+            self.assertIsInstance(cue["laser"], str)
+            self.assertTrue(cue["laser"].startswith("LASER_"))
 
 
 class TestFormatTime(unittest.TestCase):
