@@ -280,6 +280,20 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Purpose | Primary visual surface for all projected imagery and lamp laser drawings. |
 | Status | PLANNED -- to be purchased or rented for the October 2026 performance |
 
+## duckyPad Pro
+
+| Property | Value |
+| --- | --- |
+| Component | duckyPad Pro |
+| Type | Macro Pad / Show Control Input |
+| Manufacturer | dekuNukem (open source, MIT license) |
+| Description | 20-key mechanical macro pad with 2 rotary encoders, OLED screen (1.5", 128x128), Bluetooth 5.0, USB-C, per-key RGB, expansion module for external switches/foot pedals. Runs duckyScript (Turing-complete). Emits USB HID keyboard/mouse events. |
+| Specifications | 20 hot-swap keys (Cherry MX compatible), 2 rotary encoders, 64 profiles / 3712 macros, microSD storage, real-time clock, auto profile switching based on active window |
+| Role in Pixstars | Physical backstage/performer control panel. Python HID-to-OSC bridge on Mac Mini translates keypresses to show control commands. Foot pedal expansion enables performer cue triggers while playing piano. |
+| Product page | https://github.com/dekuNukem/duckyPad-Pro |
+| Purchase | https://www.tindie.com/products/dekunukem/duckypad-pro-macro-scripting-beyond-qmkvia/ |
+| Status | EVALUATING |
+
 ## Summary
 
 | Component | Status |
