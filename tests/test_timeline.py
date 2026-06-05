@@ -345,18 +345,27 @@ class TestCueDispatchingCaveLaser(unittest.TestCase):
         self.assertIn("CAVE WARNING", printed)
         self.assertIn("not_a_real_command", printed)
 
-    def test_laser_placeholder_logs(self):
-        """A cue with a laser field logs the placeholder and does not crash."""
+    def test_laser_scene_dispatches(self):
+        """A cue with a laser scene name calls sender.laser_scene()."""
         cue = {
             "time": 210.0,
             "name": "LASER_SWEEP_CUE",
-            "laser": {"cmd": "LASER_SWEEP"},
+            "laser": "LASER_SWEEP",
         }
-        with patch("builtins.print") as mock_print:
-            _dispatch_cue(cue, 0, 1, self.sender, self.ardour)
-        printed = " ".join(str(c.args[0]) for c in mock_print.call_args_list)
-        self.assertIn("LASER", printed)
-        self.assertIn("LASER_SWEEP", printed)
+        _dispatch_cue(cue, 0, 1, self.sender, self.ardour)
+        self.sender.laser_scene.assert_called_once_with("LASER_SWEEP")
+        self.sender.laser_clear.assert_not_called()
+
+    def test_laser_blackout_clears(self):
+        """A cue with laser=BLACKOUT calls sender.laser_clear()."""
+        cue = {
+            "time": 220.0,
+            "name": "LASER_BLACKOUT_CUE",
+            "laser": "BLACKOUT",
+        }
+        _dispatch_cue(cue, 0, 1, self.sender, self.ardour)
+        self.sender.laser_clear.assert_called_once_with()
+        self.sender.laser_scene.assert_not_called()
 
     def test_cue_without_cave_does_not_call_cave_methods(self):
         """Cues without a cave key do not trigger cave dispatch."""
