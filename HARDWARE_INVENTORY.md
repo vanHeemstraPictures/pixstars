@@ -92,6 +92,102 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Runs | Wake word, STT, TTS, local LLM, computer vision, emotional state engine, HiveMind client |
 | Status | PLANNED — confirmed, not yet procured |
 
+## Base Rotation Turntable (DIY)
+
+The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D open-source design (https://github.com/MGX3D/Turntable). A GT2 belt is driven by a NEMA 17 / TMC2209 / ESP32 chain and wraps directly around the outer race of a 200mm lazy susan bearing (friction drive -- no 200T ring gear). A bilateral idler-bearing + spring tensioner maintains belt grip. Origin is detected by a Hall effect sensor + neodymium magnet. Replaces the previously planned ComXim MTxRUWSLPro (see SUPERSEDED entry below).
+
+### ComXim MTxRUWSLPro Turntable (SUPERSEDED)
+
+| Property | Value |
+| --- | --- |
+| Component | ComXim MTxRUWSLPro programmable turntable |
+| Type | WiFi-controlled motorised turntable (CT command protocol) |
+| Intended role | Lamp base rotation (precision 0.1 deg, controlled directly from Mac Mini via WiFi) |
+| Status | SUPERSEDED -- supplier payment issues blocked procurement; DIY ESP32-driven turntable (NEMA 17 + TMC2209 + GT2 belt friction-drive on 200mm lazy susan) preferred. DIY solution integrates directly into existing OSC/ESP32 control stack (no separate CT protocol), costs ~EUR 50, and achieves ~0.007 deg resolution (better than 0.1 deg). |
+
+### NEMA 17 Stepper Motor
+
+| Property | Value |
+| --- | --- |
+| Component | NEMA 17 bipolar stepper motor |
+| Step angle | 1.8 deg (200 steps/rev) |
+| Drive | Microstepped 1/16 via TMC2209 -> 3,200 microsteps/rev |
+| Effective resolution at turntable | ~50,240 steps/rev = ~0.00717 deg (after ~15.7:1 belt ratio: 200mm bearing circumference ~628mm / 20T GT2 pulley ~40mm) |
+| Power | 12V (shared with LPLDD laser driver from MEAN WELL LRS-50-12); ~1.5A during rotation |
+| Location in lamp | Cave (on servo rail), drives GT2 pulley up to turntable bearing |
+| Purpose | Primary motive force for base rotation in the DIY turntable |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED |
+
+### TMC2209 Stepper Driver
+
+| Property | Value |
+| --- | --- |
+| Component | TMC2209 silent stepper driver (Trinamic) |
+| Interface | STEP / DIR / ENABLE from ESP32 (GPIO 25 STEP, GPIO 26 DIR, GPIO 14 EN) |
+| Features | StealthChop2 (near-silent operation), CoolStep, 1/16 microstepping (configured), up to 2A RMS |
+| Software | FastAccelStepper library on ESP32 (hardware pulse generation) |
+| Power | 12V motor supply (MEAN WELL LRS-50-12), 3.3V logic from ESP32 |
+| Location in lamp | Cave (on servo rail, next to ESP32 DevKit) |
+| Purpose | Silent, microstepped drive for the NEMA 17 turntable motor |
+| Status | PLANNED |
+
+### Hall Effect Sensor + Magnet (Turntable Origin)
+
+| Property | Value |
+| --- | --- |
+| Component | Hall effect sensor (SS49E linear or A3144 digital) + small neodymium magnet |
+| Interface | Single GPIO input to ESP32 (GPIO 27) |
+| Mounting | Sensor fixed to cave/turntable frame; magnet bonded to underside of rotating platform |
+| Purpose | Origin detection / home position for the DIY turntable; triggered each revolution as the magnet passes the sensor. Used by ESP32 firmware to handle `/turntable/origin` OSC command and to absolutely reference the stepper position. |
+| Status | PLANNED |
+
+### GT2 20T Pulley
+
+| Property | Value |
+| --- | --- |
+| Component | GT2 timing pulley, 20 teeth |
+| Bore | 5mm (matches NEMA 17 shaft) |
+| Belt width | 6mm (matches GT2 6mm belt) |
+| Pitch circumference | ~40mm (20T x 2mm pitch) |
+| Mounting | Direct on NEMA 17 motor shaft (set screw on flat) |
+| Purpose | Drives the GT2 belt that wraps around the 200mm lazy susan bearing outer race (friction drive); establishes the ~15.7:1 reduction ratio |
+| Status | PLANNED |
+
+### GT2 Closed-Loop Belt
+
+| Property | Value |
+| --- | --- |
+| Component | GT2 closed-loop timing belt, 6mm wide |
+| Pitch | 2mm GT2 |
+| Length | TBD -- sized to wrap once around the 200mm lazy susan bearing outer race (~628mm circumference) + reach NEMA 17 pulley + idler tensioners (likely ~800-900mm closed-loop, exact length set during build) |
+| Drive style | Friction drive -- belt wraps around the smooth outer race of the lazy susan bearing (no 200T ring gear / no toothed engagement with the platform). Tensioner provides the friction grip. |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED -- exact length finalised during physical build |
+
+### Lazy Susan 200mm Aluminum Bearing
+
+| Property | Value |
+| --- | --- |
+| Component | Lazy Susan swivel plate bearing, 200mm |
+| Material | Aluminum |
+| Outer diameter | 200mm (~628mm circumference -- acts as the "large pulley" for the friction belt drive) |
+| Load capacity | Sized for lamp + cave assembly (reference design supports 100kg+) |
+| Mounting | Top of riser block; lamp platform mounts on rotating top plate; static plate fixed to cave/riser |
+| Purpose | Primary rotational bearing for the lamp platform; its smooth aluminum outer race is the friction-drive surface the GT2 belt wraps around |
+| Status | PLANNED |
+
+### Bilateral Belt Tensioner Hardware
+
+| Property | Value |
+| --- | --- |
+| Component | Bilateral belt tensioner assembly (idler bearings + tension spring) |
+| Parts | 2x small ball-bearing idler pulleys (one each side of the NEMA 17 pulley), mounting bracket, extension/compression spring, adjustment hardware |
+| Purpose | Maintains belt tension and friction grip against the 200mm lazy susan bearing outer race; bilateral layout (idlers on both sides of the drive pulley) increases belt wrap angle around the bearing and equalises load on the motor shaft |
+| Reference | MGX3D open-source turntable (https://github.com/MGX3D/Turntable) |
+| Status | PLANNED |
+
+
 ## Laser Galvo Scanner
 
 | Item | Detail |
@@ -101,7 +197,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ACTIVE -- drives the Opt Lasers 300mW Micro RGB module from the cave 12V rail. |
 | ILDA DAC | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC) in cave; generates ILDA DB25 output (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) via Ether Dream or IDN protocol from Mac Mini |
 | Galvo PSU | Dedicated +/-24V PSU in cave for 40kpps galvo driver board (included in galvo scanner set) |
-| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH driver, which in turn powers the Opt Lasers 300mW Micro RGB module (DC 12V input); PLANNED |
+| Laser driver PSU | MEAN WELL LRS-50-12 (12V, 4.2A) - shared 12V rail powers the LPLDD-1A-16V-3CH laser driver (which drives the Opt Lasers 300mW Micro RGB module) AND the TMC2209/NEMA 17 turntable stepper; upgraded from LRS-35-12 (2.92A) to handle combined ~4.5A peak load; PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
 | Status | EVALUATING -- Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected; pending physical fit check in lamp head |
@@ -207,7 +303,7 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Supplier | Tindie / StanleyProjects |
 | Project page | https://stanleyprojects.com/projects/ildawavex16v2 |
 | GitHub | https://github.com/stanleyondrus/ILDAWaveX16V2 |
-| Location in lamp | Cave (on servo rail, under ComXim turntable) |
+| Location in lamp | Cave (on servo rail, under DIY turntable) |
 | Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
 | V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
 | Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
@@ -344,5 +440,14 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | WS2812B 35-LED front cone beam ring | IN HAND |
 | Epson EB-W05 3LCD projector (rear projection) | IN HAND |
 | Rear-projection screen | PLANNED (to be purchased or rented) |
+| ComXim MTxRUWSLPro turntable | SUPERSEDED -- replaced by DIY ESP32-driven turntable |
+| NEMA 17 stepper motor (turntable) | PLANNED |
+| TMC2209 silent stepper driver | PLANNED |
+| Hall effect sensor + neodymium magnet (turntable origin) | PLANNED |
+| GT2 20T pulley (NEMA 17 shaft) | PLANNED |
+| GT2 closed-loop belt (length TBD ~800-900mm) | PLANNED |
+| Lazy Susan 200mm aluminum bearing | PLANNED |
+| Bilateral belt tensioner hardware (idler bearings + spring) | PLANNED |
+| MEAN WELL LRS-50-12 (12V, 4.2A shared rail) | PLANNED -- upgrades LRS-35-12 to power LPLDD laser driver + TMC2209 stepper |
 
 *Last updated: June 2026*
