@@ -105,7 +105,7 @@ Reference design: github.com/MGX3D/Turntable (100kg+ load, zero backlash, proven
 | +/-24V PSU for galvo motors | 1 | Powers the 40kpps galvo driver board (galvo motor power into the head) |
 | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit ILDA DAC) | 1 | 16-bit ILDA DAC, receives laser cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet/USB; outputs standard ILDA DB25 (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) |
 | 40kpps galvo driver board (Teclulu GH40) | 1 | Drives X/Y galvo motors from +/-5V analog signals on the ILDAWaveX16 V2 DB25 output; powered from the +/-24V cave PSU |
-| MEAN WELL LRS-50-12 | 1 | 12V PSU (4.2A) shared between LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module, DC 12V input) and the TMC2209/NEMA 17 base rotation drive (~1.5A during rotation); cave-internal, separate from the 5V servo/LED rail |
+| MEAN WELL LRS-35-12 | 1 | 12V PSU for LPLDD-1A-16V-3CH laser driver, which powers the Opt Lasers 300mW Micro RGB module (DC 12V input; cave-internal, separate from the 5V servo/LED rail) |
 | Servo bracket rail | 1 | Aluminium plate, ~280x100mm |
 | Hanger rods (x4) | 4 | M4 threaded, 100mm |
 | Carbon fibre push-pull rod | 1 | Neck pan mechanical linkage (3mm CF tube, 400mm) |
@@ -227,28 +227,16 @@ Reference design: github.com/MGX3D/Turntable.
 ## Assembly Order
 
 1. Build riser block (AL tube or plywood cylinder, 120-150mm tall)
-2. Mount the 200mm lazy susan bearing centred on top of the riser block;
-   verify smooth rotation with no wobble before adding any load
-3. Mount the NEMA 17 stepper inside the cave on a rigid bracket so the
-   GT2 20T pulley on its shaft sits at the same height as the bearing
-   outer race; install the bilateral belt tensioner opposite the motor
-4. Wrap the GT2 belt around the bearing's outer race and over the 20T
-   pulley; tension via the bilateral tensioner until the belt grips
-   the race without slipping (friction-drive, MGX3D-style)
-5. Mount the Hall effect sensor on the cave wall and glue the
-   neodymium magnet to the underside of the rotating top plate so the
-   magnet passes the sensor once per revolution (origin mark)
-6. Attach inner ring adapter plate to the bearing's rotating top
-7. Build servo bracket rail with hanger rods
-8. Mount 4x MG996R and 1x MG90S on servo rail
-9. Mount Maestro 24-channel, ESP32, TMC2209, both PSUs (LRS-50-5 and
-   LRS-50-12) on the servo rail / cave floor; wire TMC2209 STEP/DIR/EN
-   to ESP32 GPIO 25/26/14, Hall sensor signal to GPIO 27
-10. Attach servo rail under inner ring (hanging into cave)
-11. Route string/rod linkages through central column to lamp joints
-12. Install AX-12A in lamp head for head nod
-13. Install WS2812 5050 RGB LED Ring 16 (rear) in lamp shade
-14. Mount the RGB Laser Galvo Scanner in the lamp head: secure the
+2. Mount ComXim MTxRUWSLPro on top of riser block
+3. Attach inner ring adapter plate to ComXim top plate
+4. Build servo bracket rail with hanger rods
+5. Mount 4x MG996R and 1x MG90S on servo rail
+6. Mount Maestro 24-channel, ESP32, PSU on servo rail
+7. Attach servo rail under inner ring (hanging into cave)
+8. Route string/rod linkages through central column to lamp joints
+9. Install AX-12A in lamp head for head nod
+10. Install WS2812 5050 RGB LED Ring 16 (rear) in lamp shade
+11. Mount the RGB Laser Galvo Scanner in the lamp head: secure the
     galvo motor + mirror pair (X/Y) and the Opt Lasers 300mW Micro RGB
     module (44 x 39 x 27 mm) on the
     mounting bracket, aperture facing forward along the lamp's
@@ -264,19 +252,17 @@ Reference design: github.com/MGX3D/Turntable.
     the ILDAWaveX16 V2 DB25 RGB lines, laser RGB analog 0-5V
     modulation (3 wires) to the ILDAWaveX16 V2 DB25 RGB lines (Opt
     Lasers 300mW Micro RGB module powered cave-internally by the
-    MEAN WELL LRS-50-12 12V PSU via the LPLDD-1A-16V-3CH driver),
+    MEAN WELL LRS-35-12 12V PSU via the LPLDD-1A-16V-3CH driver),
     and galvo motor power (2 wires, +/-24V) from the cave galvo PSU
     to the 40kpps galvo driver board
-18. Mount Anglepoise 1227 on inner ring
-19. Connect PSUs (5V and 12V) and ESP32 power
-20. Flash ESP32 firmware (Maestro serial, AX-12A TTL, WS2812 RMT,
-    FastAccelStepper + Hall-sensor homing for the turntable, OSC
-    listener for `/turntable/rotate|origin|stop`)
-21. Attach decorative skirt around riser + cave
-22. Fix riser to piano top (non-destructive)
-23. Calibrate servo ranges and home positions
-24. Run turntable homing (`/turntable/origin`) and confirm the lamp
-    platform returns to the magnet position repeatably
+15. Mount Anglepoise 1227 on inner ring
+16. Connect PSU (5V) and ComXim power
+17. Flash ESP32 firmware
+18. Configure ComXim WiFi (static IP, confirm CT commands)
+19. Attach decorative skirt around riser + ComXim base
+20. Fix riser to piano top (non-destructive)
+21. Calibrate servo ranges and home positions
+22. Test ComXim origin return
 
 ## Recommended First Milestones
 

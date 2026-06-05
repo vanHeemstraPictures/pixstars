@@ -250,7 +250,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Laser diode driver | Opt Lasers LPLDD-1A-16V-3CH (SKU 001516); 55 x 23.5 mm (bare PCB, no heatsink); 3 independent channels (R, G, B); 0-5V analog modulation input per channel, up to 100 kHz bandwidth; 1A max per channel; 7-16V DC input; soft-start, per-channel max current potentiometer; source https://optlasers.com/multichannel-drivers/lpldd-1a-16v-3ch ; $98 (tax excl.); ACTIVE -- drives the Opt Lasers 300mW Micro RGB module from the cave 12V rail. |
 | ILDA DAC | ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC) in cave; generates ILDA DB25 output (+/-5V X/Y galvo signals, 0-5V RGB laser modulation) via Ether Dream or IDN protocol from Mac Mini |
 | Galvo PSU | Dedicated +/-24V PSU in cave for 40kpps galvo driver board (included in galvo scanner set) |
-| Laser driver PSU | MEAN WELL LRS-50-12 (12V, 4.2A) - shared 12V rail powers the LPLDD-1A-16V-3CH laser driver (which drives the Opt Lasers 300mW Micro RGB module) AND the TMC2209/NEMA 17 turntable stepper; upgraded from LRS-35-12 (2.92A) to handle combined ~4.5A peak load; PLANNED |
+| Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH driver, which in turn powers the Opt Lasers 300mW Micro RGB module (DC 12V input); PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
 | Status | EVALUATING -- Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected; pending physical fit check in lamp head |
@@ -356,34 +356,11 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Supplier | Tindie / StanleyProjects |
 | Project page | https://stanleyprojects.com/projects/ildawavex16v2 |
 | GitHub | https://github.com/stanleyondrus/ILDAWaveX16V2 |
-| Location in lamp | Cave (on servo rail, under DIY turntable) |
+| Location in lamp | Cave (on servo rail, under ComXim turntable) |
 | Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
 | V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
 | Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
 | Status | EVALUATING |
-
-## Opt Lasers 300mW Micro RGB Laser Module
-
-| Property | Value |
-| --- | --- |
-| Component | Opt Lasers 300mW Micro RGB |
-| Type | Compact RGB laser module (free-space, multiwavelength) |
-| Manufacturer | Opt Lasers |
-| SKU | 001311 |
-| Description | Compact RGB laser module for laser projection / laser show use. Confirmed by Opt Lasers (June 2026, Dr. Michal Piotrowicz, Lead Diode Laser Engineer) as suitable for laser projection / laser show use. |
-| Specifications | R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; Class 4 laser |
-| Dimensions | 44 x 39 x 27 mm (L x W x H) |
-| Weight | ~55g |
-| Mounting | 4x M3 screws on base plate |
-| Modulation | 0-5V analog per channel via Opt Lasers LPLDD-1A-16V-3CH driver |
-| Power | 12V DC via LPLDD-1A-16V-3CH driver (cave 12V rail) |
-| Unit price | $539 (tax excl.) |
-| Supplier | Opt Lasers |
-| Product page | https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module |
-| Location in lamp | Lamp head (projects beam into galvo mirrors along lamp eye-line) |
-| Purpose | Primary RGB laser source for vector laser projection from the lamp head. Selected for low head weight (~55g vs SM5 ~200g). |
-| Notes | Pairs with Opt Lasers LPLDD-1A-16V-3CH driver (analog 0-5V modulation) and ILDAWaveX16 V2 ILDA DAC. |
-| Status | EVALUATING (PRIMARY) |
 
 ## SM5 6W RGB Laser Module (SUPERSEDED)
 
@@ -452,20 +429,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Purpose | Primary visual surface for all projected imagery and lamp laser drawings. |
 | Status | PLANNED -- to be purchased or rented for the October 2026 performance |
 
-## duckyPad Pro
-
-| Property | Value |
-| --- | --- |
-| Component | duckyPad Pro |
-| Type | Macro Pad / Show Control Input |
-| Manufacturer | dekuNukem (open source, MIT license) |
-| Description | 20-key mechanical macro pad with 2 rotary encoders, OLED screen (1.5", 128x128), Bluetooth 5.0, USB-C, per-key RGB, expansion module for external switches/foot pedals. Runs duckyScript (Turing-complete). Emits USB HID keyboard/mouse events. |
-| Specifications | 20 hot-swap keys (Cherry MX compatible), 2 rotary encoders, 64 profiles / 3712 macros, microSD storage, real-time clock, auto profile switching based on active window |
-| Role in Pixstars | Physical backstage/performer control panel. Python HID-to-OSC bridge on Mac Mini translates keypresses to show control commands. Foot pedal expansion enables performer cue triggers while playing piano. |
-| Product page | https://github.com/dekuNukem/duckyPad-Pro |
-| Purchase | https://www.tindie.com/products/dekunukem/duckypad-pro-macro-scripting-beyond-qmkvia/ |
-| Status | EVALUATING |
-
 ## Summary
 
 | Component | Status |
@@ -478,7 +441,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | PyYAML | ✅ Installed |
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
-| Servo controller | ORDERED (Pololu Mini Maestro 24ch, Opencircuit.nl, EUR 70.40) |
+| Servo controller | 🟡 MOCKED (connect USB servo) |
 | Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | EVALUATING (Opt Lasers + LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | Opt Lasers 300mW Micro RGB Laser Module | EVALUATING (PRIMARY) |
@@ -493,16 +456,5 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | WS2812B 35-LED front cone beam ring | IN HAND |
 | Epson EB-W05 3LCD projector (rear projection) | IN HAND |
 | Rear-projection screen | PLANNED (to be purchased or rented) |
-| ComXim MTxRUWSLPro turntable | SUPERSEDED -- replaced by DIY ESP32-driven turntable |
-| NEMA 17 stepper motor (turntable) | PLANNED |
-| TMC2209 silent stepper driver | PLANNED |
-| Hall effect sensor + neodymium magnet (turntable origin) | PLANNED |
-| GT2 20T pulley (NEMA 17 shaft) | PLANNED |
-| GT2 closed-loop belt (length TBD ~800-900mm) | PLANNED |
-| Lazy Susan 200mm aluminum bearing | PLANNED |
-| Bilateral belt tensioner hardware (idler bearings + spring) | PLANNED |
-| MEAN WELL LRS-50-12 (12V, 4.2A shared rail) | PLANNED -- upgrades LRS-35-12 to power LPLDD laser driver + TMC2209 stepper |
-| ESP32-S3 N16R8 DevKitC (ESP32-S3-WROOM-1-N16R8, cave controller) | ORDERED (Otronic.nl, EUR 12.95) |
-| Dynamixel AX-12A (head nod servo) | ORDERED (Reichelt.nl, EUR 59.08) |
 
 *Last updated: June 2026*

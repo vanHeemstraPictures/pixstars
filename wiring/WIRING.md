@@ -283,13 +283,12 @@ The cave contains:
     the NEMA 17 turntable motor mounted under the lazy susan bearing)
 -   MEAN WELL LRS-50-5 power supply (5V rail for servos and for the
     WS2812 LED ring via the cable column)
--   MEAN WELL LRS-50-12 power supply (12V rail shared between the
-    LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW
-    Micro RGB module, DC 12V input) and the TMC2209 stepper driver
-    VMOT input for the NEMA 17 turntable motor; cave-internal wiring
-    only -- the 12V line does NOT route up the cable column, only the
-    analog 0-5V RGB modulation lines from the ILDAWaveX16 V2 DB25
-    (via the LPLDD driver) feed the laser module in the lamp head)
+-   MEAN WELL LRS-35-12 power supply (12V rail for the LPLDD-1A-16V-3CH
+    laser driver, which powers the Opt Lasers 300mW Micro RGB module
+    (DC 12V input); cave-internal wiring only -- the 12V line does NOT
+    route up the cable column, only the analog 0-5V RGB modulation lines
+    from the ILDAWaveX16 V2 DB25 (via the LPLDD driver) feed the laser
+    module in the lamp head)
 -   Seeed Studio reComputer RK3588-40 (lamp brain -- local AI inference)
 
 ------------------------------------------------------------------------
@@ -399,7 +398,7 @@ Recommended:
     - Galvo X/Y analog signals: 4 wires (+/-5V differential)
     - Laser RGB analog: 3 wires (0-5V from ILDAWaveX16 V2 DB25 in cave
       via the LPLDD-1A-16V-3CH driver; the Opt Lasers module's 12V
-      supply from the cave MEAN WELL LRS-50-12 is cave-internal and
+      supply from the cave MEAN WELL LRS-35-12 is cave-internal and
       does NOT enter the cable column)
     - Galvo motor power: 2 wires (+/-24V from cave PSU)
     - AX-12A TTL serial

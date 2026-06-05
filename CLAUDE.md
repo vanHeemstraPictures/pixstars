@@ -53,13 +53,7 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original cav
 - **LPLDD-1A-16V-3CH laser driver** — drives the Opt Lasers 300mW Micro RGB module; 0-5V analog modulation per channel from the ILDAWaveX16 V2 DB25 RGB lines
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
 - **+/-24V galvo PSU** — dedicated dual-rail supply for the 40kpps galvo driver board (included in galvo scanner set)
-- **MEAN WELL LRS-50-12** — 12V PSU (4.2A) shared between the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module) and the TMC2209/NEMA 17 turntable stepper. Upgraded from LRS-35-12 to provide headroom for both loads.
-
-### ESP32-S3 pin assignments (turntable)
-- **GPIO 4** — STEP signal to TMC2209
-- **GPIO 5** — DIR signal to TMC2209
-- **GPIO 6** — TMC2209 ENABLE (active low, motor idle)
-- **GPIO 7** — Hall sensor input (origin detect)
+- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module; DC 12V input)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
@@ -104,7 +98,6 @@ ESP32 in the lamp cave handles:
 - Maestro serial control for MG996R/MG90S servos
 - AX-12A TTL serial for head nod
 - WS2812 LED ring drive via GPIO (RMT peripheral); the Mac Mini orchestrates LED cues over the same WiFi/OSC channel used for servo commands
-- DIY turntable stepper drive — TMC2209 STEP/DIR/ENABLE outputs and Hall sensor input for base rotation and origin detect; the Mac Mini orchestrates rotation cues via OSC (`/turntable/rotate`, `/turntable/origin`, `/turntable/stop`) over the same WiFi/OSC channel
 - ILDAWaveX16 V2 (16-bit ILDA DAC) receives cues from Mac Mini via Ether Dream or IDN protocol over WiFi/Ethernet; outputs ILDA DB25 signals (+/-5V X/Y to galvo driver, 0-5V RGB to Opt Lasers laser module) through the cable column to the lamp head
 
 Base rotation (DIY turntable) handles:
