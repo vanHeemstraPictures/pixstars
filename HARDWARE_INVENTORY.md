@@ -220,6 +220,27 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Status | ORDERED (Otronic.nl, EUR 12.95) |
 
 
+## Dynamixel AX-12A (Head Nod Servo)
+
+| Property | Value |
+| --- | --- |
+| Component | ROBOTIS Dynamixel AX-12A |
+| Model | AX-12A (item 902-0003-001) |
+| Protocol | Dynamixel Protocol 1.0 (half-duplex TTL serial) |
+| Baud | 1 Mbps (default) |
+| Resolution | 1024 positions (0-300 degrees) |
+| Stall torque | 1.5 N*m (12V) |
+| Gear ratio | 254:1 |
+| Operating voltage | 9-12V |
+| Weight | 53.5g |
+| Feedback | Position, speed, load, voltage, temperature |
+| Connection to ESP32-S3 | UART2 half-duplex (TX=GPIO 15, RX=GPIO 16, DIR=GPIO 8, 1 Mbps) |
+| Role | Head nod actuator in lamp head |
+| Location in lamp | Lamp head (cable through central column to ESP32 in cave) |
+| Unit price | EUR 59.08 |
+| Supplier | Reichelt.nl -- https://www.reichelt.com/nl/nl/shop/product/servomotor_robotica_9_0_-_12_v_dc-249909 |
+| Status | ORDERED (Reichelt.nl, EUR 59.08) |
+
 ## Laser Galvo Scanner
 
 | Item | Detail |
@@ -482,5 +503,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Bilateral belt tensioner hardware (idler bearings + spring) | PLANNED |
 | MEAN WELL LRS-50-12 (12V, 4.2A shared rail) | PLANNED -- upgrades LRS-35-12 to power LPLDD laser driver + TMC2209 stepper |
 | ESP32-S3 N16R8 DevKitC (ESP32-S3-WROOM-1-N16R8, cave controller) | ORDERED (Otronic.nl, EUR 12.95) |
+| Dynamixel AX-12A (head nod servo) | ORDERED (Reichelt.nl, EUR 59.08) |
 
 *Last updated: June 2026*
