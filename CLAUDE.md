@@ -43,7 +43,7 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original cav
 - **Riser block** (120–150mm AL or plywood) — creates cave depth, turntable platform mounts on top
 
 ### Cave (under turntable, on servo rail)
-- **ESP32 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral) + TMC2209/NEMA 17 turntable stepper (STEP/DIR/ENABLE + Hall sensor input)
+- **ESP32-S3 N16R8 DevKit** — WiFi bridge to Mac Mini, drives Maestro + AX-12A + WS2812 LED ring (RMT peripheral) + TMC2209/NEMA 17 turntable stepper (STEP/DIR/ENABLE + Hall sensor input)
 - **TMC2209 stepper driver** — silent (StealthChop) microstepping driver for the NEMA 17 turntable motor, 12V from shared 12V rail, STEP/DIR/EN from ESP32
 - **Pololu Mini Maestro 24-channel** servo controller (serial from ESP32)
 - **4x MG996R** servos — lower arm (Ch1), elbow (Ch2), spare (Ch3-4)
@@ -55,11 +55,11 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original cav
 - **+/-24V galvo PSU** — dedicated dual-rail supply for the 40kpps galvo driver board (included in galvo scanner set)
 - **MEAN WELL LRS-50-12** — 12V PSU (4.2A) shared between the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module) and the TMC2209/NEMA 17 turntable stepper. Upgraded from LRS-35-12 to provide headroom for both loads.
 
-### ESP32 pin assignments (turntable)
-- **GPIO 25** — STEP signal to TMC2209
-- **GPIO 26** — DIR signal to TMC2209
-- **GPIO 27** — Hall sensor input (origin detect)
-- **GPIO 14** — TMC2209 ENABLE (optional, motor idle)
+### ESP32-S3 pin assignments (turntable)
+- **GPIO 4** — STEP signal to TMC2209
+- **GPIO 5** — DIR signal to TMC2209
+- **GPIO 6** — TMC2209 ENABLE (active low, motor idle)
+- **GPIO 7** — Hall sensor input (origin detect)
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
