@@ -13,11 +13,41 @@
 // OSC server: listen for incoming commands from the Mac Mini on this UDP port.
 #define OSC_LISTEN_PORT 8000
 
-// Optional static hostname (mDNS / DHCP hint)
+// Optional static hostname (mDNS / DHCP hint). Used by WiFi.setHostname()
+// for DHCP and by ArduinoOTA / ESPmDNS as the .local name. With the
+// defaults below the cave answers as "pixstars-cave.local".
 #define DEVICE_HOSTNAME "pixstars-cave"
+#define MDNS_HOSTNAME   "pixstars-cave"
 
 // Serial baud rate for the debug monitor
 #define SERIAL_BAUD 115200
+
+// =========================================================================
+// Health monitoring / watchdog
+// =========================================================================
+// If no OSC packet is received for WATCHDOG_TIMEOUT_MS milliseconds, the
+// firmware enters a safe state: LEDs fade to dim blue, the turntable
+// stops, servos and the AX-12A head hold their last commanded targets.
+// The next valid OSC packet clears the safe state automatically. Tune
+// upward for slow networks or downward for tighter show safety.
+#define WATCHDOG_TIMEOUT_MS  5000UL
+
+// Period of the [health] heap/RSSI log line. Set to 0 to disable.
+#define HEAP_LOG_INTERVAL_MS 10000UL
+
+// Colour written to both LED rings while the watchdog is asserted.
+// Dim blue is the project convention for "host gone, holding safe".
+// Brightness is capped further by LED_MAX_BRIGHTNESS in leds.cpp.
+#define SAFE_LED_R 0
+#define SAFE_LED_G 0
+#define SAFE_LED_B 24
+
+// =========================================================================
+// OTA firmware updates (ArduinoOTA)
+// =========================================================================
+// Empty string disables password authentication. For a live show set a
+// password and keep it out of source control (config.h is gitignored).
+#define OTA_PASSWORD ""
 
 // =========================================================================
 // ESP32-S3-WROOM-1-N16R8 cave controller -- full GPIO pin map
@@ -110,3 +140,34 @@
 #ifndef STATUS_LED_PIN
 #define STATUS_LED_PIN 48
 #endif
+
+// =========================================================================
+// OSC endpoints exposed by this firmware (reference; not configuration)
+// =========================================================================
+//   /ping                          -> reply /pong (uptime ms)
+//   /status                        -> reply /status/reply (i,i,i,s,i,i,i,f):
+//                                       uptime_ms, free_heap, RSSI,
+//                                       ip_string, safe_state, tt_homed,
+//                                       tt_running, tt_degrees
+//   /servo/set      ch, angle
+//   /servo/speed    ch, speed
+//   /head/nod       angle [, speed]
+//   /led/rear       r, g, b, mode    (mode: off|solid|breathe|pulse|rainbow)
+//   /led/front      r, g, b, mode
+//   /turntable/rotate  deg [, dps]
+//   /turntable/goto    degAbs [, dps]
+//   /turntable/origin
+//   /turntable/stop
+//
+// FreeRTOS task layout:
+//   core 1 / prio 1 : Arduino loopTask  - WiFi, OSC dispatch, servos,
+//                                          AX-12A, turntable, watchdog
+//   core 0 / prio 1 : "leds" task       - FastLED frame rendering only
+// LED rendering is intentionally on the opposite core so OSC/servo
+// dispatch is never delayed by FastLED frame pushes.
+//
+// OTA + mDNS:
+//   ArduinoOTA listens once WiFi is up; the cave advertises itself as
+//   "<MDNS_HOSTNAME>.local" (default pixstars-cave.local) with an
+//   "_osc._udp" service record on OSC_LISTEN_PORT.
+// =========================================================================
