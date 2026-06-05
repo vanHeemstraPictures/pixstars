@@ -10,7 +10,7 @@ Usage:
     source .venv/bin/activate
     python -m conductor.main              # Run the show (live)
     python -m conductor.main --dry-run    # Print all cues without sending OSC
-    python -m conductor.main --rehearse   # Real-time run without Ardour or ENTER prompt
+    python -m conductor.main --rehearse   # Real-time run with Ardour, skips ENTER prompt
 """
 
 import argparse
@@ -76,8 +76,8 @@ def run_show(
     """Run through the show timeline, dispatching cues at the correct times.
 
     In dry-run mode, prints all cues immediately without waiting.
-    In rehearse mode, runs in real-time but skips Ardour transport and the
-    ENTER prompt; all other OSC subsystems still receive cues normally.
+    In rehearse mode, runs in real-time with Ardour transport active but
+    skips the ENTER prompt; all OSC subsystems receive cues normally.
     """
     total_cues = len(cues)
     show_duration = cues[-1]["time"] if cues else 0
@@ -106,10 +106,7 @@ def run_show(
         print("=" * 70)
         return
 
-    if rehearse:
-        # Swap in a no-op Ardour so transport commands are logged, not sent
-        ardour = _RehearsalArdourOSC()
-    else:
+    if not rehearse:
         # Live mode — wait for real time
         print("Press ENTER to start the show (Ctrl+C to abort)...")
         try:
@@ -158,15 +155,15 @@ def run_show(
             print(f"\n\n  REHEARSAL STOPPED at {format_time(elapsed)}")
         else:
             print(f"\n\n  SHOW STOPPED at {format_time(elapsed)}")
-            sender.ardour_stop()
+        sender.ardour_stop()
         return
 
     elapsed = time.time() - show_start
+    sender.ardour_stop()
     print("=" * 70)
     if rehearse:
         print(f"  REHEARSAL COMPLETE — Total time: {format_time(elapsed)}")
     else:
-        sender.ardour_stop()
         print(f"  SHOW COMPLETE — Total time: {format_time(elapsed)}")
     print("=" * 70)
 
@@ -259,7 +256,7 @@ def main():
     mode_group.add_argument(
         "--rehearse",
         action="store_true",
-        help="Real-time run without Ardour transport or ENTER prompt",
+        help="Real-time run with Ardour, skips ENTER prompt",
     )
     parser.add_argument(
         "--timeline",
@@ -271,7 +268,7 @@ def main():
     # Load timeline
     cues = load_timeline(args.timeline)
 
-    # Create OSC sender (rehearse still sends real OSC to non-Ardour subsystems)
+    # Create OSC sender (all modes send real OSC to all subsystems including Ardour)
     sender = OSCSender(dry_run=args.dry_run)
     ardour = ArdourOSC(sender)
 
