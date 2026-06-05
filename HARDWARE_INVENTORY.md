@@ -188,6 +188,26 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Status | PLANNED |
 
 
+## ESP32 DevKit V1 (Cave Controller)
+
+| Property | Value |
+| --- | --- |
+| Component | ESP32 DevKit V1 (ESP32-WROOM-32) |
+| Type | Cave controller / central nervous system for all physical actuators |
+| MCU | Dual-core Xtensa LX6 @ 240 MHz |
+| Memory | 520 KB SRAM, 4 MB flash |
+| Radios | 2.4 GHz WiFi, Bluetooth 4.2 LE |
+| GPIO | 25+ usable pins (sufficient for Maestro UART, AX-12A UART, 2x WS2812 RMT, TMC2209 STEP/DIR/EN, Hall sensor) |
+| Role | WiFi bridge from Mac Mini (OSC); drives Pololu Mini Maestro 24ch (UART1), Dynamixel AX-12A head nod (UART2 half-duplex), WS2812 LED rings (RMT GPIO), TMC2209 turntable stepper (STEP/DIR/EN), Hall sensor input |
+| Pin assignments | GPIO 25 (TMC2209 STEP), GPIO 26 (TMC2209 DIR), GPIO 14 (TMC2209 ENABLE), GPIO 27 (Hall sensor input), plus UART1 TX/RX (Maestro), UART2 TX/RX (AX-12A), 2x RMT GPIO (WS2812 LED rings) |
+| Location in lamp | Cave (on servo rail, next to Maestro and TMC2209) |
+| Power | 5V via USB or VIN; logic 3.3V |
+| Firmware | Arduino / PlatformIO -- FastAccelStepper (stepper), Dynamixel2Arduino (AX-12A), FastLED or Adafruit_NeoPixel (WS2812), python-osc compatible OSC server |
+| Approx price | EUR 8-12 |
+| Notes | The M5Stack Atom Lite (IN HAND) has only 6 GPIOs -- insufficient for the cave role but usable for WiFi/OSC bring-up testing. The DevKit V1 is the production cave controller. |
+| Status | NEEDED -- not yet ordered |
+
+
 ## Laser Galvo Scanner
 
 | Item | Detail |
@@ -449,5 +469,6 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Lazy Susan 200mm aluminum bearing | PLANNED |
 | Bilateral belt tensioner hardware (idler bearings + spring) | PLANNED |
 | MEAN WELL LRS-50-12 (12V, 4.2A shared rail) | PLANNED -- upgrades LRS-35-12 to power LPLDD laser driver + TMC2209 stepper |
+| ESP32 DevKit V1 (ESP32-WROOM-32, cave controller) | NEEDED -- not yet ordered |
 
 *Last updated: June 2026*
