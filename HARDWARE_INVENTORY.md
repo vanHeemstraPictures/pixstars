@@ -213,6 +213,29 @@ python -m lighting.controller --device /dev/tty.usbserial-EN055555A
 | Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
 | Status | EVALUATING |
 
+## Opt Lasers 300mW Micro RGB Laser Module
+
+| Property | Value |
+| --- | --- |
+| Component | Opt Lasers 300mW Micro RGB |
+| Type | Compact RGB laser module (free-space, multiwavelength) |
+| Manufacturer | Opt Lasers |
+| SKU | 001311 |
+| Description | Compact RGB laser module for laser projection / laser show use. Confirmed by Opt Lasers (June 2026, Dr. Michal Piotrowicz, Lead Diode Laser Engineer) as suitable for laser projection / laser show use. |
+| Specifications | R 638nm / G 520nm / B 450nm; 300mW combined (280mW min); collimated beam, divergence <1.3 mRad; Class 4 laser |
+| Dimensions | 44 x 39 x 27 mm (L x W x H) |
+| Weight | ~55g |
+| Mounting | 4x M3 screws on base plate |
+| Modulation | 0-5V analog per channel via Opt Lasers LPLDD-1A-16V-3CH driver |
+| Power | 12V DC via LPLDD-1A-16V-3CH driver (cave 12V rail) |
+| Unit price | $539 (tax excl.) |
+| Supplier | Opt Lasers |
+| Product page | https://optlasers.com/free-space-multiwavelength/300mw-micro-rgb-laser-module |
+| Location in lamp | Lamp head (projects beam into galvo mirrors along lamp eye-line) |
+| Purpose | Primary RGB laser source for vector laser projection from the lamp head. Selected for low head weight (~55g vs SM5 ~200g). |
+| Notes | Pairs with Opt Lasers LPLDD-1A-16V-3CH driver (analog 0-5V modulation) and ILDAWaveX16 V2 ILDA DAC. |
+| Status | EVALUATING (PRIMARY) |
+
 ## SM5 6W RGB Laser Module (SUPERSEDED)
 
 | Property | Value |
