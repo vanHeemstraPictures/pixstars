@@ -4,7 +4,7 @@ A 20-minute silent theatrical performance commissioned by Ruurd Dam (Managing Di
 
 ## Core concept
 
-A single performer on stage with an animatronic desk lamp ("Pinokio"), live piano, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
+A single performer on stage with an animatronic desk lamp ("A.I."), live piano, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
 
 Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally loaded.
 
@@ -18,7 +18,7 @@ Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally
 
 When editing the screenplay, preserve the identity shifts and the lamp vocabulary. Don't collapse them.
 
-## Hardware stack (Pinokio lamp) — Cave Architecture v3
+## Hardware stack (A.I. lamp) — Cave Architecture v3
 
 All servos and electronics are hidden inside a "cave" under a DIY ESP32-driven
 turntable (NEMA 17 + TMC2209 + GT2 belt friction-drive on a 200mm lazy Susan bearing),

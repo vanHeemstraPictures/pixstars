@@ -27,6 +27,9 @@ LIGHTING_OSC_PORT = 9003
 # Digital Twin WebSocket Bridge (Deno server)
 DIGITAL_TWIN_OSC_PORT = 9004
 
+# Laser Galvo Simulator (lamp head ILDA galvo stand-in)
+LASER_OSC_PORT = 9005
+
 # ── Timeline ─────────────────────────────────────────────────────────────────
 TIMELINE_FILE = "conductor/timeline.yaml"
 

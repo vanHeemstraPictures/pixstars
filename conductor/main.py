@@ -127,6 +127,10 @@ def run_show(
             elapsed = time.time() - show_start
             cue = cues[cue_index]
 
+            # Broadcast timecode to all visual subsystems every loop (~10Hz)
+            if not dry_run:
+                sender.broadcast_timecode(elapsed)
+
             if elapsed >= cue["time"]:
                 _dispatch_cue(cue, cue_index, total_cues, sender, ardour)
                 print()

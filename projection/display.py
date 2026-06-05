@@ -28,6 +28,13 @@ from pythonosc import dispatcher, osc_server
 from projection.scenes import get_scene, list_scenes, Scene, ASSETS_DIR
 
 
+def _format_timecode(elapsed: float) -> str:
+    """Format elapsed seconds as MM:SS.s (e.g. '03:45.2')."""
+    m = int(elapsed) // 60
+    s = elapsed - m * 60
+    return f"{m:02d}:{s:04.1f}"
+
+
 class ProjectionDisplay:
     """Pygame-based projection display controlled by OSC."""
 
@@ -47,6 +54,7 @@ class ProjectionDisplay:
 
         self.current_scene: Scene | None = None
         self.pending_scene: Scene | None = None
+        self.timecode = 0.0
         self.running = True
 
         # Scene change lock
@@ -55,6 +63,7 @@ class ProjectionDisplay:
         # Set up OSC
         self._dispatcher = dispatcher.Dispatcher()
         self._dispatcher.map("/projection/scene", self._handle_scene)
+        self._dispatcher.map("/timecode", self._handle_timecode)
 
     def _handle_scene(self, address: str, *args):
         """Handle /projection/scene OSC messages."""
@@ -74,6 +83,16 @@ class ProjectionDisplay:
 
         with self._lock:
             self.pending_scene = scene
+
+    def _handle_timecode(self, address: str, *args):
+        """Handle /timecode OSC messages from the conductor."""
+        if not args:
+            return
+        try:
+            with self._lock:
+                self.timecode = float(args[0])
+        except (TypeError, ValueError):
+            pass
 
     def _load_image(self, scene: Scene) -> pygame.Surface | None:
         """Load the image asset for a scene, or return None for BLACKOUT."""
@@ -143,6 +162,7 @@ class ProjectionDisplay:
             screen = pygame.display.set_mode((self.width, self.height))
 
         clock = pygame.time.Clock()
+        tc_font = pygame.font.SysFont("monospace", 20, bold=True)
 
         # Start with blackout
         self.current_scene = get_scene("BLACKOUT")
@@ -179,6 +199,12 @@ class ProjectionDisplay:
                 screen.blit(current_surface, (0, 0))
             else:
                 screen.fill(self.current_scene.background_color if self.current_scene else (0, 0, 0))
+
+            # Top-right timecode overlay (slightly grey so it doesn't distract)
+            with self._lock:
+                tc = self.timecode
+            tc_surf = tc_font.render(_format_timecode(tc), True, (200, 200, 200))
+            screen.blit(tc_surf, (self.width - tc_surf.get_width() - 12, 10))
 
             pygame.display.flip()
             clock.tick(30)
