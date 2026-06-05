@@ -1,0 +1,17 @@
+// Copy this file to src/config.h and fill in your values.
+// src/config.h is gitignored so credentials never end up in the repo.
+
+#pragma once
+
+// WiFi credentials
+#define WIFI_SSID     "YOUR_SSID_HERE"
+#define WIFI_PASSWORD "YOUR_PASSWORD_HERE"
+
+// OSC server: listen for incoming commands from the Mac Mini on this UDP port.
+#define OSC_LISTEN_PORT 8000
+
+// Optional static hostname (mDNS / DHCP hint)
+#define DEVICE_HOSTNAME "pixstars-cave"
+
+// Serial baud rate for the debug monitor
+#define SERIAL_BAUD 115200
