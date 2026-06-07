@@ -292,9 +292,9 @@ Guiding Dialogue
 
 Connection To Core Idea
 
-Creativity is not reproduction.
+**Creativity is not reproduction.**
 
-Creativity is imagination.
+**Creativity is imagination.**
 
 ⸻
 
