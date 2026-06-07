@@ -32,9 +32,9 @@ PixStars is a story about a machine discovering what makes humans special.
 
 The audience should leave with one idea:
 
-AI is not here to replace us.
+**AI is not here to replace us.**
 
-AI is here to help us discover what makes us human.
+**AI is here to help us discover what makes us human.**
 
 That someone AI is searching for is us.
 
