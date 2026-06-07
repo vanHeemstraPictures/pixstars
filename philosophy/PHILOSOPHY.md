@@ -597,3 +597,16 @@ At the end it must choose:
 
 * **collaboration over superiority**
 * **companionship over perfection**
+  
+Your lamp should not become human.
+
+Instead:
+
+**The lamp should reveal humanity.**
+
+Big difference.
+
+The audience should think:
+
+**The lamp taught Walt something about being human.**
+
