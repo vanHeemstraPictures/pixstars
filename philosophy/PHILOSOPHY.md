@@ -64,7 +64,7 @@ then the performance has succeeded.
 
 The performance asks a single question:
 
-What is it that makes humans uniquely human?
+**What is it that makes humans uniquely human?**
 
 The lamp begins with the wrong answer.
 
