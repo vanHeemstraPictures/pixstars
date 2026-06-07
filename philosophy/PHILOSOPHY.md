@@ -440,9 +440,9 @@ Reveal the truth.
 
 Message
 
-The answer is not replacement.
+**The answer is not replacement.**
 
-The answer is collaboration.
+**The answer is collaboration.**
 
 How The Audience Receives It
 
