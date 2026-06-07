@@ -108,7 +108,7 @@ Message
 
 Something can be alive before it is intelligent.
 
-Curiosity comes before knowledge.
+**Curiosity comes before knowledge.**
 
 How The Audience Receives It
 
