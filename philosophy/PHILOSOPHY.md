@@ -456,11 +456,11 @@ Acceptance.
 
 Guiding Dialogue
 
-“I don’t need you to draw better than me.”
+**“I don’t need you to draw better than me.”**
 
 Pause.
 
-“I need you to draw with me.”
+**“I need you to draw with me.”**
 
 Failure Mode
 
