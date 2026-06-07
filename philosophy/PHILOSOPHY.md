@@ -210,7 +210,7 @@ Message
 
 Learning begins with imitation.
 
-Connection begins with attention.
+**Connection begins with attention.**
 
 How The Audience Receives It
 
