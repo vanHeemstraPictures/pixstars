@@ -472,7 +472,7 @@ This is a reconciliation scene.
 
 Connection To Core Idea
 
-Humans and AI become partners.
+**Humans and AI become partners.**
 
 ⸻
 
