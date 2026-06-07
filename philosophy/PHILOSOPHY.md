@@ -392,7 +392,7 @@ Silence.
 
 Connection To Core Idea
 
-Perfection without connection leads nowhere.
+**Perfection without connection leads nowhere.**
 
 ⸻
 
