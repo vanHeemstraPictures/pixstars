@@ -638,3 +638,38 @@ They leave thinking:
 
 **“Maybe the best future is one where humans and AI create together.”**
 
+---
+
+Axel’s Final Line
+
+The strongest line may actually belong to Axel.
+
+Something like:
+
+“Everyone keeps asking what AI will become.”
+
+Pause.
+
+Looking at the lamp.
+
+“Maybe the better question is…”
+
+Long pause.
+
+He points at:
+
+```
+  Walt
+AxEl
+I
+```
+
+**WE**
+
+“…what WE become.”
+
+Final chord.
+
+Blackout.
+
+
