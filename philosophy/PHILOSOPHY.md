@@ -256,7 +256,7 @@ Challenge assumptions.
 
 Message
 
-Being better is not the same as being meaningful.
+**Being better is not the same as being meaningful.**
 
 How The Audience Receives It
 
@@ -286,9 +286,9 @@ Guiding Dialogue
 
 “Then why are you not happy?”
 
-“Because you drew Mickey.”
+**“Because you drew Mickey.”**
 
-“You did not imagine him.”
+**“You did not imagine him.”**
 
 Connection To Core Idea
 
