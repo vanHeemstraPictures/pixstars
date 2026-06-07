@@ -618,3 +618,23 @@ Walt is not the hero.
 
 That subtle distinction changes everything.
 
+---
+
+- If a scene can be removed without weakening the statement “The future is co-creation,” the scene does not belong in PixStars.
+
+- If the audience applauds the technology more than the relationship, the scene needs redesign.
+
+Because when people still talk about Elliott and E.T. forty years later, they are not talking about the special effects.
+
+They are talking about a friendship.
+
+That is the standard PixStars should aim for:
+
+The audience does not leave thinking:
+
+“What a clever AI lamp.”
+
+They leave thinking:
+
+**“Maybe the best future is one where humans and AI create together.”**
+
