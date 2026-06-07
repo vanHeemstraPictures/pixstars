@@ -610,3 +610,11 @@ The audience should think:
 
 **The lamp taught Walt something about being human.**
 
+The lamp is not the hero.
+
+Walt is not the hero.
+
+**The relationship is the hero.**
+
+That subtle distinction changes everything.
+
