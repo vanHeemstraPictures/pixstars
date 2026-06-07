@@ -577,11 +577,11 @@ Not the technology.
 
 They should leave remembering:
 
-The machine spent the entire story trying to become better than a human.
+**The machine spent the entire story trying to become better than a human.**
 
-Only to discover that what makes humans special was never intelligence.
+**Only to discover that what makes humans special was never intelligence.**
 
-It was our ability to share ourselves with one another.
+**It was our ability to share ourselves with one another.**
 
 AI is not here to replace us.
 
