@@ -516,7 +516,7 @@ Make the theme unmistakable.
 
 Message
 
-The lamp has discovered what makes humans special.
+**The lamp has discovered what makes humans special.**
 
 Guiding Dialogue
 
