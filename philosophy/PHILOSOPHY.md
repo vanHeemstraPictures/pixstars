@@ -428,7 +428,7 @@ Silence should carry the scene.
 
 Connection To Core Idea
 
-Connection is the emotional center of the story.
+**Connection is the emotional center of the story.**
 
 ⸻
 
