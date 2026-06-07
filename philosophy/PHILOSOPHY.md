@@ -186,9 +186,9 @@ Not craftsmanship.
 
 Guiding Dialogue
 
-“Walt, that is not perfect.”
+**“Walt, that is not perfect.”**
 
-“Neither am I.”
+**“Neither am I.”**
 
 Connection To Core Idea
 
