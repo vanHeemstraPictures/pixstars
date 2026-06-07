@@ -484,7 +484,7 @@ Show the solution.
 
 Message
 
-The future is co-creation.
+**The future is co-creation.*(
 
 How The Audience Receives It
 
