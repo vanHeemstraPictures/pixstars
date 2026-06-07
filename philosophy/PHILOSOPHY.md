@@ -586,3 +586,14 @@ They should leave remembering:
 AI is not here to replace us.
 
 AI is here to help us discover what makes us human.
+
+Your lamp must eventually make a choice.
+
+Not a technical choice.
+
+A philosophical choice.
+
+At the end it must choose:
+
+* **collaboration over superiority**
+* **companionship over perfection**
