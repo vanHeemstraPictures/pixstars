@@ -36,6 +36,10 @@ Website
 
 https://layers.jamiemill.com/
 
+GitHub
+
+https://github.com/jamiemill/layers-skills
+
 Creator
 
 Jamie Mill
