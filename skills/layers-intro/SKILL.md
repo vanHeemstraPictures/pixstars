@@ -23,7 +23,8 @@ Load this skill at the start of any design session. It provides the framework co
 **Solution space** — deliberate decisions about what to build:  
 4. **Product & service strategy** — which needs to serve, and what business outcomes to target.  
 5. **Conceptual model** — objects, relationships, states, vocabulary — independent of any interface.  
-6. **Interaction structure and flow** — places, affordances, connections, and flow logic. 7. **Surface** — words, visuals, feedback, hierarchy — what users actually encounter.  
+6. **Interaction structure and flow** — places, affordances, connections, and flow logic. 
+7. **Surface** — words, visuals, feedback, hierarchy — what users actually encounter.  
 
 The layers are not a linear process. Enter anywhere — but always check whether the foundations below are sound.
 
