@@ -4,6 +4,22 @@ Version: 1.0
 
 ---
 
+# Architecture Reference
+
+This document is derived from the PixStars Layers Framework.
+
+Primary reference:
+
+../architecture/layers/LAYERS_FRAMEWORK.md
+
+Specifically:
+
+- Layer 3 — User Needs
+- Layer 4 — Strategy
+- Layer 5 — Conceptual Model
+
+Any modification to this document should remain consistent with the Layers Framework.
+
 # Purpose
 
 Identify the emotional and intellectual needs of the audience.
