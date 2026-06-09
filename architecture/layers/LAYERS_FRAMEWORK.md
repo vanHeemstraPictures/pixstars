@@ -5,6 +5,9 @@ Status: Recommended
 Project: PixStars
 
 ---
+## References
+
+References the ../skills/layers-*/SKILL.md files.
 
 # 1. Executive Summary
 
