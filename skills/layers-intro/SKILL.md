@@ -21,8 +21,9 @@ Load this skill at the start of any design session. It provides the framework co
 3. **User needs** — what we think users are trying to achieve, and why
 
 **Solution space** — deliberate decisions about what to build:  
+
 4. **Product & service strategy** — which needs to serve, and what business outcomes to target.  
-5. **Conceptual model** — objects, relationships, states, vocabulary — independent of any interface.  
+5. **Conceptual model** — objects, relationships, states, vocabulary — independent of any interface.
 6. **Interaction structure and flow** — places, affordances, connections, and flow logic. 
 7. **Surface** — words, visuals, feedback, hierarchy — what users actually encounter.  
 
