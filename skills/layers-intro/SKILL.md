@@ -20,7 +20,7 @@ Load this skill at the start of any design session. It provides the framework co
 2. **The domain** — concepts, terminology, and mental models that exist independently of any product
 3. **User needs** — what we think users are trying to achieve, and why
 
-**Solution space** — deliberate decisions about what to build:
+**Solution space** — deliberate decisions about what to build:  
 4. **Product & service strategy** — which needs to serve, and what business outcomes to target
 5. **Conceptual model** — objects, relationships, states, vocabulary — independent of any interface
 6. **Interaction structure and flow** — places, affordances, connections, and flow logic
