@@ -14,9 +14,8 @@ Primary reference:
 
 Specifically:
 
+- Layer 1 — Observed Behaviour
 - Layer 3 — User Needs
-- Layer 4 — Strategy
-- Layer 5 — Conceptual Model
 
 Any modification to this document should remain consistent with the Layers Framework.
 
