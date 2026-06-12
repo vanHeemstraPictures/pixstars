@@ -282,6 +282,17 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Price | EUR 15.99 |
 | Status | IN HAND |
 
+## Kitronik Inventor's Kit for Arduino
+
+| Item | Detail |
+| --- | --- |
+| Product | Kitronik Inventor's Kit for Arduino |
+| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (various values including 470 ohm), LEDs, push buttons, potentiometer |
+| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering) |
+| Source | elektronicavoorjou.nl |
+| Notes | Expected delivery start of next week. |
+| Status | ORDERED (elektronicavoorjou.nl) |
+
 ## Olight Obounds Smart Wireless Gateway
 
 | Property | Value |
@@ -452,6 +463,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
+| Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | ORDERED |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
