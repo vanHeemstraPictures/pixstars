@@ -195,6 +195,19 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Status | PLANNED |
 
 
+## MEAN WELL LRS-50-12 (Cave 12V Rail)
+
+| Property | Value |
+| --- | --- |
+| Component | MEAN WELL LRS-50-12 |
+| Type | Enclosed switching power supply |
+| Output | 12V DC, 4.2A (50.4W) |
+| Input | AC mains (universal input) |
+| Role | Cave 12V rail -- powers the LPLDD-1A-16V-3CH laser driver and the TMC2209 stepper driver; also used for AX-12A (9-12V) bench testing |
+| Location in lamp | Cave (on servo rail) |
+| Supplier | Reichelt (https://www.reichelt.com/nl) |
+| Status | ORDERED (Reichelt) |
+
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
@@ -457,6 +470,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
 | Opt Lasers 300mW Micro RGB Laser Module | IN HAND |
 | ESP32-S3 N16R8 DevKitC (cave controller) | IN HAND |
+| MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | ORDERED (Reichelt) |
 | Dynamixel AX-12A (head nod servo) | IN HAND |
 | Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
 | SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
