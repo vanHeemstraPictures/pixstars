@@ -27,7 +27,7 @@
 
 cues:
   # --------------------------------------------------------------------------
-  # SCENE 1 - EMERGENCE (00:00-00:25) - darkness with memory
+  # SCENE 1 - EMERGENCE (00:00-00:25) - the blank canvas
   # --------------------------------------------------------------------------
   - time: 0.0
     name: "SHOW_START"
@@ -45,119 +45,101 @@ cues:
       - {cmd: "turntable_origin"}
 
   - time: 5.0
-    name: "PIANO_FIRST_NOTE"
+    name: "FIRST_NOTE"
     act: 1
     projection: "GNR_LOGO"
     lighting: "BLACKOUT"
 
   - time: 15.0
-    name: "LAMP_CLUNK_ON"
+    name: "LAMP_SILENT_ON"
     act: 1
     lighting: "LAMP_ONLY"
     cave:
       - {cmd: "led_rear", r: 255, g: 255, b: 255, mode: "solid"}
 
-  - time: 22.0
-    name: "LAMP_TILT_DOWN_3"
+  - time: 17.0
+    name: "AXEL_FREEZES"
     act: 1
-    cave:
-      - {cmd: "head_nod", angle: 147}
+
+  - time: 20.0
+    name: "GNR_DISSOLVE"
+    act: 1
+    projection: "BLACKOUT"
 
   # --------------------------------------------------------------------------
-  # SCENE 2 - NOTICING (00:25-01:10) - the rockstar dissolves
+  # SCENE 2 - DISCOVERY (00:25-01:10) - the discovery
   # --------------------------------------------------------------------------
-  - time: 25.0
-    name: "DRUMS_QUIET"
+  - time: 27.0
+    name: "AXEL_NOTICES_EARS"
     act: 2
-    lighting: "ROCKSTAR"
 
   - time: 32.0
-    name: "LAMP_SEARCH_TILT"
-    act: 2
-    cave:
-      - {cmd: "head_nod", angle: 153}
-      - {cmd: "servo", ch: 3, angle: 80}
-
-  - time: 40.0
-    name: "LAMP_TILT_15"
-    act: 2
-    cave:
-      - {cmd: "head_nod", angle: 135}
-
-  - time: 46.0
-    name: "AXEL_STOPS_PLAYING"
-    act: 2
-
-  - time: 50.0
     name: "AXEL_REMOVES_SUNGLASSES"
     act: 2
 
-  - time: 55.0
-    name: "AXEL_UNTIES_BANDANA"
+  - time: 38.0
+    name: "AXEL_REMOVES_BANDANA"
     act: 2
 
-  - time: 60.0
-    name: "LAMP_ROTATE_45"
+  - time: 42.0
+    name: "EARS_ON_LAMP"
+    act: 2
+
+  - time: 45.0
+    name: "WALT_EMERGES"
+    act: 2
+    lighting: "CREATOR"
+
+  - time: 50.0
+    name: "SKETCHBOOK_PLACED"
+    act: 2
+
+  - time: 55.0
+    name: "WALT_TURNS_AWAY"
+    act: 2
+
+  - time: 58.0
+    name: "LAMP_SECRET_TILT"
     act: 2
     cave:
-      - {cmd: "turntable_rotate", degrees: 45, speed: 10}
-
-  - time: 65.0
-    name: "DISNEY_CASTLE_REVEAL"
-    act: 2
-    projection: "DISNEY_CASTLE"
-    lighting: "DISNEY_SOFT"
+      - {cmd: "head_nod", angle: 148}
+      - {cmd: "led_rear", r: 255, g: 240, b: 200, mode: "solid"}
 
   # --------------------------------------------------------------------------
-  # SCENE 3 - THE FIRST DRAWING (01:10-02:10) - creation and its cost
+  # SCENE 3 - THE FIRST DRAWING (01:10-02:10) - the first drawing
   # --------------------------------------------------------------------------
   - time: 70.0
-    name: "MAN_TAKES_PENCIL"
+    name: "WALT_BEGINS_DRAWING"
     act: 3
+
+  - time: 75.0
+    name: "CASTLE_BEGINS_EMERGING"
+    act: 3
+    projection: "DISNEY_CASTLE"
+    lighting: "DISNEY_SOFT"
 
   - time: 80.0
     name: "DRAWING_MICKEY"
     act: 3
 
+  - time: 95.0
+    name: "LAMP_BRIGHTENS"
+    act: 3
+    cave:
+      - {cmd: "led_rear", r: 255, g: 245, b: 210, mode: "solid"}
+
   - time: 100.0
-    name: "MICKEY_REVEALED"
+    name: "MICKEY_ON_PAGE"
     act: 3
     projection: "MICKEY_DRAWING"
 
-  - time: 105.0
-    name: "PRESENT_TO_LAMP"
-    act: 3
-
-  - time: 110.0
-    name: "LAMP_TILT_20_LEFT"
-    act: 3
-    cave:
-      - {cmd: "servo", ch: 3, angle: 70}
-
-  - time: 115.0
-    name: "LAMP_TILT_20_RIGHT"
-    act: 3
-    cave:
-      - {cmd: "servo", ch: 3, angle: 110}
-
-  - time: 120.0
-    name: "LAMP_TURNS_AWAY"
+  - time: 125.0
+    name: "CASTLE_FULL"
     act: 3
     projection: "DISNEY_CASTLE"
-    cave:
-      - {cmd: "turntable_rotate", degrees: -30, speed: 8}
-      - {cmd: "servo", ch: 3, angle: 90}
-
-  - time: 125.0
-    name: "LOW_NOTE_LINGERS"
-    act: 3
-
-  - time: 130.0
-    name: "MAN_STARES_DRAWING"
-    act: 3
 
   # --------------------------------------------------------------------------
-  # SCENE 4 - TRANSLATION (02:10-03:00) - the engineer's drawing
+  # SCENE 4 - TRANSLATION (02:10-03:00) - first direct response
   # --------------------------------------------------------------------------
   - time: 130.0
     name: "MAN_STUDIES_LAMP"
@@ -532,92 +514,82 @@ cues:
     act: 10
 
   # --------------------------------------------------------------------------
-  # SCENE 11 - SYNTHESIS / FINALE (08:40-09:17)
+  # SCENE 11 - WE (08:40-09:17)
   # --------------------------------------------------------------------------
   - time: 520.0
     name: "FINAL_CHORDS_BEGIN"
     act: 11
-    projection: "TEAM_ROCKSTARS"
     lighting: "FINALE"
+    cave:
+      - {cmd: "led_rear", r: 255, g: 200, b: 80, mode: "solid"}
 
   - time: 525.0
-    name: "LAMP_SWING_DOWNBEAT"
+    name: "THREE_NAMES_APPEAR"
     act: 11
-    cave:
-      - {cmd: "turntable_rotate", degrees: -30, speed: 30}
-      - {cmd: "head_nod", angle: 155}
-
-  - time: 528.0
-    name: "LAMP_SWING_UPBEAT"
-    act: 11
-    cave:
-      - {cmd: "turntable_rotate", degrees: 30, speed: 30}
-      - {cmd: "head_nod", angle: 150}
+    projection: "THREE_NAMES"
 
   - time: 532.0
-    name: "FINAL_PROJECTIONS_GNR"
+    name: "WE_DISCOVERED"
     act: 11
-    projection: "GNR_LOGO"
+    projection: "THREE_NAMES"
 
-  - time: 536.0
-    name: "FINAL_PROJECTIONS_CASTLE"
+  - time: 538.0
+    name: "CHORD_SUSTAINS"
     act: 11
-    projection: "DISNEY_CASTLE"
 
   - time: 540.0
-    name: "FINAL_PROJECTIONS_LAMP"
+    name: "AXEL_MAKES_ROOM"
     act: 11
-    projection: "LAMP_DRAWING"
 
-  - time: 544.0
-    name: "FINAL_PROJECTIONS_TEAM"
-    act: 11
-    projection: "TEAM_ROCKSTARS"
-
-  - time: 548.0
-    name: "FINAL_CHORD"
+  - time: 543.0
+    name: "LAMP_SETTLES_BESIDE"
     act: 11
     cave:
-      - {cmd: "servo", ch: 1, angle: 120}
-      - {cmd: "servo", ch: 2, angle: 120}
-      - {cmd: "head_nod", angle: 165}
-      - {cmd: "led_rear", r: 255, g: 220, b: 100, mode: "solid"}
+      - {cmd: "servo", ch: 1, angle: 100}
+      - {cmd: "servo", ch: 2, angle: 100}
+      - {cmd: "head_nod", angle: 145}
+      - {cmd: "turntable_rotate", degrees: -15, speed: 5}
 
-  - time: 549.5
-    name: "LAMP_INSTANT_OFF"
+  - time: 548.0
+    name: "FACING_FORWARD"
     act: 11
-    projection: "TEAM_ROCKSTARS"
+    cave:
+      - {cmd: "head_nod", angle: 150}
+
+  - time: 550.0
+    name: "MUTUAL_RECOGNITION"
+    act: 11
+    cave:
+      - {cmd: "turntable_rotate", degrees: 10, speed: 8}
+      - {cmd: "head_nod", angle: 148}
+
+  - time: 553.0
+    name: "BOTH_LOOK_FORWARD"
+    act: 11
+    cave:
+      - {cmd: "turntable_rotate", degrees: -10, speed: 8}
+      - {cmd: "head_nod", angle: 150}
+
+  - time: 555.0
+    name: "LAMP_SLOW_FADE"
+    act: 11
+    cave:
+      - {cmd: "led_rear", r: 180, g: 140, b: 50, mode: "pulse"}
+
+  - time: 556.5
+    name: "LAMP_OFF"
+    act: 11
+    projection: "BLACKOUT"
     lighting: "BLACKOUT"
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
-  - time: 552.5
-    name: "PROJECTIONS_SEQUENTIAL_DARK"
-    act: 11
-    projection: "DISNEY_CASTLE"
-
-  - time: 553.5
-    name: "DISNEY_CASTLE_LAST_OFF"
+  - time: 558.0
+    name: "WE_FADES"
     act: 11
     projection: "BLACKOUT"
 
-  - time: 555.0
-    name: "SILENCE_BEAT"
-    act: 11
-
-  - time: 556.0
-    name: "LAMP_FINAL_RETURN"
-    act: 11
-    cave:
-      - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "solid"}
-
-  - time: 557.0
-    name: "LAMP_FINAL_OFF"
-    act: 11
-    cave:
-      - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
-
-  - time: 557.5
+  - time: 559.0
     name: "SHOW_END"
     act: 11
     projection: "BLACKOUT"
