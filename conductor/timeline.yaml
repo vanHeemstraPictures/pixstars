@@ -1,12 +1,12 @@
 # ============================================================================
 # Pixstars - Show Timeline
 # ============================================================================
-# Aligned with screenplays/screenplay.md (11 acts, ~9:17 total).
+# Aligned with screenplays/screenplay.md (11 scenes, ~9:17 total).
 #
 # Each cue may include:
 #   time:       seconds from show start
 #   name:       human-readable cue name
-#   act:        screenplay act number (1-11)
+#   act:        screenplay scene number (1-11)
 #   ardour:     OSC command for Ardour (optional)
 #   projection: projection scene name (optional)
 #   lighting:   lighting state name (optional)
@@ -27,7 +27,7 @@
 
 cues:
   # --------------------------------------------------------------------------
-  # ACT 1 - EMERGENCE (00:00-00:25) - darkness with memory
+  # SCENE 1 - EMERGENCE (00:00-00:25) - darkness with memory
   # --------------------------------------------------------------------------
   - time: 0.0
     name: "SHOW_START"
@@ -64,7 +64,7 @@ cues:
       - {cmd: "head_nod", angle: 147}
 
   # --------------------------------------------------------------------------
-  # ACT 2 - NOTICING (00:25-01:10) - the rockstar dissolves
+  # SCENE 2 - NOTICING (00:25-01:10) - the rockstar dissolves
   # --------------------------------------------------------------------------
   - time: 25.0
     name: "DRUMS_QUIET"
@@ -109,7 +109,7 @@ cues:
     lighting: "DISNEY_SOFT"
 
   # --------------------------------------------------------------------------
-  # ACT 3 - THE FIRST DRAWING (01:10-02:10) - creation and its cost
+  # SCENE 3 - THE FIRST DRAWING (01:10-02:10) - creation and its cost
   # --------------------------------------------------------------------------
   - time: 70.0
     name: "MAN_TAKES_PENCIL"
@@ -157,7 +157,7 @@ cues:
     act: 3
 
   # --------------------------------------------------------------------------
-  # ACT 4 - TRANSLATION (02:10-03:00) - the engineer's drawing
+  # SCENE 4 - TRANSLATION (02:10-03:00) - the engineer's drawing
   # --------------------------------------------------------------------------
   - time: 130.0
     name: "MAN_STUDIES_LAMP"
@@ -199,7 +199,7 @@ cues:
     projection: "DISNEY_CASTLE"
 
   # --------------------------------------------------------------------------
-  # ACT 5 - ASCENT (03:00-04:15) - the acceleration
+  # SCENE 5 - ASCENT (03:00-04:15) - the acceleration
   # --------------------------------------------------------------------------
   - time: 180.0
     name: "AI_V1_LAMP_DRAWING"
@@ -269,7 +269,7 @@ cues:
     act: 5
 
   # --------------------------------------------------------------------------
-  # ACT 6 - THREE DEATHS (04:15-05:10) - existential break
+  # SCENE 6 - THREE DEATHS (04:15-05:10) - existential break
   # --------------------------------------------------------------------------
   - time: 255.0
     name: "DEATH1_SWITCH_OFF"
@@ -354,7 +354,7 @@ cues:
       - {cmd: "head_nod", angle: 100}
 
   # --------------------------------------------------------------------------
-  # ACT 7 - HOLDING (05:10-06:00) - the void with hands
+  # SCENE 7 - HOLDING (05:10-06:00) - the void with hands
   # --------------------------------------------------------------------------
   - time: 310.0
     name: "KICK_DRUM_DISTANT"
@@ -381,7 +381,7 @@ cues:
     projection: "DISNEY_CASTLE"
 
   # --------------------------------------------------------------------------
-  # ACT 8 - RETURN (06:00-07:00) - resurrection and revision
+  # SCENE 8 - RETURN (06:00-07:00) - resurrection and revision
   # --------------------------------------------------------------------------
   - time: 360.0
     name: "BULB_SCREWED_IN"
@@ -436,7 +436,7 @@ cues:
     act: 8
 
   # --------------------------------------------------------------------------
-  # ACT 9 - RECOGNITION (07:00-08:00) - naming
+  # SCENE 9 - RECOGNITION (07:00-08:00) - naming
   # --------------------------------------------------------------------------
   - time: 420.0
     name: "WHITE_PAGE_APPEARS"
@@ -491,7 +491,7 @@ cues:
     lighting: "DISNEY_SOFT"
 
   # --------------------------------------------------------------------------
-  # ACT 10 - TRANSFORMATION (08:00-08:40) - the rockstar returns
+  # SCENE 10 - TRANSFORMATION (08:00-08:40) - the rockstar returns
   # --------------------------------------------------------------------------
   - time: 480.0
     name: "WALT_OPENS_BENCH"
@@ -532,7 +532,7 @@ cues:
     act: 10
 
   # --------------------------------------------------------------------------
-  # ACT 11 - SYNTHESIS / FINALE (08:40-09:17)
+  # SCENE 11 - SYNTHESIS / FINALE (08:40-09:17)
   # --------------------------------------------------------------------------
   - time: 520.0
     name: "FINAL_CHORDS_BEGIN"

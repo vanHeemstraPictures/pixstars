@@ -4,7 +4,7 @@ A 20-minute silent theatrical performance commissioned by Ruurd Dam (Managing Di
 
 ## Core concept
 
-A single performer on stage with an animatronic desk lamp ("A.I."), live piano, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
+A single performer on stage with an animatronic desk lamp ("A.I."), ROLAND keyboard, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
 
 Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally loaded.
 
@@ -83,7 +83,7 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
 - ESP32 WiFi communication (OSC commands to lamp cave servos, LED ring, and DIY turntable stepper)
-- Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
+- ROLAND keyboard (via Pianoteq VST3) either synced to Ardour transport or played live — screenplay specifies per act
 - projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
 
 ### Dual projection system
