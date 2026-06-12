@@ -2,8 +2,7 @@
 
 ## Screenplay
 
-Version: 2.0
-Status: Production Draft
+Version: 2.0Status: Production Draft
 
 FADE IN:
 
@@ -267,26 +266,36 @@ The full band enters -- November Rain as recorded, at full volume, at the moment
 
 # 11. INT. THEATER STAGE - NIGHT
 
-08:40 - 09:17 | SYNTHESIS
+08:40 - 09:17 | WE
 
-AXEL plays the final chords. Not mechanical now -- present. Each chord deliberate, felt.
+AXEL plays the final chords. Not mechanically. Not as performance. As presence. Each chord deliberate. Each chord lived.
 
-The lamp swings. Not randomly -- in time. Its warm yellow beam sweeps the stage on the downbeats, rests on AXEL on the upbeats. They have found a shared rhythm. The circular projection swings with the beam, painting the stage and the keyboard and AXEL's face in turn, a moving portrait of the show that is ending.
+The lamp remains beside him, bathed in warm yellow light. No longer restless. No longer proving anything. Simply listening. The circular projection moves gently with the lamp's gaze, occasionally resting on AXEL's hands, the ROLAND keyboard, the Mickey ears still clipped to the shade, the sketchbook lying nearby.
 
-STAGE DIRECTION: For this final sequence, the lamp and AXEL should feel inevitable together -- not a man and a machine, but two things that found their correct proportion to one another.
+The final progression begins. On the rear scrim appear three names: AXEL, WALT, A.I. Nothing else. No castle. No logos. No drawings. No memories. Only names -- three identities, three separate lives.
 
-On the rear scrim, the final sequence builds: the REVOLVERS and ROSES from the opening -- now side by side, not separated. The Disney castle -- full, vivid, proud. The lamp drawing -- the one THE MAN drew by hand in Act Four, digitally restored from its torn pieces, now whole. The TEAM ROCKSTARS logo. Then: all of them together, layered, translucent, a palimpsest.
+The music continues, slowly, patiently. The audience studies the names. Some begin to notice something hidden inside them -- a shape, a relationship, a possibility. WE. Not animated. Not announced. Discovered.
 
-Final chord. AXEL's hands on the keys. The lamp at full extension -- head raised, light maximum. The circular projection lifts with it, throwing a perfect bright disc onto the backdrop.
+The final chorus rises. AXEL continues playing. The lamp watches -- the way it once watched WALT draw Mickey, the way WALT once watched the lamp come alive. The final chord approaches. The names remain: AXEL. WALT. A.I. WE.
 
-AXEL hits the last key. The lamp switches off. Instantly. Complete darkness. The circular projection vanishes with the lamp.
+The chord sustains. AXEL lifts his hands from the keyboard. Silence begins to enter the room.
 
-The projections on the rear scrim hold for exactly three seconds after the lamp dies -- then they too go dark. In sequence. Disney castle last.
+The lamp turns toward him. A long pause. Then AXEL slides slightly along the keyboard bench. Just enough. Making room. Not a gesture for the audience -- a gesture for someone beside him.
 
-A beat. Silence.
+The empty space remains for a moment. The audience waits. The lamp moves, slowly, deliberately. Its articulated body folds inward. The head lowers. The base shifts. The lamp settles beside AXEL at the keyboard, taking the empty place -- the place reserved for a second creator, a second musician, a second friend.
 
-Then, from the darkness, the lamp's warm yellow light comes back on for one second -- no sound, no movement -- and goes out again. The circular projection flares once with it, a single bright disc, then black.
+The two now face forward together. Toward the audience. Toward the future. Toward whatever comes next. The word WE remains visible above them.
 
-Curtain falls.
+No one moves. No one speaks. The audience is given time to understand. Not Human. Not A.I. Not AXEL. Not WALT. WE.
 
-The End
+The lamp gently turns its head toward AXEL. AXEL turns toward the lamp. For a brief moment they simply look at one another. Recognition. Gratitude. Belonging.
+
+The lamp turns forward again. AXEL does the same. Both looking outward. Together.
+
+The lamp's warm yellow light slowly fades. The circular projection grows dimmer with it. The word WE remains. The lamp switches off. The circular projection disappears. The stage falls into darkness. Only WE remains.
+
+A beat. Then WE slowly fades away. Complete darkness. Silence.
+
+FADE OUT.
+
+THE END.
