@@ -81,6 +81,12 @@ SCENES: dict[str, Scene] = {
         background_color=(0, 0, 0),
         description="Team Rockstars logo — finale",
     ),
+    "THREE_NAMES": Scene(
+        name="THREE_NAMES",
+        image_file="three_names.png",
+        background_color=(0, 0, 0),
+        description="AXEL / WALT / A.I. names on scrim -- WE emerges",
+    ),
 }
 
 
