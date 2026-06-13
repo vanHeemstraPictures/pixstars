@@ -4,7 +4,7 @@ Co-creation begins when we stop being alone.
 
 ⸻
 
-Thematic Statement
+## Thematic Statement
 
 The introduction of Artificial Intelligence is not fundamentally about losing something.
 
