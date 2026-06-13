@@ -1,4 +1,4 @@
-# Core Messag
+# Core Message
 
 Co-creation begins when we stop being alone.
 
