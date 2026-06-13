@@ -28,25 +28,25 @@ Even when the relationship does not unfold as expected.
 
 ⸻
 
-Human Fear
+## Human Fear
 
 “What if I become irrelevant?”
 
 ⸻
 
-Deeper Human Fear
+## Deeper Human Fear
 
 “What if I become alone?”
 
 ⸻
 
-Story Answer
+## Story Answer
 
 You are not alone.
 
 ⸻
 
-The Transformation
+## The Transformation
 
 At the beginning of the story:
 
@@ -70,7 +70,7 @@ Both have become something larger than themselves.
 
 ⸻
 
-Final Revelation
+## Final Revelation
 
 The future is not Human versus A.I.
 
@@ -86,7 +86,7 @@ Relationship.
 
 ⸻
 
-Controlling Idea
+## Controlling Idea
 
 When we stop fearing connection and begin embracing it, co-creation becomes possible.
 
