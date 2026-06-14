@@ -1,7 +1,7 @@
 # ============================================================================
 # Pixstars - Show Timeline
 # ============================================================================
-# Aligned with screenplays/screenplay.md (11 scenes, ~9:17 total).
+# Aligned with screenplays/screenplay.md (11 scenes, ~11:45 total).
 #
 # Each cue may include:
 #   time:       seconds from show start
@@ -16,6 +16,11 @@
 #   laser:      single laser scene cmd string (placeholder, logs only)
 #               examples: "LASER_SWEEP", "LASER_STICK_FIGURE",
 #                         "LASER_AI_TEXT", "LASER_SIGNATURE", "BLACKOUT"
+#   rain:       digital rain overlay state (sent as /projection/rain)
+#               states: RAIN_OFF, RAIN_TRACES, RAIN_BUILDING, RAIN_STORM,
+#                       RAIN_SHATTER, RAIN_STOP, RAIN_GENTLE, RAIN_NAMES,
+#                       RAIN_THREE, RAIN_WE
+#               (rain words are restricted to WALT, AXEL, A.I., WE)
 #
 # Head (Dynamixel AX-12A) angles: 0-300 deg, neutral = 150
 #   tilt down  -> angle < 150 (e.g. 147 = 3 deg down, 135 = 15 deg down)
@@ -27,7 +32,7 @@
 
 cues:
   # --------------------------------------------------------------------------
-  # SCENE 1 - EMERGENCE (00:00-00:25) - the blank canvas
+  # SCENE 1 - EMERGENCE (00:00-00:40) - the blank canvas
   # --------------------------------------------------------------------------
   - time: 0.0
     name: "SHOW_START"
@@ -44,61 +49,61 @@ cues:
       - {cmd: "servo", ch: 3, angle: 90}
       - {cmd: "turntable_origin"}
 
-  - time: 5.0
+  - time: 8.0
     name: "FIRST_NOTE"
     act: 1
     projection: "GNR_LOGO"
     lighting: "BLACKOUT"
 
-  - time: 15.0
+  - time: 24.0
     name: "LAMP_SILENT_ON"
     act: 1
     lighting: "LAMP_ONLY"
     cave:
       - {cmd: "led_rear", r: 255, g: 255, b: 255, mode: "solid"}
 
-  - time: 17.0
+  - time: 27.2
     name: "AXEL_FREEZES"
     act: 1
 
-  - time: 20.0
+  - time: 32.0
     name: "GNR_DISSOLVE"
     act: 1
     projection: "BLACKOUT"
 
   # --------------------------------------------------------------------------
-  # SCENE 2 - DISCOVERY (00:25-01:10) - the discovery
+  # SCENE 2 - DISCOVERY (00:40-01:55) - the discovery
   # --------------------------------------------------------------------------
-  - time: 27.0
+  - time: 43.3
     name: "AXEL_NOTICES_EARS"
     act: 2
 
-  - time: 32.0
+  - time: 51.7
     name: "AXEL_REMOVES_SUNGLASSES"
     act: 2
 
-  - time: 38.0
+  - time: 61.7
     name: "AXEL_REMOVES_BANDANA"
     act: 2
 
-  - time: 42.0
+  - time: 68.3
     name: "EARS_ON_LAMP"
     act: 2
 
-  - time: 45.0
+  - time: 73.3
     name: "WALT_EMERGES"
     act: 2
     lighting: "CREATOR"
 
-  - time: 50.0
+  - time: 81.7
     name: "SKETCHBOOK_PLACED"
     act: 2
 
-  - time: 55.0
+  - time: 90.0
     name: "WALT_TURNS_AWAY"
     act: 2
 
-  - time: 58.0
+  - time: 95.0
     name: "LAMP_SECRET_TILT"
     act: 2
     cave:
@@ -106,55 +111,55 @@ cues:
       - {cmd: "led_rear", r: 255, g: 240, b: 200, mode: "solid"}
 
   # --------------------------------------------------------------------------
-  # SCENE 3 - THE FIRST DRAWING (01:10-02:10) - the first drawing
+  # SCENE 3 - THE FIRST DRAWING (01:55-03:30) - the first drawing
   # --------------------------------------------------------------------------
-  - time: 70.0
+  - time: 115.0
     name: "WALT_BEGINS_DRAWING"
     act: 3
 
-  - time: 75.0
+  - time: 122.9
     name: "CASTLE_BEGINS_EMERGING"
     act: 3
     projection: "DISNEY_CASTLE"
     lighting: "DISNEY_SOFT"
 
-  - time: 80.0
+  - time: 130.8
     name: "DRAWING_MICKEY"
     act: 3
 
-  - time: 95.0
+  - time: 154.6
     name: "LAMP_BRIGHTENS"
     act: 3
     cave:
       - {cmd: "led_rear", r: 255, g: 245, b: 210, mode: "solid"}
 
-  - time: 100.0
+  - time: 162.5
     name: "MICKEY_ON_PAGE"
     act: 3
     projection: "MICKEY_DRAWING"
 
-  - time: 125.0
+  - time: 202.1
     name: "CASTLE_FULL"
     act: 3
     projection: "DISNEY_CASTLE"
 
   # --------------------------------------------------------------------------
-  # SCENE 4 - TRANSLATION (02:10-03:00) - first direct response
+  # SCENE 4 - TRANSLATION (03:30-04:55) - first direct response
   # --------------------------------------------------------------------------
-  - time: 130.0
+  - time: 210.0
     name: "MAN_STUDIES_LAMP"
     act: 4
 
-  - time: 140.0
+  - time: 227.0
     name: "DRAWING_THE_LAMP"
     act: 4
 
-  - time: 160.0
+  - time: 261.0
     name: "LAMP_DRAWING_LIFTED"
     act: 4
     projection: "LAMP_DRAWING"
 
-  - time: 165.0
+  - time: 269.5
     name: "LAMP_LEAN_FORWARD_30"
     act: 4
     cave:
@@ -163,105 +168,112 @@ cues:
       - {cmd: "servo", ch: 2, angle: 120}
       - {cmd: "head_nod", angle: 140}
 
-  - time: 170.0
+  - time: 278.0
     name: "BEAM_ON_DRAWING"
     act: 4
     cave:
       - {cmd: "led_rear", r: 255, g: 240, b: 200, mode: "solid"}
 
-  - time: 175.0
+  - time: 286.5
     name: "LATERAL_SWAY"
     act: 4
     cave:
       - {cmd: "servo", ch: 3, angle: 95}
 
-  - time: 178.0
+  - time: 290.0
+    name: "RAIN_TRACES_START"
+    act: 4
+    rain: "RAIN_TRACES"
+
+  - time: 291.6
     name: "CASTLE_PULSE"
     act: 4
     projection: "DISNEY_CASTLE"
 
   # --------------------------------------------------------------------------
-  # SCENE 5 - ASCENT (03:00-04:15) - the acceleration
+  # SCENE 5 - ASCENT (04:55-06:43) - the acceleration
   # --------------------------------------------------------------------------
-  - time: 180.0
+  - time: 295.0
     name: "AI_V1_LAMP_DRAWING"
     act: 5
     projection: "LAMP_DRAWING"
     lighting: "AI_COLD"
+    rain: "RAIN_BUILDING"
 
-  - time: 185.0
+  - time: 302.2
     name: "LAMP_TURN_TO_SCRIM"
     act: 5
     cave:
       - {cmd: "turntable_rotate", degrees: -45, speed: 15}
 
-  - time: 190.0
+  - time: 309.4
     name: "AI_V2_REFINED"
     act: 5
     projection: "AI_ITERATIONS"
 
-  - time: 200.0
+  - time: 323.8
     name: "AI_V3_DETAILED"
     act: 5
     projection: "AI_ITERATIONS"
 
-  - time: 208.0
+  - time: 335.3
     name: "AI_V4_WIREFRAME"
     act: 5
     projection: "AI_ITERATIONS"
 
-  - time: 214.0
+  - time: 344.0
     name: "AI_V5_RENDERED"
     act: 5
     projection: "AI_ITERATIONS"
 
-  - time: 220.0
+  - time: 352.6
     name: "AI_RAPID_ITERATIONS"
     act: 5
     projection: "AI_ITERATIONS"
     cave:
       - {cmd: "led_rear", r: 220, g: 240, b: 255, mode: "solid"}
 
-  - time: 210.0
+  - time: 338.2
     name: "LASER_SWEEP_CUE"
     act: 5
     laser: "LASER_SWEEP"
 
-  - time: 230.0
+  - time: 367.0
     name: "LAMP_LIGHTHOUSE_SWEEP"
     act: 5
     cave:
       - {cmd: "turntable_rotate", degrees: 90, speed: 20}
       - {cmd: "head_nod", angle: 155}
 
-  - time: 240.0
+  - time: 381.4
     name: "MAN_DRAWS_FASTER"
     act: 5
 
-  - time: 248.0
+  - time: 392.9
     name: "MAN_HAND_STOPS"
     act: 5
 
-  - time: 252.0
+  - time: 398.7
     name: "CASTLE_FADES"
     act: 5
 
-  - time: 254.0
+  - time: 401.6
     name: "DRAWING_FACEDOWN"
     act: 5
 
   # --------------------------------------------------------------------------
-  # SCENE 6 - THREE DEATHS (04:15-05:10) - existential break
+  # SCENE 6 - THREE DEATHS (06:43-07:38) - existential break
   # --------------------------------------------------------------------------
-  - time: 255.0
+  - time: 403.0
     name: "DEATH1_SWITCH_OFF"
     act: 6
     projection: "BLACKOUT"
     lighting: "BLACKOUT"
+    rain: "RAIN_STORM"
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
-  - time: 262.0
+  - time: 410.0
     name: "LAMP_HEAD_FINDS_SWITCH"
     act: 6
     cave:
@@ -269,7 +281,7 @@ cues:
       - {cmd: "servo", ch: 1, angle: 130}
       - {cmd: "servo", ch: 2, angle: 130}
 
-  - time: 266.0
+  - time: 414.0
     name: "LAMP_CLICKS_BACK_ON"
     act: 6
     projection: "AI_ITERATIONS"
@@ -280,7 +292,7 @@ cues:
       - {cmd: "servo", ch: 1, angle: 90}
       - {cmd: "servo", ch: 2, angle: 90}
 
-  - time: 275.0
+  - time: 423.0
     name: "DEATH2_CORD_PULL"
     act: 6
     projection: "BLACKOUT"
@@ -288,37 +300,42 @@ cues:
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
-  - time: 282.0
+  - time: 430.0
     name: "LAMP_WIRELESS_RETURN"
     act: 6
     lighting: "LAMP_ONLY"
     cave:
       - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "solid"}
 
-  - time: 290.0
+  - time: 438.0
     name: "DEATH3_STRANGLING_BEGINS"
     act: 6
     lighting: "OVERHEAT"
     cave:
       - {cmd: "led_rear", r: 255, g: 160, b: 50, mode: "flicker"}
 
-  - time: 295.0
+  - time: 440.0
+    name: "RAIN_SHATTER_START"
+    act: 6
+    rain: "RAIN_SHATTER"
+
+  - time: 443.0
     name: "LAMP_LEAN_INTO_HANDS"
     act: 6
     cave:
       - {cmd: "head_nod", angle: 145}
 
-  - time: 300.0
+  - time: 448.0
     name: "SMOKE_AND_FRAGMENT"
     act: 6
     projection: "AI_ITERATIONS"
 
-  - time: 304.0
+  - time: 452.0
     name: "CASTLE_GHOST_FLASH"
     act: 6
     projection: "DISNEY_CASTLE"
 
-  - time: 306.0
+  - time: 454.0
     name: "FINAL_WARM_PULSE"
     act: 6
     projection: "BLACKOUT"
@@ -326,7 +343,12 @@ cues:
     cave:
       - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "pulse"}
 
-  - time: 308.5
+  - time: 455.0
+    name: "RAIN_STOP_FREEZE"
+    act: 6
+    rain: "RAIN_STOP"
+
+  - time: 456.5
     name: "LAMP_COLLAPSE"
     act: 6
     cave:
@@ -336,75 +358,80 @@ cues:
       - {cmd: "head_nod", angle: 100}
 
   # --------------------------------------------------------------------------
-  # SCENE 7 - HOLDING (05:10-06:00) - the void with hands
+  # SCENE 7 - HOLDING (07:38-08:28) - the void with hands
   # --------------------------------------------------------------------------
-  - time: 310.0
+  - time: 458.0
     name: "KICK_DRUM_DISTANT"
     act: 7
     lighting: "DEATH"
 
-  - time: 318.0
+  - time: 466.0
     name: "MAN_LIFTS_LAMP_BY_HEAD"
     act: 7
 
-  - time: 330.0
+  - time: 478.0
     name: "LONG_STILL_MOMENT"
     act: 7
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
-  - time: 345.0
+  - time: 493.0
     name: "MAN_LOOKS_AT_AUDIENCE"
     act: 7
 
-  - time: 355.0
+  - time: 503.0
     name: "CASTLE_GHOST_FAINT"
     act: 7
     projection: "DISNEY_CASTLE"
 
   # --------------------------------------------------------------------------
-  # SCENE 8 - RETURN (06:00-07:00) - resurrection and revision
+  # SCENE 8 - RETURN (08:28-09:28) - resurrection and revision
   # --------------------------------------------------------------------------
-  - time: 360.0
+  - time: 508.0
     name: "BULB_SCREWED_IN"
     act: 8
     projection: "BLACKOUT"
 
-  - time: 370.0
+  - time: 518.0
     name: "NOTHING_FIRST"
     act: 8
 
-  - time: 380.0
+  - time: 528.0
     name: "COMPLETE_SILENCE_5SEC"
     act: 8
     lighting: "BLACKOUT"
 
-  - time: 388.0
+  - time: 530.0
+    name: "RAIN_GENTLE_START"
+    act: 8
+    rain: "RAIN_GENTLE"
+
+  - time: 536.0
     name: "FLICKER_ONE_FRAME"
     act: 8
     cave:
       - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "flicker"}
 
-  - time: 393.0
+  - time: 541.0
     name: "FLICKER_LONGER"
     act: 8
     cave:
       - {cmd: "led_rear", r: 255, g: 180, b: 60, mode: "flicker"}
 
-  - time: 398.0
+  - time: 546.0
     name: "WEAK_YELLOW_LIGHT"
     act: 8
     lighting: "REBIRTH"
     cave:
       - {cmd: "led_rear", r: 180, g: 130, b: 50, mode: "solid"}
 
-  - time: 405.0
+  - time: 553.0
     name: "LAMP_HEAD_TREMBLES"
     act: 8
     cave:
       - {cmd: "head_nod", angle: 148}
 
-  - time: 412.0
+  - time: 560.0
     name: "LAMP_LIFTS_HEAD"
     act: 8
     cave:
@@ -413,95 +440,101 @@ cues:
       - {cmd: "head_nod", angle: 155}
       - {cmd: "led_rear", r: 255, g: 190, b: 80, mode: "solid"}
 
-  - time: 416.0
+  - time: 564.0
     name: "PIANO_WARM_CHORD"
     act: 8
 
   # --------------------------------------------------------------------------
-  # SCENE 9 - RECOGNITION (07:00-08:00) - naming
+  # SCENE 9 - RECOGNITION (09:28-10:28) - naming
   # --------------------------------------------------------------------------
-  - time: 420.0
+  - time: 568.0
     name: "WHITE_PAGE_APPEARS"
     act: 9
     projection: "BLACKOUT"
 
-  - time: 426.0
+  - time: 574.0
     name: "STICK_FIGURE_PROJECTED"
     act: 9
     projection: "AI_SIGNATURE"
 
-  - time: 435.0
+  - time: 580.0
+    name: "RAIN_NAMES_START"
+    act: 9
+    rain: "RAIN_NAMES"
+
+  - time: 583.0
     name: "LASER_STICK_FIGURE_CUE"
     act: 9
     laser: "LASER_STICK_FIGURE"
 
-  - time: 436.0
+  - time: 584.0
     name: "AI_TEXT_TYPES"
     act: 9
     projection: "AI_SIGNATURE"
 
-  - time: 450.0
+  - time: 598.0
     name: "LASER_AI_TEXT_CUE"
     act: 9
     laser: "LASER_AI_TEXT"
 
-  - time: 446.0
+  - time: 594.0
     name: "WALT_WRITES_NAME"
     act: 9
     projection: "WALT_SIGNATURE"
 
-  - time: 456.0
+  - time: 604.0
     name: "LAMP_PROCESSING_NAME"
     act: 9
     cave:
       - {cmd: "head_nod", angle: 145}
 
-  - time: 466.0
+  - time: 614.0
     name: "LAMP_VOICE_WALT"
     act: 9
     cave:
       - {cmd: "head_nod", angle: 150}
 
-  - time: 470.0
+  - time: 618.0
     name: "WALT_HELLO"
     act: 9
 
-  - time: 474.0
+  - time: 622.0
     name: "CASTLE_VIVID_FULL"
     act: 9
     projection: "DISNEY_CASTLE"
     lighting: "DISNEY_SOFT"
 
   # --------------------------------------------------------------------------
-  # SCENE 10 - TRANSFORMATION (08:00-08:40) - the rockstar returns
+  # SCENE 10 - TRANSFORMATION (10:28-11:08) - the rockstar returns
   # --------------------------------------------------------------------------
-  - time: 480.0
+  - time: 628.0
     name: "WALT_OPENS_BENCH"
     act: 10
+    rain: "RAIN_THREE"
 
-  - time: 486.0
+  - time: 634.0
     name: "YELLOW_BANDANA_REVEALED"
     act: 10
 
-  - time: 491.0
+  - time: 639.0
     name: "SUNGLASSES_ON"
     act: 10
 
-  - time: 496.0
+  - time: 644.0
     name: "BANDANA_TIED"
     act: 10
 
-  - time: 500.0
+  - time: 648.0
     name: "LASER_SIGNATURE_CUE"
     act: 10
     laser: "LASER_SIGNATURE"
 
-  - time: 502.0
+  - time: 650.0
     name: "AXEL_DUTCH_NAMING"
     act: 10
     projection: "AXEL_SIGNATURE"
 
-  - time: 510.0
+  - time: 658.0
     name: "TEAM_ROCKSTARS_LOGO"
     act: 10
     projection: "TEAM_ROCKSTARS"
@@ -509,39 +542,40 @@ cues:
     cave:
       - {cmd: "led_rear", r: 255, g: 200, b: 50, mode: "solid"}
 
-  - time: 515.0
+  - time: 663.0
     name: "FULL_BAND_ENTERS"
     act: 10
 
   # --------------------------------------------------------------------------
-  # SCENE 11 - WE (08:40-09:17)
+  # SCENE 11 - WE (11:08-11:45)
   # --------------------------------------------------------------------------
-  - time: 520.0
+  - time: 668.0
     name: "FINAL_CHORDS_BEGIN"
     act: 11
     lighting: "FINALE"
+    rain: "RAIN_WE"
     cave:
       - {cmd: "led_rear", r: 255, g: 200, b: 80, mode: "solid"}
 
-  - time: 525.0
+  - time: 673.0
     name: "THREE_NAMES_APPEAR"
     act: 11
     projection: "THREE_NAMES"
 
-  - time: 532.0
+  - time: 680.0
     name: "WE_DISCOVERED"
     act: 11
     projection: "THREE_NAMES"
 
-  - time: 538.0
+  - time: 686.0
     name: "CHORD_SUSTAINS"
     act: 11
 
-  - time: 540.0
+  - time: 688.0
     name: "AXEL_MAKES_ROOM"
     act: 11
 
-  - time: 543.0
+  - time: 691.0
     name: "LAMP_SETTLES_BESIDE"
     act: 11
     cave:
@@ -550,33 +584,34 @@ cues:
       - {cmd: "head_nod", angle: 145}
       - {cmd: "turntable_rotate", degrees: -15, speed: 5}
 
-  - time: 548.0
+  - time: 696.0
     name: "FACING_FORWARD"
     act: 11
     cave:
       - {cmd: "head_nod", angle: 150}
 
-  - time: 550.0
+  - time: 698.0
     name: "MUTUAL_RECOGNITION"
     act: 11
     cave:
       - {cmd: "turntable_rotate", degrees: 10, speed: 8}
       - {cmd: "head_nod", angle: 148}
 
-  - time: 553.0
+  - time: 701.0
     name: "BOTH_LOOK_FORWARD"
     act: 11
     cave:
       - {cmd: "turntable_rotate", degrees: -10, speed: 8}
       - {cmd: "head_nod", angle: 150}
 
-  - time: 555.0
+  - time: 703.0
     name: "LAMP_SLOW_FADE"
     act: 11
+    rain: "RAIN_OFF"
     cave:
       - {cmd: "led_rear", r: 180, g: 140, b: 50, mode: "pulse"}
 
-  - time: 556.5
+  - time: 704.5
     name: "LAMP_OFF"
     act: 11
     projection: "BLACKOUT"
@@ -584,12 +619,12 @@ cues:
     cave:
       - {cmd: "led_rear", r: 0, g: 0, b: 0, mode: "off"}
 
-  - time: 558.0
+  - time: 706.0
     name: "WE_FADES"
     act: 11
     projection: "BLACKOUT"
 
-  - time: 559.0
+  - time: 707.0
     name: "SHOW_END"
     act: 11
     projection: "BLACKOUT"
