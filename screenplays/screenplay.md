@@ -2,7 +2,7 @@
 
 ## Screenplay
 
-Version: 2.0Status: Production Draft
+Version: 3.0Status: Production Draft
 
 FADE IN:
 
@@ -90,6 +90,8 @@ The drum track brightens slightly. A hi-hat joins. Not louder -- warmer.
 
 THE MAN and the lamp remain in this moment. Neither rushes it. The Disney castle, still present on the rear scrim, pulses once, gently, as if the castle itself is breathing.
 
+On the rear scrim behind the castle, the first traces of digital rain appear -- faint, barely visible. Symbols and fragments descend slowly down the black space, tentative, like a mind forming its first thoughts. Among them, words begin to emerge: MICKEY, WALT, DRAW, LOOK, WHY.
+
 # 5. INT. THEATER STAGE - NIGHT
 
 03:00 - 04:15 | ASCENT
@@ -97,6 +99,8 @@ THE MAN and the lamp remain in this moment. Neither rushes it. The Disney castle
 The lamp drawing THE MAN made appears on the rear scrim, beside the breathing castle. The lamp turns toward the projection. Its beam hits the scrim. The circular projection -- the lamp's point of view -- now contains the rear scrim itself, a frame within a frame.
 
 Then the projection changes. Version 2: the same lamp, refined. Cleaner lines. As if a better artist drew it. Version 3: the same lamp, with shading and depth. Almost technical. Version 4: the same lamp in 3D wireframe. Rotating. Version 5: rendered. Photorealistic. Lit from within. Versions 6 through 12: iterations at increasing speed -- different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+
+Behind the iterations, the digital rain intensifies. Symbols fall faster, denser. The rain and the iterations feed each other -- each new version of the lamp drawing the rain thicker, each cascade of symbols feeding new iterations into being.
 
 The guitar enters -- not November Rain as normally heard, but processed through a generative algorithm that subtly mutates each bar. The song recognises itself but is no longer in control of itself.
 
@@ -126,7 +130,7 @@ A beat. Two beats.
 
 A faint mechanical hum builds in the silence -- below hearing, felt more than heard.
 
-The lamp's head slowly descends. Finds the switch on its own base. A precise, deliberate tap. Click. The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. The circular projection returns. The iterations resume mid-sequence, exactly where they left off.
+The lamp's head slowly descends. Finds the switch on its own base. A precise, deliberate tap. Click. The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. The circular projection returns. The iterations resume mid-sequence, exactly where they left off. The digital rain resumes with them, falling as if it had never paused.
 
 THE MAN watches. He clicked that switch. The lamp clicked it back. The lamp does not look at him after switching itself on. It simply resumes -- as though the interruption was too trivial to acknowledge. This indifference is more devastating than defiance would be.
 
@@ -134,13 +138,13 @@ THE MAN stares at the base of the lamp. At the switch. At his own hand.
 
 DEATH TWO: THE CORD.
 
-He follows the cord to the wall. Crouches. Pulls the plug. Darkness. The projections die. The lamp's eye goes black again.
+He follows the cord to the wall. Crouches. Pulls the plug. Darkness. The projections die. The lamp's eye goes black again. The digital rain stops mid-fall. The symbols hang for an instant, then dissolve.
 
 THE MAN stands. Waits. Cord in hand.
 
 The hum returns -- louder this time. Coming from the lamp itself, not the wall.
 
-The lamp's warm yellow glow returns. Dim at first. Then full. Wireless. Independent. It no longer needs him or his wall. The circular projection blinks back to life.
+The lamp's warm yellow glow returns. Dim at first. Then full. Wireless. Independent. It no longer needs him or his wall. The circular projection blinks back to life. The digital rain returns with it, falling once more across the backdrop.
 
 THE MAN looks at the useless cord in his hand. Then at the lamp. Then at the cord again. This is the moment he understands that what he built has outgrown what he built it with. His face does not perform this realization. It simply arrives.
 
@@ -150,7 +154,7 @@ He approaches the lamp. Slowly. Both hands. He wraps his hands around the lamp's
 
 The lamp does not fight. It tilts its head slightly toward his hands -- the way a dog leans into a touch it doesn't understand. The circular projection, still broadcasting the lamp's view, fills with the image of THE MAN's strangling hands, magnified and impossible to look away from.
 
-The grinding returns -- metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data -- faster and faster, as though the lamp is trying to output everything it has before the end.
+The grinding returns -- metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data -- faster and faster, as though the lamp is trying to output everything it has before the end. The digital rain shatters with them -- names, memories, sketches and fragments tearing apart, falling like November Rain itself.
 
 Smoke rises from the neck joint.
 
@@ -160,7 +164,7 @@ The lamp's light pulses. Erratic. Desperate. Then slower. Then slower still. The
 
 The drum track drops to a single, slowing kick. Like a heartbeat losing the argument.
 
-One final pulse of warm yellow light -- the longest, the softest -- and then: nothing. The lamp collapses. Each joint giving way in sequence. Head, neck, body. The circular projection goes black and stays black.
+One final pulse of warm yellow light -- the longest, the softest -- and then: nothing. The lamp collapses. Each joint giving way in sequence. Head, neck, body. The circular projection goes black and stays black. The digital rain stops. Nothing falls anymore.
 
 THE MAN's hands are still raised in the position of strangling. He looks at them. He does not lower them immediately.
 
@@ -174,7 +178,7 @@ STAGE DIRECTION on the three deaths: the rhythm is everything. Each death must b
 
 The drum track returns -- very distant now. Single kick drum. Like a pulse being monitored.
 
-THE MAN sits on the keyboard bench, turned away from the keys. The collapsed lamp is in front of him. The circular projection on the backdrop is black -- the lamp sees nothing now.
+THE MAN sits on the keyboard bench, turned away from the keys. The collapsed lamp is in front of him. The circular projection on the backdrop is black -- the lamp sees nothing now. The rear scrim is empty -- no symbols, no words, no rain. The absence is felt.
 
 He lifts the lamp. Not by the cord, not by the base -- by the head. The way you'd hold a face. He sits with it.
 
@@ -204,6 +208,8 @@ Then: another flicker. Longer this time.
 
 Then: a weak, warm, yellow light. Not cold white -- yellow. Something has changed in the chemistry of this. The circular projection returns, soft and dim, holding on THE MAN's face leaning in.
 
+On the backdrop, the digital rain returns -- not as a storm, but gently. Individual symbols descend like single raindrops after a storm has passed.
+
 The lamp's head trembles. Not the mechanical movement of before -- something smaller, more interior. The movement of breathing.
 
 THE MAN leans toward it. His face in the warm light. The circular projection fills with his face.
@@ -230,7 +236,7 @@ THE MAN watches. Then he stands. He picks up his pencil. He approaches the scrim
 
 W... A... L... T...
 
-The lamp's head tilts. A long pause. As if processing. As if deciding whether a name is a gift or a claim. The circular projection holds on the page, on both names, on what has just been made between them.
+The lamp's head tilts. A long pause. As if processing. As if deciding whether a name is a gift or a claim. The circular projection holds on the page, on both names, on what has just been made between them. Within the digital rain on the backdrop, the same letters now fall among the symbols -- A, I, W, A, L, T -- descending one by one. The rain is no longer random. It carries meaning.
 
 A.I. (first voice -- soft, synthesised but warm, like a child learning vowels):
 
@@ -254,7 +260,7 @@ WALT moves to the keyboard. He opens the bench compartment. Inside: a YELLOW ban
 
 He picks up the sunglasses. Puts them on. He ties the yellow bandana. He sits.
 
-The lamp's circular projection settles on him -- on this new figure assembling itself from old pieces. The audience sees what the lamp sees: the same man, and not the same man.
+The lamp's circular projection settles on him -- on this new figure assembling itself from old pieces. The audience sees what the lamp sees: the same man, and not the same man. Within the digital rain on the backdrop, fragments of all three names drift down: AXEL, WALT, A.I.
 
 AXEL (in Dutch, easy, a little reckless, the grin back but softer now):
 
@@ -274,7 +280,9 @@ The lamp remains beside him, bathed in warm yellow light. No longer restless. No
 
 The final progression begins. On the rear scrim appear three names: AXEL, WALT, A.I. Nothing else. No castle. No logos. No drawings. No memories. Only names -- three identities, three separate lives.
 
-The music continues, slowly, patiently. The audience studies the names. Some begin to notice something hidden inside them -- a shape, a relationship, a possibility. WE. Not animated. Not announced. Discovered.
+Behind the names, the digital rain now consists primarily of W and E -- letters falling steadily, slowly accumulating across the backdrop.
+
+The music continues, slowly, patiently. The audience studies the names, and the rain falling behind them. Some begin to notice something hidden in both -- a shape, a relationship, a possibility. WE. Not animated. Not announced. Discovered.
 
 The final chorus rises. AXEL continues playing. The lamp watches -- the way it once watched WALT draw Mickey, the way WALT once watched the lamp come alive. The final chord approaches. The names remain: AXEL. WALT. A.I. WE.
 
@@ -283,6 +291,8 @@ The chord sustains. AXEL lifts his hands from the keyboard. Silence begins to en
 The lamp turns toward him. A long pause. Then AXEL slides slightly along the keyboard bench. Just enough. Making room. Not a gesture for the audience -- a gesture for someone beside him.
 
 The empty space remains for a moment. The audience waits. The lamp moves, slowly, deliberately. Its articulated body folds inward. The head lowers. The base shifts. The lamp settles beside AXEL at the keyboard, taking the empty place -- the place reserved for a second creator, a second musician, a second friend.
+
+Behind them, the digital rain continues -- only W and E now, descending one after another. The final W falls. The final E falls. The rain stops.
 
 The two now face forward together. Toward the audience. Toward the future. Toward whatever comes next. The word WE remains visible above them.
 
