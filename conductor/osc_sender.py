@@ -148,6 +148,10 @@ class OSCSender:
         """Send projection scene change."""
         self.send("projection", "/projection/scene", scene)
 
+    def projection_rain(self, state: str):
+        """Send digital rain overlay state change."""
+        self.send("projection", "/projection/rain", state)
+
     def lighting_state(self, state: str):
         """Send lighting state change."""
         self.send("lighting", "/lighting/state", state)

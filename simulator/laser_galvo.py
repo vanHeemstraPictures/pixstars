@@ -22,6 +22,8 @@ from dataclasses import dataclass
 import pygame
 from pythonosc import dispatcher, osc_server
 
+from projection.rain import DigitalRainRenderer
+
 
 DEFAULT_PORT = 9005
 WINDOW_SIZE = (600, 400)
@@ -183,6 +185,7 @@ class LaserSimulator:
         self.state = LaserState(set_at=time.monotonic())
         self.last_command = "(waiting for OSC commands on port %d)" % port
         self.timecode = 0.0
+        self.rain_state = "RAIN_OFF"
         self._lock = threading.Lock()
 
         cx, cy = WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2
@@ -191,10 +194,14 @@ class LaserSimulator:
         self._text = _ai_text_segments(cx, cy)
         self._sig = _signature_segments(cx, cy)
 
+        # Rain renderer (initialized in start() once pygame.font is ready)
+        self.rain: DigitalRainRenderer | None = None
+
         self._dispatcher = dispatcher.Dispatcher()
         self._dispatcher.map("/laser/scene", self._handle_scene)
         self._dispatcher.map("/laser/clear", self._handle_clear)
         self._dispatcher.map("/timecode", self._handle_timecode)
+        self._dispatcher.map("/projection/rain", self._handle_rain)
 
     # -- OSC handlers ----------------------------------------------------
 
@@ -222,6 +229,26 @@ class LaserSimulator:
                 self.timecode = float(args[0])
         except (TypeError, ValueError):
             pass
+
+    def _handle_rain(self, address, *args):
+        if not args:
+            print("  [LASER SIM WARNING] /projection/rain needs a state string")
+            return
+        state_name = str(args[0]).upper()
+        if self.rain is None:
+            with self._lock:
+                self.rain_state = state_name
+            print(f"  [LASER SIM] /projection/rain {state_name} (queued)")
+            return
+        try:
+            self.rain.set_state(state_name)
+        except ValueError as e:
+            print(f"  [LASER SIM ERROR] {e}")
+            return
+        with self._lock:
+            self.rain_state = state_name
+            self.last_command = f"/projection/rain {state_name}"
+        print(f"  [LASER SIM] /projection/rain {state_name}")
 
     # -- Drawing helpers -------------------------------------------------
 
@@ -346,11 +373,24 @@ class LaserSimulator:
         tc_font = pygame.font.SysFont("monospace", 20, bold=True)
         clock = pygame.time.Clock()
 
+        # Rain overlay (rendered as background behind laser drawings)
+        self.rain = DigitalRainRenderer(WINDOW_SIZE[0], WINDOW_SIZE[1], font_size=14)
+        with self._lock:
+            initial_rain = self.rain_state
+        if initial_rain != "RAIN_OFF":
+            try:
+                self.rain.set_state(initial_rain)
+            except ValueError:
+                pass
+
         print("=" * 50)
         print("  PIXSTARS LASER GALVO SIMULATOR")
         print(f"  OSC port: {self.port}")
         print("  Scenes: LASER_SWEEP, LASER_STICK_FIGURE,")
         print("          LASER_AI_TEXT, LASER_SIGNATURE, BLACKOUT")
+        print("  Rain:   /projection/rain <RAIN_OFF|RAIN_TRACES|RAIN_BUILDING|")
+        print("          RAIN_STORM|RAIN_SHATTER|RAIN_STOP|RAIN_GENTLE|")
+        print("          RAIN_NAMES|RAIN_THREE|RAIN_WE>")
         print("  ESC or window close to quit")
         print("=" * 50)
 
@@ -369,12 +409,20 @@ class LaserSimulator:
                 set_at = self.state.set_at
                 last_cmd = self.last_command
                 tc = self.timecode
+                rain_state = self.rain_state
+
+            # Rain background layer (drawn first so lasers render on top)
+            dt = clock.get_time() / 1000.0
+            self.rain.update(dt)
+            screen.blit(self.rain.render(), (0, 0))
 
             elapsed = now - set_at
             self._render(screen, scene, elapsed)
 
-            header = small.render(f"scene: {scene}   t+{elapsed:5.2f}s",
-                                  True, TEXT_COLOR)
+            header = small.render(
+                f"scene: {scene}   rain: {rain_state}   t+{elapsed:5.2f}s",
+                True, TEXT_COLOR,
+            )
             screen.blit(header, (10, 8))
             overlay = font.render(last_cmd, True, TEXT_COLOR)
             screen.blit(overlay, (10, WINDOW_SIZE[1] - 22))

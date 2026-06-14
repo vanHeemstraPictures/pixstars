@@ -199,6 +199,10 @@ def _dispatch_cue(cue: dict, index: int, total: int, sender: OSCSender, ardour: 
     if "projection" in cue and cue["projection"]:
         sender.projection_scene(cue["projection"])
 
+    # Projection rain overlay state
+    if "rain" in cue and cue["rain"]:
+        sender.projection_rain(cue["rain"])
+
     # Lighting state
     if "lighting" in cue and cue["lighting"]:
         sender.lighting_state(cue["lighting"])
