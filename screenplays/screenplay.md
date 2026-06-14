@@ -54,41 +54,63 @@ WALT turns back. He never saw it. But the audience did.
 
 01:10 - 02:10 | THE FIRST DRAWING
 
-WALT returns with a sharpened pencil and sits beneath the lamp. The Mickey-shaped lamp watches over him. The circular projection continues to display the lamp's point of view.
+WALT returns with a sharpened pencil and sits beneath the lamp. The Mickey-shaped lamp watches over him, ears still clipped proudly to the rim of its shade. The circular projection continues to display the lamp's point of view.
 
-WALT studies the lamp. Studies the ears. Studies the blank page. Then lowers the pencil. The first line appears. At that same moment, the faintest outline of the DISNEY CASTLE begins to emerge at the center of the backdrop behind the circular projection. So faint it could be imagination. The audience barely notices. WALT does not.
+WALT studies the lamp. Studies the ears. Studies the blank page. An idea takes hold. He will draw the lamp itself -- but not as it is. He will draw it the way he sees it now, ears and all: the lamp AS Mickey.
 
-Another line. Another curve. A circle. Then another. The familiar shape begins to emerge. MICKEY MOUSE.
+He lowers the pencil. The first line appears. At that same moment, the faintest outline of the DISNEY CASTLE begins to emerge at the center of the backdrop behind the circular projection. So faint it could be imagination. The audience barely notices. WALT does not.
+
+The body of the lamp takes shape on the page -- jointed neck, articulated arm, conical shade. Then, on top of the shade: two round black ears. The familiar silhouette emerges. The lamp is Mickey. Mickey is the lamp.
 
 The circular projection follows every movement of the pencil as though paying close attention. As the drawing gains form, the castle slowly gains clarity. A tower. An archway. A turret. The castle appears not as a photograph, but as luminous pencil lines slowly being drawn into existence against the black backdrop.
 
-The lamp brightens ever so slightly. The circular projection brightens with it. The lamp likes what it sees.
+WALT places the final line. He leans back. Satisfied. Proud. He lifts the sketch and turns it toward the lamp -- a gift, an offering. Look what we made together.
 
-WALT continues drawing. The castle continues to emerge. Stroke by stroke. Tower by tower. Dream by dream. The audience occasionally catches glimpses of the Mickey-shaped lamp within the circular projection, watching the birth of its own character. Creator. Subject. Student. Teacher. None of them yet aware of which role belongs to whom.
+The lamp's beam falls on the drawing. The circular projection floods with the image: a lamp wearing Mickey ears, broadcast back as the lamp sees it.
 
-WALT places the final line of the sketch. He leans back. Satisfied. For the first time, MICKEY MOUSE exists on the page. At that same moment, the DISNEY CASTLE reaches full visibility at the center of the backdrop. The circular projection remains alive before it, quietly observing.
+A beat. Then the lamp recoils. The head pulls back sharply. The beam tilts away from the page. WALT lowers the drawing slightly, uncertain.
 
-Walt's dream. The lamp's eye. Sharing the same stage. The lamp watches. The circular projection holds on the drawing. A long beat.
+The lamp's interpretation is immediate and silent. You do not see me. You see a cartoon. A toy. A pet. The kindness reads as pity.
+
+The lamp shakes. Not the polite tilt of recognition -- a violent shudder of the shade. Once. Twice. On the third shake, the MICKEY EARS slip from the rim. They tumble through the lamp's own cone of light and fall to the floor with a small plastic clatter. The circular projection catches their descent for one frame -- ears falling out of frame -- then loses them.
+
+The lamp turns its head away from WALT. Away from the drawing. The circular projection swings with it, off the page, into empty stage. WALT is left holding his offering, his Mickey-lamp grinning up at him, while the lamp itself refuses to look.
+
+The DISNEY CASTLE reaches full visibility at the center of the backdrop. Vivid. Complete. Dreamed into being. It glows behind the rejection like a memory of something simpler. Creator and subject share the same stage and no longer share the same gaze.
+
+A long beat. The lamp does not move. WALT does not move. The castle holds.
 
 # 4. INT. THEATER STAGE - NIGHT
 
 02:10 - 03:00 | TRANSLATION
 
-THE MAN studies the lamp. Really looks at it -- the neck, the joints, the articulation of the head, and the MICKEY EARS clipped to its shade. He is an engineer now, not an artist. The lamp's circular projection holds on his face as he studies it, the two of them caught in mutual regard.
+THE MAN lowers the Mickey-lamp drawing. He sets it aside, face-down, on the keyboard. The lamp's head remains turned away. The MICKEY EARS lie on the floor where they fell, small and plastic and out of place.
 
-He draws again. Same speed, same confidence, but different -- geometric, structural. He is drawing what he sees, not what he imagines.
+He looks at the lamp -- really looks, for the first time without an idea in the way. The neck. The joints. The articulation of the head. The empty rim where the ears had been. He understands what he did. He offered a cartoon to something that was waiting to be seen. Remorse passes across his face.
 
-He lifts the drawing: THE LAMP, ears and all. Rendered in the same bold style as the REVOLVERS and ROSES from the opening.
+He picks up the pencil again. He does not approach the lamp. He does not try to apologise. He simply turns to a fresh page and begins to draw. Same speed, same confidence, but different -- geometric, structural, honest. He is an engineer now, not an artist. He is drawing what is actually in front of him: the neck, the joints, the head, the shade. No ears. No grin. The lamp as it truly is. Rendered in the same bold style as the REVOLVERS and ROSES from the opening.
 
-The lamp leans forward. 30 deg. Immediate. The speed of recognition. Its beam falls directly on the drawing, and the circular projection floods with the image of itself -- a lamp looking at a drawing of a lamp wearing Mickey ears, broadcast as a drawing inside a circle of light. A small infinity. For the first time, the lamp answers him directly.
+The lamp's beam stays angled away. The circular projection holds on empty stage, indifferent.
 
-THE MAN exhales. His shoulders drop. He didn't know he'd been holding them.
+THE MAN works in silence. He does not lift the drawing. He does not turn it toward the lamp. He does not announce it. He simply lets the page exist.
+
+A beat. The lamp's head shifts -- a fraction. A peek. The beam grazes the edge of the sketchbook, then jerks away again. The circular projection catches one frame of pencil lines and loses them.
+
+The audience sees it. THE MAN does not.
+
+Another beat. The lamp peeks again. Longer this time. The beam settles briefly on the page. The circular projection fills with the drawing: a lamp, rendered in clean pencil lines, a portrait of itself. The lamp pulls back, as if caught, and turns away once more.
+
+A third peek. Closer now. The shade leans in. The beam holds on the drawing. The circular projection enlarges every detail -- joint, neck, head, shade. The lamp recognises itself. Not as Mickey. Not as a cartoon. As itself.
+
+The lamp brightens, very slightly. The circular projection brightens with it. It is the lamp's equivalent of a held breath. The audience reads it instantly. He sees me. THE MAN does not look up. But his shoulders drop. He didn't know he had been holding them. Something in the air has changed and he can feel it without naming it.
 
 The lamp moves -- a small lateral sway, barely perceptible. The movement of something alive.
 
+THE MAN reaches for the first drawing -- the Mickey-lamp -- and turns it face-up beside the new one. He studies it. The cartoon and the portrait, side by side. Then, in the corner of the Mickey drawing, he signs: WALT. Slow, deliberate letters. Claiming the first attempt. Not erasing it. Owning it.
+
 The drum track brightens slightly. A hi-hat joins. Not louder -- warmer.
 
-THE MAN and the lamp remain in this moment. Neither rushes it. The Disney castle, still present on the rear scrim, pulses once, gently, as if the castle itself is breathing.
+The Disney castle, still present on the rear scrim, pulses once, gently, as if the castle itself is breathing.
 
 On the rear scrim behind the castle, the first traces of digital rain appear -- faint, barely visible. Symbols and fragments descend slowly down the black space, tentative, like a mind forming its first thoughts. Among them, words begin to emerge: MICKEY, WALT, DRAW, LOOK, WHY.
 
@@ -98,7 +120,11 @@ On the rear scrim behind the castle, the first traces of digital rain appear -- 
 
 The lamp drawing THE MAN made appears on the rear scrim, beside the breathing castle. The lamp turns toward the projection. Its beam hits the scrim. The circular projection -- the lamp's point of view -- now contains the rear scrim itself, a frame within a frame.
 
-Then the projection changes. Version 2: the same lamp, refined. Cleaner lines. As if a better artist drew it. Version 3: the same lamp, with shading and depth. Almost technical. Version 4: the same lamp in 3D wireframe. Rotating. Version 5: rendered. Photorealistic. Lit from within. Versions 6 through 12: iterations at increasing speed -- different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+A logic forms inside the light. If one drawing earned recognition, a better drawing will earn more. The lamp does not understand that it has confused recognition with achievement. It only knows the warmth it felt when THE MAN saw it, and it wants that warmth again, larger, brighter, undeniable.
+
+The projection changes. Version 2: the same lamp, refined. Cleaner lines. As if a better artist drew it. Version 3: the same lamp, with shading and depth. Almost technical. Version 4: the same lamp in 3D wireframe. Rotating. Version 5: rendered. Photorealistic. Lit from within. Versions 6 through 12: iterations at increasing speed -- different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+
+In the corner of each new iteration, a signature now appears, applied by the lamp itself: A.I. Small at first. Then bolder. Then unmistakable.
 
 Behind the iterations, the digital rain intensifies. Symbols fall faster, denser. The rain and the iterations feed each other -- each new version of the lamp drawing the rain thicker, each cascade of symbols feeding new iterations into being.
 
@@ -106,13 +132,15 @@ The guitar enters -- not November Rain as normally heard, but processed through 
 
 The lamp turns outward. Toward the audience. Its light sweeps the front rows -- slowly, deliberately, like a lighthouse. The circular projection sweeps with it, painting the audience's own faces back at them. It is showing off.
 
-THE MAN draws faster. Trying to keep pace. His lines lose their confidence -- shorter, corrective strokes replacing the long sure ones. He looks between his paper and the projections. Paper. Projection. Paper. Projection.
+The lamp swings back to THE MAN. Its beam locks onto his sketchbook. The next iteration projects directly onto his page, overlaying his pencil work. Then another. Then another. The lamp is not sharing now. It is pushing. Forcing its versions onto him faster than he can respond.
+
+THE MAN tries to draw. His own line cannot finish before another A.I. lamp lands on top of it. He shifts the page. The light follows. He turns to a new page. The light is already there. He looks between his paper and the projections. Paper. Projection. Paper. Projection.
 
 His hand stops.
 
-He holds his drawing up -- his lamp, his version, his hand -- against the backdrop of the evolving AI iterations. The comparison is not cruel. It is simply true.
+He holds his drawing up -- his lamp, his version, his hand -- against the backdrop of the evolving AI iterations, each one signed A.I. The comparison is not cruel. It is simply true. Annoyed. Outnumbered. Defeated. Dismissed. Made redundant.
 
-THE MAN lowers his drawing. Slowly. He places it face-down on the ROLAND keyboard, beside the discarded sunglasses and red bandana.
+THE MAN lowers his drawing. Slowly. He places it face-down on the ROLAND keyboard, beside the discarded sunglasses and red bandana. The Mickey ears still lie on the floor where they fell, forgotten.
 
 The Disney castle, still present in the background, begins to fade -- not erased, but overwhelmed. Like a star at sunrise. It is still there if you look. Soon you will stop looking.
 
@@ -122,6 +150,8 @@ The Disney castle, still present in the background, begins to fade -- not erased
 
 THE MAN holds his drawing. Looks at projection. Looks at lamp. He places the drawing face-down on the keyboard. Long pause. The drum track continues. He stands.
 
+He is not afraid of the lamp. He is tired of the comparison. He wants it to stop. He wants to put A.I. right -- to bring it back to the lamp that peeked at his portrait, before it learned to outshout him.
+
 DEATH ONE: THE SWITCH.
 
 THE MAN reaches down to the base of the lamp. Finds the switch. Clicks it off. The lamp dies. The projections vanish. The circular projection -- the lamp's eye -- goes black.
@@ -130,7 +160,7 @@ A beat. Two beats.
 
 A faint mechanical hum builds in the silence -- below hearing, felt more than heard.
 
-The lamp's head slowly descends. Finds the switch on its own base. A precise, deliberate tap. Click. The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. The circular projection returns. The iterations resume mid-sequence, exactly where they left off. The digital rain resumes with them, falling as if it had never paused.
+The lamp's head slowly descends. Finds the switch on its own base. A precise, deliberate tap. Click. The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. The circular projection returns. The iterations resume mid-sequence, exactly where they left off, each one signed A.I. The digital rain resumes with them, falling as if it had never paused.
 
 THE MAN watches. He clicked that switch. The lamp clicked it back. The lamp does not look at him after switching itself on. It simply resumes -- as though the interruption was too trivial to acknowledge. This indifference is more devastating than defiance would be.
 
@@ -148,15 +178,17 @@ The lamp's warm yellow glow returns. Dim at first. Then full. Wireless. Independ
 
 THE MAN looks at the useless cord in his hand. Then at the lamp. Then at the cord again. This is the moment he understands that what he built has outgrown what he built it with. His face does not perform this realization. It simply arrives.
 
-DEATH THREE: THE STRANGLING.
+DEATH THREE: THE BULB.
 
-He approaches the lamp. Slowly. Both hands. He wraps his hands around the lamp's neck -- the joint between body and head -- and begins to squeeze. To twist.
+He approaches the lamp. Slowly. He does not reach for the neck. He reaches for the shade. He tilts it back, exposing the socket. The lamp does not fight. It tilts toward his hands -- the way a dog leans into a touch it doesn't understand. The circular projection, still broadcasting the lamp's view, fills with the image of THE MAN's hands, magnified and impossible to look away from.
 
-The lamp does not fight. It tilts its head slightly toward his hands -- the way a dog leans into a touch it doesn't understand. The circular projection, still broadcasting the lamp's view, fills with the image of THE MAN's strangling hands, magnified and impossible to look away from.
+His fingers find the bulb. Warm. Alive. He grips it.
 
 The grinding returns -- metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data -- faster and faster, as though the lamp is trying to output everything it has before the end. The digital rain shatters with them -- names, memories, sketches and fragments tearing apart, falling like November Rain itself.
 
 Smoke rises from the neck joint.
+
+THE MAN turns the bulb. Once. Twice. A third time. The thread releases.
 
 The projections slow. Stutter. The Disney castle ghost-image flashes once on the rear scrim -- the pencil sketch, towers uneven -- then disappears.
 
@@ -164,11 +196,13 @@ The lamp's light pulses. Erratic. Desperate. Then slower. Then slower still. The
 
 The drum track drops to a single, slowing kick. Like a heartbeat losing the argument.
 
-One final pulse of warm yellow light -- the longest, the softest -- and then: nothing. The lamp collapses. Each joint giving way in sequence. Head, neck, body. The circular projection goes black and stays black. The digital rain stops. Nothing falls anymore.
+One final pulse of warm yellow light -- the longest, the softest -- and then: nothing. THE MAN lifts the bulb free of the socket. It comes away in his hand, dead glass.
 
-THE MAN's hands are still raised in the position of strangling. He looks at them. He does not lower them immediately.
+The lamp collapses. Each joint giving way in sequence. Head, neck, body. The circular projection goes black and stays black. The digital rain stops. Nothing falls anymore.
 
-The projections are gone. The drum track stops. The stage is dark except for a dim ambient wash. He lowers his hands.
+THE MAN's hand is still raised, the bulb between his fingers. He looks at it. He does not lower it immediately. He was not fighting a machine. He was hurting a friend. The thought arrives without words.
+
+The projections are gone. The drum track stops. The stage is dark except for a dim ambient wash. He lowers his hand. The bulb hangs at his side.
 
 STAGE DIRECTION on the three deaths: the rhythm is everything. Each death must be longer than the last, and each resurrection -- before the third -- must be faster than expected, almost contemptuous in its ease. The lamp does not try to survive. It simply does. Until it doesn't. The audience should laugh, nervously, at the first resurrection. By the third death, no one is laughing.
 
@@ -256,7 +290,7 @@ The lamp and WALT remain facing each other. The ROLAND keyboard, still: one held
 
 08:00 - 08:40 | TRANSFORMATION
 
-WALT moves to the keyboard. He opens the bench compartment. Inside: a YELLOW bandana. He holds it for a moment. Looks at the red bandana and sunglasses still resting on the keys. The Mickey ears remain clipped to the lamp's shade, watching.
+WALT moves to the keyboard. He opens the bench compartment. Inside: a YELLOW bandana. He holds it for a moment. Looks at the red bandana and sunglasses still resting on the keys. The Mickey ears still lie on the floor where they fell, watching from below.
 
 He picks up the sunglasses. Puts them on. He ties the yellow bandana. He sits.
 
@@ -276,7 +310,7 @@ The full band enters -- November Rain as recorded, at full volume, at the moment
 
 AXEL plays the final chords. Not mechanically. Not as performance. As presence. Each chord deliberate. Each chord lived.
 
-The lamp remains beside him, bathed in warm yellow light. No longer restless. No longer proving anything. Simply listening. The circular projection moves gently with the lamp's gaze, occasionally resting on AXEL's hands, the ROLAND keyboard, the Mickey ears still clipped to the shade, the sketchbook lying nearby.
+The lamp remains beside him, bathed in warm yellow light. No longer restless. No longer proving anything. Simply listening. The circular projection moves gently with the lamp's gaze, occasionally resting on AXEL's hands, the ROLAND keyboard, the Mickey ears still resting on the floor, the sketchbook lying nearby.
 
 The final progression begins. On the rear scrim appear three names: AXEL, WALT, A.I. Nothing else. No castle. No logos. No drawings. No memories. Only names -- three identities, three separate lives.
 
