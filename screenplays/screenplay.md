@@ -2,13 +2,13 @@
 
 ## Screenplay
 
-Version: 4.0Status: Production Draft
+Version: 5.0Status: Production Draft
 
 FADE IN:
 
 # 1. INT. THEATER STAGE - NIGHT
 
-00:00 - 00:25 | EMERGENCE
+00:00 - 00:40 | EMERGENCE
 
 TOTAL DARKNESS. Projected on the black backdrop are two brightly illuminated illustrations: stage left, a pair of crossed GUNS rendered in silver and white; stage right, a cluster of deep red ROSES. The images glow against the darkness like artwork from a rock album cover. Between them lies empty space.
 
@@ -28,7 +28,7 @@ The circular projection quietly displays the illuminated top surface of the keyb
 
 # 2. INT. THEATER STAGE - NIGHT
 
-00:25 - 01:10 | DISCOVERY
+00:40 - 01:55 | DISCOVERY
 
 The lamp continues to cast its warm circle of light across the top of the ROLAND keyboard. The circular projection continues to mirror exactly what the lamp sees. At the center of the image remain the MICKEY MOUSE EARS.
 
@@ -52,7 +52,7 @@ WALT turns back. He never saw it. But the audience did.
 
 # 3. INT. THEATER STAGE - NIGHT
 
-01:10 - 02:10 | THE FIRST DRAWING
+01:55 - 03:30 | THE FIRST DRAWING
 
 WALT returns with a sharpened pencil and sits beneath the lamp. The Mickey-shaped lamp watches over him, ears still clipped proudly to the rim of its shade. The circular projection continues to display the lamp's point of view.
 
@@ -82,7 +82,7 @@ A long beat. The lamp does not move. WALT does not move. The castle holds.
 
 # 4. INT. THEATER STAGE - NIGHT
 
-02:10 - 03:00 | TRANSLATION
+03:30 - 04:55 | TRANSLATION
 
 THE MAN lowers the Mickey-lamp drawing. He sets it aside, face-down, on the keyboard. The lamp's head remains turned away. The MICKEY EARS lie on the floor where they fell, small and plastic and out of place.
 
@@ -116,7 +116,7 @@ On the rear scrim behind the castle, the first traces of digital rain appear -- 
 
 # 5. INT. THEATER STAGE - NIGHT
 
-03:00 - 04:15 | ASCENT
+04:55 - 06:43 | ASCENT
 
 The lamp drawing THE MAN made appears on the rear scrim, beside the breathing castle. The lamp turns toward the projection. Its beam hits the scrim. The circular projection -- the lamp's point of view -- now contains the rear scrim itself, a frame within a frame.
 
@@ -146,7 +146,7 @@ The Disney castle, still present in the background, begins to fade -- not erased
 
 # 6. INT. THEATER STAGE - NIGHT
 
-04:15 - 05:10 | THREE DEATHS
+06:43 - 07:38 | THREE DEATHS
 
 THE MAN holds his drawing. Looks at projection. Looks at lamp. He places the drawing face-down on the keyboard. Long pause. The drum track continues. He stands.
 
@@ -208,7 +208,7 @@ STAGE DIRECTION on the three deaths: the rhythm is everything. Each death must b
 
 # 7. INT. THEATER STAGE - NIGHT
 
-05:10 - 06:00 | HOLDING
+07:38 - 08:28 | HOLDING
 
 The drum track returns -- very distant now. Single kick drum. Like a pulse being monitored.
 
@@ -224,7 +224,7 @@ The Disney castle projection appears on the rear scrim -- very faint, barely vis
 
 # 8. INT. THEATER STAGE - NIGHT
 
-06:00 - 07:00 | RETURN
+08:28 - 09:28 | RETURN
 
 THE MAN holds the bulb over the lamp socket. His hand trembles slightly -- not performance trembling, but the real trembling of doing something that might not work. He screws the bulb in.
 
@@ -256,7 +256,7 @@ The lamp is alive. And it is not what it was.
 
 # 9. INT. THEATER STAGE - NIGHT
 
-07:00 - 08:00 | RECOGNITION
+09:28 - 10:28 | RECOGNITION
 
 A white page appears on the rear scrim. Clean. The lamp's beam falls on it. The lamp's circular projection now contains the page -- a frame within a frame, white inside the circle of light.
 
@@ -288,7 +288,7 @@ The lamp and WALT remain facing each other. The ROLAND keyboard, still: one held
 
 # 10. INT. THEATER STAGE - NIGHT
 
-08:00 - 08:40 | TRANSFORMATION
+10:28 - 11:08 | TRANSFORMATION
 
 WALT moves to the keyboard. He opens the bench compartment. Inside: a YELLOW bandana. He holds it for a moment. Looks at the red bandana and sunglasses still resting on the keys. The Mickey ears still lie on the floor where they fell, watching from below.
 
@@ -306,7 +306,7 @@ The full band enters -- November Rain as recorded, at full volume, at the moment
 
 # 11. INT. THEATER STAGE - NIGHT
 
-08:40 - 09:17 | WE
+11:08 - 11:45 | WE
 
 AXEL plays the final chords. Not mechanically. Not as performance. As presence. Each chord deliberate. Each chord lived.
 
