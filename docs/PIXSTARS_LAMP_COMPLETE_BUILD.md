@@ -47,7 +47,7 @@ to TMC2209), unified with the servo/LED/laser control path on the same ESP32.
                     |  120-150mm tall |
                     |                 |
                     +-----------------+
-                         piano top
+                       keyboard surface
 
     Inside cave (hanging from servo rail under rotating top plate):
       ESP32 DevKit, Maestro 24-ch, 4x MG996R, 1x MG90S,
@@ -87,7 +87,7 @@ Mac Mini M4 Pro
 | Bilateral belt tensioner (idler pulleys or sprung blocks) | 1 set | Maintains friction grip on bearing race (MGX3D-style) |
 | Hall effect sensor (SS49E or A3144) + neodymium magnet | 1 set | Origin detect for homing |
 | Riser block (AL tube or 18mm plywood) | 1 | Creates cave depth (120-150mm); bearing + drive mount on top |
-| Riser-to-piano fixings | 1 set | M6 bolts or clamp system (non-destructive) |
+| Riser-to-keyboard fixings | 1 set | M6 bolts or clamp system (non-destructive) |
 | Inner ring adapter plate | 1 | AL plate, couples inner ring to lazy susan bearing top |
 | Decorative skirt | 1 | Fabric or formed AL, conceals riser + cave |
 
@@ -260,7 +260,7 @@ Reference design: github.com/MGX3D/Turntable.
 17. Flash ESP32 firmware
 18. Configure ComXim WiFi (static IP, confirm CT commands)
 19. Attach decorative skirt around riser + ComXim base
-20. Fix riser to piano top (non-destructive)
+20. Fix riser to keyboard stand (non-destructive)
 21. Calibrate servo ranges and home positions
 22. Test ComXim origin return
 
@@ -285,6 +285,6 @@ Reference design: github.com/MGX3D/Turntable.
 | Lazy susan bearing alignment / wobble with cave load hanging below? | Affects laser/camera pointing stability from the lamp head |
 | Hall sensor / magnet mounting repeatability (origin drift between shows)? | Determines whether a secondary index or re-home cadence is needed |
 | Riser block height vs. cave component stack (NEMA 17 + bracket + tensioner)? | Final riser dimension |
-| Can riser attach to piano non-destructively? | Stage requirement |
+| Can riser attach to keyboard stand non-destructively? | Stage requirement |
 
 See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for full design rationale.

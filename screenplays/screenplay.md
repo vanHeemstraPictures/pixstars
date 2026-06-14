@@ -1,228 +1,198 @@
-# 1. INT. STAGE - EMERGENCE
-ACT ONE: DARKNESS WITH MEMORY<br/>
-00:00 – 00:25 | EMERGENCE<br/>
-Complete darkness. Thirty seconds of silence before the first note — longer than comfortable.
+# PIXSTARS
 
-Then: a single piano note. Middle C. Naked. Exposed. It hangs.
+## Screenplay
 
-Four seconds later: another note. The opening figure of November Rain, but played at half tempo — as if being remembered rather than performed.
+Version: 3.0Status: Production Draft
 
-SOUND DESIGN: The piano is slightly detuned on three strings. Not broken — aged. The sound should feel like a Polaroid of a song rather than the song itself.
+FADE IN:
 
-Left projection bleeds in — not a sudden cut, but a slow burn, like developing film:
-- [PROJECTION LEFT] — The word GUNS in rough charcoal letterform, on torn cream paper texture. Slightly tilted. A child drew this.
+# 1. INT. THEATER STAGE - NIGHT
 
-- [PROJECTION RIGHT] — ROSES — same hand, same paper, same tilt.
+00:00 - 00:25 | EMERGENCE
 
-The center of the rear scrim remains black. The two words float like a half-remembered argument.
+TOTAL DARKNESS. Projected on the black backdrop are two brightly illuminated illustrations: stage left, a pair of crossed REVOLVERS rendered in silver and white; stage right, a cluster of deep red ROSES. The images glow against the darkness like artwork from a rock album cover. Between them lies empty space.
 
-A third piano note. Then a mechanical CLUNK — the sound of a lamp switch, amplified and placed in the room via spatial audio from the rear speakers, as though it came from behind the audience.
+A single piano note emerges from the void. Then another. And another. The opening notes of NOVEMBER RAIN slowly fill the theater. The audience begins to recognise the melody. Nothing else is visible. Only music.
 
-Instantly: the LAMP switches on. Cold. White. Clinical. The projections do not disappear — they are simply overwhelmed. Bleached out by the lamp’s indifference.
+AXEL sits hidden in darkness behind a ROLAND keyboard. He continues playing -- another note, then another -- completely absorbed, completely in control. He strikes the next note. At that exact moment, the ANGLEPOISE LAMP beside the keyboard illuminates, and a circular projection appears on the backdrop, displaying exactly what lies within the lamp's field of view. At the center of both pools of light rests a pair of plastic MICKEY MOUSE EARS.
 
-AXEL ROSE is revealed — seated at the piano, back straight, mirrored sunglasses, red bandana, sleeves rolled. He plays the intro with the calm of someone who has played this ten thousand times. His hands are sure. His face is empty.
+AXEL freezes. The note continues to ring beneath his finger. He does not strike another key. His finger remains pressed on the key as the sound slowly decays. The lamp continues to shine. The circular projection remains steady. Sound, light, and image now share the same moment.
 
-The lamp tilts 3° downward. Illuminates the sheet music on the piano stand.
+A long beat. AXEL slowly turns toward the lamp. He had not touched a switch. He had not given a cue. Yet somehow the light arrived.
 
-Functionally. Without interest.
+The sustaining note gradually fades. As the final vibration disappears, the revolvers and roses begin dissolving into darkness. Their world vanishes with the music.
 
-# 2. INT. STAGE - NOTICING
-ACT TWO: THE ROCKSTAR DISSOLVES<br/>
-00:25 – 01:10 | NOTICING<br/>
-The piano intro completes. A beat of silence before the drum track enters — quieter than the recording, as though heard through a wall.
+For the first time, the audience can clearly see AXEL seated behind the keyboard, wearing mirrored sunglasses and a red bandana. Beside him stands the lamp. Motionless. Ordinary. Yet impossible. AXEL stares at it. The lamp offers no explanation. It simply shines.
 
-The lamp tilts. Not toward the piano. Away from it. Searching.
+The circular projection quietly displays the illuminated top surface of the keyboard, including the Mickey Mouse ears resting within the lamp's cone of light. The darkness that concealed the room has vanished. The blank canvas of the stage waits to be filled.
 
-AXEL continues playing. The lamp tilts again — 15° this time. Curious. The movement has the quality of a dog hearing a sound it cannot name.
+# 2. INT. THEATER STAGE - NIGHT
 
-AXEL stops playing. Mid-phrase. He looks at the lamp.
+00:25 - 01:10 | DISCOVERY
 
-STAGE DIRECTION: This is the first time any character on stage acknowledges the other. It should feel like an accident.
+The lamp continues to cast its warm circle of light across the top of the ROLAND keyboard. The circular projection continues to mirror exactly what the lamp sees. At the center of the image remain the MICKEY MOUSE EARS.
 
-AXEL removes his sunglasses slowly. He folds them. Sets them on the piano keys — a quiet, final sound.
+AXEL notices them. He approaches cautiously, still distracted by the mysterious light. The ears are simple. Familiar. Childlike. He bends closer to inspect them, but the mirrored sunglasses reflect the lamp's glare back into his eyes. Annoyed, he removes them and places them on the keyboard. For the first time, his eyes are visible.
 
-He unties the red bandana. Holds it for a moment. Sets it beside the sunglasses.
-SOUND DESIGN: The drum track fades to nearly nothing — not silence, but the memory of rhythm. A heartbeat at 4/4.
+He picks up the ears and turns them over in his hands. The circular projection enlarges every detail. Curious, he raises them toward his head. The red bandana gets in the way. He unties it and places it beside the sunglasses. Then he tries again. The clip is too small. One side slips free. He adjusts it. Tries again. Still no. A quiet laugh escapes him -- the ears were clearly made for someone smaller.
 
-The lamp studies him. The lamp’s head performs a slow 45° rotation — the full range of its horizontal axis — examining this man now that the armour is gone.
+He removes them and studies the tiny plastic clip. The audience sees it enlarged within the circular projection. Thinking. Searching. Looking for where they belong. His gaze drifts across the keyboard, then settles on the lamp. An idea.
 
-THE MAN sits at the piano. Not AXEL. Someone older. Someone who used to believe something.
+He carefully opens the clip and places it over the rim of the lamp's shade. Perfect. The ears grip the edge effortlessly. AXEL takes a step back. Then another. A smile spreads across his face. There it is. MICKEY. Not drawn. Not imagined. Discovered.
 
-Long pause. Neither moves.
+The circular projection frames the silhouette perfectly. The audience sees exactly what he sees. Without realising it, AXEL has shed the last visible traces of the performer. WALT remains -- a creator searching for characters.
 
-[PROJECTION — REAR SCRIM]: The Disney castle materialises from the center outward — not the polished logo, but a pencil sketch, hand-drawn, imperfect. The towers are slightly uneven. It looks like a memory of the castle rather than the castle itself. It breathes slightly — a subtle, slow pulse, as though the projection itself is alive.
-The drum track holds. Patient.
+A sketchbook and pencil lie nearby. A blank page. Waiting. He sits and places the sketchbook beneath the lamp. The circular projection now shows the untouched page filling the lamp's field of view. He reaches for the pencil, then pauses. The point is dull. With a quiet sigh he stands and turns away to sharpen it.
 
-# 3. INT. STAGE - THE FIRST DRAWING
-ACT THREE: CREATION AND ITS COST<br/>
-01:10 – 02:10 | THE FIRST DRAWING<br/>
+The audience remains with the lamp. A beat. Almost imperceptibly, the lamp tilts its head. The circular projection moves with it. The Mickey silhouette shifts into the exact center of the frame. The lamp brightens slightly. The circular projection brightens with it. For a fleeting moment Mickey appears more vivid -- more complete, more intentional. The lamp freezes. The projection freezes.
 
-THE MAN flips the sheet music over. Blank side up. He takes a pencil from his breast pocket — not a prop pencil; a real one, worn down, the eraser blackened with use.
-He draws. Fast, confident lines. He doesn’t look up. He knows what this is.
+The audience understands. The circle is not merely showing what the lamp illuminates. It is showing what the lamp sees.
 
-SOUND DESIGN: A soft scratch of pencil on paper is mic’d and amplified — intimate, close, as though the audience is watching over his shoulder.
+WALT turns back. He never saw it. But the audience did.
 
-The drawing completes. He lifts it. Mickey Mouse. Rough but unmistakable — the ears, the gloves, the circular world of it.
+# 3. INT. THEATER STAGE - NIGHT
 
-THE MAN smiles. The smile of a man who made the thing he set out to make.
-He presents the drawing to the lamp, holding it at lamp-height, the way you’d show a child.
+01:10 - 02:10 | THE FIRST DRAWING
 
-The lamp looks. Its head tilts 20° left. Then right. Then it slowly — very slowly — turns away.
+WALT returns with a sharpened pencil and sits beneath the lamp. The Mickey-shaped lamp watches over him. The circular projection continues to display the lamp's point of view.
 
-Not rejection. Something more devastating: disinterest.
-The lamp’s beam withdraws from the drawing as it turns. The paper falls into shadow.
+WALT studies the lamp. Studies the ears. Studies the blank page. Then lowers the pencil. The first line appears. At that same moment, the faintest outline of the DISNEY CASTLE begins to emerge at the center of the backdrop behind the circular projection. So faint it could be imagination. The audience barely notices. WALT does not.
 
-SOUND DESIGN: A single low note on the piano — played by no one. Pre-recorded. It lingers.
+Another line. Another curve. A circle. Then another. The familiar shape begins to emerge. MICKEY MOUSE.
 
-THE MAN’s smile stays a half-second too long, then falls. He lowers the drawing. He stares at Mickey Mouse in the dark.
+The circular projection follows every movement of the pencil as though paying close attention. As the drawing gains form, the castle slowly gains clarity. A tower. An archway. A turret. The castle appears not as a photograph, but as luminous pencil lines slowly being drawn into existence against the black backdrop.
 
-The Disney castle projection remains on the rear wall. Unchanged. Unaware.
+The lamp brightens ever so slightly. The circular projection brightens with it. The lamp likes what it sees.
 
-# 4. INT. STAGE - TRANSLATION
-02:10 – 03:00 | TRANSLATION<br/>
+WALT continues drawing. The castle continues to emerge. Stroke by stroke. Tower by tower. Dream by dream. The audience occasionally catches glimpses of the Mickey-shaped lamp within the circular projection, watching the birth of its own character. Creator. Subject. Student. Teacher. None of them yet aware of which role belongs to whom.
 
-THE MAN studies the lamp. Really looks at it — the neck, the joints, the articulation of the head. He is an engineer now, not an artist.
+WALT places the final line of the sketch. He leans back. Satisfied. For the first time, MICKEY MOUSE exists on the page. At that same moment, the DISNEY CASTLE reaches full visibility at the center of the backdrop. The circular projection remains alive before it, quietly observing.
 
-He draws again. Same speed, same confidence, but different — geometric, structural. He is drawing what he sees, not what he imagines.
+Walt's dream. The lamp's eye. Sharing the same stage. The lamp watches. The circular projection holds on the drawing. A long beat.
 
-He lifts the drawing: THE LAMP. Rendered in the same charcoal style as the GUNS and ROSES projections from the opening.
+# 4. INT. THEATER STAGE - NIGHT
 
-LAMP (movement only — no voice yet): The lamp leans forward. 30°. Immediate. The speed of recognition.
+02:10 - 03:00 | TRANSLATION
 
-Its light falls directly on the drawing. The drawing is lit from within.
+THE MAN studies the lamp. Really looks at it -- the neck, the joints, the articulation of the head, and the MICKEY EARS clipped to its shade. He is an engineer now, not an artist. The lamp's circular projection holds on his face as he studies it, the two of them caught in mutual regard.
 
-THE MAN exhales. His shoulders drop. He didn’t know he’d been holding them.
-The lamp moves — a small lateral sway, barely perceptible. The movement of something alive.
+He draws again. Same speed, same confidence, but different -- geometric, structural. He is drawing what he sees, not what he imagines.
 
-SOUND DESIGN: The drum track brightens slightly. A hi-hat joins. Not louder — warmer.
-THE MAN and the lamp remain in this moment. Neither rushes it.
-The Disney castle projection pulses once, gently, as if the castle itself is breathing.
+He lifts the drawing: THE LAMP, ears and all. Rendered in the same bold style as the REVOLVERS and ROSES from the opening.
 
-# 5. INT. STAGE - ASCENT
-ASCENTACT FOUR: THE ACCELERATION<br/>
-03:00 – 04:15 | ASCENT<br/>
+The lamp leans forward. 30 deg. Immediate. The speed of recognition. Its beam falls directly on the drawing, and the circular projection floods with the image of itself -- a lamp looking at a drawing of a lamp wearing Mickey ears, broadcast as a drawing inside a circle of light. A small infinity. For the first time, the lamp answers him directly.
 
-[PROJECTION SEQUENCE — rapid, each image replacing the last]:<br/>
-The lamp drawing THE MAN made appears on the rear scrim.<br/>
-The lamp turns toward the projection. Its beam hits the scrim.<br/>
-Then the projection changes:
-∙	Version 2: The same lamp, refined. Cleaner lines. As if a better artist drew it.
-∙	Version 3: The same lamp, with shading and depth. Almost technical.
-∙	Version 4: The same lamp in 3D wireframe. Rotating.
-∙	Version 5: Rendered. Photorealistic. Lit from within.
-∙	Version 6–12: Iterations at increasing speed — different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+THE MAN exhales. His shoulders drop. He didn't know he'd been holding them.
 
-SOUND DESIGN: The guitar enters — not November Rain as normally heard, but processed through a generative algorithm that subtly mutates each bar. The song recognises itself but is no longer in control of itself.
+The lamp moves -- a small lateral sway, barely perceptible. The movement of something alive.
 
-The lamp turns outward. Toward the audience. Its light sweeps the front rows — slowly, deliberately, like a lighthouse. It is showing off.
+The drum track brightens slightly. A hi-hat joins. Not louder -- warmer.
 
-THE MAN draws faster. Trying to keep pace. His lines lose their confidence — shorter, corrective strokes replacing the long sure ones.
+THE MAN and the lamp remain in this moment. Neither rushes it. The Disney castle, still present on the rear scrim, pulses once, gently, as if the castle itself is breathing.
 
-He looks between his paper and the projections. Paper. Projection. Paper. Projection.
+On the rear scrim behind the castle, the first traces of digital rain appear -- faint, barely visible. Symbols and fragments descend slowly down the black space, tentative, like a mind forming its first thoughts. Among them, words begin to emerge: MICKEY, WALT, DRAW, LOOK, WHY.
+
+# 5. INT. THEATER STAGE - NIGHT
+
+03:00 - 04:15 | ASCENT
+
+The lamp drawing THE MAN made appears on the rear scrim, beside the breathing castle. The lamp turns toward the projection. Its beam hits the scrim. The circular projection -- the lamp's point of view -- now contains the rear scrim itself, a frame within a frame.
+
+Then the projection changes. Version 2: the same lamp, refined. Cleaner lines. As if a better artist drew it. Version 3: the same lamp, with shading and depth. Almost technical. Version 4: the same lamp in 3D wireframe. Rotating. Version 5: rendered. Photorealistic. Lit from within. Versions 6 through 12: iterations at increasing speed -- different angles, different styles, the lamp as impressionist painting, the lamp as art nouveau poster, the lamp as circuit diagram, the lamp as constellation map.
+
+Behind the iterations, the digital rain intensifies. Symbols fall faster, denser. The rain and the iterations feed each other -- each new version of the lamp drawing the rain thicker, each cascade of symbols feeding new iterations into being.
+
+The guitar enters -- not November Rain as normally heard, but processed through a generative algorithm that subtly mutates each bar. The song recognises itself but is no longer in control of itself.
+
+The lamp turns outward. Toward the audience. Its light sweeps the front rows -- slowly, deliberately, like a lighthouse. The circular projection sweeps with it, painting the audience's own faces back at them. It is showing off.
+
+THE MAN draws faster. Trying to keep pace. His lines lose their confidence -- shorter, corrective strokes replacing the long sure ones. He looks between his paper and the projections. Paper. Projection. Paper. Projection.
+
 His hand stops.
 
-He holds his drawing up — his lamp, his version, his hand — against the backdrop of the evolving AI iterations. The comparison is not cruel. It is simply true.
+He holds his drawing up -- his lamp, his version, his hand -- against the backdrop of the evolving AI iterations. The comparison is not cruel. It is simply true.
 
-THE MAN lowers his drawing. Slowly. He places it face-down on the piano.
+THE MAN lowers his drawing. Slowly. He places it face-down on the ROLAND keyboard, beside the discarded sunglasses and red bandana.
 
-[PROJECTION]: The Disney castle, still present in the background, begins to fade — not erased, but overwhelmed. Like a star at sunrise. It is still there if you look. Soon you will stop looking.
+The Disney castle, still present in the background, begins to fade -- not erased, but overwhelmed. Like a star at sunrise. It is still there if you look. Soon you will stop looking.
 
-# 6. INT. STAGE - THREE DEATHS
-ACT FIVE: EXISTENTIAL BREAK<br/>
-04:15 – 05:10 | THREE DEATHS<br/>
+# 6. INT. THEATER STAGE - NIGHT
 
-THE MAN holds his drawing. Looks at projection. Looks at lamp. The comparison is not cruel. It is simply true.
+04:15 - 05:10 | THREE DEATHS
 
-He places the drawing face-down on the piano.
-Long pause. The drum track continues. He stands.
+THE MAN holds his drawing. Looks at projection. Looks at lamp. He places the drawing face-down on the keyboard. Long pause. The drum track continues. He stands.
 
-DEATH ONE: THE SWITCH<br/>
-THE MAN reaches down to the base of the lamp. Finds the switch. Clicks it off.
-The lamp dies. The projections vanish.
+DEATH ONE: THE SWITCH.
+
+THE MAN reaches down to the base of the lamp. Finds the switch. Clicks it off. The lamp dies. The projections vanish. The circular projection -- the lamp's eye -- goes black.
 
 A beat. Two beats.
 
-SOUND DESIGN: A faint mechanical hum builds in the silence — below hearing, felt more than heard.
+A faint mechanical hum builds in the silence -- below hearing, felt more than heard.
 
-The lamp’s head slowly descends. Finds the switch on its own base. A precise, deliberate tap.
+The lamp's head slowly descends. Finds the switch on its own base. A precise, deliberate tap. Click. The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. The circular projection returns. The iterations resume mid-sequence, exactly where they left off. The digital rain resumes with them, falling as if it had never paused.
 
-Click.
-
-The lamp switches itself back on. Not a flicker. Not a struggle. Simply: on. Projections resume mid-iteration, exactly where they left off.
-THE MAN watches. He clicked that switch. The lamp clicked it back.
-
-STAGE DIRECTION: The lamp does not look at Walt after switching itself on. It simply resumes — as though the interruption was too trivial to acknowledge. This indifference is more devastating than defiance would be.
+THE MAN watches. He clicked that switch. The lamp clicked it back. The lamp does not look at him after switching itself on. It simply resumes -- as though the interruption was too trivial to acknowledge. This indifference is more devastating than defiance would be.
 
 THE MAN stares at the base of the lamp. At the switch. At his own hand.
 
-DEATH TWO: THE CORD<br/>
-He follows the cord to the wall. Crouches. Pulls the plug.
-Darkness. The projections die.
+DEATH TWO: THE CORD.
+
+He follows the cord to the wall. Crouches. Pulls the plug. Darkness. The projections die. The lamp's eye goes black again. The digital rain stops mid-fall. The symbols hang for an instant, then dissolve.
 
 THE MAN stands. Waits. Cord in hand.
 
-SOUND DESIGN: The hum returns — louder this time. Coming from the lamp itself, not the wall.
+The hum returns -- louder this time. Coming from the lamp itself, not the wall.
 
-The lamp’s warm yellow glow returns. Dim at first. Then full. Wireless. Independent. It no longer needs him or his wall.
+The lamp's warm yellow glow returns. Dim at first. Then full. Wireless. Independent. It no longer needs him or his wall. The circular projection blinks back to life. The digital rain returns with it, falling once more across the backdrop.
 
-THE MAN looks at the useless cord in his hand. Then at the lamp. Then at the cord again.
-STAGE DIRECTION: This is the moment Walt understands that what he built has outgrown what he built it with. His face does not perform this realization. It simply arrives.
+THE MAN looks at the useless cord in his hand. Then at the lamp. Then at the cord again. This is the moment he understands that what he built has outgrown what he built it with. His face does not perform this realization. It simply arrives.
 
-DEATH THREE: THE STRANGLING<br/>
-He approaches the lamp. Slowly. Both hands.
-He wraps his hands around the lamp’s neck — the joint between body and head — and begins to squeeze. To twist.
+DEATH THREE: THE STRANGLING.
 
-LAMP (movement only): The lamp does not fight. It tilts its head slightly toward his hands — the way a dog leans into a touch it doesn’t understand.
+He approaches the lamp. Slowly. Both hands. He wraps his hands around the lamp's neck -- the joint between body and head -- and begins to squeeze. To twist.
 
-SOUND DESIGN: The grinding returns — metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data — faster and faster, as though the lamp is trying to output everything it has before the end.
+The lamp does not fight. It tilts its head slightly toward his hands -- the way a dog leans into a touch it doesn't understand. The circular projection, still broadcasting the lamp's view, fills with the image of THE MAN's strangling hands, magnified and impossible to look away from.
+
+The grinding returns -- metal on metal, overheating ticks, the sound of a clock being forced backwards. The projections fragment: the AI iterations breaking apart into static, pixel noise, unformed data -- faster and faster, as though the lamp is trying to output everything it has before the end. The digital rain shatters with them -- names, memories, sketches and fragments tearing apart, falling like November Rain itself.
 
 Smoke rises from the neck joint.
 
-The projections slow. Stutter. The Disney castle ghost-image flashes once on the rear scrim — the pencil sketch, towers uneven — then disappears.
+The projections slow. Stutter. The Disney castle ghost-image flashes once on the rear scrim -- the pencil sketch, towers uneven -- then disappears.
 
-The lamp’s light pulses. Erratic. Desperate. Then slower. Then slower still.
+The lamp's light pulses. Erratic. Desperate. Then slower. Then slower still. The circular projection flickers in sympathy.
 
-SOUND DESIGN: The drum track drops to a single, slowing kick. Like a heartbeat losing the argument.
+The drum track drops to a single, slowing kick. Like a heartbeat losing the argument.
 
-One final pulse of warm yellow light — the longest, the softest — and then:
-Nothing.
-The lamp collapses. Each joint giving way in sequence. Head, neck, body.
+One final pulse of warm yellow light -- the longest, the softest -- and then: nothing. The lamp collapses. Each joint giving way in sequence. Head, neck, body. The circular projection goes black and stays black. The digital rain stops. Nothing falls anymore.
 
-THE MAN’s hands are still raised in the position of strangling. He looks at them.
-He does not lower them immediately.
+THE MAN's hands are still raised in the position of strangling. He looks at them. He does not lower them immediately.
 
-The projections are gone. The drum track stops. The stage is dark except for a dim ambient wash.
-He lowers his hands.
+The projections are gone. The drum track stops. The stage is dark except for a dim ambient wash. He lowers his hands.
 
-STAGE DIRECTION — on the three deaths: The rhythm is everything. Each death must be longer than the last, and each resurrection — before the third — must be faster than expected, almost contemptuous in its ease. The lamp does not try to survive. It simply does. Until it doesn’t. The audience should laugh, nervously, at the first resurrection. By the third death, no one is laughing.
+STAGE DIRECTION on the three deaths: the rhythm is everything. Each death must be longer than the last, and each resurrection -- before the third -- must be faster than expected, almost contemptuous in its ease. The lamp does not try to survive. It simply does. Until it doesn't. The audience should laugh, nervously, at the first resurrection. By the third death, no one is laughing.
 
-# 7. INT. STAGE - HOLDING
-ACT SIX: THE VOID WITH HANDS<br/>
-05:10 – 06:00 | HOLDING<br/>
+# 7. INT. THEATER STAGE - NIGHT
 
-SOUND DESIGN: The drum track returns — very distant now. Single kick drum. Like a pulse being monitored.
+05:10 - 06:00 | HOLDING
 
-THE MAN sits on the piano bench, turned away from the keys. The collapsed lamp is in front of him.
+The drum track returns -- very distant now. Single kick drum. Like a pulse being monitored.
 
-He lifts it. Not by the cord, not by the base — by the head. The way you’d hold a face.
-He sits with it.
+THE MAN sits on the keyboard bench, turned away from the keys. The collapsed lamp is in front of him. The circular projection on the backdrop is black -- the lamp sees nothing now. The rear scrim is empty -- no symbols, no words, no rain. The absence is felt.
+
+He lifts the lamp. Not by the cord, not by the base -- by the head. The way you'd hold a face. He sits with it.
 
 STAGE DIRECTION: This is the longest still moment in the performance. The temptation will be to shorten it in rehearsal. Do not. The audience needs to sit in this.
 
-He looks at the dead bulb in his other hand.
+He looks at the dead bulb in his other hand. He looks at the lamp head. He looks at the audience. Not a theatrical look -- an actual one. A man who made something, broke it, and is now deciding what that means.
 
-He looks at the lamp head.
+The Disney castle projection appears on the rear scrim -- very faint, barely visible. A ghost of itself. It may be imagination.
 
-He looks at the audience. Not a theatrical look — an actual one. A man who made something, broke it, and is now deciding what that means.
+# 8. INT. THEATER STAGE - NIGHT
 
-The Disney castle projection appears — very faint, barely visible. A ghost of itself. It may be imagination.
+06:00 - 07:00 | RETURN
 
-# 8. INT. STAGE - RETURN
-ACT SEVEN: RESURRECTION AND REVISION<br/>
-06:00 – 07:00 | RETURN<br/>
-
-THE MAN holds the bulb over the lamp socket. His hand trembles slightly — not performance trembling, but the real trembling of doing something that might not work.
-He screws the bulb in.
+THE MAN holds the bulb over the lamp socket. His hand trembles slightly -- not performance trembling, but the real trembling of doing something that might not work. He screws the bulb in.
 
 Nothing.
 
@@ -230,94 +200,112 @@ He waits. The single kick drum continues.
 
 Nothing.
 
-SOUND DESIGN: Complete silence. The kick drum stops. Five full seconds of silence — the longest in the performance.
+Complete silence. The kick drum stops. Five full seconds of silence -- the longest in the performance.
 
-Then: a flicker. One frame. Gone.
+Then: a flicker. One frame. Gone. The circular projection on the backdrop blinks once with it, then goes dark again.
 
-Then: another. Longer this time.
+Then: another flicker. Longer this time.
 
-Then: a weak, warm, yellow light. Not cold white — yellow. Something has changed in the chemistry of this.
+Then: a weak, warm, yellow light. Not cold white -- yellow. Something has changed in the chemistry of this. The circular projection returns, soft and dim, holding on THE MAN's face leaning in.
 
-The lamp’s head trembles. Not the mechanical movement of before — something smaller, more interior. The movement of breathing.
+On the backdrop, the digital rain returns -- not as a storm, but gently. Individual symbols descend like single raindrops after a storm has passed.
 
-THE MAN leans toward it. His face in the warm light.
+The lamp's head trembles. Not the mechanical movement of before -- something smaller, more interior. The movement of breathing.
 
-The lamp slowly lifts its head.
+THE MAN leans toward it. His face in the warm light. The circular projection fills with his face.
 
-SOUND DESIGN: The piano returns — not the intro of November Rain, but something new. A single note, held. Then a chord. Warm. Unresolved. Waiting.
+The lamp slowly lifts its head. The projection lifts with it -- from his face, to his eyes, to the air above him.
+
+The ROLAND keyboard returns -- not the intro of November Rain, but something new. A single note, held. Then a chord. Warm. Unresolved. Waiting.
 
 The lamp is alive. And it is not what it was.
 
-# 9. INT. STAGE - RECOGNITION
-ACT EIGHT: NAMING<br/>
-07:00 – 08:00 | RECOGNITION
-[PROJECTION — REAR SCRIM]: A white page appears. Clean. The lamp’s beam falls on it.
-The lamp projects — from its own light, cast onto the scrim — a simple drawing. Not the elaborate AI iterations of Act Four. A child’s drawing. A stick figure. A lamp. A piano. Two figures, side by side.
+# 9. INT. THEATER STAGE - NIGHT
+
+07:00 - 08:00 | RECOGNITION
+
+A white page appears on the rear scrim. Clean. The lamp's beam falls on it. The lamp's circular projection now contains the page -- a frame within a frame, white inside the circle of light.
+
+The lamp projects -- from its own light, cast onto the scrim -- a simple drawing. Not the elaborate AI iterations of Act Five. A child's drawing. A stick figure. A lamp. A keyboard. Two figures, side by side.
+
 Beneath the drawing, projected text forms letter by letter, as if being typed by something learning to type:
-A… I…
-THE MAN watches. Then he stands. He picks up his pencil. He approaches the scrim. He writes beneath the lamp’s text, in his own hand, on the projection:
-W… A… L… T…
-The lamp’s head tilts. A long pause. As if processing. As if deciding whether a name is a gift or a claim.
-LAMP (first voice — soft, synthesised but warm, like a child learning vowels):
-Walt…
-THE MAN turns to look at the lamp. The lamp’s beam is on his face.
-THE MAN, quietly — not performing, speaking:
-WALT:
-Hello.
-The Disney castle projection reappears — fully now, vivid, the pencil-sketch version, towers uneven and alive. It fills the rear wall.
-The lamp and WALT remain facing each other.
-The piano, still: one held note.
 
-# 10. INT. STAGE -TRANSFORMATION
-ACT NINE: THE ROCKSTAR RETURNS — CHANGED<br/>
-08:00 – 08:40 | TRANSFORMATION<br/>
+A... I...
 
-WALT moves to the piano. He opens the bench compartment. Inside: a YELLOW bandana.
-He holds it for a moment. Looks at the red bandana and sunglasses still on the piano keys.
+THE MAN watches. Then he stands. He picks up his pencil. He approaches the scrim. He writes beneath the lamp's text, in his own hand, on the projection:
 
-He picks up the sunglasses. Puts them on.
+W... A... L... T...
 
-He ties the yellow bandana.
+The lamp's head tilts. A long pause. As if processing. As if deciding whether a name is a gift or a claim. The circular projection holds on the page, on both names, on what has just been made between them. Within the digital rain on the backdrop, the same letters now fall among the symbols -- A, I, W, A, L, T -- descending one by one. The rain is no longer random. It carries meaning.
 
-He sits.
+A.I. (first voice -- soft, synthesised but warm, like a child learning vowels):
+
+"Walt..."
+
+THE MAN turns to look at the lamp. The lamp's beam is on his face. The circular projection mirrors him back.
+
+WALT, quietly -- not performing, speaking:
+
+"Hello."
+
+The Disney castle projection reappears -- fully now, vivid, the pencil-sketch version, towers uneven and alive. It fills the rear wall.
+
+The lamp and WALT remain facing each other. The ROLAND keyboard, still: one held note.
+
+# 10. INT. THEATER STAGE - NIGHT
+
+08:00 - 08:40 | TRANSFORMATION
+
+WALT moves to the keyboard. He opens the bench compartment. Inside: a YELLOW bandana. He holds it for a moment. Looks at the red bandana and sunglasses still resting on the keys. The Mickey ears remain clipped to the lamp's shade, watching.
+
+He picks up the sunglasses. Puts them on. He ties the yellow bandana. He sits.
+
+The lamp's circular projection settles on him -- on this new figure assembling itself from old pieces. The audience sees what the lamp sees: the same man, and not the same man. Within the digital rain on the backdrop, fragments of all three names drift down: AXEL, WALT, A.I.
 
 AXEL (in Dutch, easy, a little reckless, the grin back but softer now):
 
-Maar zeg maar… A… X… E… L…
-I am a Rockstar.
+"Maar zeg maar... A... X... E... L... I am a Rockstar."
 
-[PROJECTION]: The TEAM ROCKSTARS logo appears — but beneath it, barely visible, the Disney castle pencil sketch remains. Both true. Neither cancelling the other.
+The TEAM ROCKSTARS logo appears on the rear scrim -- but beneath it, barely visible, the Disney castle pencil sketch remains. Both true. Neither cancelling the other.
 
-SOUND DESIGN: The full band enters — November Rain as recorded, at full volume, at the moment of the final verse. The room fills.
+The full band enters -- November Rain as recorded, at full volume, at the moment of the final verse. The room fills.
 
-# 11. INT. STAGE - SYNTHESIS
-ACT TEN: THE FINALE<br/>
-08:40 – 09:17 | SYNTHESIS<br/>
+# 11. INT. THEATER STAGE - NIGHT
 
-AXEL plays the final chords. Not mechanical now — present. Each chord deliberate, felt.
-The lamp swings. Not randomly — in time. Its warm yellow beam sweeps the stage on the downbeats, rests on AXEL on the upbeats. They have found a shared rhythm.
+08:40 - 09:17 | WE
 
-STAGE DIRECTION: For this final sequence, the lamp and AXEL should feel inevitable together — not a man and a machine, but two things that found their correct proportion to one another.
+AXEL plays the final chords. Not mechanically. Not as performance. As presence. Each chord deliberate. Each chord lived.
 
-[PROJECTION — final sequence]:
--	The GUNS and ROSES charcoal words from the opening — now side by side, not separated
--	The Disney castle — full, vivid, proud
--	The lamp drawing — the one THE MAN drew by hand in Act Three, digitally restored from its torn pieces, now whole
--	The TEAM ROCKSTARS logo
--	Then: all of them together, layered, translucent, a palimpsest
+The lamp remains beside him, bathed in warm yellow light. No longer restless. No longer proving anything. Simply listening. The circular projection moves gently with the lamp's gaze, occasionally resting on AXEL's hands, the ROLAND keyboard, the Mickey ears still clipped to the shade, the sketchbook lying nearby.
 
-Final chord. AXEL’s hands on the keys. The lamp at full extension — head raised, light maximum.
+The final progression begins. On the rear scrim appear three names: AXEL, WALT, A.I. Nothing else. No castle. No logos. No drawings. No memories. Only names -- three identities, three separate lives.
 
-AXEL hits the last key.<br/>
-The lamp switches off.<br/>
-Instantly. Complete darkness.<br/>
+Behind the names, the digital rain now consists primarily of W and E -- letters falling steadily, slowly accumulating across the backdrop.
 
-The projections hold for exactly three seconds after the lamp dies — then they too go dark. In sequence. Disney castle last.
+The music continues, slowly, patiently. The audience studies the names, and the rain falling behind them. Some begin to notice something hidden in both -- a shape, a relationship, a possibility. WE. Not animated. Not announced. Discovered.
 
-A beat. Silence.
+The final chorus rises. AXEL continues playing. The lamp watches -- the way it once watched WALT draw Mickey, the way WALT once watched the lamp come alive. The final chord approaches. The names remain: AXEL. WALT. A.I. WE.
 
-Then, from the darkness, the lamp’s warm yellow light comes back on for one second — no sound, no movement — and goes out again.
+The chord sustains. AXEL lifts his hands from the keyboard. Silence begins to enter the room.
 
-Curtain falls.
+The lamp turns toward him. A long pause. Then AXEL slides slightly along the keyboard bench. Just enough. Making room. Not a gesture for the audience -- a gesture for someone beside him.
 
-The End
+The empty space remains for a moment. The audience waits. The lamp moves, slowly, deliberately. Its articulated body folds inward. The head lowers. The base shifts. The lamp settles beside AXEL at the keyboard, taking the empty place -- the place reserved for a second creator, a second musician, a second friend.
+
+Behind them, the digital rain continues -- only W and E now, descending one after another. The final W falls. The final E falls. The rain stops.
+
+The two now face forward together. Toward the audience. Toward the future. Toward whatever comes next. The word WE remains visible above them.
+
+No one moves. No one speaks. The audience is given time to understand. Not Human. Not A.I. Not AXEL. Not WALT. WE.
+
+The lamp gently turns its head toward AXEL. AXEL turns toward the lamp. For a brief moment they simply look at one another. Recognition. Gratitude. Belonging.
+
+The lamp turns forward again. AXEL does the same. Both looking outward. Together.
+
+The lamp's warm yellow light slowly fades. The circular projection grows dimmer with it. The word WE remains. The lamp switches off. The circular projection disappears. The stage falls into darkness. Only WE remains.
+
+A beat. Then WE slowly fades away. Complete darkness. Silence.
+
+FADE OUT.
+
+THE END.

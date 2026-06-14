@@ -195,6 +195,19 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Status | PLANNED |
 
 
+## MEAN WELL LRS-50-12 (Cave 12V Rail)
+
+| Property | Value |
+| --- | --- |
+| Component | MEAN WELL LRS-50-12 |
+| Type | Enclosed switching power supply |
+| Output | 12V DC, 4.2A (50.4W) |
+| Input | AC mains (universal input) |
+| Role | Cave 12V rail -- powers the LPLDD-1A-16V-3CH laser driver and the TMC2209 stepper driver; also used for AX-12A (9-12V) bench testing |
+| Location in lamp | Cave (on servo rail) |
+| Supplier | Reichelt (https://www.reichelt.com/nl) |
+| Status | ORDERED (Reichelt) |
+
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
@@ -217,7 +230,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Unit price | EUR 12.95 |
 | Supplier | Otronic.nl -- https://www.otronic.nl/en/esp32-s3-n16r8-devboard-16mb-flash-en-8mb-psram.html |
 | Notes | Replaces the originally planned ESP32 DevKit V1 (WROOM-32). The S3 offers 44 GPIOs (vs 34), 16 MB flash (vs 4 MB), 8 MB PSRAM, USB OTG, BT 5.0, and AI vector instructions for EUR 12.95. The M5Stack Atom Lite (IN HAND) remains as a WiFi/OSC test device. |
-| Status | ORDERED (Otronic.nl, EUR 12.95) |
+| Status | IN HAND (Otronic.nl, EUR 12.95) |
 
 
 ## Dynamixel AX-12A (Head Nod Servo)
@@ -239,7 +252,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Location in lamp | Lamp head (cable through central column to ESP32 in cave) |
 | Unit price | EUR 59.08 |
 | Supplier | Reichelt.nl -- https://www.reichelt.com/nl/nl/shop/product/servomotor_robotica_9_0_-_12_v_dc-249909 |
-| Status | ORDERED (Reichelt.nl, EUR 59.08) |
+| Status | IN HAND (Reichelt.nl, EUR 59.08) |
 
 ## Laser Galvo Scanner
 
@@ -253,7 +266,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH driver, which in turn powers the Opt Lasers 300mW Micro RGB module (DC 12V input); PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
-| Status | EVALUATING -- Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected; pending physical fit check in lamp head |
+| Status | IN HAND -- Opt Lasers 300mW Micro RGB received; LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected and pending procurement; physical fit check in lamp head pending |
 
 ## LED Strip Connectors
 
@@ -281,6 +294,17 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Source | Amazon.nl |
 | Price | EUR 15.99 |
 | Status | IN HAND |
+
+## Kitronik Inventor's Kit for Arduino
+
+| Item | Detail |
+| --- | --- |
+| Product | Kitronik Inventor's Kit for Arduino |
+| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (various values including 470 ohm), LEDs, push buttons, potentiometer |
+| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering) |
+| Source | elektronicavoorjou.nl |
+| Notes | Expected delivery start of next week. |
+| Status | ORDERED (elektronicavoorjou.nl) |
 
 ## Olight Obounds Smart Wireless Gateway
 
@@ -442,14 +466,18 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | EVALUATING (Opt Lasers + LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
+| Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | Opt Lasers 300mW Micro RGB IN HAND; EVALUATING (LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
 | ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
-| Opt Lasers 300mW Micro RGB Laser Module | EVALUATING (PRIMARY) |
+| Opt Lasers 300mW Micro RGB Laser Module | IN HAND |
+| ESP32-S3 N16R8 DevKitC (cave controller) | IN HAND |
+| MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | ORDERED (Reichelt) |
+| Dynamixel AX-12A (head nod servo) | IN HAND |
 | Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
 | SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
+| Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | ORDERED |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |

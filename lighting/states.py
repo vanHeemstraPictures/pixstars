@@ -49,6 +49,11 @@ LIGHTING_STATES: dict[str, LightingState] = {
         channels={1: 180, 2: 100, 3: 120, 4: 255, 5: 80, 6: 0, 7: 64},
         description="Soft blue/purple fairy-tale ambiance",
     ),
+    "CREATOR": LightingState(
+        name="CREATOR",
+        channels={1: 200, 2: 180, 3: 140, 4: 255, 5: 120, 6: 0, 7: 32},
+        description="Warm intimate light -- WALT the creator emerges",
+    ),
     "AI_COLD": LightingState(
         name="AI_COLD",
         channels={1: 200, 2: 40, 3: 180, 4: 255, 5: 120, 6: 0, 7: 0},

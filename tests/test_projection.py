@@ -13,13 +13,14 @@ class TestProjectionScenes(unittest.TestCase):
     """Test projection scene definitions."""
 
     def test_all_10_scenes_defined(self):
-        """All 10 projection scenes are defined."""
+        """All 11 projection scenes are defined."""
         expected = [
             "BLACKOUT", "GNR_LOGO", "DISNEY_CASTLE", "MICKEY_DRAWING",
             "LAMP_DRAWING", "AI_ITERATIONS", "AI_SIGNATURE",
             "WALT_SIGNATURE", "AXEL_SIGNATURE", "TEAM_ROCKSTARS",
+            "THREE_NAMES",
         ]
-        self.assertEqual(len(SCENES), 10)
+        self.assertEqual(len(SCENES), 11)
         for name in expected:
             self.assertIn(name, SCENES)
 
@@ -61,7 +62,7 @@ class TestProjectionScenes(unittest.TestCase):
 
     def test_list_scenes_returns_all(self):
         names = list_scenes()
-        self.assertEqual(len(names), 10)
+        self.assertEqual(len(names), 11)
 
     def test_timeline_scenes_all_exist(self):
         """All scene names used in the timeline exist in SCENES."""
@@ -130,8 +131,9 @@ class TestLightingStates(unittest.TestCase):
         expected = [
             "BLACKOUT", "LAMP_ONLY", "ROCKSTAR", "DISNEY_SOFT",
             "AI_COLD", "OVERHEAT", "DEATH", "REBIRTH", "FINALE",
+            "CREATOR",
         ]
-        self.assertEqual(len(LIGHTING_STATES), 9)
+        self.assertEqual(len(LIGHTING_STATES), 10)
         for name in expected:
             self.assertIn(name, LIGHTING_STATES)
 

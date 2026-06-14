@@ -4,7 +4,7 @@ A 20-minute silent theatrical performance commissioned by Ruurd Dam (Managing Di
 
 ## Core concept
 
-A single performer on stage with an animatronic desk lamp ("A.I."), live piano, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
+A single performer on stage with an animatronic desk lamp ("A.I."), ROLAND keyboard, and a deconstructed audio/MIDI rendering of Guns N' Roses' "November Rain." The performer holds three simultaneous character identities — **Rockstar**, **Creator**, and **Witness** — shifting between them without dialogue. Silence is the medium; movement, light, and sound carry the narrative.
 
 Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally loaded.
 
@@ -53,12 +53,12 @@ See `architecture_decision_records/LAMP_ARCHITECTURE_v3.md` for the original cav
 - **LPLDD-1A-16V-3CH laser driver** — drives the Opt Lasers 300mW Micro RGB module; 0-5V analog modulation per channel from the ILDAWaveX16 V2 DB25 RGB lines
 - **MEAN WELL LRS-50-5** power supply (5V rail for servos and LED ring, separated from logic)
 - **+/-24V galvo PSU** — dedicated dual-rail supply for the 40kpps galvo driver board (included in galvo scanner set)
-- **MEAN WELL LRS-35-12** (or equivalent) — 12V PSU for the LPLDD-1A-16V-3CH laser driver (which powers the Opt Lasers 300mW Micro RGB module; DC 12V input)
+- **MEAN WELL LRS-50-12** — 12V 4.2A PSU, shared cave 12V rail: powers the LPLDD-1A-16V-3CH laser driver and the TMC2209 stepper driver
 
 ### Lamp head
 - **Dynamixel AX-12A** — head nod (TTL serial via ESP32, NOT on Maestro)
 - **WS2812 5050 RGB LED Ring 16** — physically in the lamp head, driven by ESP32 DevKit GPIO (RMT peripheral) in the cave, powered from the cave MEAN WELL LRS-50-5; 5V/GND/DATA route through the central cable column with a JST-SM 3-pin connector at the lamp head junction, 330Ω series resistor on the data line at the ESP32 end, 1000µF capacitor near the ring
-- **RGB Laser Galvo Scanner** — Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) + 40kpps X/Y galvo mirrors (7 x 12 mm), projects along the lamp eye-line (vector laser drawing); 0-5V RGB modulation + galvo motor signal cables route through cable column to ILDAWaveX16 V2 and galvo driver in the cave; 12V DC power through cable column
+- **RGB Laser Galvo Scanner** — Opt Lasers 300mW Micro RGB (44 x 39 x 27 mm, 638/520/450nm) + 40kpps X/Y galvo mirrors (7 x 12 mm), projects along the lamp eye-line (vector laser drawing); 0-5V RGB modulation + galvo motor signal cables route through cable column to ILDAWaveX16 V2 and galvo driver in the cave; 12V DC power is cave-internal (not routed through cable column)
 - **OV2640 camera module** (~3g) — on Pi Zero 2 WH (CSI/SPI), role TBD in script
 
 ### Host
@@ -83,7 +83,7 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
 - ESP32 WiFi communication (OSC commands to lamp cave servos, LED ring, and DIY turntable stepper)
-- Piano (Pianoteq) either synced to Ardour transport or played live — screenplay specifies per act
+- ROLAND keyboard (via Pianoteq VST3) either synced to Ardour transport or played live — screenplay specifies per act
 - projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
 
 ### Dual projection system
