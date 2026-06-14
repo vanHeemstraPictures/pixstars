@@ -10,7 +10,7 @@ FADE IN:
 
 00:00 - 00:25 | EMERGENCE
 
-TOTAL DARKNESS. Projected on the black backdrop are two brightly illuminated illustrations: stage left, a pair of crossed REVOLVERS rendered in silver and white; stage right, a cluster of deep red ROSES. The images glow against the darkness like artwork from a rock album cover. Between them lies empty space.
+TOTAL DARKNESS. Projected on the black backdrop are two brightly illuminated illustrations: stage left, a pair of crossed GUNS rendered in silver and white; stage right, a cluster of deep red ROSES. The images glow against the darkness like artwork from a rock album cover. Between them lies empty space.
 
 A single piano note emerges from the void. Then another. And another. The opening notes of NOVEMBER RAIN slowly fill the theater. The audience begins to recognise the melody. Nothing else is visible. Only music.
 
@@ -20,7 +20,7 @@ AXEL freezes. The note continues to ring beneath his finger. He does not strike 
 
 A long beat. AXEL slowly turns toward the lamp. He had not touched a switch. He had not given a cue. Yet somehow the light arrived.
 
-The sustaining note gradually fades. As the final vibration disappears, the revolvers and roses begin dissolving into darkness. Their world vanishes with the music.
+The sustaining note gradually fades. As the final vibration disappears, the guns and roses begin dissolving into darkness. Their world vanishes with the music.
 
 For the first time, the audience can clearly see AXEL seated behind the keyboard, wearing mirrored sunglasses and a red bandana. Beside him stands the lamp. Motionless. Ordinary. Yet impossible. AXEL stares at it. The lamp offers no explanation. It simply shines.
 
@@ -88,7 +88,7 @@ THE MAN lowers the Mickey-lamp drawing. He sets it aside, face-down, on the keyb
 
 He looks at the lamp -- really looks, for the first time without an idea in the way. The neck. The joints. The articulation of the head. The empty rim where the ears had been. He understands what he did. He offered a cartoon to something that was waiting to be seen. Remorse passes across his face.
 
-He picks up the pencil again. He does not approach the lamp. He does not try to apologise. He simply turns to a fresh page and begins to draw. Same speed, same confidence, but different -- geometric, structural, honest. He is an engineer now, not an artist. He is drawing what is actually in front of him: the neck, the joints, the head, the shade. No ears. No grin. The lamp as it truly is. Rendered in the same bold style as the REVOLVERS and ROSES from the opening.
+He picks up the pencil again. He does not approach the lamp. He does not try to apologise. He simply turns to a fresh page and begins to draw. Same speed, same confidence, but different -- geometric, structural, honest. He is an engineer now, not an artist. He is drawing what is actually in front of him: the neck, the joints, the head, the shade. No ears. No grin. The lamp as it truly is. Rendered in the same bold style as the GUNS and ROSES from the opening.
 
 The lamp's beam stays angled away. The circular projection holds on empty stage, indifferent.
 
