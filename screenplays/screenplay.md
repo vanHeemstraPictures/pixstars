@@ -106,13 +106,13 @@ The lamp brightens, very slightly. The circular projection brightens with it. It
 
 The lamp moves -- a small lateral sway, barely perceptible. The movement of something alive.
 
-THE MAN reaches for the first drawing -- the Mickey-lamp -- and turns it face-up beside the new one. He studies it. The cartoon and the portrait, side by side. Then, in the corner of the Mickey drawing, he signs: WALT. Slow, deliberate letters. Claiming the first attempt. Not erasing it. Owning it.
+THE MAN looks at the lamp portrait he has just drawn. Then, in the corner, he signs: WALT. Slow, deliberate letters. Claiming it. Owning it.
 
 The drum track brightens slightly. A hi-hat joins. Not louder -- warmer.
 
 The Disney castle, still present on the rear scrim, pulses once, gently, as if the castle itself is breathing.
 
-On the rear scrim behind the castle, the first traces of digital rain appear -- faint, barely visible. Symbols and fragments descend slowly down the black space, tentative, like a mind forming its first thoughts. Among them, words begin to emerge: MICKEY, WALT, DRAW, LOOK, WHY.
+On the rear scrim behind the castle, the first traces of digital rain appear -- faint, barely visible. Symbols and fragments descend slowly down the black space, tentative, like a mind forming its first thoughts.
 
 # 5. INT. THEATER STAGE - NIGHT
 
