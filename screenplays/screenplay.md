@@ -2,7 +2,7 @@
 
 ## Screenplay
 
-Version: 5.0Status: Production Draft
+Version: 5.0 | Status: Production Draft
 
 FADE IN:
 

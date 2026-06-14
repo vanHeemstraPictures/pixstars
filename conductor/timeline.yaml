@@ -221,6 +221,11 @@ cues:
     act: 5
     projection: "AI_ITERATIONS"
 
+  - time: 338.2
+    name: "LASER_SWEEP_CUE"
+    act: 5
+    laser: "LASER_SWEEP"
+
   - time: 344.0
     name: "AI_V5_RENDERED"
     act: 5
@@ -232,11 +237,6 @@ cues:
     projection: "AI_ITERATIONS"
     cave:
       - {cmd: "led_rear", r: 220, g: 240, b: 255, mode: "solid"}
-
-  - time: 338.2
-    name: "LASER_SWEEP_CUE"
-    act: 5
-    laser: "LASER_SWEEP"
 
   - time: 367.0
     name: "LAMP_LIGHTHOUSE_SWEEP"
@@ -472,15 +472,15 @@ cues:
     act: 9
     projection: "AI_SIGNATURE"
 
-  - time: 598.0
-    name: "LASER_AI_TEXT_CUE"
-    act: 9
-    laser: "LASER_AI_TEXT"
-
   - time: 594.0
     name: "WALT_WRITES_NAME"
     act: 9
     projection: "WALT_SIGNATURE"
+
+  - time: 598.0
+    name: "LASER_AI_TEXT_CUE"
+    act: 9
+    laser: "LASER_AI_TEXT"
 
   - time: 604.0
     name: "LAMP_PROCESSING_NAME"
