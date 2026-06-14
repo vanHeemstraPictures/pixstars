@@ -7,6 +7,7 @@ Show Conductor and displays the correct visuals for each scene.
 
 Listens on port 9002 for:
     /projection/scene <scene_name>  — Switch to named scene
+    /projection/rain <state_name>   — Set digital rain overlay state
 
 Usage:
     source .venv/bin/activate
@@ -26,6 +27,7 @@ import pygame
 from pythonosc import dispatcher, osc_server
 
 from projection.scenes import get_scene, list_scenes, Scene, ASSETS_DIR
+from projection.rain import DigitalRainRenderer
 
 
 def _format_timecode(elapsed: float) -> str:
@@ -63,7 +65,11 @@ class ProjectionDisplay:
         # Set up OSC
         self._dispatcher = dispatcher.Dispatcher()
         self._dispatcher.map("/projection/scene", self._handle_scene)
+        self._dispatcher.map("/projection/rain", self._handle_rain)
         self._dispatcher.map("/timecode", self._handle_timecode)
+
+        # Rain overlay (initialized in start() once pygame is up so font is ready)
+        self.rain: DigitalRainRenderer | None = None
 
     def _handle_scene(self, address: str, *args):
         """Handle /projection/scene OSC messages."""
@@ -83,6 +89,22 @@ class ProjectionDisplay:
 
         with self._lock:
             self.pending_scene = scene
+
+    def _handle_rain(self, address: str, *args):
+        """Handle /projection/rain OSC messages."""
+        if not args:
+            print("  [PROJ WARNING] /projection/rain with no arguments")
+            return
+        state_name = str(args[0]).upper()
+        if self.rain is None:
+            print(f"  [PROJ WARNING] rain renderer not initialized; ignoring {state_name}")
+            return
+        try:
+            self.rain.set_state(state_name)
+        except ValueError as e:
+            print(f"  [PROJ ERROR] {e}")
+            return
+        print(f"  [PROJ] rain -> {state_name}")
 
     def _handle_timecode(self, address: str, *args):
         """Handle /timecode OSC messages from the conductor."""
@@ -164,6 +186,9 @@ class ProjectionDisplay:
         clock = pygame.time.Clock()
         tc_font = pygame.font.SysFont("monospace", 20, bold=True)
 
+        # Initialize rain overlay (defaults to RAIN_OFF)
+        self.rain = DigitalRainRenderer(self.width, self.height)
+
         # Start with blackout
         self.current_scene = get_scene("BLACKOUT")
         current_surface = self._load_image(self.current_scene)
@@ -199,6 +224,11 @@ class ProjectionDisplay:
                 screen.blit(current_surface, (0, 0))
             else:
                 screen.fill(self.current_scene.background_color if self.current_scene else (0, 0, 0))
+
+            # Digital rain overlay (composited on top of scene, below timecode)
+            dt = clock.get_time() / 1000.0
+            self.rain.update(dt)
+            screen.blit(self.rain.render(), (0, 0))
 
             # Top-right timecode overlay (slightly grey so it doesn't distract)
             with self._lock:
