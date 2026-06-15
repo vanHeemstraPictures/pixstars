@@ -5,14 +5,14 @@ I need a wiring diagram only (no code). This is a bench test on a 400-point brea
 ESP32-S3 N16R8 DevKitC (3.3V logic, powered via USB-C):
 - GPIO 8 -> 74HCT245 pin 1 (DIR) -- direction control for half-duplex
 - GPIO 15 (UART2 TX) -> 74HCT245 pin 2 (A1) -- transmit to AX-12A
-- GPIO 16 (UART2 RX) <- 74HCT245 pin 3 (A2) -- receive from AX-12A
+- GPIO 16 (UART2 RX) <- 1K resistor <- 74HCT245 pin 3 (A2) -- receive from AX-12A (voltage divider: 1K series + 2.2K to GND at GPIO 16, drops 4.7V to 3.23V)
 - 5V pin -> 5V power rail on breadboard (provides 5V for 74HCT245 logic)
 - GND pin -> common GND rail on breadboard
 
 74HCT245 (DIP-20, octal bus transceiver, 5V logic, HCT family accepts 3.3V inputs):
 - Pin 1 (DIR) <- ESP32 GPIO 8 (HIGH = A-to-B = TX mode, LOW = B-to-A = RX mode)
 - Pin 2 (A1) <- ESP32 GPIO 15 (UART2 TX) -- low-voltage side transmit
-- Pin 3 (A2) -> ESP32 GPIO 16 (UART2 RX) -- low-voltage side receive
+- Pin 3 (A2) -> 1K resistor -> junction point -> ESP32 GPIO 16 (UART2 RX) -- low-voltage side receive. At the junction point, a 2.2K resistor goes to GND. This voltage divider (1K + 2.2K) reduces the 74HCT245 output from ~4.7V to ~3.23V, safe for ESP32-S3 (max 3.6V absolute).
 - Pin 10 (GND) -> common GND rail
 - Pin 17 (B2) -> tied to pin 18 (B1), both connect to AX-12A DATA wire
 - Pin 18 (B1) -> tied to pin 17 (B2), both connect to AX-12A DATA wire
@@ -35,5 +35,6 @@ Critical notes:
 - B1 and B2 are bridged together on the breadboard to create a single half-duplex data bus
 - The HCT family threshold (1.4V) allows 3.3V ESP32 outputs to be read as valid HIGH
 - AX-12A stall current up to 900mA at 12V -- 12V rail must come from the dedicated PSU, not the ESP32
+- VOLTAGE DIVIDER ON RX LINE IS MANDATORY: 74HCT245 A-side output is ~4.7V when VCC=5V, but ESP32-S3 GPIO absolute max is 3.6V. The 1K + 2.2K divider (4.7V * 2.2/3.2 = 3.23V) protects GPIO 16. Without it, you risk damaging the ESP32.
 
 Use color-coded wires: red=5V, orange=12V, black=GND, yellow=signal/data. Show the 74HCT245 DIP-20 pinout clearly on the breadboard. Include a connection table below the diagram.

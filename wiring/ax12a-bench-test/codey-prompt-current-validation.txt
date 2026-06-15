@@ -41,6 +41,6 @@ Please validate:
      a. Add a voltage divider (2K + 3.3K) on A2 output to reduce to ~3.1V
      b. Add a 3.3V zener clamp on A2 output
      c. Power 74HCT245 from 3.3V instead of 5V (but then B-side output may not reach AX-12A threshold)
-   - Recommended fix: voltage divider on the A2-to-GPIO16 line
+   - APPLIED FIX: 1K series + 2.2K to GND voltage divider on the A2-to-GPIO16 line (Vout = 4.7V * 2.2K / 3.2K = 3.23V, safe for ESP32-S3)
 
 Show a table with all voltage levels at each node. Flag any out-of-spec conditions in red.
