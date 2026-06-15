@@ -1,0 +1,39 @@
+Board: ESP32-S3 N16R8 DevKitC
+
+I need a wiring diagram only (no code). This is a bench test on a 400-point breadboard for a Dynamixel AX-12A head nod servo using a 74HCT245 octal bus transceiver as a half-duplex level-shifting buffer. Please draw the complete wiring diagram showing all connections between these components:
+
+ESP32-S3 N16R8 DevKitC (3.3V logic, powered via USB-C):
+- GPIO 8 -> 74HCT245 pin 1 (DIR) -- direction control for half-duplex
+- GPIO 15 (UART2 TX) -> 74HCT245 pin 2 (A1) -- transmit to AX-12A
+- GPIO 16 (UART2 RX) <- 74HCT245 pin 3 (A2) -- receive from AX-12A
+- 5V pin -> 5V power rail on breadboard (provides 5V for 74HCT245 logic)
+- GND pin -> common GND rail on breadboard
+
+74HCT245 (DIP-20, octal bus transceiver, 5V logic, HCT family accepts 3.3V inputs):
+- Pin 1 (DIR) <- ESP32 GPIO 8 (HIGH = A-to-B = TX mode, LOW = B-to-A = RX mode)
+- Pin 2 (A1) <- ESP32 GPIO 15 (UART2 TX) -- low-voltage side transmit
+- Pin 3 (A2) -> ESP32 GPIO 16 (UART2 RX) -- low-voltage side receive
+- Pin 10 (GND) -> common GND rail
+- Pin 17 (B2) -> tied to pin 18 (B1), both connect to AX-12A DATA wire
+- Pin 18 (B1) -> tied to pin 17 (B2), both connect to AX-12A DATA wire
+- Pin 19 (OE active low) -> GND rail (always enabled)
+- Pin 20 (VCC) -> 5V rail
+- Pins 4-9 (A3-A8) and pins 11-16 (B3-B8): unused, leave unconnected
+
+Dynamixel AX-12A servo (half-duplex TTL serial, 1 Mbps, 9-12V):
+- VCC (red wire) -> 12V rail (from MEAN WELL LRS-50-12)
+- GND (black wire) -> common GND rail
+- DATA (yellow wire) -> 74HCT245 pins 17+18 (B1 and B2 tied together)
+
+MEAN WELL LRS-50-12 power supply (12V 4.2A, AC mains input):
+- V+ (12V) -> 12V power rail on breadboard
+- V- (GND) -> common GND rail on breadboard
+
+Critical notes:
+- Common ground: ESP32 GND, MEAN WELL LRS-50-12 GND, and AX-12A GND must all share the same GND rail
+- The 74HCT245 VCC is 5V (from ESP32 5V pin), NOT 12V
+- B1 and B2 are bridged together on the breadboard to create a single half-duplex data bus
+- The HCT family threshold (1.4V) allows 3.3V ESP32 outputs to be read as valid HIGH
+- AX-12A stall current up to 900mA at 12V -- 12V rail must come from the dedicated PSU, not the ESP32
+
+Use color-coded wires: red=5V, orange=12V, black=GND, yellow=signal/data. Show the 74HCT245 DIP-20 pinout clearly on the breadboard. Include a connection table below the diagram.
