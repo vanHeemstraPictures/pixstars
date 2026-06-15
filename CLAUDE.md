@@ -1,6 +1,6 @@
 # PIXSTARS
 
-A 20-minute silent theatrical performance commissioned by Ruurd Dam (Managing Director, Team Rockstars) for a live event in **October 2026**. The piece is production-bound, not exploratory — the screenplay is in ten acts and ready to drive build decisions.
+A 20-minute silent theatrical performance commissioned by Ruurd Dam (Managing Director, Team Rockstars) for a live event in **October 2026**. The piece is production-bound, not exploratory — the screenplay is in eleven scenes and ready to drive build decisions.
 
 ## Core concept
 
@@ -10,9 +10,12 @@ Tonal reference: Kim Ki-duk's filmmaking. Sparse, patient, physical, emotionally
 
 ## Screenplay
 
-- Ten acts, production-ready draft
+- Eleven scenes, production-ready v5.0
+- Show duration: 11:45
+- Scene 6 (Three Deaths) synced to 6:43 to match the November Rain video rainfall
+- Digital rain visual layer (Matrix-green, 10 states) woven through the narrative
 - Lamp movement vocabulary defined (not ad-lib — choreographed gestures with named primitives)
-- Spatial sound design notes per act
+- Spatial sound design notes per scene
 - Director's Appendix included (staging intent, transitions, cue logic)
 - Three-identity throughline (Rockstar / Creator / Witness) is load-bearing — treat as structural, not decorative
 
@@ -77,14 +80,19 @@ Hosted in **Ardour** from a purchased Hit Trax MIDI file (licensed, don't redist
 - **Pianoteq 9** (Steinway model, VST3) — piano
 - **MODO DRUM** with **Rock Custom Sounds** kit — drums
 - Deconstructed arrangement: this is not a cover, it's a reduction. Respect the editorial decisions already made in the Ardour session — stems have been pulled out deliberately.
+- Show duration: 11:45 (705 seconds)
+- Primary sync point: Scene 6 (RAIN_STORM) at 6:43 = November Rain video rainfall
+- Ardour markers should align with screenplay scene boundaries
 
 ## Show control
 
 Mac Mini M4 Pro runs:
 - Ardour (audio/MIDI playback and routing)
 - ESP32 WiFi communication (OSC commands to lamp cave servos, LED ring, and DIY turntable stepper)
-- ROLAND keyboard (via Pianoteq VST3) either synced to Ardour transport or played live — screenplay specifies per act
-- projection/ subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures)
+- ROLAND keyboard (via Pianoteq VST3) either synced to Ardour transport or played live — screenplay specifies per scene
+- `conductor/` subsystem (Python, reads `conductor/timeline.yaml`, dispatches OSC cues to all subsystems based on timecode)
+- `projection/` subsystem (pygame, OSC port 9002) -- drives the Epson EB-W05 rear projector over HDMI for theater-scale imagery (Disney castle, GNR logo, AI iterations, signatures), plus the digital rain overlay (`projection/rain.py`, 10 Matrix-green states composited over scenes); OSC endpoints `/projection/scene` and `/projection/rain`
+- `simulator/laser_galvo.py` -- rehearsal simulator for laser galvo output, includes digital rain overlay, listens on the same OSC endpoints as production
 
 ### Dual projection system
 
@@ -104,6 +112,12 @@ Base rotation (DIY turntable) handles:
 - Precision stepping (~0.00717° per microstep) via the cave ESP32 -> TMC2209 -> NEMA 17, with GT2 belt friction-drive on a 200mm lazy Susan bearing
 - Origin return on command via Hall effect sensor (SS49E/A3144) + magnet
 - Controlled from Mac Mini via OSC through the same cave ESP32 (no separate device or protocol)
+
+### Conductor
+- `conductor/main.py` reads `conductor/timeline.yaml` and dispatches cues at the specified times
+- Sends OSC to: projection display (port 9002), ESP32 cave, Ardour
+- Cue fields: `projection:`, `lighting:`, `cave:`, `laser:`, `ardour:`, `rain:`
+- 100+ cues across 11 scenes, all in ascending time order
 
 Timecode strategy and cue routing should live in `docs/` or a top-level `SHOW_CONTROL.md` — check what's there before assuming.
 
