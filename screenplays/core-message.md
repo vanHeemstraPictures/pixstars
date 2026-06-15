@@ -85,17 +85,3 @@ Not surrender.
 Relationship.
 
 ⸻
-
-## Controlling Idea
-
-When we stop fearing connection and begin embracing it, co-creation becomes possible.
-
-⸻
-
-Final Image
-
-AXEL makes room.
-
-The lamp takes the empty place beside him.
-
-WE.
