@@ -303,8 +303,24 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (various values including 470 ohm), LEDs, push buttons, potentiometer |
 | Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering) |
 | Source | elektronicavoorjou.nl |
-| Notes | Expected delivery start of next week. |
-| Status | ORDERED (elektronicavoorjou.nl) |
+| Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
+| Status | IN HAND |
+
+## 74HCT245 Bus Transceiver (AX-12A Half-Duplex Buffer)
+
+| Property | Value |
+| --- | --- |
+| Component | 74HCT245 (DIP-20) |
+| Type | Octal bus transceiver, non-inverting, 3-state |
+| Family | 74HCT (TTL-compatible CMOS, 3.3V input compatible) |
+| Package | DIP-20 (breadboard-compatible) |
+| Voltage | 4.5-5.5V |
+| Direction control | Single DIR pin (HIGH = A->B, LOW = B->A) |
+| Role | Half-duplex level-shifting buffer between ESP32-S3 (3.3V) and Dynamixel AX-12A (5V TTL). DIR pin driven by ESP32 GPIO 8. |
+| Location in lamp | Cave (on breadboard for bench test, then on servo rail for production) |
+| Supplier | Electrokit.com (Sweden) |
+| Product page | https://www.electrokit.com/en/74hct245-dip-20-octal-bus-transceiver-non-inverted-outputs |
+| Status | ORDERED (Electrokit.com) |
 
 ## Olight Obounds Smart Wireless Gateway
 
@@ -477,7 +493,8 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
-| Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | ORDERED |
+| Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
+| 74HCT245 bus transceiver (AX-12A half-duplex buffer) | ORDERED (Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
