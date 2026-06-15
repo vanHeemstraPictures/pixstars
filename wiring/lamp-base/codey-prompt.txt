@@ -7,11 +7,11 @@ ESP32-S3 N16R8 DevKitC (central controller):
 - GPIO 5 -> DIR on TMC2209 stepper driver
 - GPIO 6 -> ENABLE on TMC2209 (active low)
 - GPIO 7 <- Hall effect sensor (A3144) signal (origin detect)
-- GPIO 8 -> AX-12A direction pin (half-duplex TTL serial)
+- GPIO 8 -> 74HCT245 pin 1 (DIR) -- half-duplex direction control (HIGH = TX, LOW = RX)
 - GPIO 9 -> WS2812 rear LED ring DATA (through 330 ohm resistor, then cable column to lamp head, 16 LEDs)
 - GPIO 10 -> WS2812 front LED ring DATA (through 330 ohm resistor, then cable column to lamp head, 35 LEDs)
-- GPIO 15 (UART2 TX) -> AX-12A DATA via tri-state buffer
-- GPIO 16 (UART2 RX) <- AX-12A DATA via tri-state buffer
+- GPIO 15 (UART2 TX) -> 74HCT245 pin 2 (A1) -- transmit to AX-12A
+- GPIO 16 (UART2 RX) <- 1K resistor <- 74HCT245 pin 3 (A2) -- receive from AX-12A (1K + 2.2K voltage divider to GND at GPIO 16, drops 4.7V to 3.23V)
 - GPIO 17 (UART1 TX) -> Pololu Mini Maestro 24ch RX (serial)
 - GPIO 18 (UART1 RX) <- Pololu Mini Maestro 24ch TX (serial)
 - GPIO 48 -> onboard status WS2812 LED
@@ -32,7 +32,7 @@ TMC2209 stepper driver (silent StealthChop mode):
 - GND -> common ground
 
 Dynamixel AX-12A (head nod servo, in lamp head):
-- TTL serial half-duplex via tri-state buffer on GPIO 8/15/16
+- TTL serial half-duplex via 74HCT245 (DIP-20) bus transceiver. DIR=GPIO 8, TX via A1 (pin 2), RX via A2 (pin 3) with 1K+2.2K voltage divider. B1 (pin 18) and B2 (pin 17) bridged together to AX-12A DATA wire.
 - Power: 12V from LRS-50-12 (AX-12A accepts 9-12V)
 
 Power supplies:

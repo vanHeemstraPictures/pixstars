@@ -1,0 +1,46 @@
+Board: ESP32-S3 N16R8 DevKitC
+
+Using the same AX-12A bench test circuit (ESP32-S3 + 74HCT245 + AX-12A + MEAN WELL LRS-50-12), I need a current and voltage validation analysis. No code, just electrical analysis.
+
+Please validate:
+
+1. 5V RAIL (from ESP32 USB 5V pin):
+   - 74HCT245 quiescent current: ~1mA (datasheet ICC)
+   - ESP32 GPIO 8 output HIGH current into 74HCT245 DIR pin: negligible (CMOS input)
+   - ESP32 GPIO 15 output current into 74HCT245 A1 pin: negligible (CMOS input)
+   - Total 5V rail load: ~1mA -- well within ESP32 USB 5V capability (~500mA)
+   - SAFE? Yes/No
+
+2. 12V RAIL (from MEAN WELL LRS-50-12, 4.2A max):
+   - AX-12A idle current: ~50mA
+   - AX-12A moving (no load): ~300mA
+   - AX-12A stall current: ~900mA
+   - Total 12V rail load: 50-900mA -- well within PSU capacity (4.2A)
+   - SAFE? Yes/No
+
+3. SIGNAL LEVELS:
+   - ESP32 GPIO HIGH output: 3.3V
+   - 74HCT245 input HIGH threshold (VIH): 2.0V (TTL compatible)
+   - 74HCT245 HCT input HIGH threshold: 1.4V (guaranteed)
+   - 3.3V > 1.4V: ESP32 can drive 74HCT245 inputs? Yes/No
+   - 74HCT245 output HIGH (VOH) on B side: ~4.7V (powered from 5V VCC)
+   - AX-12A TTL input HIGH threshold: 2.5V (Dynamixel Protocol 1.0)
+   - 4.7V > 2.5V: 74HCT245 B-side can drive AX-12A? Yes/No
+   - AX-12A TTL output HIGH: ~5V
+   - 74HCT245 B-side input threshold: 2.0V
+   - 5V > 2.0V: AX-12A can drive 74HCT245 B-side? Yes/No
+   - 74HCT245 A-side output when powered at 5V, receiving 5V on B-side: outputs ~4.7V
+   - ESP32 GPIO 16 (RX) is 5V tolerant? NO -- ESP32-S3 GPIOs are 3.3V max!
+
+4. CRITICAL CHECK -- ESP32 RX OVERVOLTAGE:
+   - When DIR=LOW (RX mode), 74HCT245 A2 output drives ESP32 GPIO 16
+   - 74HCT245 A-side output VOH = ~4.7V when VCC=5V
+   - ESP32-S3 absolute max GPIO voltage: 3.6V
+   - 4.7V > 3.6V: OVERVOLTAGE RISK on ESP32 GPIO 16!
+   - Mitigation options:
+     a. Add a voltage divider (2K + 3.3K) on A2 output to reduce to ~3.1V
+     b. Add a 3.3V zener clamp on A2 output
+     c. Power 74HCT245 from 3.3V instead of 5V (but then B-side output may not reach AX-12A threshold)
+   - APPLIED FIX: 1K series + 2.2K to GND voltage divider on the A2-to-GPIO16 line (Vout = 4.7V * 2.2K / 3.2K = 3.23V, safe for ESP32-S3)
+
+Show a table with all voltage levels at each node. Flag any out-of-spec conditions in red.
