@@ -374,10 +374,10 @@ pixstars/
 │   │   └── laser-chain.fzz
 │   │
 │   ├── pcbs/
+│   │   ├── ax12a-buffer/
+│   │   ├── cave-controller/
 │   │   ├── led-adapter/
-│   │   ├── power-board/
-│   │   ├── audio-board/
-│   │   └── pixstars-controller/
+│   │   └── power-distribution/
 │   │
 │   ├── exports/
 │   │
