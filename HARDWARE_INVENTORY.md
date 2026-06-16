@@ -266,7 +266,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Laser driver PSU | MEAN WELL LRS-35-12 (or equivalent compact 12V ~3A PSU) - powers the LPLDD-1A-16V-3CH driver, which in turn powers the Opt Lasers 300mW Micro RGB module (DC 12V input); PLANNED |
 | Purpose | In-head vector laser projector for theatrical visuals during performance |
 | Mounting | Lamp head lower interior, projects along eye-line; analog signals routed through cable column to ILDA DAC in cave |
-| Status | IN HAND -- Opt Lasers 300mW Micro RGB received; LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2 + 40kpps galvo selected and pending procurement; physical fit check in lamp head pending |
+| Status | IN HAND -- Opt Lasers 300mW Micro RGB received; ILDAWaveX16 V2 received (2 units); LPLDD-1A-16V-3CH driver + 40kpps galvo selected and pending procurement; physical fit check in lamp head pending |
 
 ## LED Strip Connectors
 
@@ -400,7 +400,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Purpose | ILDA DAC for driving the RGB laser galvo scanner in the lamp head. Receives laser cues from Mac Mini via WiFi/Ethernet (Ether Dream or IDN protocol), outputs standard ILDA DB25 analog signals through the cable column to the galvo scanner. SD card provides backup playback path. |
 | V1 board dimensions | 55 x 53 mm (V2 is larger due to dual processor, Ethernet, DB25 -- exact dimensions TBD from supplier) |
 | Notes | Opt Lasers confirmed their Micro RGB is suitable for laser projection (June 2026, Dr. Michal Piotrowicz). The ILDAWaveX16 V2 board selection is independent of the laser module choice. |
-| Status | EVALUATING |
+| Status | IN HAND (2 units: 1 primary + 1 spare) |
 
 ## SM5 6W RGB Laser Module (SUPERSEDED)
 
@@ -482,8 +482,8 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Ardour | ✅ Installed (OSC to be enabled) |
 | DMX interface | 🟡 MOCKED (purchase Enttec DMX USB Pro) |
 | Servo controller | 🟡 MOCKED (connect USB servo) |
-| Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | Opt Lasers 300mW Micro RGB IN HAND; EVALUATING (LPLDD + ILDAWaveX16 V2 + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
-| ILDAWaveX16 V2 (ILDA Laser DAC) | EVALUATING |
+| Laser galvo scanner (Opt Lasers 300mW Micro RGB + LPLDD-1A-16V-3CH driver + ILDAWaveX16 V2, 40kpps galvo (Teclulu GH40), +/-24V PSU, 12V PSU for LPLDD) | Opt Lasers 300mW Micro RGB IN HAND; ILDAWaveX16 V2 IN HAND (2 units); EVALUATING (LPLDD + 40kpps galvo); SM5 6W RGB (Starshine) SUPERSEDED -- too heavy |
+| ILDAWaveX16 V2 (ILDA Laser DAC) | IN HAND (2 units) |
 | Opt Lasers 300mW Micro RGB Laser Module | IN HAND |
 | ESP32-S3 N16R8 DevKitC (cave controller) | IN HAND |
 | MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | ORDERED (Reichelt) |
