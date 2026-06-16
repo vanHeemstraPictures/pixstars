@@ -2,9 +2,9 @@ AISLER_SETUP.md
 
 AISLER Integration for PixStars
 
-Version: 1.0
-Status: Recommended
-Repository: pixstars/architecture/aisler
+Version: 1.0  
+Status: Recommended  
+Repository: pixstars/architecture/aisler  
 
 ⸻
 
@@ -66,7 +66,7 @@ https://github.com/fritzing/fritzing-app
 3. Architectural Role
 
 PixStars Architecture
-
+```
 PixStars
 │
 ├── Performance Layer
@@ -91,7 +91,7 @@ PixStars
 │
 └── Manufacturing Layer
     └── AISLER
-
+```
 AISLER is responsible for transforming hardware designs into physical hardware.
 
 ⸻
@@ -303,7 +303,7 @@ This board would become the hardware kernel of the PixStars lamp.
 10. Repository Structure
 
 Recommended structure:
-
+```
 pixstars/
 │
 ├── architecture/
@@ -332,7 +332,7 @@ pixstars/
 │       └── aisler/
 │
 └── docs/
-
+```
 ⸻
 
 11. Revision Management
@@ -357,7 +357,7 @@ Manufactured boards should remain reproducible.
 12. Manufacturing Workflow
 
 Recommended workflow:
-
+```
 Architecture
     ↓
 Fritzing Design
@@ -375,7 +375,7 @@ Testing
 Documentation
     ↓
 Production Revision
-
+```
 Every hardware change should follow this process.
 
 ⸻
