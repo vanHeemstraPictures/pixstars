@@ -4,6 +4,35 @@
 
 Pixstars reimagines Pixar's iconic Luxo Jr. lamp as a live stage character that reacts, emotes, and performs alongside a pianist playing Guns N' Roses' *November Rain*. A central Show Conductor dispatches OSC cues to five subsystems in real time, creating a synchronized audio-visual experience.
 
+## About
+
+```
+PixStars
+│
+├── Performance Layer
+│   ├── Ardour
+│   ├── DigiScore
+│   └── Jess+
+│
+├── Automation Layer
+│   ├── Home Assistant
+│   ├── OpenVoiceOS
+│   └── HiveMind
+│
+├── Hardware Layer
+│   ├── Raspberry Pi
+│   ├── ESP32
+│   ├── Sensors
+│   ├── Audio
+│   └── Lighting
+│
+├── Design Layer
+│   └── Fritzing
+│
+└── Manufacturing Layer
+    └── AISLER
+```
+
 ## Traceability
 
 Parent:
