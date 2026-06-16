@@ -2,7 +2,7 @@
 
 **A live performance combining an AI-driven Pixar-style desk lamp, ROLAND keyboard, projection, and DMX lighting — orchestrated from a Mac Mini M4 Pro.**
 
-Pixstars reimagines Pixar's iconic Luxo Jr. lamp as a live stage character that reacts, emotes, and performs alongside a pianist playing Guns N' Roses' *November Rain*. A central Show Conductor dispatches OSC cues to five subsystems in real time, creating a synchronized audio-visual experience.
+Pixstars reimagines Pixar's iconic Luxo Jr. lamp as a live stage character that reacts, emotes, and performs alongside a keyboard pianist playing Guns N' Roses' *November Rain*. A central Show Conductor dispatches OSC cues to five subsystems in real time, creating a synchronized audio-visual experience.
 
 ## About
 
