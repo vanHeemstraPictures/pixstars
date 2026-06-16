@@ -134,20 +134,19 @@ pixstars/
 |       +-- FRITZING_SETUP.md
 |
 +-- electronics/
-|   +-- fritzing/
-|   |
-|   +-- cave-controller.fzz
-|   +-- power-distribution.fzz
-|   +-- lamp-head.fzz
-|   +-- turntable.fzz
-|   +-- laser-chain.fzz
-|   |
-|   +-- exports/
-|       +-- cave-controller.png
-|       +-- power-distribution.png
-|       +-- lamp-head.png
-|       +-- turntable.png
-|       +-- laser-chain.png
+    +-- fritzing/
+        +-- cave-controller.fzz
+        +-- power-distribution.fzz
+        +-- lamp-head.fzz
+        +-- turntable.fzz
+        +-- laser-chain.fzz
+        |
+        +-- exports/
+            +-- cave-controller.png
+            +-- power-distribution.png
+            +-- lamp-head.png
+            +-- turntable.png
+            +-- laser-chain.png
 ```
 ⸻
 
