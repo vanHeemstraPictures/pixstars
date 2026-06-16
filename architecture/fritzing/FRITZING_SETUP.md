@@ -87,7 +87,7 @@ This dramatically simplifies:
 4. Architectural Role
 
 PixStars Architecture Layers
-
+```
 Performance Layer
 │
 ├── Ardour
@@ -111,13 +111,13 @@ Hardware Layer
 Documentation Layer
 │
 └── Fritzing
-
+```
 Fritzing documents the Hardware Layer.
 
 ⸻
 
 5. Recommended Repository Structure
-
+```
 pixstars/
 │
 ├── architecture/
@@ -140,7 +140,7 @@ pixstars/
 │       ├── audio-system.png
 │       ├── power-system.png
 │       └── led-ring.png
-
+```
 ⸻
 
 6. Required PixStars Diagrams
@@ -234,7 +234,7 @@ power-system.fzz
 7. Lamp Head Reference Design
 
 Initial reference wiring
-
+```
 Raspberry Pi Zero 2 WH
 GPIO18
    │
@@ -254,7 +254,7 @@ Audio Adapter
    └── Speaker Amplifier
            │
            └── Speaker
-
+```
 This design should become the first Fritzing project.
 
 ⸻
@@ -278,13 +278,13 @@ SunFounder USB Microphone
 Wire Colours
 
 Use consistent colours.
-
+```
 Red     = +5V
 Black   = Ground
 Yellow  = GPIO
 Green   = Audio
 Blue    = USB
-
+```
 ⸻
 
 Labels
@@ -360,13 +360,13 @@ Examples:
 * Projection hardware
 
 Each subsystem should receive:
-
+```
 Subsystem Name
 │
 ├── .fzz
 ├── PNG Export
 └── SVG Export
-
+```
 ⸻
 
 12. Recommendation
