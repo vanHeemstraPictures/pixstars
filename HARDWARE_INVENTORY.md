@@ -206,7 +206,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Role | Cave 12V rail -- powers the LPLDD-1A-16V-3CH laser driver and the TMC2209 stepper driver; also used for AX-12A (9-12V) bench testing |
 | Location in lamp | Cave (on servo rail) |
 | Supplier | Reichelt (https://www.reichelt.com/nl) |
-| Status | ORDERED (Reichelt) |
+| Status | IN HAND (Reichelt) |
 
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
@@ -320,7 +320,8 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Location in lamp | Cave (on breadboard for bench test, then on servo rail for production) |
 | Supplier | Electrokit.com (Sweden) |
 | Product page | https://www.electrokit.com/en/74hct245-dip-20-octal-bus-transceiver-non-inverted-outputs |
-| Status | ORDERED (Electrokit.com) |
+| Quantity | 2 (1 active for AX-12A bench test, 1 spare) |
+| Status | IN HAND |
 
 ## Olight Obounds Smart Wireless Gateway
 
@@ -486,7 +487,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | ILDAWaveX16 V2 (ILDA Laser DAC) | IN HAND (2 units) |
 | Opt Lasers 300mW Micro RGB Laser Module | IN HAND |
 | ESP32-S3 N16R8 DevKitC (cave controller) | IN HAND |
-| MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | ORDERED (Reichelt) |
+| MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | IN HAND (Reichelt) |
 | Dynamixel AX-12A (head nod servo) | IN HAND |
 | Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
 | SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
@@ -494,7 +495,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
-| 74HCT245 bus transceiver (AX-12A half-duplex buffer) | ORDERED (Electrokit.com) |
+| 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
