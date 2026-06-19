@@ -320,7 +320,8 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Location in lamp | Cave (on breadboard for bench test, then on servo rail for production) |
 | Supplier | Electrokit.com (Sweden) |
 | Product page | https://www.electrokit.com/en/74hct245-dip-20-octal-bus-transceiver-non-inverted-outputs |
-| Status | ORDERED (Electrokit.com) |
+| Quantity | 2 (1 active for AX-12A bench test, 1 spare) |
+| Status | IN HAND |
 
 ## Olight Obounds Smart Wireless Gateway
 
@@ -494,7 +495,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
-| 74HCT245 bus transceiver (AX-12A half-duplex buffer) | ORDERED (Electrokit.com) |
+| 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
 | M5Stack Atom Echo (wake word satellite) | IN HAND |
