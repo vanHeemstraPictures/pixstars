@@ -40,6 +40,38 @@ The Adafruit Feather ESP32-C1 (#5933) used in this Fritzing sketch hasa **differ
 
 When the firmware is flashed to the real ESP32-S3 DevKitC, the GPIOnumbers in the firmware match the left column. The Feather pin labelsin the middle column exist only inside Fritzing -- ignore them outsideof this sketch.
 
+## 1b. PSU mains wiring (MEAN WELL LRS-50-12)
+
+Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the breadboard. The bench test runs on **Netherlands 230V mains** -- the AC side is dangerous, the DC side is not. Treat them accordingly.
+
+### AC input (Mains -- 230V, DANGEROUS)
+
+| Terminal | Connect to | Wire color (EU standard) |
+|----------|-----------|--------------------------|
+| L | Live | Brown |
+| N | Neutral | Blue |
+| FG (the earth symbol) | Earth / Ground | Green-yellow |
+
+**Recommended approach for bench test:** Use a grounded IEC C13 power cord (standard PC / monitor cable). Cut the socket end off, strip the 3 wires, and screw them into the L, N, and FG terminals on the PSU. For production, use an IEC C14 panel-mount inlet on the cave enclosure instead of a cut cable.
+
+### DC output
+
+| Terminal | Connect to | Wire color |
+|----------|-----------|------------|
+| V+ | +12V rail on breadboard (bottom red) | Orange |
+| V- | GND rail on breadboard (bottom blue) | Black |
+
+### Safety checklist
+
+- [ ] Verify the PSU voltage selector is set to 230V (or confirm universal input 85-264VAC printed on the label -- the LRS-50-12 is universal, but check).
+- [ ] Earth / ground wire MUST be connected to the FG terminal.
+- [ ] No exposed mains wiring -- use heat-shrink tubing on all AC connections.
+- [ ] Test the DC output with a multimeter before connecting to the breadboard (expect ~12.0V between V+ and V-).
+- [ ] NEVER touch the AC terminals while the cord is plugged in.
+- [ ] Unplug from the wall before making any wiring changes on the PSU.
+
+Once the PSU reads ~12.0V on the multimeter and nothing on the AC side is exposed, you are ready to place components on the breadboard.
+
 ## 2. Breadboard placement strategy
 
 Half-size breadboard orientation: long axis horizontal, two power railson top (red/blue), two on the bottom, and the center channel splittingrows a-e (top half) from rows f-j (bottom half).
