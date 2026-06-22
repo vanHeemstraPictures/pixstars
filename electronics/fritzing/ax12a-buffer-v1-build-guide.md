@@ -61,6 +61,23 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 | V+ | +12V rail on breadboard (bottom red) | Orange |
 | V- | GND rail on breadboard (bottom blue) | Black |
 
+### PSU DC output to breadboard
+
+Use two Kitronik M/M jumper wires to connect the PSU DC output screw terminals to the breadboard power rails:
+
+| Wire | Color | From (PSU terminal) | To (breadboard) |
+|------|-------|---------------------|-----------------|
+| 1 | Orange | V+ (+12V) screw terminal | Left red rail, row 2 (+12V) |
+| 2 | Black | V- (COM/GND) screw terminal | Left blue rail, row 2 (GND) |
+
+Steps:
+1. Ensure the PSU is unplugged from mains
+2. Loosen the V+ screw terminal on the PSU DC output side
+3. Insert the stripped/bare end of an orange jumper wire, tighten the screw
+4. Push the pin end of the orange wire into the left red (+) rail on the breadboard (row 2)
+5. Repeat with a black jumper wire: stripped end into the V- (COM) screw terminal, pin end into the left blue (-) rail on the breadboard (row 2)
+6. Verify: orange wire bridges PSU V+ to breadboard +12V rail, black wire bridges PSU V- to breadboard GND rail
+
 ### Safety checklist
 
 - [ ] Verify the PSU voltage selector is set to 230V (or confirm universal input 85-264VAC printed on the label -- the LRS-50-12 is universal, but check).
