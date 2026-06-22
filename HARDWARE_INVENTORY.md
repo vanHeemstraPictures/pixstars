@@ -323,11 +323,35 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Item | Detail |
 | --- | --- |
 | Product | Kitronik Inventor's Kit for Arduino |
-| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (various values including 470 ohm), LEDs, push buttons, potentiometer |
-| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering). Kit LEDs + 1K ohm resistor also used for the PSU power verification smoke test (Step 0) before connecting the AX-12A. |
+| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (10x 220 ohm, 5x 2.2K ohm, 5x 10K ohm), LEDs, push buttons, potentiometer. NOTE: kit does NOT contain 1K ohm or 330 ohm resistors -- those are sourced separately from TinyTronics. |
+| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering). Kit LEDs used for the PSU power verification smoke test (Step 0) before connecting the AX-12A (1K ohm resistor for the smoke test is sourced from TinyTronics, see below). |
 | Source | elektronicavoorjou.nl |
 | Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
 | Status | IN HAND |
+
+## 1K Ohm Resistor (TinyTronics)
+
+| Property | Value |
+| --- | --- |
+| Component | 1K ohm resistor, through-hole, axial |
+| Quantity | 4 |
+| Purpose | AX-12A voltage divider (series leg, paired with the 2.2K ohm GND leg from the Kitronik kit on the 74HCT245 A2 -> ESP32 GPIO 16 line); PSU LED smoke test (Step 0 on the AX-12A bench test) |
+| Supplier | TinyTronics (tinytronics.nl) |
+| Product page | https://www.tinytronics.nl/en/components/resistors/resistors/1k%CF%89-resistor |
+| Notes | Kitronik Inventor's Kit does not contain 1K ohm resistors (the kit ships 220 ohm, 2.2K ohm, and 10K ohm only), so this value is sourced separately. |
+| Status | ORDERED (TinyTronics) |
+
+## 330 Ohm Resistor (TinyTronics)
+
+| Property | Value |
+| --- | --- |
+| Component | 330 ohm resistor, through-hole, axial (LED series resistor) |
+| Quantity | 4 |
+| Purpose | WS2812 LED ring data line protection -- 1 per ring on the data line at the ESP32 end (2 rings total: rear 16-LED ring in lamp head + front 35-LED cone beam ring); remaining 2 are spares |
+| Supplier | TinyTronics (tinytronics.nl) |
+| Product page | https://www.tinytronics.nl/en/components/resistors/resistors/330%CF%89-resistor-(led-series-resistor) |
+| Notes | Kitronik Inventor's Kit does not contain 330 ohm resistors. |
+| Status | ORDERED (TinyTronics) |
 
 ## 74HCT245 Bus Transceiver (AX-12A Half-Duplex Buffer)
 
@@ -519,6 +543,8 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
+| 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | ORDERED (TinyTronics) |
+| 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | ORDERED (TinyTronics) |
 | 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |

@@ -84,9 +84,9 @@ R = (12V - 2V) / 20mA = 500 ohm. Use a 1K ohm resistor (safer, ~10mA, LED still 
 
 LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED cathode (short leg) -> GND rail -> LRS-50-12 V-
 
-### Parts (from Kitronik kit)
-- 1x LED (any color, standard 5mm or 3mm through-hole)
-- 1x 1K ohm resistor (or 470 ohm - 1K ohm range)
+### Parts
+- 1x LED (any color, standard 5mm or 3mm through-hole) -- from Kitronik kit
+- 1x 1K ohm resistor -- ORDERED from TinyTronics (the Kitronik kit does NOT contain 1K ohm resistors; it ships 220 ohm, 2.2K ohm, and 10K ohm only)
 
 ### Steps
 1. Complete section 1b (PSU mains wiring) first -- PSU must be wired to the Handson cord but NOT plugged in yet
