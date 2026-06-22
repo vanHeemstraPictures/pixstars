@@ -221,6 +221,16 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Purpose | Connects MEAN WELL LRS-50-12 to Dutch mains (230V). Cut socket end, strip 3 wires (brown=L, blue=N, green-yellow=FG), screw into PSU terminals. |
 | Status | IN HAND |
 
+### Wire-to-terminal mapping (LRS-50-12 AC input)
+
+Match each cord wire to the correct PSU terminal. Getting this wrong is a shock hazard.
+
+| PSU terminal | Cord wire color (EU standard) | Function |
+| --- | --- | --- |
+| L (Live) | Brown | 230V live |
+| N (Neutral) | Blue | Neutral return |
+| FG (Frame Ground, earth symbol) | Green-yellow (striped) | Protective earth |
+
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
