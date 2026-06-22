@@ -52,7 +52,7 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 | N | Neutral | Blue |
 | FG (the earth symbol) | Earth / Ground | Green-yellow |
 
-**Recommended approach for bench test:** Use a grounded IEC C13 power cord (standard PC / monitor cable). Cut the socket end off, strip the 3 wires, and screw them into the L, N, and FG terminals on the PSU. For production, use an IEC C14 panel-mount inlet on the cave enclosure instead of a cut cable.
+**Recommended approach for bench test:** Use the Handson Aansluitsnoer 2.5m from GAMMA (3x1.50mm2, randaarde plug, KEMA certified, product B186276, EUR 6.99). Cut the socket end off, strip the 3 wires (brown=L, blue=N, green-yellow=FG), and screw them into the L, N, and FG terminals on the PSU. For production, use an IEC C14 panel-mount inlet on the cave enclosure instead of a cut cable.
 
 ### DC output
 
