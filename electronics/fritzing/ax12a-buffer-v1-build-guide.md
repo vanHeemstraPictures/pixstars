@@ -72,6 +72,39 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 
 Once the PSU reads ~12.0V on the multimeter and nothing on the AC side is exposed, you are ready to place components on the breadboard.
 
+## 1c. PSU power verification (Step 0)
+
+A pre-flight smoke test: confirm the MEAN WELL LRS-50-12 is actually outputting 12V at the breadboard rails before connecting any expensive components (ESP32, 74HCT245, AX-12A). Drives a single LED through a current-limiting resistor -- a visual go/no-go.
+
+### Circuit
+
+A simple LED + current-limiting resistor to visually confirm 12V is present on the breadboard rails.
+
+R = (12V - 2V) / 20mA = 500 ohm. Use a 1K ohm resistor (safer, ~10mA, LED still lights clearly).
+
+LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED cathode (short leg) -> GND rail -> LRS-50-12 V-
+
+### Parts (from Kitronik kit)
+- 1x LED (any color, standard 5mm or 3mm through-hole)
+- 1x 1K ohm resistor (or 470 ohm - 1K ohm range)
+
+### Steps
+1. Complete section 1b (PSU mains wiring) first -- PSU must be wired to the Handson cord but NOT plugged in yet
+2. Wire PSU DC output to breadboard: V+ to bottom red rail (+12V), V- to bottom blue rail (GND)
+3. Place 1K ohm resistor: one leg in the +12V rail, other leg in a free row
+4. Place LED: anode (long leg) in the same row as the resistor's free leg, cathode (short leg) in the GND rail
+5. Double-check: resistor bridges +12V to LED anode, LED cathode connects to GND. No direct 12V-to-LED connection without the resistor.
+6. Plug in the Handson cord to mains
+7. LED lights up = 12V rail confirmed. If LED does not light, unplug immediately and check polarity/connections.
+8. (Optional) Measure with multimeter across +12V and GND rails -- expect ~12.0V
+9. Unplug from mains
+10. Remove the LED and resistor -- they were only for verification. The breadboard is now ready for the AX-12A circuit (section 2 onwards).
+
+### Safety
+- NEVER touch the PSU AC terminals while plugged in
+- If the LED does not light, unplug FIRST, then troubleshoot
+- The LED test draws ~10mA -- negligible load, safe for the PSU
+
 ## 2. Breadboard placement strategy
 
 Half-size breadboard orientation: long axis horizontal, two power railson top (red/blue), two on the bottom, and the center channel splittingrows a-e (top half) from rows f-j (bottom half).

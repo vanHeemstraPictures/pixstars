@@ -324,7 +324,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | --- | --- |
 | Product | Kitronik Inventor's Kit for Arduino |
 | Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (various values including 470 ohm), LEDs, push buttons, potentiometer |
-| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering) |
+| Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering). Kit LEDs + 1K ohm resistor also used for the PSU power verification smoke test (Step 0) before connecting the AX-12A. |
 | Source | elektronicavoorjou.nl |
 | Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
 | Status | IN HAND |
