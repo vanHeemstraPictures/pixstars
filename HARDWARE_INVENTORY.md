@@ -208,6 +208,19 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Supplier | Reichelt (https://www.reichelt.com/nl) |
 | Status | IN HAND (Reichelt) |
 
+## Handson Aansluitsnoer 2.5m (Black)
+
+| Property | Value |
+| --- | --- |
+| Component | Handson Aansluitsnoer 2.5m (Black) |
+| Type | Mains power cord, randaarde (grounded) plug, 3x1.50mm2 |
+| Specs | 230V / 16A / 3500W max, IP20 (indoor only), KEMA certified |
+| Length | 2.5 m |
+| Source | GAMMA (https://www.gamma.nl), product B186276 |
+| Price | EUR 6.99 |
+| Purpose | Connects MEAN WELL LRS-50-12 to Dutch mains (230V). Cut socket end, strip 3 wires (brown=L, blue=N, green-yellow=FG), screw into PSU terminals. |
+| Status | IN HAND |
+
 ## ESP32-S3 N16R8 DevKitC (Cave Controller)
 
 | Property | Value |
@@ -488,6 +501,7 @@ The lamp's base rotation is a DIY belt-driven turntable inspired by the MGX3D op
 | Opt Lasers 300mW Micro RGB Laser Module | IN HAND |
 | ESP32-S3 N16R8 DevKitC (cave controller) | IN HAND |
 | MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | IN HAND (Reichelt) |
+| Handson Aansluitsnoer 2.5m (Black) -- 230V mains cord for LRS-50-12 | IN HAND (GAMMA, EUR 6.99) |
 | Dynamixel AX-12A (head nod servo) | IN HAND |
 | Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
 | SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
