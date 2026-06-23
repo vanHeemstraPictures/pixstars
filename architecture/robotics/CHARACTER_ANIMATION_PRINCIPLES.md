@@ -33,7 +33,7 @@ Pause
 Look
 ↓
 Move
-``
+```
 ⸻
 
 Principle 3 — Follow Through
