@@ -1,4 +1,4 @@
-ROBOTICS_CHARACTER_ARCHITECTURE.md
+# ROBOTICS_CHARACTER_ARCHITECTURE.md
 
 Version: 1.0  
 Status: Proposed Architecture  
