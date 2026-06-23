@@ -121,7 +121,7 @@ Mission Control
       ├── Lamp
       └── Projection System
 ```
-[Storyboarder](https://tinythings.net/storyboarder/)becomes the authoring tool.
+[Storyboarder](https://tinythings.net/storyboarder/) becomes the authoring tool.
 
 Mission Control becomes the operational tool.
 
