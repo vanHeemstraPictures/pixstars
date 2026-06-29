@@ -339,7 +339,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Supplier | TinyTronics (tinytronics.nl) |
 | Product page | https://www.tinytronics.nl/en/components/resistors/resistors/1k%CF%89-resistor |
 | Notes | Kitronik Inventor's Kit does not contain 1K ohm resistors (the kit ships 220 ohm, 2.2K ohm, and 10K ohm only), so this value is sourced separately. |
-| Status | ORDERED (TinyTronics) |
+| Status | IN HAND (TinyTronics) |
 
 ## 330 Ohm Resistor (TinyTronics)
 
@@ -351,7 +351,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Supplier | TinyTronics (tinytronics.nl) |
 | Product page | https://www.tinytronics.nl/en/components/resistors/resistors/330%CF%89-resistor-(led-series-resistor) |
 | Notes | Kitronik Inventor's Kit does not contain 330 ohm resistors. |
-| Status | ORDERED (TinyTronics) |
+| Status | IN HAND (TinyTronics) |
 
 ## 74HCT245 Bus Transceiver (AX-12A Half-Duplex Buffer)
 
@@ -543,8 +543,8 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
-| 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | ORDERED (TinyTronics) |
-| 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | ORDERED (TinyTronics) |
+| 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | IN HAND (TinyTronics) |
+| 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | IN HAND (TinyTronics) |
 | 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |
