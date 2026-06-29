@@ -6,9 +6,9 @@ Authoritative circuit spec: `wiring/ax12a-bench-test/codey-prompt.txt`.Wire colo
 
 Use straight ASCII quotes only when typing labels in Fritzing.
 
-> **IMPORTANT -- Fritzing stand-in part.** The Fritzing parts bin on macOS does not ship an ESP32-S3 N16R8 DevKitC. This sketch uses the **Adafruit Feather ESP32-C1 (#5933)** as a visual stand-in for documentation only. The **physical build uses the ESP32-S3 N16R8 DevKitC** -- the Feather has a different form factor and pin layout, so always cross-reference the Pin Mapping section below before wiring real hardware. Rename the Feather to `ESP32-S3 N16R8 DevKitC` in the Inspector so the sketch label matches the bench build.
+> IMPORTANT -- Fritzing stand-in part. The Fritzing parts bin on macOS does not ship an ESP32-S3 N16R8 DevKitC. This sketch uses the Adafruit Feather ESP32-C1 (#5933) as a visual stand-in for documentation only. The physical build uses the ESP32-S3 N16R8 DevKitC -- the Feather has a different form factor and pin layout, so always cross-reference the Pin Mapping section below before wiring real hardware. Rename the Feather to ESP32-S3 N16R8 DevKitC in the Inspector so the sketch label matches the bench build.
 
-> **IMPORTANT -- 74LVC245 vs 74HCT245.** Fritzing's parts bin on macOS ships **74LVC245** (low-voltage CMOS) instead of 74HCT245. The DIP-20 **pinout is identical** -- only the logic family differs. Place the 74LVC245 in the sketch, then rename it to `74HCT245` in the Inspector so the silkscreen label matches the physical board. The bench build uses an actual 74HCT245.
+> IMPORTANT -- 74LVC245 vs 74HCT245. Fritzing's parts bin on macOS ships 74LVC245 (low-voltage CMOS) instead of 74HCT245. The DIP-20 pinout is identical -- only the logic family differs. Place the 74LVC245 in the sketch, then rename it to 74HCT245 in the Inspector so the silkscreen label matches the physical board. The bench build uses an actual 74HCT245.
 
 ## 1. Parts list
 
@@ -16,13 +16,13 @@ Open Fritzing, switch to the Breadboard view, and search the Parts bin(top-right
 
 | Qty | Component | Fritzing part (exact name) | Notes |
 | --- | --- | --- | --- |
-| 1 | Half-size breadboard | `Breadboard Half +` | 400 tie points (30 rows + 2 power rails per side). |
-| 1 | ESP32-S3 N16R8 DevKitC (stand-in) | `Adafruit Feather ESP32-C1 (#5933)` | Visual stand-in only. Rename to `ESP32-S3 N16R8 DevKitC` in the Inspector. See Pin Mapping section -- the Feather's labelled pins do NOT line up with the actual ESP32-S3 GPIO numbers. |
-| 1 | 74HCT245 octal buffer | `74LVC245` | Same DIP-20 pinout as 74HCT245. Rename to `74HCT245` in the Inspector. The physical build uses a real 74HCT245. |
-| 1 | Resistor (1 kohm) | `Resistor` | Set `Resistance` to `1k` in the Inspector. Axial through-hole. |
-| 1 | Resistor (2.2 kohm) | `Resistor` | Set `Resistance` to `2.2k` in the Inspector. Axial through-hole. |
-| 1 | 3-pin male header | `Sparkfun Pin Header (3 pin)` | Acts as the AX-12A pigtail (VCC / DATA / GND). Label it `AX-12A` in the Inspector. |
-| 1 | 2-pin screw terminal | `2-pin screw terminal` | 12V input from MEAN WELL LRS-50-12. A DC barrel jack is also acceptable; either way label it `LRS-50-12 12V IN`. |
+| 1 | Half-size breadboard | Breadboard Half + | 400 tie points (30 rows + 2 power rails per side). |
+| 1 | ESP32-S3 N16R8 DevKitC (stand-in) | Adafruit Feather ESP32-C1 (#5933) | Visual stand-in only. Rename to ESP32-S3 N16R8 DevKitC in the Inspector. See Pin Mapping section -- the Feather's labelled pins do NOT line up with the actual ESP32-S3 GPIO numbers. |
+| 1 | 74HCT245 octal buffer | 74LVC245 | Same DIP-20 pinout as 74HCT245. Rename to 74HCT245 in the Inspector. The physical build uses a real 74HCT245. |
+| 1 | Resistor (1 kohm) | Resistor | Set Resistance to 1k in the Inspector. Axial through-hole. |
+| 1 | Resistor (2.2 kohm) | Resistor | Set Resistance to 2.2k in the Inspector. Axial through-hole. |
+| 1 | 3-pin male header | Sparkfun Pin Header (3 pin) | Acts as the AX-12A pigtail (VCC / DATA / GND). Label it AX-12A in the Inspector. |
+| 1 | 2-pin screw terminal | 2-pin screw terminal | 12V input from MEAN WELL LRS-50-12. A DC barrel jack is also acceptable; either way label it LRS-50-12 12V IN. |
 
 All parts above are in the Fritzing core library on macOS -- no extraparts packs required. Do not invent custom parts for this bench test.
 
@@ -32,11 +32,11 @@ The Adafruit Feather ESP32-C1 (#5933) used in this Fritzing sketch hasa **differ
 
 | Actual ESP32-S3 pin | Feather stand-in pin | Wire to |
 | --- | --- | --- |
-| GPIO 15 (UART2 TX) | `TX` | 74HCT245 pin 2 (A1) |
-| GPIO 16 (UART2 RX) | `RX` | 1 kohm resistor from 74HCT245 pin 3 (A2) (divider junction) |
-| GPIO 8 (DIR) | `IO0` | 74HCT245 pin 1 (DIR) |
-| 5V | `USB` | +5V rail (top red) |
-| GND | `GND` | GND rail (top blue) |
+| GPIO 15 (UART2 TX) | TX | 74HCT245 pin 2 (A1) |
+| GPIO 16 (UART2 RX) | RX | 1 kohm resistor from 74HCT245 pin 3 (A2) (divider junction) |
+| GPIO 8 (DIR) | IO0 | 74HCT245 pin 1 (DIR) |
+| 5V | USB | +5V rail (top red) |
+| GND | GND | GND rail (top blue) |
 
 When the firmware is flashed to the real ESP32-S3 DevKitC, the GPIOnumbers in the firmware match the left column. The Feather pin labelsin the middle column exist only inside Fritzing -- ignore them outsideof this sketch.
 
@@ -47,7 +47,7 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 ### AC input (Mains -- 230V, DANGEROUS)
 
 | Terminal | Connect to | Wire color (EU standard) |
-|----------|-----------|--------------------------|
+| --- | --- | --- |
 | L | Live | Brown |
 | N | Neutral | Blue |
 | FG (the earth symbol) | Earth / Ground | Green-yellow |
@@ -57,7 +57,7 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 ### DC output
 
 | Terminal | Connect to | Wire color |
-|----------|-----------|------------|
+| --- | --- | --- |
 | V+ | +12V rail on breadboard (bottom red) | Orange |
 | V- | GND rail on breadboard (bottom blue) | Black |
 
@@ -66,11 +66,12 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 Use two Kitronik M/M jumper wires to connect the PSU DC output screw terminals to the breadboard power rails:
 
 | Wire | Color | From (PSU terminal) | To (breadboard) |
-|------|-------|---------------------|-----------------|
+| --- | --- | --- | --- |
 | 1 | Orange | V+ (+12V) screw terminal | Left red rail, row 2 (+12V) |
 | 2 | Black | V- (COM/GND) screw terminal | Left blue rail, row 2 (GND) |
 
 Steps:
+
 1. Ensure the PSU is unplugged from mains
 2. Loosen the V+ screw terminal on the PSU DC output side
 3. Insert the stripped/bare end of an orange jumper wire, tighten the screw
@@ -102,10 +103,12 @@ R = (12V - 2V) / 20mA = 500 ohm. Use a 1K ohm resistor (safer, ~10mA, LED still 
 LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED cathode (short leg) -> GND rail -> LRS-50-12 V-
 
 ### Parts
+
 - 1x LED (any color, standard 5mm or 3mm through-hole) -- from Kitronik kit
 - 1x 1K ohm resistor -- IN HAND from TinyTronics (the Kitronik kit does NOT contain 1K ohm resistors; it ships 220 ohm, 2.2K ohm, and 10K ohm only)
 
 ### Steps
+
 1. Complete section 1b (PSU mains wiring) first -- PSU must be wired to the Handson cord but NOT plugged in yet
 2. Wire PSU DC output to breadboard: V+ to bottom red rail (+12V), V- to bottom blue rail (GND)
 3. Place 1K ohm resistor: one leg in the +12V rail, other leg in a free row
@@ -118,9 +121,19 @@ LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED catho
 10. Remove the LED and resistor -- they were only for verification. The breadboard is now ready for the AX-12A circuit (section 2 onwards).
 
 ### Safety
+
 - NEVER touch the PSU AC terminals while plugged in
 - If the LED does not light, unplug FIRST, then troubleshoot
 - The LED test draws ~10mA -- negligible load, safe for the PSU
+
+### Status: PASSED
+
+The PSU smoke test has been completed on physical hardware. The MEAN WELL LRS-50-12 powered the breadboard rails correctly and the verification LED lit as expected in the ON state. Photo evidence:
+
+- `electronics/pcbs/psu-verification/psu_verification_off.png` -- mains unplugged, LED dark
+- `electronics/pcbs/psu-verification/psu_verification_on.png` -- mains plugged in, LED lit (12V rail confirmed)
+
+Always unplug from mains before making any wiring changes on the breadboard, even after a successful smoke test.
 
 ## 2. Breadboard placement strategy
 
@@ -156,15 +169,15 @@ The **From** column lists the Feather stand-in pin label that appearson the Frit
 
 | # | From | To | Color | Purpose |
 | --- | --- | --- | --- | --- |
-| 1 | Feather `USB` (ESP32-S3 5V) | +5V rail (top red) | Red | 5V supply for 74HCT245 |
-| 2 | Feather `GND` (ESP32-S3 GND) | GND rail (top blue) | Black | Common ground |
+| 1 | Feather USB (ESP32-S3 5V) | +5V rail (top red) | Red | 5V supply for 74HCT245 |
+| 2 | Feather GND (ESP32-S3 GND) | GND rail (top blue) | Black | Common ground |
 | 3 | 74HCT245 pin 20 (VCC) | +5V rail | Red | Buffer logic supply |
 | 4 | 74HCT245 pin 10 (GND) | GND rail | Black | Buffer ground |
 | 5 | 74HCT245 pin 19 (OE, active low) | GND rail | Black | Always-enabled output |
-| 6 | Feather `IO0` (ESP32-S3 GPIO 8) | 74HCT245 pin 1 (DIR) | Green | Half-duplex direction control |
-| 7 | Feather `TX` (ESP32-S3 GPIO 15, UART2 TX) | 74HCT245 pin 2 (A1) | Yellow | TX into low-voltage side |
+| 6 | Feather IO0 (ESP32-S3 GPIO 8) | 74HCT245 pin 1 (DIR) | Green | Half-duplex direction control |
+| 7 | Feather TX (ESP32-S3 GPIO 15, UART2 TX) | 74HCT245 pin 2 (A1) | Yellow | TX into low-voltage side |
 | 8 | 74HCT245 pin 3 (A2) | 1 kohm resistor -> junction | Yellow | RX from low-voltage side (series leg of divider) |
-| 9 | Junction row | Feather `RX` (ESP32-S3 GPIO 16, UART2 RX) | Yellow | Divided RX into ESP32 (~3.23V) |
+| 9 | Junction row | Feather RX (ESP32-S3 GPIO 16, UART2 RX) | Yellow | Divided RX into ESP32 (~3.23V) |
 | 10 | Junction row | 2.2 kohm resistor -> GND rail | Black | Lower leg of voltage divider |
 | 11 | 74HCT245 pin 17 (B2) | 74HCT245 pin 18 (B1) | Yellow | Bridge B1 and B2 (half-duplex bus) |
 | 12 | 74HCT245 pin 18 (B1) / pin 17 (B2) bridge | AX-12A header DATA (middle pin) | Yellow | Single-wire data bus to servo |
