@@ -92,8 +92,8 @@
 //     GPIO 10  LED_RING_FRONT -> 35-LED ring DIN (via 330R + 1000uF)
 //
 //   --- UART2 to Dynamixel AX-12A (half-duplex, tied via direction GPIO 8) ---
-//     GPIO 15  UART2 TX -> AX-12A data line (via 74HC126/buffer)
-//     GPIO 16  UART2 RX <- AX-12A data line (via 74HC126/buffer)
+//     GPIO 15  UART2 TX -> AX-12A data line (via 74HCT245 buffer, A1)
+//     GPIO 16  UART2 RX <- AX-12A data line (via 74HCT245 buffer, A2 + divider)
 //
 //   --- UART1 to Pololu Mini Maestro 24ch ---
 //     GPIO 17  UART1 TX -> Maestro RX

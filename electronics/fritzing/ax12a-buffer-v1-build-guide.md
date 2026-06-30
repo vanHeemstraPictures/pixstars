@@ -221,3 +221,22 @@ Run through every item before saving and exporting:
 - [ ] All labels typed in Fritzing use straight ASCII quotes only.
 
 When all boxes are ticked, the sketch is ready for save and export.
+
+## 7. Bench wiring check: PASSED
+
+The pin-by-pin breadboard wiring check has been completed against the latest Fritzing sketch and verified on physical hardware before any live power-up. All wires match the Connection table in section 3 and the Verification checklist in section 6 is fully satisfied.
+
+Reference assets:
+
+- `electronics/fritzing/ax-12a-bench-test.fzz` -- source sketch used as the wiring reference
+- `electronics/exports/ax-12a-bench-test_v1-breadboard.png` -- breadboard export used during the bench check
+
+Confirmed results:
+
+- 5V and +12V rails are physically separated: +5V reaches only the 74HCT245 pin 20 (VCC) and the ESP32 5V pin; +12V reaches only the AX-12A header VCC pin and the 12V screw terminal. There is no wire bridging the +5V and +12V rails at any point.
+- Common ground is a single continuous net across ESP32 GND, 74HCT245 pin 10, 74HCT245 pin 19 (OE), the 2.2 kohm divider lower leg, the AX-12A GND pin, the PSU V-, and both blue rails.
+- RX voltage divider is in place: 1 kohm in series from 74HCT245 pin 3 (A2) to the junction, 2.2 kohm from the junction to GND, and the junction routed to ESP32 GPIO 16 -- no direct wire from pin 3 to GPIO 16.
+- B1 (pin 18) and B2 (pin 17) are bridged and routed to the AX-12A DATA pin; DIR is wired from ESP32 GPIO 8 to 74HCT245 pin 1; TX from ESP32 GPIO 15 to 74HCT245 pin 2 (A1).
+- No floating pins on the buffer beyond the intentionally unconnected A3-A8 and B3-B8.
+
+Safety reminder: keep the Handson cord unplugged from mains until the live power-up procedure begins. The wiring check above was performed with the PSU disconnected from mains and the ESP32 USB-C cable unplugged.
