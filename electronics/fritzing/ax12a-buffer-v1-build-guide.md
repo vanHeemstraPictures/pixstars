@@ -84,11 +84,11 @@ Steps:
 - [ ] Verify the PSU voltage selector is set to 230V (or confirm universal input 85-264VAC printed on the label -- the LRS-50-12 is universal, but check).
 - [ ] Earth / ground wire MUST be connected to the FG terminal.
 - [ ] No exposed mains wiring -- use heat-shrink tubing on all AC connections.
-- [ ] Test the DC output with a multimeter before connecting to the breadboard (expect ~12.0V between V+ and V-).
+- [ ] Test the DC output with the UNI-T UT139C (Kyoritsu 7066A leads: black -> COM, red -> V/Ohm; range switch on V DC) before connecting to the breadboard -- expect ~12.0V between V+ and V-.
 - [ ] NEVER touch the AC terminals while the cord is plugged in.
 - [ ] Unplug from the wall before making any wiring changes on the PSU.
 
-Once the PSU reads ~12.0V on the multimeter and nothing on the AC side is exposed, you are ready to place components on the breadboard.
+Once the UT139C reads ~12.0V across PSU V+ and V- and nothing on the AC side is exposed, you are ready to place components on the breadboard.
 
 ## 1c. PSU power verification (Step 0)
 
@@ -116,7 +116,7 @@ LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED catho
 5. Double-check: resistor bridges +12V to LED anode, LED cathode connects to GND. No direct 12V-to-LED connection without the resistor.
 6. Plug in the Handson cord to mains
 7. LED lights up = 12V rail confirmed. If LED does not light, unplug immediately and check polarity/connections.
-8. (Optional) Measure with multimeter across +12V and GND rails -- expect ~12.0V
+8. (Optional) Measure with the UT139C across +12V and GND rails (V DC range, 7066A leads: black -> COM/GND rail, red -> V/Ohm/+12V rail) -- expect ~12.0V.
 9. Unplug from mains
 10. Remove the LED and resistor -- they were only for verification. The breadboard is now ready for the AX-12A circuit (section 2 onwards).
 
@@ -221,6 +221,8 @@ Run through every item before saving and exporting:
 - [ ] All labels typed in Fritzing use straight ASCII quotes only.
 
 When all boxes are ticked, the sketch is ready for save and export.
+
+Physical continuity verification of the built breadboard uses the UNI-T UT139C multimeter and the Kyoritsu 7066A red/black lead set. Follow the "Continuity check procedure (UT139C + Kyoritsu 7066A)" section in the bench note (`ccc1bd61-a938-4f77-a036-9895b5924559`) for the exact meter setup (COM / V-Ohm jack assignment, SELECT button to reach the buzzer icon) and the probe-by-probe checklist (26 probe placements covering common GND, +5V, +12V isolation, DATA bus bridge, and RX divider). Do not substitute a generic multimeter procedure -- the tool-specific steps ensure the buzzer threshold, lead polarity, and jack assignments match the ordered hardware.
 
 ## 7. Bench wiring check: PASSED
 

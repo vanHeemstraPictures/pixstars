@@ -318,6 +318,28 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Price | EUR 15.99 |
 | Status | IN HAND |
 
+## UNI-T UT139C Digital Multimeter
+
+| Property | Value |
+| --- | --- |
+| Component | UNI-T UT139C True RMS Digital Multimeter |
+| Type | Handheld True RMS digital multimeter |
+| Purpose | Bench verification of the MEAN WELL LRS-50-12 12V rail, common-ground continuity checks on the AX-12A bench (74HCT245) circuit, and general electronics debug during lamp/cave build. |
+| Supplier | Elektramat.nl |
+| Product page | https://www.elektramat.nl/uni-t-multimeter-ut139c-ut139c/ |
+| Status | ORDERED (Elektramat.nl) |
+
+## Kyoritsu 7066A Test Lead Set (Red/Black)
+
+| Property | Value |
+| --- | --- |
+| Component | Kyoritsu 7066A meetsnoerenset (test lead set, red/black) |
+| Type | Silicone-insulated 4mm banana test leads with sharp probe tips |
+| Purpose | Pairs with the UNI-T UT139C for the AX-12A bench test (74HCT245 wiring): voltage checks on +12V/+5V rails and continuity/probe access on the breadboard nodes. |
+| Supplier | Elektramat.nl |
+| Product page | https://www.elektramat.nl/kyoritsu-7066a-meetsnoerenset-rood-zwart-07066at000/ |
+| Status | ORDERED (Elektramat.nl) |
+
 ## Kitronik Inventor's Kit for Arduino
 
 | Item | Detail |
@@ -542,6 +564,8 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
+| UNI-T UT139C digital multimeter (bench measurement) | ORDERED (Elektramat.nl) |
+| Kyoritsu 7066A test lead set, red/black (paired with UT139C) | ORDERED (Elektramat.nl) |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
 | 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | IN HAND (TinyTronics) |
 | 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | IN HAND (TinyTronics) |
