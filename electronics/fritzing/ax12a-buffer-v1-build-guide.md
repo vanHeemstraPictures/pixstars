@@ -222,7 +222,7 @@ Run through every item before saving and exporting:
 
 When all boxes are ticked, the sketch is ready for save and export.
 
-Physical continuity verification of the built breadboard uses the UNI-T UT139C multimeter and the Kyoritsu 7066A red/black lead set. Follow the "Continuity check procedure (UT139C + Kyoritsu 7066A)" section in the bench note (`ccc1bd61-a938-4f77-a036-9895b5924559`) for the exact meter setup (COM / V-Ohm jack assignment, SELECT button to reach the buzzer icon) and the probe-by-probe checklist (26 probe placements covering common GND, +5V, +12V isolation, DATA bus bridge, and RX divider). Do not substitute a generic multimeter procedure -- the tool-specific steps ensure the buzzer threshold, lead polarity, and jack assignments match the ordered hardware.
+Physical continuity verification of the built breadboard uses the UNI-T UT139C multimeter and the Kyoritsu 7066A red/black lead set. Follow the "Continuity check procedure (UT139C + Kyoritsu 7066A)" section in the bench note (`ccc1bd61-a938-4f77-a036-9895b5924559`) for the exact meter setup (COM / V-Ohm jack assignment, SELECT button to reach the buzzer icon) and the probe-by-probe checklist (26 probe placements covering common GND, +5V, +12V isolation, DATA bus bridge, and RX divider). Do not substitute a generic multimeter procedure -- the tool-specific steps ensure the buzzer threshold, lead polarity, and jack assignments match the bench hardware.
 
 ## 7. Bench wiring check: PASSED
 
