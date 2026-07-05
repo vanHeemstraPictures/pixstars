@@ -351,6 +351,18 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
 | Status | IN HAND |
 
+## 830-Point Solderless Breadboard (Amazon.nl)
+
+| Property | Value |
+| --- | --- |
+| Component | 830-point solderless breadboard (full-size, ~165 x 55 mm) |
+| Purpose | Larger prototyping surface for the AX-12A bench rebuild. Preferred over the Kitronik 400-point breadboard because the power rails run continuously top-to-bottom (no split in the middle), which simplifies distributing the +12V and GND rails across the AX-12A circuit (74HCT245 buffer + PSU verification LED + voltage divider) without extra bridging jumpers. |
+| Supplier | Amazon.nl |
+| ASIN | B01MCRZFE5 |
+| Product page | https://www.amazon.nl/dp/B01MCRZFE5 |
+| Notes | Preferred because the power rails continue top-to-bottom (uninterrupted +/- rails on both sides). |
+| Status | ORDERED (Amazon.nl) |
+
 ## 1K Ohm Resistor (TinyTronics)
 
 | Property | Value |
@@ -567,6 +579,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | UNI-T UT139C digital multimeter (bench measurement) | IN HAND (Elektramat.nl) |
 | Kyoritsu 7066A test lead set, red/black (paired with UT139C) | IN HAND (Elektramat.nl) |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
+| 830-point solderless breadboard (continuous top-to-bottom power rails, AX-12A bench rebuild) | ORDERED (Amazon.nl, ASIN B01MCRZFE5) |
 | 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | IN HAND (TinyTronics) |
 | 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | IN HAND (TinyTronics) |
 | 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
