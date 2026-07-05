@@ -21,7 +21,7 @@ Open Fritzing, switch to the Breadboard view, and search the Parts bin(top-right
 | 1 | 74HCT245 octal buffer | 74LVC245 | Same DIP-20 pinout as 74HCT245. Rename to 74HCT245 in the Inspector. The physical build uses a real 74HCT245. |
 | 1 | Resistor (1 kohm) | Resistor | Set Resistance to 1k in the Inspector. Axial through-hole. |
 | 1 | Resistor (2.2 kohm) | Resistor | Set Resistance to 2.2k in the Inspector. Axial through-hole. |
-| 1 | 3-pin male header | Sparkfun Pin Header (3 pin) | Acts as the AX-12A pigtail (VCC / DATA / GND). Label it AX-12A in the Inspector. |
+| 1 | 3-pin male header | Sparkfun Pin Header (3 pin) | Acts as the AX-12A pigtail. Pin order (measured): Pin 1 = GND (black), Pin 2 = VCC (red), Pin 3 = DATA (yellow). Label it AX-12A in the Inspector. |
 | 1 | 2-pin screw terminal | 2-pin screw terminal | 12V input from MEAN WELL LRS-50-12. A DC barrel jack is also acceptable; either way label it LRS-50-12 12V IN. |
 
 All parts above are in the Fritzing core library on macOS -- no extraparts packs required. Do not invent custom parts for this bench test.
@@ -152,7 +152,7 @@ Component placement:
 2. **74HCT245 DIP-20** (placed as `74LVC245` from the bin, renamedin Inspector) -- straddle the center channel to the right of theFeather, occupying rows 18-27 (pins 1-10 in the top half on row e,pins 11-20 in the bottom half on row f). Pin 1 is the row nearestthe notch.
 3. **1 kohm resistor** -- between 74HCT245 pin 3 (A2) and a freejunction row (e.g. row 22 column h). Place horizontally so oneleg lands on the pin-3 row and the other on the junction row.
 4. **2.2 kohm resistor** -- from the junction row to the GND rail(top blue). Place vertically.
-5. **AX-12A 3-pin header** (`Sparkfun Pin Header (3 pin)`, renamedto `AX-12A`) -- bottom-right of the board, rows 27-29 incolumns a-c (or any free 3-row block on the bottom half). Labelpins top-to-bottom: `VCC (red)`, `DATA (yellow)`, `GND (black)`.
+5. **AX-12A 3-pin header** (`Sparkfun Pin Header (3 pin)`, renamedto `AX-12A`) -- bottom-right of the board, rows 27-29 incolumns a-c (or any free 3-row block on the bottom half). Labelpins in AX-12A pin order (Pin 1 -> Pin 3, measured pinout): `GND (black, Pin 1)`, `VCC (red, Pin 2)`, `DATA (yellow, Pin 3)`.
 6. **12V screw terminal** (`2-pin screw terminal`) -- bottom-left ofthe board, anchored to the +12V and bottom GND rails.
 
 ## 3. Connection table (every wire)
@@ -180,9 +180,9 @@ The **From** column lists the Feather stand-in pin label that appearson the Frit
 | 9 | Junction row | Feather RX (ESP32-S3 GPIO 16, UART2 RX) | Yellow | Divided RX into ESP32 (~3.23V) |
 | 10 | Junction row | 2.2 kohm resistor -> GND rail | Black | Lower leg of voltage divider |
 | 11 | 74HCT245 pin 17 (B2) | 74HCT245 pin 18 (B1) | Yellow | Bridge B1 and B2 (half-duplex bus) |
-| 12 | 74HCT245 pin 18 (B1) / pin 17 (B2) bridge | AX-12A header DATA (middle pin) | Yellow | Single-wire data bus to servo |
-| 13 | AX-12A header VCC (top pin) | +12V rail (bottom red) | Orange | Servo motor supply |
-| 14 | AX-12A header GND (bottom pin) | GND rail | Black | Servo ground |
+| 12 | 74HCT245 pin 18 (B1) / pin 17 (B2) bridge | AX-12A header DATA (Pin 3) | Yellow | Single-wire data bus to servo |
+| 13 | AX-12A header VCC (Pin 2, middle pin) | +12V rail (bottom red) | Orange | Servo motor supply |
+| 14 | AX-12A header GND (Pin 1) | GND rail | Black | Servo ground |
 | 15 | 12V screw terminal V+ | +12V rail | Orange | PSU 12V input |
 | 16 | 12V screw terminal V- | GND rail (bottom blue) | Black | PSU return |
 | 17 | Top GND rail (blue) | Bottom GND rail (blue) | Black | Tie both GND rails together (single ground) |
