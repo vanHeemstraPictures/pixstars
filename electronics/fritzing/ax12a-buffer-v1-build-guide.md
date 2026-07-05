@@ -21,7 +21,7 @@ Open Fritzing, switch to the Breadboard view, and search the Parts bin(top-right
 | 1 | 74HCT245 octal buffer | 74LVC245 | Same DIP-20 pinout as 74HCT245. Rename to 74HCT245 in the Inspector. The physical build uses a real 74HCT245. |
 | 1 | Resistor (1 kohm) | Resistor | Set Resistance to 1k in the Inspector. Axial through-hole. |
 | 1 | Resistor (2.2 kohm) | Resistor | Set Resistance to 2.2k in the Inspector. Axial through-hole. |
-| 1 | 3-pin male header | Sparkfun Pin Header (3 pin) | Acts as the AX-12A pigtail. Pin order (measured): Pin 1 = GND (black), Pin 2 = VCC (red), Pin 3 = DATA (yellow). Label it AX-12A in the Inspector. |
+| 1 | 3-pin male header | Sparkfun Pin Header (3 pin) | Acts as the AX-12A pigtail. Pin order (measured): Pin 1 = GND (black), Pin 2 = VCC (red), Pin 3 = DATA (yellow). Both 3-pin sockets on the AX-12A servo share the same daisy-chain pinout, so the pigtail can plug into either socket. Label it AX-12A in the Inspector. |
 | 1 | 2-pin screw terminal | 2-pin screw terminal | 12V input from MEAN WELL LRS-50-12. A DC barrel jack is also acceptable; either way label it LRS-50-12 12V IN. |
 
 All parts above are in the Fritzing core library on macOS -- no extraparts packs required. Do not invent custom parts for this bench test.
