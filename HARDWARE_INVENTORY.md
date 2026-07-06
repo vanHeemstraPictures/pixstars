@@ -327,7 +327,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Purpose | Bench verification of the MEAN WELL LRS-50-12 12V rail, common-ground continuity checks on the AX-12A bench (74HCT245) circuit, and general electronics debug during lamp/cave build. |
 | Supplier | Elektramat.nl |
 | Product page | https://www.elektramat.nl/uni-t-multimeter-ut139c-ut139c/ |
-| Status | ORDERED (Elektramat.nl) |
+| Status | IN HAND (Elektramat.nl) |
 
 ## Kyoritsu 7066A Test Lead Set (Red/Black)
 
@@ -338,7 +338,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Purpose | Pairs with the UNI-T UT139C for the AX-12A bench test (74HCT245 wiring): voltage checks on +12V/+5V rails and continuity/probe access on the breadboard nodes. |
 | Supplier | Elektramat.nl |
 | Product page | https://www.elektramat.nl/kyoritsu-7066a-meetsnoerenset-rood-zwart-07066at000/ |
-| Status | ORDERED (Elektramat.nl) |
+| Status | IN HAND (Elektramat.nl) |
 
 ## Kitronik Inventor's Kit for Arduino
 
@@ -350,6 +350,18 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Source | elektronicavoorjou.nl |
 | Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
 | Status | IN HAND |
+
+## 830-Point Solderless Breadboard (Amazon.nl)
+
+| Property | Value |
+| --- | --- |
+| Component | 830-point solderless breadboard (full-size, ~165 x 55 mm) |
+| Purpose | Larger prototyping surface for the AX-12A bench rebuild. Preferred over the Kitronik 400-point breadboard because the power rails run continuously top-to-bottom (no split in the middle), which simplifies distributing the +12V and GND rails across the AX-12A circuit (74HCT245 buffer + PSU verification LED + voltage divider) without extra bridging jumpers. |
+| Supplier | Amazon.nl |
+| ASIN | B01MCRZFE5 |
+| Product page | https://www.amazon.nl/dp/B01MCRZFE5 |
+| Notes | Preferred because the power rails continue top-to-bottom (uninterrupted +/- rails on both sides). |
+| Status | ORDERED (Amazon.nl) |
 
 ## 1K Ohm Resistor (TinyTronics)
 
@@ -564,9 +576,10 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
 | LED strip connectors | IN HAND |
 | Soldering station | IN HAND |
-| UNI-T UT139C digital multimeter (bench measurement) | ORDERED (Elektramat.nl) |
-| Kyoritsu 7066A test lead set, red/black (paired with UT139C) | ORDERED (Elektramat.nl) |
+| UNI-T UT139C digital multimeter (bench measurement) | IN HAND (Elektramat.nl) |
+| Kyoritsu 7066A test lead set, red/black (paired with UT139C) | IN HAND (Elektramat.nl) |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
+| 830-point solderless breadboard (continuous top-to-bottom power rails, AX-12A bench rebuild) | ORDERED (Amazon.nl, ASIN B01MCRZFE5) |
 | 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | IN HAND (TinyTronics) |
 | 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | IN HAND (TinyTronics) |
 | 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
