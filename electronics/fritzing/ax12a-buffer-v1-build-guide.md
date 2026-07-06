@@ -10,13 +10,15 @@ Use straight ASCII quotes only when typing labels in Fritzing.
 
 > IMPORTANT -- 74LVC245 vs 74HCT245. Fritzing's parts bin on macOS ships 74LVC245 (low-voltage CMOS) instead of 74HCT245. The DIP-20 pinout is identical -- only the logic family differs. Place the 74LVC245 in the sketch, then rename it to 74HCT245 in the Inspector so the silkscreen label matches the physical board. The bench build uses an actual 74HCT245.
 
+> IMPORTANT -- Two-breadboard Fritzing stand-in. The ESP32-S3 stand-in and the 74HCT245 (plus its RX divider network) do not fit comfortably on a single half-size breadboard. The sketch therefore uses **two half-size breadboards stacked vertically** (upper + lower) and treats the matching rails between them as one continuous rail: **red-to-red** (+5V and +12V feeds continue across both boards) and **blue-to-blue** (GND is a single continuous net). See Section 2 for the upper/lower role split. In the physical bench build these two stand-in boards collapse onto **one extended breadboard** with enough length for all components; Fritzing does not ship an extended breadboard in its parts bin, which is why the sketch uses two half-size boards to represent it. Any placement wording in this guide that refers to "the breadboard" without an upper/lower qualifier refers to the lower board in the Fritzing sketch and to the single extended board in the physical build.
+
 ## 1. Parts list
 
 Open Fritzing, switch to the Breadboard view, and search the Parts bin(top-right) for each item. Drag onto the sketch:
 
 | Qty | Component | Fritzing part (exact name) | Notes |
 | --- | --- | --- | --- |
-| 1 | Half-size breadboard | Breadboard Half + | 400 tie points (30 rows + 2 power rails per side). |
+| 2 | Half-size breadboard (Fritzing stand-in) | Breadboard Half + | 400 tie points each (30 rows + 2 power rails per side). Stacked upper + lower to stand in for a single extended breadboard; matching rails are treated as continuous (red-to-red, blue-to-blue). See Section 2. |
 | 1 | ESP32-S3 N16R8 DevKitC (stand-in) | Adafruit Feather ESP32-C1 (#5933) | Visual stand-in only. Rename to ESP32-S3 N16R8 DevKitC in the Inspector. See Pin Mapping section -- the Feather's labelled pins do NOT line up with the actual ESP32-S3 GPIO numbers. |
 | 1 | 74HCT245 octal buffer | 74LVC245 | Same DIP-20 pinout as 74HCT245. Rename to 74HCT245 in the Inspector. The physical build uses a real 74HCT245. |
 | 1 | Resistor (1 kohm) | Resistor | Set Resistance to 1k in the Inspector. Axial through-hole. |
@@ -56,16 +58,18 @@ Wire the MEAN WELL LRS-50-12 to wall power *before* placing anything on the brea
 
 ### DC output
 
+In the Fritzing stand-in the PSU screw terminal sits on the **lower breadboard**; in the physical build it sits at the corresponding end of the single extended breadboard. Either way the target rails are the +12V and GND rails on that board.
+
 | Terminal | Connect to | Wire color |
 | --- | --- | --- |
-| V+ | +12V rail on breadboard (bottom red) | Orange |
-| V- | GND rail on breadboard (bottom blue) | Black |
+| V+ | +12V rail on the lower breadboard (bottom red) | Orange |
+| V- | GND rail on the lower breadboard (bottom blue) | Black |
 
 ### PSU DC output to breadboard
 
-Use two Kitronik M/M jumper wires to connect the PSU DC output screw terminals to the breadboard power rails:
+Use two Kitronik M/M jumper wires to connect the PSU DC output screw terminals to the lower-breadboard power rails:
 
-| Wire | Color | From (PSU terminal) | To (breadboard) |
+| Wire | Color | From (PSU terminal) | To (lower breadboard) |
 | --- | --- | --- | --- |
 | 1 | Orange | V+ (+12V) screw terminal | Left red rail, row 2 (+12V) |
 | 2 | Black | V- (COM/GND) screw terminal | Left blue rail, row 2 (GND) |
@@ -75,9 +79,9 @@ Steps:
 1. Ensure the PSU is unplugged from mains
 2. Loosen the V+ screw terminal on the PSU DC output side
 3. Insert the stripped/bare end of an orange jumper wire, tighten the screw
-4. Push the pin end of the orange wire into the left red (+) rail on the breadboard (row 2)
-5. Repeat with a black jumper wire: stripped end into the V- (COM) screw terminal, pin end into the left blue (-) rail on the breadboard (row 2)
-6. Verify: orange wire bridges PSU V+ to breadboard +12V rail, black wire bridges PSU V- to breadboard GND rail
+4. Push the pin end of the orange wire into the left red (+) rail on the lower breadboard (row 2)
+5. Repeat with a black jumper wire: stripped end into the V- (COM) screw terminal, pin end into the left blue (-) rail on the lower breadboard (row 2)
+6. Verify: orange wire bridges PSU V+ to the lower-breadboard +12V rail, black wire bridges PSU V- to the lower-breadboard GND rail. Because the upper and lower boards' matching rails are treated as continuous (red-to-red, blue-to-blue), the +12V and GND nets are also live on the upper board.
 
 ### Safety checklist
 
@@ -137,23 +141,52 @@ Always unplug from mains before making any wiring changes on the breadboard, eve
 
 ## 2. Breadboard placement strategy
 
-Half-size breadboard orientation: long axis horizontal, two power railson top (red/blue), two on the bottom, and the center channel splittingrows a-e (top half) from rows f-j (bottom half).
+### Two-breadboard Fritzing stand-in (upper + lower)
 
-Rail assignments (label them in the sketch by double-clicking the railand typing the label):
+The Fritzing sketch places components on **two half-size breadboards stacked vertically** because the ESP32-S3 stand-in and the 74HCT245 with its RX divider network do not fit comfortably on a single half-size board. The two boards represent one continuous board:
 
-- Top red rail = `+5V` (from Feather `USB` pin, representingESP32-S3 5V)
-- Top blue rail = `GND` (common ground, shared by ESP32, AX-12A, PSU)
-- Bottom red rail = `+12V` (from MEAN WELL LRS-50-12)
-- Bottom blue rail = `GND` (tied to top blue rail via a black jumper)
+- **Rails are matched across the gap**: red-to-red, blue-to-blue. The upper board's red rails are jumpered to the lower board's red rails, and the upper board's blue rails are jumpered to the lower board's blue rails. There is a single GND net and a single +5V net across both boards, and the +12V feed reaches whichever board needs it via the same red-to-red bridge.
+- **Physical build**: on the actual bench hardware the same layout collapses onto **one extended breadboard** long enough to hold everything. Fritzing's parts bin does not ship an extended breadboard, so the two half-size boards in the sketch are the stand-in for it. All electrical nets in Section 3 are identical either way.
 
-Component placement:
+Half-size breadboard orientation (both boards): long axis horizontal, two power rails on top (red/blue), two on the bottom, and the center channel splitting rows a-e (top half) from rows f-j (bottom half).
 
-1. **Adafruit Feather ESP32-C1 (stand-in for ESP32-S3 DevKitC)** --straddle the center channel, USB-C facing left. The Feather isphysically smaller than the ESP32-S3 DevKitC (28 mm wide vs ~25 mmfor the Feather, ~51 mm long vs ~74 mm) and occupies fewer rows --roughly rows 1-16 on the breadboard, with the 12-pin header on oneside and the 16-pin header on the other. The Feather pin labels(`USB`, `GND`, `TX`, `RX`, `IO0`, etc.) are visible directly onthe sketch; use those labels when attaching wires and consult thePin Mapping section (1a) for the corresponding ESP32-S3 GPIOnumbers.
-2. **74HCT245 DIP-20** (placed as `74LVC245` from the bin, renamedin Inspector) -- straddle the center channel to the right of theFeather, occupying rows 18-27 (pins 1-10 in the top half on row e,pins 11-20 in the bottom half on row f). Pin 1 is the row nearestthe notch.
-3. **1 kohm resistor** -- between 74HCT245 pin 3 (A2) and a freejunction row (e.g. row 22 column h). Place horizontally so oneleg lands on the pin-3 row and the other on the junction row.
-4. **2.2 kohm resistor** -- from the junction row to the GND rail(top blue). Place vertically.
-5. **AX-12A 3-pin header** (`Sparkfun Pin Header (3 pin)`, renamedto `AX-12A`) -- bottom-right of the board, rows 27-29 incolumns a-c (or any free 3-row block on the bottom half). Labelpins in AX-12A pin order (Pin 1 -> Pin 3, measured pinout): `GND (black, Pin 1)`, `VCC (red, Pin 2)`, `DATA (yellow, Pin 3)`.
-6. **12V screw terminal** (`2-pin screw terminal`) -- bottom-left ofthe board, anchored to the +12V and bottom GND rails.
+### Rail assignments
+
+Label the rails in the sketch by double-clicking each rail and typing the label. In the exported image the upper board's top rails carry the `+5 Volt` and `+12 Volt` tags used to feed both boards.
+
+- Top red rail (upper + lower, continuous) = `+5V` (from Feather `USB` pin, representing ESP32-S3 5V)
+- Top blue rail (upper + lower, continuous) = `GND` (common ground, shared by ESP32, 74HCT245, AX-12A, PSU)
+- Bottom red rail (upper + lower, continuous) = `+12V` (from MEAN WELL LRS-50-12)
+- Bottom blue rail (upper + lower, continuous) = `GND` (tied to top blue rail via a black jumper on the lower board so all four blue rails are one net)
+
+### Upper breadboard -- buffer + RX divider
+
+The upper board (labeled `Breadboard1` in the sketch) hosts the logic-level side of the circuit:
+
+1. **74HCT245 DIP-20** (placed as `74LVC245` from the bin, renamed to `74HCT245` in the Inspector) -- straddle the center channel with the notch pointing up, occupying roughly rows 20-29 (pins 1-10 in the top half on row e, pins 11-20 in the bottom half on row f). Pin 1 is the row nearest the notch.
+2. **1 kohm resistor** (R5) -- horizontal, between 74HCT245 pin 3 (A2) and a free junction row just to the right of the chip. One leg lands on the pin-3 row, the other on the junction row.
+3. **2.2 kohm resistor** (R4) -- horizontal, from the junction row down to the top GND rail (blue) of the upper board.
+
+Nothing else lives on the upper board; the +5V, +12V, and GND rails on it are energised via the red-to-red / blue-to-blue jumpers from the lower board.
+
+### Lower breadboard -- ESP32 stand-in, servo pigtail, PSU input
+
+The lower board (labeled `Breadboard` in the sketch) hosts everything the performer plugs into physically:
+
+1. **Adafruit Feather ESP32-C1 (stand-in for ESP32-S3 DevKitC)** -- straddle the center channel with USB-C facing down toward the front edge. The Feather is physically smaller than the ESP32-S3 DevKitC (~25 mm wide vs 28 mm, ~51 mm long vs ~74 mm) and occupies fewer rows than the real DevKitC would. The Feather pin labels (`USB`, `GND`, `TX`, `RX`, `IO0`, etc.) are visible directly on the sketch; use those labels when attaching wires and consult the Pin Mapping section (1a) for the corresponding ESP32-S3 GPIO numbers.
+2. **AX-12A 3-pin header** (`Sparkfun Pin Header (3 pin)`, renamed to `AX-12A`) -- placed on the right-hand side of the lower board, on the bottom half. Label pins in AX-12A pin order (Pin 1 -> Pin 3, measured pinout): `GND (black, Pin 1)`, `VCC (red, Pin 2)`, `DATA (yellow, Pin 3)`.
+3. **12V screw terminal** (`2-pin screw terminal`, labeled `LRS-50-12 12V IN` / `MEAN WELL LRS-50-12 12V IN Power Supply`) -- bottom-right corner of the lower board, anchored to the +12V (bottom red) and GND (bottom blue) rails.
+
+### Inter-board rail bridges
+
+Add the following jumper wires between the two boards so the matched rails behave as one continuous rail:
+
+- Red-to-red on the top rail (+5V continuous across upper and lower)
+- Blue-to-blue on the top rail (GND continuous across upper and lower)
+- Red-to-red on the bottom rail (+12V continuous across upper and lower)
+- Blue-to-blue on the bottom rail (GND continuous across upper and lower)
+
+In the physical single-extended-breadboard build these bridges are not needed -- the rails are already one continuous piece.
 
 ## 3. Connection table (every wire)
 
