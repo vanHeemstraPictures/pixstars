@@ -141,6 +141,12 @@ Always unplug from mains before making any wiring changes on the breadboard, eve
 
 ## 2. Breadboard placement strategy
 
+### Same-row jumper convention (reading the Fritzing image)
+
+In the updated Fritzing export, a component leg and a jumper wire that connect to it are often drawn into two different holes on the same breadboard row rather than sharing a single hole. This is a drawing convention -- a real breadboard hole only reliably accepts one lead at a time, and Fritzing likewise does not stack a leg and a wire pin in the same hole in the exported image. Every hole a-e in a given row (and every hole f-j in the row below the center channel) is tied to the other holes in the same half-row by the internal spring clip, so a jumper in one hole and a component leg in another hole on the same half-row sit on the same electrical node.
+
+When reading the image, treat "same row" as "same electrical node" even if the wire lands in a hole adjacent to the leg it is connecting to. In the physical build, pick any free hole in the same half-row -- no single hole ever has to take both a component leg and a jumper at the same time. The Connection table in section 3 and the Verification checklist in section 6 describe electrical nets, not literal hole coordinates, so both remain unchanged by this convention. Continuity checks in the bench note likewise probe electrical nets and will beep across any two holes in the same half-row.
+
 ### Two-breadboard Fritzing stand-in (upper + lower)
 
 The Fritzing sketch places components on **two half-size breadboards stacked vertically** because the ESP32-S3 stand-in and the 74HCT245 with its RX divider network do not fit comfortably on a single half-size board. The two boards represent one continuous board:
