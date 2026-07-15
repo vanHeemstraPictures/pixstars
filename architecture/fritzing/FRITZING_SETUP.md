@@ -305,12 +305,17 @@ Wire Colours
 
 Use consistent colours, matching wiring/WIRING.md conventions.
 ```
-Red              = +5V
+Orange           = +12V (motor / laser driver rail)
+Red              = +5V (logic / servo / LED rail)
 Black            = Ground (GND)
 Green / Yellow   = Data (WS2812 DIN, AX-12A TTL, stepper STEP/DIR)
-Orange / Yellow  = Servo PWM signal
+Yellow           = Servo PWM signal (kept distinct from the Orange +12V rail)
 Red (speaker+)   = Audio +
 Black (speaker-) = Audio return
+
+Rail rule: on any DC rail wire, `Orange = +12V` and `Red = +5V`. Never
+use red for +12V. This matches `wiring/WIRING.md` and
+`electronics/fritzing/ax12a-buffer-v1-build-guide.md`.
 ```
 ⸻
 
