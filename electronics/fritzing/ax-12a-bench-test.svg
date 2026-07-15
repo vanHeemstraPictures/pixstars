@@ -26,13 +26,13 @@
      showgrid="true"
      inkscape:zoom="0.57"
      inkscape:cx="932.45614"
-     inkscape:cy="1689.4737"
+     inkscape:cy="1268.4211"
      inkscape:window-width="1568"
      inkscape:window-height="933"
      inkscape:window-x="949"
      inkscape:window-y="30"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer51">
+     inkscape:current-layer="g188">
     <inkscape:grid
        id="grid3"
        units="mm"
@@ -50,6 +50,12 @@
   </sodipodi:namedview>
   <defs
      id="defs1">
+    <rect
+       x="1285.9649"
+       y="84.210526"
+       width="168.42105"
+       height="42.105263"
+       id="rect255" />
     <rect
        x="1261.4035"
        y="1557.8947"
@@ -518,6 +524,12 @@
        width="135.08772"
        height="57.894737"
        id="rect248" />
+    <rect
+       x="1285.9649"
+       y="84.210526"
+       width="168.42105"
+       height="42.105263"
+       id="rect257" />
   </defs>
   <g
      inkscape:label="ESP32-S3-N16R8"
@@ -2834,7 +2846,7 @@
     <text
        xml:space="preserve"
        id="text246"
-       style="font-size:26.6667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect247);fill:#fdf9f9;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect247);display:inline;fill:#fdf9f9;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(-238.38598,-5.0175443)"><tspan
          x="1680.0485"
          y="2157.3541"
@@ -2846,7 +2858,7 @@
     <text
        xml:space="preserve"
        id="text248"
-       style="font-size:26.6667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect248);fill:#fdf9f9;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect248);display:inline;fill:#fdf9f9;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(-240.84212,40.350878)"><tspan
          x="1680.5277"
          y="2157.3541"
@@ -2858,7 +2870,7 @@
     <text
        xml:space="preserve"
        id="text249"
-       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect249);fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect249);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(-84.701757,63.157897)"><tspan
          x="1523.6937"
          y="2182.8339"
@@ -2866,7 +2878,7 @@
     <text
        xml:space="preserve"
        id="text250"
-       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect250);fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect250);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        transform="rotate(-90.330159,1750.7173,1824.7872)"><tspan
          x="1351.1918"
          y="1572.3066"
@@ -2964,7 +2976,7 @@
      transform="translate(1.754386)"
      sodipodi:insensitive="true">
     <path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#ee1414;stroke-width:3.03496;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill:none;fill-opacity:1;stroke:#fa7307;stroke-width:3.03496;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        d="m 1057.8948,2214.0352 105.263,7.0175"
        id="path138"
        sodipodi:nodetypes="cc" />
@@ -2976,7 +2988,7 @@
      style="display:inline"
      sodipodi:insensitive="true">
     <path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#ee1414;stroke-width:3.03496;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill:none;fill-opacity:1;stroke:#fc8205;stroke-width:3.03496;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        d="m 1057.8948,2170.1755 110.5262,-5.2632"
        id="path121"
        sodipodi:nodetypes="cc"
@@ -3179,7 +3191,7 @@
   <g
      inkscape:groupmode="layer"
      id="g188"
-     inkscape:label="Z4HCT245_Leg_Left_From_Bottom_1_Pin_20 to Left_Red_Rail_+12V"
+     inkscape:label="Z4HCT245_Leg_Left_From_Bottom_1_Pin_20 to Left_Red_Rail_+5V"
      sodipodi:insensitive="true">
     <path
        style="fill:none;fill-opacity:1;stroke:#f70917;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
@@ -3330,6 +3342,46 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer58"
+     inkscape:label="Legend"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#f86409;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect254"
+       width="15.789474"
+       height="15.789474"
+       x="1249.1228"
+       y="94.736839" />
+    <text
+       xml:space="preserve"
+       id="text254"
+       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect255);display:inline;fill:#0e75ed;fill-opacity:1;stroke:#fa7307;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(-52.631579,12.280702)"><tspan
+         x="1331.5164"
+         y="98.623008"
+         id="tspan199"><tspan
+           style="fill:#000000;stroke:none"
+           id="tspan198">= +12V (Orange)</tspan></tspan></text>
+    <rect
+       style="fill:#f50b26;fill-opacity:1;stroke:none;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect256"
+       width="15.789474"
+       height="15.789474"
+       x="1249.1228"
+       y="135.08772" />
+    <text
+       xml:space="preserve"
+       id="text256"
+       style="font-size:16px;font-family:Arial;-inkscape-font-specification:Arial;text-align:end;letter-spacing:0.2px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect257);display:inline;fill:#0e75ed;fill-opacity:1;stroke:#fa7307;stroke-width:6.81449;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(-85.964913,49.122808)"><tspan
+         x="1365.2305"
+         y="98.623008"
+         id="tspan201"><tspan
+           style="fill:#000000;stroke:none"
+           id="tspan200">= +5V (Red)</tspan></tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer47"
      inkscape:label="Last Updated"
      sodipodi:insensitive="true">
@@ -3342,9 +3394,9 @@
        transform="translate(808.77196,-1.7543861)"><tspan
          x="448.47578"
          y="33.710899"
-         id="tspan199"><tspan
+         id="tspan203"><tspan
            style="text-align:end;text-anchor:end;fill:#000000;stroke:none"
-           id="tspan198">last updated: 15 July 2026 21:33</tspan></tspan></text>
+           id="tspan202">last updated: 15 July 2026 21:33</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -3361,9 +3413,9 @@
        transform="translate(808.77196,-1.7543861)"><tspan
          x="474.47578"
          y="33.710899"
-         id="tspan201"><tspan
+         id="tspan205"><tspan
            style="text-align:end;text-anchor:end;fill:#000000;stroke:none"
-           id="tspan200">author: Willem van Heemstra</tspan></tspan></text>
+           id="tspan204">author: Willem van Heemstra</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -3377,6 +3429,6 @@
        transform="translate(-203.50878,1.754386)"><tspan
          x="224.1418"
          y="31.95504"
-         id="tspan202">AX-12A Bench Test</tspan></text>
+         id="tspan206">AX-12A Bench Test</tspan></text>
   </g>
 </svg>
