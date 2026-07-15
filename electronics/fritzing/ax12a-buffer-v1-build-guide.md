@@ -109,7 +109,7 @@ LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED catho
 ### Parts
 
 - 1x LED (any color, standard 5mm or 3mm through-hole) -- from Kitronik kit
-- 1x 1K ohm resistor -- IN HAND from TinyTronics (the Kitronik kit does NOT contain 1K ohm resistors; it ships 220 ohm, 2.2K ohm, and 10K ohm only)
+- 1x 1K ohm resistor -- IN HAND from TinyTronics (the Kitronik kit does NOT reliably supply the 1K ohm value; the 2.2K ohm resistor needed elsewhere in the AX-12A divider is likewise sourced from TinyTronics via the 10Ω-1MΩ resistor set -- ORDERED, see HARDWARE_INVENTORY.md)
 
 ### Steps
 
