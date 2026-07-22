@@ -47,12 +47,17 @@ The recommended pattern:
 
   Function       Color             Purpose
   -------------- ----------------- ----------------
-  +5V            Red               Power
+  +12V           Orange            Power (motor / laser driver rail)
+  +5V            Red               Power (logic / servo / LED rail)
   GND            Black             Ground
   DATA           Green / Yellow    Digital signal
-  Servo signal   Orange / Yellow   PWM control
+  Servo signal   Yellow            PWM control (servo signal wire)
   Speaker +      Red               Audio
   Speaker -      Black             Audio return
+
+Rail rule: on any DC rail wire, `Orange = +12V` and `Red = +5V`. Never
+use red for +12V. The `Yellow` servo signal color keeps the PWM control
+line distinct from the `Orange` +12V rail.
 
 ------------------------------------------------------------------------
 

@@ -10,7 +10,19 @@ Use straight ASCII quotes only when typing labels in Fritzing.
 
 > IMPORTANT -- 74LVC245 vs 74HCT245. Fritzing's parts bin on macOS ships 74LVC245 (low-voltage CMOS) instead of 74HCT245. The DIP-20 pinout is identical -- only the logic family differs. Place the 74LVC245 in the sketch, then rename it to 74HCT245 in the Inspector so the silkscreen label matches the physical board. The bench build uses an actual 74HCT245.
 
-> IMPORTANT -- Two-breadboard Fritzing stand-in. The ESP32-S3 stand-in and the 74HCT245 (plus its RX divider network) do not fit comfortably on a single half-size breadboard. The sketch therefore uses **two half-size breadboards stacked vertically** (upper + lower) and treats the matching rails between them as one continuous rail: **red-to-red** (+5V and +12V feeds continue across both boards) and **blue-to-blue** (GND is a single continuous net). See Section 2 for the upper/lower role split. In the physical bench build these two stand-in boards collapse onto **one extended breadboard** with enough length for all components; Fritzing does not ship an extended breadboard in its parts bin, which is why the sketch uses two half-size boards to represent it. Any placement wording in this guide that refers to "the breadboard" without an upper/lower qualifier refers to the lower board in the Fritzing sketch and to the single extended board in the physical build.
+> IMPORTANT -- Two-breadboard Fritzing stand-in. The ESP32-S3 stand-in and the 74HCT245 (plus its RX divider network) do not fit comfortably on a single half-size breadboard. The sketch therefore uses **two half-size breadboards stacked vertically** (upper + lower) and treats the matching rails between them as one continuous rail: **red-rail-to-red-rail** (+5V and +12V feeds continue across both boards) and **blue-rail-to-blue-rail** (GND is a single continuous net). "Red-rail-to-red-rail" and "blue-rail-to-blue-rail" describe which physical breadboard rails are bridged, not the jumper wire color -- the jumper wire color still follows the +12V = orange, +5V = red, GND = black convention. See Section 2 for the upper/lower role split. In the physical bench build these two stand-in boards collapse onto **one extended breadboard** with enough length for all components; Fritzing does not ship an extended breadboard in its parts bin, which is why the sketch uses two half-size boards to represent it. Any placement wording in this guide that refers to "the breadboard" without an upper/lower qualifier refers to the lower board in the Fritzing sketch and to the single extended board in the physical build.
+
+## Wire color vs breadboard rail color
+
+The physically red-striped power rails on the breadboard carry +5V (top rail) and +12V (bottom rail) in this bench build, and the physically blue-striped rails carry GND. That is a property of the breadboard silkscreen, not a wire color choice. The wire color convention in this bench build is separate and unchanged:
+
+- **Orange** = +12V wires (NOT red)
+- **Red** = +5V wires
+- **Black** = GND wires
+- **Yellow** = DATA / UART signal
+- **Green** = DIR (control)
+
+Wherever this guide refers to a "red rail" it means the physically red-striped breadboard power rail; the jumper landed on that rail is still orange when it carries +12V and red only when it carries +5V. This applies equally to the inter-board rail bridges in section 2.
 
 ## 1. Parts list
 
@@ -18,7 +30,7 @@ Open Fritzing, switch to the Breadboard view, and search the Parts bin(top-right
 
 | Qty | Component | Fritzing part (exact name) | Notes |
 | --- | --- | --- | --- |
-| 2 | Half-size breadboard (Fritzing stand-in) | Breadboard Half + | 400 tie points each (30 rows + 2 power rails per side). Stacked upper + lower to stand in for a single extended breadboard; matching rails are treated as continuous (red-to-red, blue-to-blue). See Section 2. |
+| 2 | Half-size breadboard (Fritzing stand-in) | Breadboard Half + | 400 tie points each (30 rows + 2 power rails per side). Stacked upper + lower to stand in for a single extended breadboard; matching rails are treated as continuous (red-rail-to-red-rail, blue-rail-to-blue-rail -- the wire color of each rail-bridging jumper still follows the +12V = orange, +5V = red, GND = black convention). See Section 2. |
 | 1 | ESP32-S3 N16R8 DevKitC (stand-in) | Adafruit Feather ESP32-C1 (#5933) | Visual stand-in only. Rename to ESP32-S3 N16R8 DevKitC in the Inspector. See Pin Mapping section -- the Feather's labelled pins do NOT line up with the actual ESP32-S3 GPIO numbers. |
 | 1 | 74HCT245 octal buffer | 74LVC245 | Same DIP-20 pinout as 74HCT245. Rename to 74HCT245 in the Inspector. The physical build uses a real 74HCT245. |
 | 1 | Resistor (1 kohm) | Resistor | Set Resistance to 1k in the Inspector. Axial through-hole. |
@@ -81,7 +93,7 @@ Steps:
 3. Insert the stripped/bare end of an orange jumper wire, tighten the screw
 4. Push the pin end of the orange wire into the left red (+) rail on the lower breadboard (row 2)
 5. Repeat with a black jumper wire: stripped end into the V- (COM) screw terminal, pin end into the left blue (-) rail on the lower breadboard (row 2)
-6. Verify: orange wire bridges PSU V+ to the lower-breadboard +12V rail, black wire bridges PSU V- to the lower-breadboard GND rail. Because the upper and lower boards' matching rails are treated as continuous (red-to-red, blue-to-blue), the +12V and GND nets are also live on the upper board.
+6. Verify: orange wire bridges PSU V+ to the lower-breadboard +12V rail, black wire bridges PSU V- to the lower-breadboard GND rail. Because the upper and lower boards' matching rails are treated as continuous (red-rail-to-red-rail, blue-rail-to-blue-rail), the +12V and GND nets are also live on the upper board.
 
 ### Safety checklist
 
@@ -109,7 +121,7 @@ LRS-50-12 V+ (+12V rail) -> 1K ohm resistor -> LED anode (long leg) -> LED catho
 ### Parts
 
 - 1x LED (any color, standard 5mm or 3mm through-hole) -- from Kitronik kit
-- 1x 1K ohm resistor -- IN HAND from TinyTronics (the Kitronik kit does NOT reliably supply the 1K ohm value; the 2.2K ohm resistor needed elsewhere in the AX-12A divider is likewise sourced from TinyTronics via the 10Ω-1MΩ resistor set -- ORDERED, see HARDWARE_INVENTORY.md)
+- 1x 1K ohm resistor -- IN HAND from TinyTronics (the Kitronik kit does NOT reliably supply the 1K ohm value; the 2.2K ohm resistor needed elsewhere in the AX-12A divider is likewise sourced from TinyTronics via the 10Ω-1MΩ resistor set -- IN HAND, see HARDWARE_INVENTORY.md)
 
 ### Steps
 
@@ -151,7 +163,7 @@ When reading the image, treat "same row" as "same electrical node" even if the w
 
 The Fritzing sketch places components on **two half-size breadboards stacked vertically** because the ESP32-S3 stand-in and the 74HCT245 with its RX divider network do not fit comfortably on a single half-size board. The two boards represent one continuous board:
 
-- **Rails are matched across the gap**: red-to-red, blue-to-blue. The upper board's red rails are jumpered to the lower board's red rails, and the upper board's blue rails are jumpered to the lower board's blue rails. There is a single GND net and a single +5V net across both boards, and the +12V feed reaches whichever board needs it via the same red-to-red bridge.
+- **Rails are matched across the gap**: red-rail-to-red-rail, blue-rail-to-blue-rail (these describe which physical breadboard rails are bridged, not the jumper wire color). The upper board's red-striped rails are jumpered to the lower board's red-striped rails, and the upper board's blue-striped rails are jumpered to the lower board's blue-striped rails. There is a single GND net and a single +5V net across both boards, and the +12V feed reaches whichever board needs it via the bottom red-rail bridge (an orange jumper wire per the +12V = orange convention).
 - **Physical build**: on the actual bench hardware the same layout collapses onto **one extended breadboard** long enough to hold everything. Fritzing's parts bin does not ship an extended breadboard, so the two half-size boards in the sketch are the stand-in for it. All electrical nets in Section 3 are identical either way.
 
 Half-size breadboard orientation (both boards): long axis horizontal, two power rails on top (red/blue), two on the bottom, and the center channel splitting rows a-e (top half) from rows f-j (bottom half).
@@ -173,7 +185,7 @@ The upper board (labeled `Breadboard1` in the sketch) hosts the logic-level side
 2. **1 kohm resistor** (R5) -- horizontal, between 74HCT245 pin 3 (A2) and a free junction row just to the right of the chip. One leg lands on the pin-3 row, the other on the junction row.
 3. **2.2 kohm resistor** (R4) -- horizontal, from the junction row down to the top GND rail (blue) of the upper board.
 
-Nothing else lives on the upper board; the +5V, +12V, and GND rails on it are energised via the red-to-red / blue-to-blue jumpers from the lower board.
+Nothing else lives on the upper board; the +5V, +12V, and GND rails on it are energised via the inter-board rail bridges from the lower board (see the "Inter-board rail bridges" subsection below for jumper wire colors -- +12V is bridged with an orange jumper, +5V with a red jumper, GND with a black jumper).
 
 ### Lower breadboard -- ESP32 stand-in, servo pigtail, PSU input
 
@@ -187,10 +199,10 @@ The lower board (labeled `Breadboard` in the sketch) hosts everything the perfor
 
 Add the following jumper wires between the two boards so the matched rails behave as one continuous rail:
 
-- Red-to-red on the top rail (+5V continuous across upper and lower)
-- Blue-to-blue on the top rail (GND continuous across upper and lower)
-- Red-to-red on the bottom rail (+12V continuous across upper and lower)
-- Blue-to-blue on the bottom rail (GND continuous across upper and lower)
+- Bridge the two boards' top red-striped rails together (+5V continuous across upper and lower; per wire color convention this bridge uses a red jumper wire)
+- Bridge the two boards' top blue-striped rails together (GND continuous across upper and lower; per wire color convention this bridge uses a black jumper wire)
+- Bridge the two boards' bottom red-striped rails together (+12V continuous across upper and lower; per wire color convention this bridge uses an orange jumper wire, NOT red -- +12V is never color coded red on this bench)
+- Bridge the two boards' bottom blue-striped rails together (GND continuous across upper and lower; per wire color convention this bridge uses a black jumper wire)
 
 In the physical single-extended-breadboard build these bridges are not needed -- the rails are already one continuous piece.
 

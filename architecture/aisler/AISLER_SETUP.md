@@ -132,19 +132,24 @@ Tools:
 * Markdown
 * Draw.io
 
-Deliverables (one .fzz per cave subsystem):
+Deliverables:
 
-cave-controller.fzz
-power-distribution.fzz
-lamp-head.fzz
-turntable.fzz
-laser-chain.fzz
+Cave subsystem wiring is documented as hand-drawn SVG alongside each
+subsystem (SVG-first policy -- see
+`architecture/fritzing/FRITZING_SETUP.md`). Fritzing is retained only
+for the PSU verification bench-test:
+
+electronics/fritzing/psu-verification_v1.fzz
+
+No other cave-subsystem .fzz files are planned. Earlier plans that
+enumerated one .fzz per subsystem (cave-controller, power-distribution,
+lamp-head, turntable, laser-chain) have been dropped.
 
 Goal:
 
 Validate the cave architecture (CLAUDE.md, wiring/WIRING.md) before
-manufacturing any PCB. Diagrams are the source of truth for the
-hand-wired prototype.
+manufacturing any PCB. SVG diagrams (and the retained PSU bench-test)
+are the source of truth for the hand-wired prototype.
 
 ⸻
 
@@ -367,11 +372,7 @@ pixstars/
 ├── electronics/
 │   │
 │   ├── fritzing/
-│   │   ├── cave-controller.fzz
-│   │   ├── power-distribution.fzz
-│   │   ├── lamp-head.fzz
-│   │   ├── turntable.fzz
-│   │   └── laser-chain.fzz
+│   │   └── psu-verification_v1.fzz     (retained -- PSU/bench-test only)
 │   │
 │   ├── pcbs/
 │   │   ├── ax12a-buffer/
