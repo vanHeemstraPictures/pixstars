@@ -345,7 +345,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Item | Detail |
 | --- | --- |
 | Product | Kitronik Inventor's Kit for Arduino |
-| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (10x 220 ohm, 5x 10K ohm), LEDs, push buttons, potentiometer. NOTE: kit does NOT reliably supply the 1K ohm, 2.2K ohm, or 330 ohm resistors required for the AX-12A bench build -- those values are sourced separately from TinyTronics (1K and 330 ohm individually; 2.2K from the TinyTronics 10Ω-1MΩ resistor set, ORDERED -- see below). |
+| Includes | 400-point breadboard, jumper wires (M/M), assorted resistors (10x 220 ohm, 5x 10K ohm), LEDs, push buttons, potentiometer. NOTE: kit does NOT reliably supply the 1K ohm, 2.2K ohm, or 330 ohm resistors required for the AX-12A bench build -- those values are sourced separately from TinyTronics (1K and 330 ohm individually; 2.2K from the TinyTronics 10Ω-1MΩ resistor set -- see below). |
 | Purpose | Solderless prototyping of the AX-12A bench test wiring and the WS2812 LED ring data line (330 ohm series resistor breadboard mock-up, signal validation before final soldering). Kit LEDs used for the PSU power verification smoke test (Step 0) before connecting the AX-12A (1K ohm resistor for the smoke test is sourced from TinyTronics, see below). |
 | Source | elektronicavoorjou.nl |
 | Notes | Received. Breadboard and jumper wires used for AX-12A bench test. |
@@ -360,8 +360,8 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Supplier | Amazon.nl |
 | ASIN | B01MCRZFE5 |
 | Product page | https://www.amazon.nl/dp/B01MCRZFE5 |
-| Notes | Preferred because the power rails continue top-to-bottom (uninterrupted +/- rails on both sides). |
-| Status | ORDERED (Amazon.nl) |
+| Notes | Preferred because the power rails continue top-to-bottom (uninterrupted +/- rails on both sides). Received; in use on the assembled AX-12A bench. The bundled colored jumper wire set (M/M, standard rainbow assortment) is likewise IN HAND and follows the +12V = orange, +5V = red, GND = black, signal = yellow color convention used throughout the build guide. |
+| Status | IN HAND (Amazon.nl) |
 
 ## 1K Ohm Resistor (TinyTronics)
 
@@ -392,11 +392,11 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Property | Value |
 | --- | --- |
 | Component | Assorted through-hole axial resistor set, 10 ohm through 1 Mohm |
-| Purpose | Source for the 2.2K ohm GND leg of the AX-12A voltage divider (74HCT245 A2 -> ESP32 GPIO 16, paired with the 1K ohm series leg above); general bench spares for any additional resistor values needed during the AX-12A build. Ordered to replace the previously assumed Kitronik-sourced 2.2K ohm resistor. |
+| Purpose | Source for the 2.2K ohm GND leg of the AX-12A voltage divider (74HCT245 A2 -> ESP32 GPIO 16, paired with the 1K ohm series leg above); general bench spares for any additional resistor values needed during the AX-12A build. Sourced to replace the previously assumed Kitronik-sourced 2.2K ohm resistor. |
 | Supplier | TinyTronics (tinytronics.nl) |
 | Product page | https://www.tinytronics.nl/en/components/resistors/resistors/10%CF%89-1m%CF%89-resistor-set |
-| Notes | Ordered because the Kitronik Inventor's Kit does not reliably supply the 2.2K ohm resistor required for the AX-12A voltage divider. Flip status to IN HAND once the set is physically received. |
-| Status | ORDERED (TinyTronics) |
+| Notes | Sourced because the Kitronik Inventor's Kit does not reliably supply the 2.2K ohm resistor required for the AX-12A voltage divider. Received and in use on the assembled AX-12A bench. |
+| Status | IN HAND (TinyTronics) |
 
 ## 74HCT245 Bus Transceiver (AX-12A Half-Duplex Buffer)
 
@@ -590,10 +590,11 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | UNI-T UT139C digital multimeter (bench measurement) | IN HAND (Elektramat.nl) |
 | Kyoritsu 7066A test lead set, red/black (paired with UT139C) | IN HAND (Elektramat.nl) |
 | Kitronik Inventor's Kit for Arduino (breadboard, jumpers, resistors, LEDs, buttons, potentiometer) | IN HAND |
-| 830-point solderless breadboard (continuous top-to-bottom power rails, AX-12A bench rebuild) | ORDERED (Amazon.nl, ASIN B01MCRZFE5) |
+| 830-point solderless breadboard (continuous top-to-bottom power rails, AX-12A bench rebuild) | IN HAND (Amazon.nl, ASIN B01MCRZFE5) |
 | 1K ohm resistor (qty 4) -- AX-12A divider series leg + PSU LED smoke test | IN HAND (TinyTronics) |
 | 330 ohm resistor (qty 4) -- WS2812 LED ring data line protection | IN HAND (TinyTronics) |
-| 10Ω-1MΩ resistor set -- source for the 2.2K ohm AX-12A divider GND leg (+ general bench spares) | ORDERED (TinyTronics) |
+| 10Ω-1MΩ resistor set -- source for the 2.2K ohm AX-12A divider GND leg (+ general bench spares) | IN HAND (TinyTronics) |
+| Colored jumper wires (M/M, bundled with the 830-point breadboard kit) -- follows +12V orange / +5V red / GND black / signal yellow convention | IN HAND (Amazon.nl, bundled with ASIN B01MCRZFE5) |
 | 74HCT245 bus transceiver (AX-12A half-duplex buffer) | IN HAND (qty 2: 1 active + 1 spare, Electrokit.com) |
 | Olight Obounds gateway | PLANNED (to order, fallback if Atom Lite spike fails) |
 | M5Stack Atom Lite (BLE proxy) | IN HAND |

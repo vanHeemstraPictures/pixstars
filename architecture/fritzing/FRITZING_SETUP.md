@@ -2,32 +2,30 @@ FRITZING_SETUP.md
 
 Fritzing Integration for PixStars
 
-Version: 2.0
-Status: Recommended
+Version: 3.0
+Status: Narrow scope -- PSU verification bench-test only
 Repository: pixstars/architecture/fritzing
 
 ⸻
 
 1. Executive Summary
 
-Fritzing is a visual electronics documentation and prototyping tool that allows hardware systems to be documented using:
+PixStars uses custom SVG drawings as the preferred format for hardware visual
+documentation. Custom SVG is used wherever the shape and identity of real parts
+must be represented truthfully (cave layout, cable column, lamp head, turntable,
+laser chain).
 
-* Breadboard diagrams
-* Wiring diagrams
-* Schematic diagrams
-* PCB layouts
+Fritzing is retained only for the PSU verification bench-test
+(`electronics/fritzing/psu-verification_v1.fzz`). It is not the repo-wide
+hardware documentation platform, and its stand-in part shapes are not treated
+as accurate representations of the physical build.
 
-For PixStars, Fritzing is used as the authoritative source for documenting all electronic wiring and physical hardware connections in the Cave Architecture v3 build (ESP32-S3 controller, hidden cave under DIY turntable, lamp head with no motors).
+Fritzing is not part of the runtime architecture. In its retained bench-test
+role it serves as:
 
-Fritzing is not part of the runtime architecture.
-
-Instead, it serves as:
-
-* Hardware documentation
-* Assembly documentation
-* Troubleshooting documentation
-* Wiring verification
-* Future maintenance documentation
+* Schematic capture for the isolated PSU verification circuit
+* A reproducible test setup that another builder can follow
+* A wiring cross-check for the 5V and 12V rails before they are integrated
 
 ⸻
 
@@ -53,39 +51,26 @@ https://github.com/MGX3D/Turntable
 
 ⸻
 
-3. Why Fritzing Fits PixStars
+3. Why SVG-first, and where Fritzing still fits
 
-PixStars combines numerous electronic subsystems hidden under one lamp:
+Fritzing part libraries rely on generic, stand-in symbols and breadboard
+graphics that do not match the physical shape, footprint, or identity of the
+actual PixStars parts (Opt Lasers Micro RGB module, ILDAWaveX16 V2, MEAN WELL
+LRS-50 series, 200mm lazy susan bearing, GT2 belt drive, JST-SM connectors,
+cable column geometry, and the cave enclosure itself). Presenting those as
+"the hardware" in Fritzing breadboard views is misleading and makes assembly
+and maintenance harder, not easier.
 
-* ESP32-S3 N16R8 DevKit (cave controller, WiFi bridge)
-* Pololu Mini Maestro 24-channel servo controller
-* MG996R / MG90S servos on the servo rail
-* Dynamixel AX-12A head nod (TTL serial via 74HCT245 buffer)
-* TMC2209 stepper driver + NEMA 17 (DIY turntable)
-* WS2812 5050 RGB LED Ring 16 (in lamp head, driven by ESP32 RMT GPIO)
-* ILDAWaveX16 V2 ILDA DAC + 40kpps galvo driver + LPLDD-1A-16V-3CH laser driver
-* Opt Lasers 300mW Micro RGB laser galvo scanner (in lamp head)
-* MEAN WELL LRS-50-5 and LRS-50-12 power supplies
-* Hall effect origin sensor (SS49E / A3144)
-* Raspberry Pi Zero 2 WH (lamp head I/O only -- audio, sensors, OV2640 camera)
-* Seeed Studio reComputer RK3588-40 (local AI brain in lamp base)
+Custom SVG (drawn in Inkscape or equivalent) is therefore preferred for any
+visual that must be true to the real hardware -- cave layout, cable column,
+lamp head, turntable, and laser chain. Custom SVG lets us draw parts at their
+actual dimensions and orientations, label real connectors, and keep the visual
+consistent with build photos.
 
-These systems become difficult to understand from text alone.
-
-Fritzing provides visual documentation showing:
-
-* Which component is connected
-* Where it is connected
-* Which wire color is used
-* Which GPIO pins are used
-* Which power rails are used
-
-This dramatically simplifies:
-
-* Building
-* Maintenance
-* Troubleshooting
-* Future upgrades
+Fritzing is kept only where its schematic-capture view is genuinely useful and
+where stand-in parts are acceptable: the isolated PSU verification bench-test.
+That circuit is small, uses generic power-supply and load symbols, and does
+not need to depict the real physical layout of the cave.
 
 ⸻
 
@@ -119,168 +104,93 @@ Hardware Layer
 |
 Documentation Layer
 |
-+-- Fritzing (.fzz files + PNG/SVG exports)
++-- Custom SVG (true-to-hardware visuals -- preferred)
++-- Fritzing (.fzz) -- PSU verification bench-test only
++-- Markdown build guides + wiring/WIRING.md
 ```
-Fritzing documents the Hardware Layer.
+Custom SVG is the primary format for the Hardware Layer visuals. Fritzing is
+scoped to the PSU verification bench-test and is not used to represent the
+integrated cave.
 
 ⸻
 
-5. Recommended Repository Structure
+5. Repository Structure
 ```
 pixstars/
 |
 +-- architecture/
 |   +-- fritzing/
-|       +-- FRITZING_SETUP.md
+|       +-- FRITZING_SETUP.md   (this file -- SVG-first policy + Fritzing scope)
 |
 +-- electronics/
     +-- fritzing/
-        +-- cave-controller.fzz
-        +-- power-distribution.fzz
-        +-- lamp-head.fzz
-        +-- turntable.fzz
-        +-- laser-chain.fzz
-        |
-        +-- exports/
-            +-- cave-controller.png
-            +-- power-distribution.png
-            +-- lamp-head.png
-            +-- turntable.png
-            +-- laser-chain.png
+        +-- README.md
+        +-- psu-verification_v1.fzz          (PSU bench-test -- retained)
+        +-- ax-12a-bench-test.svg            (SVG bench-test drawing)
+        +-- ax12a-buffer-v1-build-guide.md   (build guide, references the SVG)
 ```
+True-to-hardware visuals (cave layout, cable column, lamp head, turntable,
+laser chain) are drawn as custom SVG and live alongside the build guide or
+architecture doc that references them, not under `electronics/fritzing/`.
+
 ⸻
 
-6. Required PixStars Diagrams
+6. Retained Fritzing Scope
 
-The following diagrams should be maintained. Each .fzz file corresponds to one of the five cave subsystems.
+Only one Fritzing project is maintained:
 
-Cave Controller
+PSU Verification Bench-Test
 
 Contains:
 
-* ESP32-S3 N16R8 DevKit
-* Pololu Mini Maestro 24-channel (serial from ESP32 UART)
-* 74HCT245 octal bus transceiver (half-duplex buffer for AX-12A)
-* Dynamixel AX-12A TTL serial link (via 74HCT245, DIR pin on ESP32 GPIO 8)
-* TMC2209 STEP / DIR / EN lines from ESP32
-* Hall effect sensor (SS49E or A3144) input to ESP32 GPIO 27
-* Common ground rail
+* MEAN WELL LRS-50-5 (5V rail) and MEAN WELL LRS-50-12 (12V rail) as
+  schematic-symbol sources
+* Representative resistive / servo dummy loads on each rail
+* Common ground bus tie-point
+* Bulk capacitor placement notes (1000uF near WS2812 ring load, 100uF near
+  the 12V driver load)
+* Probe points and expected voltage / current at each measurement
 
-Document:
+Purpose:
 
-* ESP32 GPIO assignments (STEP, DIR, EN, RMT data, UART, 74HCT245 DIR)
-* Logic ground tie-points
-* WiFi role (OSC bridge to Mac Mini)
-
-Filename:
-
-cave-controller.fzz
-
-⸻
-
-Power Distribution
-
-Contains:
-
-* MEAN WELL LRS-50-5 (5V rail -- servos, WS2812 ring via cable column)
-* MEAN WELL LRS-50-12 (12V rail -- TMC2209 VMOT, LPLDD-1A-16V-3CH)
-* +/-24V galvo PSU (dedicated dual-rail for 40kpps galvo driver board)
-* Common ground bus (ESP32 logic GND tied to 5V and 12V returns)
-* Capacitor placement (1000uF near WS2812 ring, 100uF across TMC2209 VMOT)
+* Verify the 5V and 12V rails behave correctly under representative load
+  before they are wired into the integrated cave
+* Provide a schematic another builder can follow to reproduce the bench-test
 
 Filename:
 
-power-distribution.fzz
+`electronics/fritzing/psu-verification_v1.fzz`
+
+Stand-in part shapes in this file are acceptable because the bench-test is
+schematic-oriented and does not attempt to represent the physical cave.
 
 ⸻
 
-Lamp Head
+7. Custom SVG for true-to-hardware visuals
 
-Contains:
+For anything where physical shape, footprint, cable path, or connector
+identity matters -- cave layout, cable column routing, lamp head assembly,
+turntable mechanics, and the laser chain -- draw a custom SVG (Inkscape or
+equivalent) instead of a Fritzing breadboard view.
 
-* WS2812 5050 RGB LED Ring 16 (rear-facing, 5V/GND/DATA via cable column)
-* WS2812B 35-LED front ring (front-facing halo, separate JST-SM 3-pin)
-* Dynamixel AX-12A (head nod, TTL serial via cable column)
-* Opt Lasers 300mW Micro RGB module + 40kpps X/Y galvo mirrors
-* JST-SM 3-pin connector at the lamp head junction
-* 1000uF electrolytic capacitor at the LED ring
-* Raspberry Pi Zero 2 WH (lamp head I/O only -- OV2640 CSI, USB mic, speaker)
+Guidelines:
 
-Filename:
+* Draw parts at their real proportions where possible; do not substitute
+  visually different stand-ins
+* Label real connectors and pinouts (JST-SM 3-pin, DB25, TTL headers)
+* Keep the wire-colour convention below consistent with Fritzing so the two
+  formats remain readable side by side
+* Store each SVG next to the build guide or architecture doc that references
+  it, using a descriptive filename
 
-lamp-head.fzz
-
-⸻
-
-Turntable
-
-Contains:
-
-* NEMA 17 stepper motor (1.8 deg, 200 steps/rev)
-* TMC2209 stepper driver (StealthChop, 1/16 microstepping)
-* GT2 belt friction-drive (20T pulley to 200mm lazy susan bearing race)
-* Bilateral belt tensioner
-* Hall effect sensor (SS49E or A3144) + neodymium magnet
-* ESP32 STEP / DIR / EN wiring
-* 12V VMOT supply from LRS-50-12
-
-Filename:
-
-turntable.fzz
-
-⸻
-
-Laser Chain
-
-Contains:
-
-* ILDAWaveX16 V2 (ESP32-S3 + RP2354, 16-bit DAC, WiFi/Ethernet/USB)
-* DB25 fan-out to galvo driver and LPLDD laser driver
-* 40kpps galvo driver board (Teclulu GH40 or equivalent)
-* LPLDD-1A-16V-3CH laser driver (0-5V analog modulation, 3 channels)
-* Opt Lasers 300mW Micro RGB module (638 / 520 / 450 nm)
-* Cable column routing (X/Y +/-5V, RGB 0-5V, galvo motor +/-24V)
-
-Filename:
-
-laser-chain.fzz
-
-⸻
-
-7. Lamp Head Reference Design
-
-Initial reference wiring for the WS2812 rear ring (driven from the cave):
-```
-ESP32-S3 N16R8 (in cave)
-   |
-   +-- RMT GPIO (data line)
-           |
-           +-- 330 ohm resistor (cave end)
-                   |
-                   +-- DATA wire (cable column)
-                           |
-                           +-- JST-SM 3-pin (lamp head junction)
-                                   |
-                                   +-- WS2812 D0 (in head)
-
-MEAN WELL LRS-50-5 (cave)
-   |
-   +-- 5V wire (cable column) ---- JST-SM ---- WS2812 PWR 5V
-   +-- GND wire (cable column) --- JST-SM ---- WS2812 GND
-                                                  |
-                                                  +-- 1000uF capacitor (near ring)
-
-ESP32 logic GND must be tied to MEAN WELL GND (common ground).
-```
-This design should be the first Fritzing project.
-
-The full lamp head .fzz also documents the AX-12A TTL serial link, the laser galvo cabling, and the Pi Zero 2 WH I/O (audio, OV2640 CSI).
+Existing example: `electronics/fritzing/ax-12a-bench-test.svg`, referenced
+from `ax12a-buffer-v1-build-guide.md`.
 
 ⸻
 
 8. Documentation Standards
 
-Every Fritzing project must include:
+Applies to the retained Fritzing schematic and to custom SVG drawings:
 
 Component Names
 
@@ -339,31 +249,26 @@ Never leave signal lines unnamed.
 
 9. Export Standards
 
-Every project should be exported as:
+For the retained PSU verification Fritzing project, export a PNG and an SVG
+at 3000px wide alongside the `.fzz` file, so the schematic can be viewed
+without running Fritzing.
 
-PNG
-SVG
+Custom SVG drawings are already in a portable format and do not need a
+separate export step; commit the working `.svg` file directly.
 
-Store exports in:
-
-electronics/fritzing/exports/
-
-Recommended resolution:
-
-3000px wide
-
-This allows inclusion in:
-
-* Documentation
-* Build manuals
-* Presentations
-* Maintenance guides
+Both formats are appropriate for inclusion in build manuals and maintenance
+guides.
 
 ⸻
 
 10. Integration With Existing Documentation
 
-Fritzing diagrams should be referenced from:
+The PSU verification Fritzing file can be referenced from any build guide or
+architecture doc that discusses the 5V / 12V rails, for example
+`wiring/WIRING.md`, `HARDWARE_INVENTORY.md`, or PSU-specific build guides.
+
+Custom SVG drawings for the integrated cave, cable column, lamp head,
+turntable, and laser chain should be referenced from:
 
 wiring/WIRING.md
 architecture_decision_records/LAMP_ARCHITECTURE_v3.md
@@ -374,17 +279,15 @@ SHOW_CONTROL.md (if present)
 Example:
 
 See:
-electronics/fritzing/exports/cave-controller.png
+electronics/fritzing/ax-12a-bench-test.svg
 
-for complete wiring details.
+as an example of a custom SVG referenced from a Markdown build guide.
 
 ⸻
 
 11. Future Expansion
 
-Future PixStars hardware can be documented using the same approach.
-
-Examples:
+Future PixStars hardware documentation defaults to custom SVG:
 
 * Additional cameras
 * Extra ESP32 satellites
@@ -394,26 +297,28 @@ Examples:
 * MIDI interfaces
 * Additional projection hardware
 
-Each subsystem should receive:
-```
-Subsystem Name
-|
-+-- .fzz
-+-- PNG Export
-+-- SVG Export
-```
+Fritzing may be added again only for a new isolated bench-test where
+schematic capture with generic parts is genuinely useful (for example, a
+future PSU or driver bring-up). It should not be introduced for the
+integrated cave.
+
 ⸻
 
 12. Recommendation
 
-Recommendation: Fritzing is the official electronics documentation platform for PixStars Cave Architecture v3.
+Recommendation: custom SVG is the preferred format for hardware visual
+documentation in PixStars. Fritzing is kept only for the PSU verification
+bench-test.
 
 Use:
 
-* Markdown for architecture
+* Markdown for architecture, build guides, and wiring notes
 * Draw.io for system diagrams
+* Custom SVG (Inkscape) for true-to-hardware visuals of the integrated build
+* Fritzing schematic for the PSU verification bench-test only
 * Conductor (timeline.yaml) for show control
 * Ardour for audio/MIDI playback
-* Fritzing for all hardware wiring documentation
 
-This provides a complete documentation chain from high-level architecture down to individual wires.
+This keeps the documentation chain honest: schematic where a schematic is
+appropriate, true-to-hardware SVG where the physical build is what needs to
+be understood.
