@@ -31,6 +31,68 @@
 #include "maestro.h"
 #include "turntable.h"
 
+// =========================================================================
+// TEMPORARY DIAGNOSTIC INSTRUMENTATION -- remove after bench pass.
+// Purpose: make each runtime stage visible even when the default Serial
+// path (HWCDC on the S3 native USB port) is not being monitored.
+//
+// Every stage marker is emitted on THREE independent signal paths so at
+// least one is always readable on this bench:
+//   1. Serial   -> HWCDC over the ESP32-S3 native USB-C port.
+//   2. Serial0  -> UART0 (GPIO 43/44) over the USB-UART bridge USB-C port.
+//                  This is where the ROM boot log already appears, so any
+//                  monitor already reading ROM bytes will see these lines.
+//   3. Onboard status LED (WS2812 on GPIO 48) latched to a stage-specific
+//      colour for ~300 ms. The main-loop LED updater is suppressed while
+//      the diagnostic hold is active so the flash isn't overwritten.
+//
+// Stage -> colour legend (onboard WS2812, GPIO 48):
+//   SETUP_START             white
+//   WIFI_CONNECTED          cyan
+//   UDP_READY               magenta
+//   SETUP_DONE              yellow
+//   LOOP_HEARTBEAT (1 Hz)   dim orange (brief pulse)
+//   PACKET_SEEN             purple
+//   REPLY_ATTEMPTED         pink
+//
+// Toggle PIXSTARS_DIAG to 0 to disable all diagnostic markers in one line.
+// =========================================================================
+#ifndef PIXSTARS_DIAG
+#define PIXSTARS_DIAG 1
+#endif
+
+#if PIXSTARS_DIAG
+static unsigned long diagLedHoldUntilMs = 0;
+
+static void diagPrint(const char *stage) {
+  Serial.printf("[DIAG] %s t=%lums\n", stage, millis());
+  Serial0.printf("[DIAG] %s t=%lums\r\n", stage, millis());
+}
+
+static void diagLedFlash(uint8_t r, uint8_t g, uint8_t b, uint16_t holdMs) {
+#ifdef CONFIG_IDF_TARGET_ESP32S3
+  neopixelWrite(STATUS_LED_PIN, r, g, b);
+#else
+  (void)r; (void)g; (void)b;
+  digitalWrite(STATUS_LED_PIN, HIGH);
+#endif
+  diagLedHoldUntilMs = millis() + holdMs;
+}
+
+static void diagMark(const char *stage, uint8_t r, uint8_t g, uint8_t b) {
+  diagPrint(stage);
+  diagLedFlash(r, g, b, 300);
+}
+#else
+static inline void diagPrint(const char *) {}
+static inline void diagLedFlash(uint8_t, uint8_t, uint8_t, uint16_t) {}
+static inline void diagMark(const char *, uint8_t, uint8_t, uint8_t) {}
+static const unsigned long diagLedHoldUntilMs = 0;
+#endif
+// =========================================================================
+// END TEMPORARY DIAGNOSTIC INSTRUMENTATION
+// =========================================================================
+
 // --- Watchdog / health-monitoring tunables (override in config.h) ---
 //
 // If no OSC packet is received for WATCHDOG_TIMEOUT_MS milliseconds we
@@ -125,6 +187,12 @@ static void updateStatusLed() {
   unsigned long now = millis();
   unsigned long interval = 0;
 
+  // DIAG: hold off status-LED writes while a diagnostic flash is active
+  // so the stage colour isn't overwritten mid-flash.
+  if (diagLedHoldUntilMs != 0 && (long)(diagLedHoldUntilMs - now) > 0) {
+    return;
+  }
+
   switch (ledMode) {
     case LED_CONNECTING: interval = 500; break;   // 1 Hz
     case LED_ERROR:      interval = 50;  break;   // 10 Hz
@@ -154,6 +222,8 @@ static void handlePing(OSCMessage &msg) {
   reply.send(udp);
   udp.endPacket();
   reply.empty();
+
+  diagMark("REPLY_ATTEMPTED /pong", 32, 8, 24);  // pink
 }
 
 // /status -> reply /status/reply with a flat tuple of diagnostic values:
@@ -333,15 +403,26 @@ void setup() {
 #endif
   writeStatusLed(false);
 
+  // DIAG: bring up UART0 (GPIO 43/44) as a serial mirror before anything
+  // else so stage markers reach the USB-UART bridge port even if the
+  // HWCDC (native USB) Serial path is not being monitored.
+#if PIXSTARS_DIAG
+  Serial0.begin(115200);
+#endif
+
   Serial.begin(SERIAL_BAUD);
   delay(100);
   Serial.println();
   Serial.println("[boot] Pixstars cave ESP32 firmware");
 
+  diagMark("SETUP_START", 24, 24, 24);         // white
+
   connectWiFi();
+  diagMark("WIFI_CONNECTED", 0, 24, 24);       // cyan
 
   udp.begin(OSC_LISTEN_PORT);
   Serial.printf("[osc] listening on UDP port %d\n", OSC_LISTEN_PORT);
+  diagMark("UDP_READY", 24, 0, 24);            // magenta
 
   startOtaAndMdns();
 
@@ -355,9 +436,28 @@ void setup() {
   startLedTask();
 
   Serial.printf("[boot] ready. heap=%u\n", (unsigned)ESP.getFreeHeap());
+  diagMark("SETUP_DONE loop_starting", 24, 24, 0);  // yellow
 }
 
 void loop() {
+#if PIXSTARS_DIAG
+  // DIAG: loop-alive heartbeat. Fires once per second on both serial
+  // paths and briefly flashes the onboard LED dim orange, so a stalled
+  // loop is unmistakable at the bench.
+  static unsigned long diagLastBeatMs = 0;
+  static uint32_t diagBeatCount = 0;
+  unsigned long diagNow = millis();
+  if (diagNow - diagLastBeatMs >= 1000UL) {
+    diagLastBeatMs = diagNow;
+    diagBeatCount++;
+    Serial.printf("[DIAG] LOOP_HEARTBEAT n=%lu t=%lums\n",
+                  (unsigned long)diagBeatCount, diagNow);
+    Serial0.printf("[DIAG] LOOP_HEARTBEAT n=%lu t=%lums\r\n",
+                   (unsigned long)diagBeatCount, diagNow);
+    diagLedFlash(32, 12, 0, 120);              // dim orange, short
+  }
+#endif
+
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("[wifi] connection lost, reconnecting");
     enterSafeState();
@@ -365,6 +465,7 @@ void loop() {
     updateStatusLed();
     connectWiFi();
     udp.begin(OSC_LISTEN_PORT);
+    diagMark("UDP_READY (reconnect)", 24, 0, 24);
   }
 
   ArduinoOTA.handle();
@@ -372,6 +473,15 @@ void loop() {
   OSCMessage msg;
   int size = udp.parsePacket();
   if (size > 0) {
+#if PIXSTARS_DIAG
+    IPAddress rip = udp.remoteIP();
+    uint16_t rport = udp.remotePort();
+    Serial.printf("[DIAG] PACKET_SEEN size=%d from=%s:%u\n",
+                  size, rip.toString().c_str(), rport);
+    Serial0.printf("[DIAG] PACKET_SEEN size=%d from=%s:%u\r\n",
+                   size, rip.toString().c_str(), rport);
+    diagLedFlash(20, 0, 32, 200);              // purple
+#endif
     while (size--) msg.fill(udp.read());
     if (!msg.hasError()) {
       lastOscMs = millis();
