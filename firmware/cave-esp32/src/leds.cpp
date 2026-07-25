@@ -38,6 +38,18 @@
 #define LED_RAINBOW_PERIOD_MS 4000
 #endif
 
+// TEMPORARY BENCH GUARD (Wave 4/5 diagnostic).
+// Setting LEDS_HARDWARE_ENABLED to 0 makes begin() skip the FastLED
+// addLeds()/clear() calls that blocked setup on the current bench (see
+// PRE_LEDS with no POST_LEDS in the wave 4 capture). update()/setRear()/
+// setFront() become no-ops on the hardware path -- the marker sequence
+// can then progress past POST_LEDS so the next capture can identify any
+// downstream blocker. Re-enable (set to 1 in config.h) once the LED
+// wiring/RMT root cause is resolved.
+#ifndef LEDS_HARDWARE_ENABLED
+#define LEDS_HARDWARE_ENABLED 0
+#endif
+
 #define FASTLED_INTERNAL  // suppress FastLED pragma version banner
 #include <FastLED.h>
 
@@ -56,15 +68,30 @@ static CRGB frontBuf[LED_RING_FRONT_COUNT];
 static Ring rear  = { rearBuf,  LED_RING_REAR_COUNT,  0, 0, 0, MODE_OFF };
 static Ring front = { frontBuf, LED_RING_FRONT_COUNT, 0, 0, 0, MODE_OFF };
 
+// True once the FastLED backend has been configured. When LEDS_HARDWARE_ENABLED
+// is 0 (bench wave) this stays false, and update() skips FastLED.show() so no
+// call ever reaches the RMT peripheral.
+static bool s_ready = false;
+
 bool begin() {
+#if LEDS_HARDWARE_ENABLED
   FastLED.addLeds<WS2812B, LED_RING_REAR_PIN,  GRB>(rearBuf,  LED_RING_REAR_COUNT);
   FastLED.addLeds<WS2812B, LED_RING_FRONT_PIN, GRB>(frontBuf, LED_RING_FRONT_COUNT);
   FastLED.setBrightness(LED_MAX_BRIGHTNESS);
   FastLED.clear(true);
+  s_ready = true;
   Serial.printf("[leds] rear=GPIO%d (%d) front=GPIO%d (%d) brightness=%d\n",
                 LED_RING_REAR_PIN,  LED_RING_REAR_COUNT,
                 LED_RING_FRONT_PIN, LED_RING_FRONT_COUNT,
                 (int)LED_MAX_BRIGHTNESS);
+#else
+  // Bench diagnostic: FastLED init is the confirmed setup blocker in wave 4.
+  // Skip it so POST_LEDS and downstream markers can be observed. LED rings
+  // will not light in this build.
+  Serial.printf("[leds] begin() SKIPPED (LEDS_HARDWARE_ENABLED=0) rear=GPIO%d (%d) front=GPIO%d (%d)\n",
+                LED_RING_REAR_PIN,  LED_RING_REAR_COUNT,
+                LED_RING_FRONT_PIN, LED_RING_FRONT_COUNT);
+#endif
   return true;
 }
 
@@ -109,6 +136,9 @@ static bool renderRing(const Ring &r, unsigned long now) {
 }
 
 void update() {
+  // Bench guard: if begin() skipped FastLED init, don't touch the RMT
+  // peripheral or the (unconfigured) controller list from the LED task.
+  if (!s_ready) return;
   static unsigned long lastFrame = 0;
   unsigned long now = millis();
   // Cap refresh at ~60 Hz so OSC processing always gets CPU.
