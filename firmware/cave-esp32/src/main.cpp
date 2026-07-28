@@ -50,10 +50,23 @@
 //   SETUP_START             white
 //   WIFI_CONNECTED          cyan
 //   UDP_READY               magenta
+//   OTA_MDNS_DONE           dim white
+//   PRE_MAESTRO / POST_MAESTRO       dim red / red
+//   PRE_DYNAMIXEL / POST_DYNAMIXEL   dim green / green
+//   PRE_LEDS / POST_LEDS             dim blue / blue
+//   PRE_TURNTABLE / POST_TURNTABLE   dim yellow / amber
+//   PRE_LEDTASK / POST_LEDTASK       teal / bright teal
 //   SETUP_DONE              yellow
 //   LOOP_HEARTBEAT (1 Hz)   dim orange (brief pulse)
 //   PACKET_SEEN             purple
 //   REPLY_ATTEMPTED         pink
+//
+// NOTE: the PRE_/POST_ pairs between UDP_READY and SETUP_DONE are the
+// wave-4 granular markers. Consecutive begin() calls are typically fast,
+// so the LED flashes may overwrite each other -- the Serial/Serial0 log
+// is the definitive record. If a PRE_ marker appears without its POST_
+// partner (and SETUP_DONE never fires), that subsystem's begin() is the
+// blocker.
 //
 // Toggle PIXSTARS_DIAG to 0 to disable all diagnostic markers in one line.
 // =========================================================================
@@ -374,6 +387,7 @@ static void startOtaAndMdns() {
   } else {
     Serial.println("[mdns] start failed");
   }
+  diagMark("OTA_MDNS_DONE", 16, 16, 16);       // dim white
 }
 
 static void connectWiFi() {
@@ -426,14 +440,27 @@ void setup() {
 
   startOtaAndMdns();
 
+  diagMark("PRE_MAESTRO", 16, 0, 0);           // dim red
   maestro::begin();
+  diagMark("POST_MAESTRO", 32, 0, 0);          // red
+
+  diagMark("PRE_DYNAMIXEL", 0, 16, 0);         // dim green
   dynamixel::begin();
+  diagMark("POST_DYNAMIXEL", 0, 32, 0);        // green
+
+  diagMark("PRE_LEDS", 0, 0, 16);              // dim blue
   leds::begin();
+  diagMark("POST_LEDS", 0, 0, 32);             // blue
+
+  diagMark("PRE_TURNTABLE", 16, 16, 0);        // dim yellow
   turntable::begin();
+  diagMark("POST_TURNTABLE", 32, 20, 0);       // amber
 
   // LED rendering runs in its own task on core 0; loop() (core 1) no
   // longer needs to call leds::update().
+  diagMark("PRE_LEDTASK", 0, 16, 16);          // teal
   startLedTask();
+  diagMark("POST_LEDTASK", 0, 32, 32);         // bright teal
 
   Serial.printf("[boot] ready. heap=%u\n", (unsigned)ESP.getFreeHeap());
   diagMark("SETUP_DONE loop_starting", 24, 24, 0);  // yellow
