@@ -21,8 +21,14 @@ Fritzing is **not** the repo-wide hardware documentation platform. See
   integrated cave.
 - **ax-12a-bench-test.svg** -- custom SVG bench-test drawing for the
   Dynamixel AX-12A head-nod servo + 74HCT245 half-duplex TTL buffer,
-  referenced from `ax12a-buffer-v1-build-guide.md`. Example of the
-  SVG-first pattern used throughout the repo.
+  referenced from `ax12a-buffer-v1-build-guide.md`. Also shows the
+  intended external ROBOTIS U2D2 reader path in-line on the AX-12A
+  3-pin bus (shared 12V rail; used only when running the read-only
+  Protocol 1.0 servo-side check with Dynamixel Wizard 2.0). The
+  physical breadboard today still has the ESP32-direct data path
+  wired per section 3 of the build guide; the U2D2 rewiring in the
+  SVG is applied only for the external read. Example of the SVG-first
+  pattern used throughout the repo.
 - **ax12a-buffer-v1-build-guide.md** -- Markdown build guide that
   references the SVG above.
 

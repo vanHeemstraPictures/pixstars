@@ -277,6 +277,19 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | Supplier | Reichelt.nl -- https://www.reichelt.com/nl/nl/shop/product/servomotor_robotica_9_0_-_12_v_dc-249909 |
 | Status | IN HAND (Reichelt.nl, EUR 59.08) |
 
+## ROBOTIS U2D2 (External Dynamixel Reader)
+
+| Property | Value |
+| --- | --- |
+| Component | ROBOTIS U2D2 USB communication converter |
+| Protocol | Dynamixel Protocol 1.0 and 2.0 (TTL half-duplex + RS-485) |
+| Interface | USB (FTDI-based) to Dynamixel TTL 3-pin sockets (2x, treated as equivalent daisy-chain connectors) |
+| Role | External bus master for read-only Protocol 1.0 servo-side checks on the AX-12A (Status Return Level, angle limits, ID, baud, return delay); paired with Dynamixel Wizard 2.0 on the Mac Mini. Not part of the show-time signal chain -- diagnostic use only. |
+| Physical placement | Temporary bench connection to the AX-12A 3-pin bus; the ESP32 TX/RX/DIR wires must be disconnected from the AX-12A DATA line for the duration of the external read so the two bus masters do not fight. |
+| SVG reference | `electronics/fritzing/ax-12a-bench-test.svg` now shows the intended external U2D2 wiring (U2D2 in-line on the AX-12A 3-pin bus, sharing the 12V rail). The physical breadboard today still has the ESP32-direct data path in place; the U2D2 rewiring is applied only when the external read is executed. |
+| Supplier | Reichelt (ordered 2026-07-27) |
+| Status | IN HAND (Reichelt) |
+
 ## Laser Galvo Scanner
 
 | Item | Detail |
@@ -582,6 +595,7 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | MEAN WELL LRS-50-12 (cave 12V rail: LPLDD laser driver + TMC2209 + AX-12A bench) | IN HAND (Reichelt) |
 | Handson Aansluitsnoer 2.5m (Black) -- 230V mains cord for LRS-50-12 | IN HAND (GAMMA, EUR 6.99) |
 | Dynamixel AX-12A (head nod servo) | IN HAND |
+| ROBOTIS U2D2 (external Protocol 1.0 reader for AX-12A servo-side checks) | IN HAND (Reichelt) |
 | Opt Lasers LPLDD-1A-16V-3CH laser driver | EVALUATING (ACTIVE) |
 | SM5 6W RGB Laser Module (Starshine Lighting) | SUPERSEDED -- too heavy for lamp head |
 | 40kpps High Speed Galvo Scanner Set (Teclulu GH40 or equiv) | EVALUATING |
