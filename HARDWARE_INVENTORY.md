@@ -283,10 +283,10 @@ Match each cord wire to the correct PSU terminal. Getting this wrong is a shock 
 | --- | --- |
 | Component | ROBOTIS U2D2 USB communication converter |
 | Protocol | Dynamixel Protocol 1.0 and 2.0 (TTL half-duplex + RS-485) |
-| Interface | USB (FTDI-based) to Dynamixel TTL 3-pin sockets (2x, treated as equivalent daisy-chain connectors) |
+| Interface | USB-C (host link to Mac Mini) to ONE 3-pin Dynamixel TTL socket (sole AX-12A comm path). The U2D2 also carries one 4-pin RS-485 socket and one UART header, both OFF-LIMITS for this bench (RS-485 unused; the UART header is not a second TTL port and 12V into it destroys the U2D2). The two equivalent 3-pin sockets are on the AX-12A servo itself (daisy-chain), not on the U2D2. |
 | Role | External bus master for read-only Protocol 1.0 servo-side checks on the AX-12A (Status Return Level, angle limits, ID, baud, return delay); paired with Dynamixel Wizard 2.0 on the Mac Mini. Not part of the show-time signal chain -- diagnostic use only. |
-| Physical placement | Temporary bench connection to the AX-12A 3-pin bus; the ESP32 TX/RX/DIR wires must be disconnected from the AX-12A DATA line for the duration of the external read so the two bus masters do not fight. |
-| SVG reference | `electronics/fritzing/ax-12a-bench-test.svg` now shows the intended external U2D2 wiring (U2D2 in-line on the AX-12A 3-pin bus, sharing the 12V rail). The physical breadboard today still has the ESP32-direct data path in place; the U2D2 rewiring is applied only when the external read is executed. |
+| Physical placement | Temporary bench connection to the AX-12A 3-pin bus; the ESP32 TX/RX/DIR wires and the 74HCT245 B1/B2 bridge must be isolated from the AX-12A DATA line for the duration of the external read so the two bus masters do not fight. Only the +12V motor rail is shared with the U2D2 (via Cable Y or the Pattern B junction); the +5V cave rail is never shared. |
+| SVG reference | `electronics/fritzing/ax-12a-bench-test.svg` (user-updated) and `electronics/fritzing/ax-12a-u2d2-external-read.svg` (now verified) show the bench-proven external U2D2 wiring in the pin order that produced a successful Dynamixel Wizard 2.0 scan (Protocol 1.0, 1000000 bps, ID 1, model AX-12A). AX-12A pigtail pin order: Pin 1 = GND (black), Pin 2 = VCC (red), Pin 3 = DATA (yellow). Pattern A wires the U2D2 TTL into the AX-12A's second daisy-chain socket; Pattern B uses a breadboard 3-way junction. The physical breadboard's default state remains the ESP32-direct data path; the U2D2 is wired in only for the duration of the external read. |
 | Supplier | Reichelt (ordered 2026-07-27) |
 | Status | IN HAND (Reichelt) |
 
