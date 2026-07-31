@@ -16,25 +16,26 @@ PixStars is more than a stage performance.
 
 It combines:
 
-* Storytelling
-* Live acting
-* Music
-* Robotics
-* Artificial Intelligence
-* Projection Mapping
-* Lighting
-* Audience Experience
+- Storytelling
+- Live acting
+- Music
+- Robotics
+- Artificial Intelligence
+- Projection Mapping
+- Lighting
+- Audience Experience
 
 To coordinate these disciplines, PixStars requires a shared understanding of:
 
-* What is happening
-* Why it is happening
-* What the audience should experience
-* How success is measured
+- What is happening
+- Why it is happening
+- What the audience should experience
+- How success is measured
 
 This document introduces the first Minimal Viable Product (MVP) of the PixStars Intent Engine.
 
 The Intent Engine acts as a bridge between:
+
 ```
 Story
    ↓
@@ -44,67 +45,69 @@ Timeline
    ↓
 Technical Systems
 ```
+
 The purpose is to capture:
 
-* Scenes
-* Actions
-* Cues
-* States
-* Audience intent
-* Performance scores
+- Scenes
+- Actions
+- Cues
+- States
+- Audience intent
+- Performance scores
 
 in a single timeline-driven model.
 
 ⸻
 
-2. Vision
+1. Vision
 
 A future PixStars performance should be executable from a single source of truth.
 
 The same timeline should drive:
 
-* Screenplay
-* Storyboards
-* Lamp behaviour
-* Projections
-* Audio cues
-* Lighting cues
-* Home Assistant
-* Jess+
-* DigiScore
+- Screenplay
+- Storyboards
+- Lamp behaviour
+- Projections
+- Audio cues
+- Lighting cues
+- Home Assistant
+- Jess+
+- DigiScore
 
 while simultaneously documenting:
 
-* Emotional intent
-* Narrative intent
-* Audience understanding
-* Technical readiness
+- Emotional intent
+- Narrative intent
+- Audience understanding
+- Technical readiness
 
 ⸻
 
-3. MVP Scope
+1. MVP Scope
 
 Included:
 
-* Storyboard-based timeline
-* Scene model
-* Cue model
-* State model
-* Intent model
-* Scoring model
-* Export to Home Assistant dashboard
+- Storyboard-based timeline
+- Scene model
+- Cue model
+- State model
+- Intent model
+- Scoring model
+- Export to Home Assistant dashboard
 
 Excluded:
 
-* Real-time automation
-* AI scene evaluation
-* Automatic cue generation
-* Live audience analytics
-* Machine learning
+- Real-time automation
+- AI scene evaluation
+- Automatic cue generation
+- Live audience analytics
+- Machine learning
 
 ⸻
 
-4. Architecture
+1. Architecture
+
 ```
 Storyboarder
       │
@@ -121,17 +124,19 @@ Mission Control
       ├── Lamp
       └── Projection System
 ```
+
 [Storyboarder](https://tinythings.net/storyboarder/) becomes the authoring tool.
 
 Mission Control becomes the operational tool.
 
 ⸻
 
-5. Timeline Model
+1. Timeline Model
 
 Each storyboard frame represents a timeline event.
 
 Example:
+
 ```
 frame: 42
 timecode: 00:04:12
@@ -141,13 +146,15 @@ description:
   Lamp notices Walt's lamp sketch.
 duration: 8s
 ```
+
 ⸻
 
-6. Intent Model
+1. Intent Model
 
 Every frame contains intent.
 
 Example:
+
 ```
 intent:
   audience_emotion:
@@ -160,13 +167,15 @@ intent:
   importance:
     high
 ```
+
 ⸻
 
-7. State Model
+1. State Model
 
 Each frame contains active states.
 
 Example:
+
 ```
 states:
   performer:
@@ -182,13 +191,15 @@ states:
   lighting:
     cue: warm_white
 ```
+
 ⸻
 
-8. Cue Model
+1. Cue Model
 
 Technical systems receive cues.
 
 Example:
+
 ```
 cues:
   lamp:
@@ -200,13 +211,15 @@ cues:
   lighting:
     warm_fade
 ```
+
 ⸻
 
-9. Scoring Model
+1. Scoring Model
 
 Every frame can be evaluated.
 
 Example:
+
 ```
 score:
   clarity: 90
@@ -215,15 +228,17 @@ score:
   audience_confusion_risk: 10
   narrative_importance: 95
 ```
+
 Scores use a 0–100 scale.
 
 ⸻
 
-10. Scene Score Aggregation
+1. Scene Score Aggregation
 
 Scene scores are calculated from frame scores.
 
 Example:
+
 ```
 scene:
   name: Drawing Duel
@@ -231,11 +246,12 @@ scene:
   emotional_impact: 92
   confusion_risk: 15
 ```
+
 This allows weak scenes to be identified before rehearsals.
 
 ⸻
 
-11. Mission Control View
+1. Mission Control View
 
 Mission Control should display:
 
@@ -255,40 +271,26 @@ Current Scores
 
 Example:
 
-Scene:
-Drawing Duel
-Frame:
-42
-Intent:
-Lamp Feels Seen
-Emotion:
-Wonder
-Projection:
-Lamp Sketch
-Lamp:
-Curious
-Audio:
-Cue 17
-Score:
-92
+Scene:Drawing DuelFrame:42Intent:Lamp Feels SeenEmotion:WonderProjection:Lamp SketchLamp:CuriousAudio:Cue 17Score:92
 
 ⸻
 
-12. Storyboarder Integration
+1. Storyboarder Integration
 
 Storyboarder becomes the primary design interface.
 
 Designers create:
 
-* Frames
-* Notes
-* Timing
-* Camera ideas
-* Stage notes
+- Frames
+- Notes
+- Timing
+- Camera ideas
+- Stage notes
 
 Additional PixStars metadata is attached.
 
 Example:
+
 ```
 pixstars:
   intent:
@@ -298,13 +300,15 @@ pixstars:
   score:
     92
 ```
+
 ⸻
 
-13. Home Assistant Integration
+1. Home Assistant Integration
 
 Mission Control receives exported timeline data.
 
 Example export:
+
 ```
 timeline:
   - frame: 42
@@ -317,42 +321,43 @@ timeline:
     score:
       92
 ```
+
 Home Assistant displays:
 
-* Current frame
-* Next frame
-* Current cue
-* Current score
+- Current frame
+- Next frame
+- Current cue
+- Current score
 
 ⸻
 
-14. Future Evolution
+1. Future Evolution
 
 MVP 2
 
-* Automatic cue generation
-* Timeline validation
-* Cue conflict detection
+- Automatic cue generation
+- Timeline validation
+- Cue conflict detection
 
 MVP 3
 
-* Real-time performance execution
+- Real-time performance execution
 
 MVP 4
 
-* AI rehearsal assistant
+- AI rehearsal assistant
 
 MVP 5
 
-* Audience reaction scoring
+- Audience reaction scoring
 
 MVP 6
 
-* Full Intent-Driven Performance Engine
+- Full Intent-Driven Performance Engine
 
 ⸻
 
-15. Success Criteria
+1. Success Criteria
 
 The MVP is successful when:
 
@@ -365,7 +370,7 @@ The MVP is successful when:
 
 ⸻
 
-16. Conclusion
+1. Conclusion
 
 The Intent Engine introduces a new layer within PixStars.
 
