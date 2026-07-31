@@ -122,8 +122,87 @@ static void handleHeadNod(OSCMessage &msg) {
   dynamixel::setAngle((uint8_t)AX12_ID, angle, speed);
 }
 
+// Mirror one AX-12A read result to both Serial (HWCDC) and Serial0
+// (UART0 bridge) so bench captures on either port see the same lines.
+// `word` is the 16-bit value for two-byte registers or the 8-bit value
+// widened to 16 bits for one-byte registers.
+static void axReadLog(const char *name, bool ok, uint16_t word,
+                      uint8_t err, uint8_t nBytes) {
+  if (ok) {
+    if (nBytes == 2) {
+      Serial.printf("[DIAG] AX12_READ %s = %u (0x%04X) err=0x%02X ok=1\n",
+                    name, (unsigned)word, (unsigned)word, (unsigned)err);
+      Serial0.printf("[DIAG] AX12_READ %s = %u (0x%04X) err=0x%02X ok=1\r\n",
+                     name, (unsigned)word, (unsigned)word, (unsigned)err);
+    } else {
+      Serial.printf("[DIAG] AX12_READ %s = %u (0x%02X) err=0x%02X ok=1\n",
+                    name, (unsigned)word, (unsigned)word, (unsigned)err);
+      Serial0.printf("[DIAG] AX12_READ %s = %u (0x%02X) err=0x%02X ok=1\r\n",
+                     name, (unsigned)word, (unsigned)word, (unsigned)err);
+    }
+  } else {
+    Serial.printf("[DIAG] AX12_READ %s = TIMEOUT/BAD_PACKET ok=0\n", name);
+    Serial0.printf("[DIAG] AX12_READ %s = TIMEOUT/BAD_PACKET ok=0\r\n", name);
+  }
+}
+
+// Bench-only: query AX-12A servo state to separate mechanical bind vs
+// EEPROM wheel-mode vs supply sag vs latched status error. Reads (in
+// order): CW Angle Limit, CCW Angle Limit, Present Position, Present
+// Load, Present Voltage, Present Temperature. Each result and its
+// status-error byte are mirrored to Serial0 for the USB-UART bridge.
+static void handleHeadRead(OSCMessage & /*msg*/) {
+  Serial.printf("[DIAG] AX12_READ START id=%u\n", (unsigned)AX12_ID);
+  Serial0.printf("[DIAG] AX12_READ START id=%u\r\n", (unsigned)AX12_ID);
+
+  uint16_t w = 0;
+  uint8_t  b = 0;
+  uint8_t  err = 0;
+  bool ok;
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_CW_ANGLE_LIMIT, 2,
+                           reinterpret_cast<uint8_t *>(&w), &err);
+  axReadLog("CW_ANGLE_LIMIT", ok, w, err, 2);
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_CCW_ANGLE_LIMIT, 2,
+                           reinterpret_cast<uint8_t *>(&w), &err);
+  axReadLog("CCW_ANGLE_LIMIT", ok, w, err, 2);
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_PRESENT_POSITION, 2,
+                           reinterpret_cast<uint8_t *>(&w), &err);
+  axReadLog("PRESENT_POSITION", ok, w, err, 2);
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_PRESENT_LOAD, 2,
+                           reinterpret_cast<uint8_t *>(&w), &err);
+  axReadLog("PRESENT_LOAD", ok, w, err, 2);
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_PRESENT_VOLTAGE, 1,
+                           &b, &err);
+  axReadLog("PRESENT_VOLTAGE", ok, (uint16_t)b, err, 1);
+
+  err = 0;
+  ok = dynamixel::readData((uint8_t)AX12_ID,
+                           dynamixel::AX12_REG_PRESENT_TEMP, 1,
+                           &b, &err);
+  axReadLog("PRESENT_TEMPERATURE", ok, (uint16_t)b, err, 1);
+
+  Serial.println("[DIAG] AX12_READ END");
+  Serial0.println("[DIAG] AX12_READ END");
+}
+
 void head(OSCMessage &msg, int offset) {
-  if (msg.dispatch("/nod", handleHeadNod, offset)) return;
+  if (msg.dispatch("/nod",  handleHeadNod,  offset)) return;
+  if (msg.dispatch("/read", handleHeadRead, offset)) return;
   logMessage("head", msg);
 }
 // Apply (r, g, b, mode) from an OSC message to a single ring. Channels
