@@ -553,12 +553,12 @@ It does not own the performance clock.
 
 ⸻
 
-16. Timeout and Fallback Behaviour
+## 16. Timeout and Fallback Behaviour
 
 Every AI-assisted cue should have a deterministic fallback.
 
 For example:
-
+```
 Cue starts
     │
     ▼
@@ -573,7 +573,7 @@ Request character response
              │
              ▼
        scripted fallback
-
+```
 This ensures that:
 
 * model latency cannot stop the show;
@@ -587,24 +587,24 @@ The show must continue even if the AI disappears.
 
 ⸻
 
-17. Hardware Safety Boundary
+## 17. Hardware Safety Boundary
 
 The LLM must never directly specify unrestricted servo positions, velocities, electrical states, or other low-level hardware parameters.
 
 Avoid:
-
+```
 {
   "servo_position": 842,
   "servo_speed": 1000
 }
-
+```
 Prefer:
-
+```
 {
   "behaviour": "shake_head",
   "intensity": "annoyed"
 }
-
+```
 A deterministic behaviour controller then translates:
 
 shake_head + annoyed
@@ -612,7 +612,7 @@ shake_head + annoyed
 into safe servo commands.
 
 For example:
-
+```
 Character Behaviour
         │
         ▼
@@ -623,17 +623,17 @@ Safety Envelope
         │
         ▼
 Dynamixel Command
-
+```
 This is especially important for the AX-12A-driven lampshade mechanism.
 
 ⸻
 
-18. MQTT / EMQX as the Nervous-System Bus
+## 18. MQTT / EMQX as the Nervous-System Bus
 
 MQTT remains an excellent fit for connecting the distributed components.
 
 Conceptually:
-
+```
 Perception
    │
    ▼
@@ -653,7 +653,7 @@ Behaviour
    │
    ▼
 Physical Lamp
-
+```
 EMQX can provide the messaging backbone and potentially host additional intelligent routing or agent capabilities.
 
 This keeps components loosely coupled.
@@ -671,12 +671,12 @@ The physical subsystem realizes that intent.
 
 ⸻
 
-19. Character Memory
+## 19. Character Memory
 
 Local inference also makes character memory particularly interesting.
 
 A.I. could maintain short-term performance memory such as:
-
+```
 WALT showed Mickey drawing.
 A.I. rejected it.
 WALT appeared disappointed.
@@ -684,27 +684,27 @@ WALT started another drawing.
 A.I. pretended not to care.
 A.I. peeked.
 A.I. recognized itself.
-
+```
 The model can use this context to maintain emotional continuity.
 
 Memory should nevertheless be separated from inference.
-
+```
 Character
 │
 ├── Memory
 │
 └── Inference
-
+```
 This prevents the model’s context window from becoming the authoritative system of record.
 
 ⸻
 
-20. Observability
+## 20. Observability
 
 Every inference should be observable during development and rehearsals.
 
 Useful records include:
-
+```
 timestamp
 scene
 input transcript
@@ -716,7 +716,7 @@ structured response
 validation result
 selected behaviour
 fallback used
-
+```
 This allows rehearsals to reveal:
 
 * slow responses;
@@ -730,7 +730,7 @@ A rehearsal can therefore become an engineering dataset.
 
 ⸻
 
-21. Rehearsal Mode
+## 21. Rehearsal Mode
 
 PixStars should eventually support a dedicated rehearsal mode.
 
@@ -754,10 +754,10 @@ Such replayability would greatly improve debugging.
 
 ⸻
 
-22. Simulation
+## 22. Simulation
 
 Because the AI communicates through semantic behaviours rather than directly controlling hardware, the same character can operate against a simulator.
-
+```
                  Character Runtime
                         │
                         ▼
@@ -768,17 +768,17 @@ Because the AI communicates through semantic behaviours rather than directly con
              Stage           Simulator
                │                 │
            Real Lamp         Virtual Lamp
-
+```
 This allows development of A.I.’s behaviour without continuously operating the physical mechanism.
 
 ⸻
 
-23. Local AI and Voice
+## 23. Local AI and Voice
 
 The existing voice architecture can now increasingly become local.
 
 A future local pipeline may look like:
-
+```
 Microphone
     │
     ▼
@@ -798,21 +798,21 @@ Local TTS
     │
     ▼
 Speaker
-
+```
 This would make the entire conversational loop independent of cloud APIs.
 
 The Raspberry Pi can remain responsible for audio capture and playback while computationally expensive processing occurs on the Mac Mini.
 
 ⸻
 
-24. Latency as a Dramatic Tool
+## 24. Latency as a Dramatic Tool
 
 AI latency is normally considered purely an engineering problem.
 
 In PixStars it can sometimes become theatrical behaviour.
 
 For example, a 500–1500 ms delay can be represented as:
-
+```
 WALT speaks
      │
      ▼
@@ -826,7 +826,7 @@ light pulses
      │
      ▼
 response
-
+```
 The audience interprets computation time as thinking.
 
 Nevertheless, excessive latency must still trigger deterministic fallback.
@@ -835,14 +835,14 @@ Engineering limitations can therefore occasionally become character animation.
 
 ⸻
 
-25. Theatrical Significance
+## 25. Theatrical Significance
 
 There is a particularly compelling consequence of this architecture.
 
 A.I. is no longer merely an animatronic prop pretending to be artificial intelligence.
 
 During the performance:
-
+```
 WALT
   │
   │ speaks
@@ -860,7 +860,7 @@ A.I.
   │ reacts
   ▼
 WALT
-
+```
 The theatrical fiction and engineering reality partially coincide.
 
 This can remain invisible to the audience.
@@ -878,7 +878,7 @@ They simply experience a lamp that appears to understand WALT.
 
 ⸻
 
-26. The Death of A.I.
+## 26. The Death of A.I.
 
 This architecture becomes particularly meaningful during the climactic sequence.
 
@@ -889,7 +889,7 @@ A.I. initially survives attempts to disable it.
 Eventually WALT removes the bulb.
 
 At this point the Character Runtime can deliberately cease participating.
-
+```
 Qwen
  │
  ▼
@@ -904,7 +904,7 @@ light disappears
 voice disappears
 MQTT behaviour stops
                  SILENCE
-
+```
 The screenplay takes complete control.
 
 The absence of intelligence becomes part of the performance.
@@ -917,12 +917,12 @@ The technical architecture therefore reinforces the emotional architecture of th
 
 ⸻
 
-27. Reconciliation
+## 27. Reconciliation
 
 When A.I. eventually returns, its systems can reappear progressively.
 
 For example:
-
+```
 light
   ↓
 small movement
@@ -932,7 +932,7 @@ perception
 voice
   ↓
 character intelligence
-
+```
 Rather than simply switching everything back on simultaneously, restoration can become part of the dramatic language.
 
 The final A.I. may also behave differently from the competitive character seen earlier.
@@ -945,12 +945,12 @@ The technology serves that transformation.
 
 ⸻
 
-28. Relationship to Open Engineering Character
+## 28. Relationship to Open Engineering Character
 
 Although PixStars is the immediate implementation, the architecture should not make the Character capability specific to the lamp.
 
 Conceptually:
-
+```
 Character
      │
      ├──────────────┬───────────────┐
@@ -958,7 +958,7 @@ Character
      ▼              ▼               ▼
  PixStars       Detective       Snowy Owl
     A.I.         Character       Character
-
+```
 All may share capabilities such as:
 
 * identity;
@@ -976,7 +976,7 @@ PixStars becomes a particularly demanding proving ground for the Character archi
 
 ⸻
 
-29. Separation of Character and Model
+## 29. Separation of Character and Model
 
 One important design rule follows:
 
@@ -985,7 +985,7 @@ A character is not a model.
 A.I.’s personality should not live exclusively inside a Qwen system prompt.
 
 Instead:
-
+```
 A.I.
 │
 ├── Character Definition
@@ -997,12 +997,12 @@ A.I.
 └── Inference Provider
       │
       └── Qwen3
-
+```
 This permits migration to future models without losing the character.
 
 ⸻
 
-30. Development vs Performance
+## 30. Development vs Performance
 
 PixStars should distinguish between at least two operating environments.
 
@@ -1035,12 +1035,12 @@ The performance environment should therefore be treated much more like a product
 
 ⸻
 
-31. Model Configuration
+## 31. Model Configuration
 
 The Qwen configuration should eventually be version-controlled alongside PixStars runtime configuration.
 
 Relevant parameters may include:
-
+```
 model
 quantization
 context size
@@ -1050,19 +1050,19 @@ top-p
 timeout
 prompt version
 behaviour schema version
-
+```
 The exact runtime parameters should be determined experimentally.
 
 They should be tuned for performance reliability, rather than maximum model creativity.
 
 ⸻
 
-32. Progressive Context Expansion
+## 32. Progressive Context Expansion
 
 The current local deployment should be optimized incrementally.
 
 Rather than immediately maximizing context length, development should progressively evaluate:
-
+```
 context
    ↓
 memory usage
@@ -1072,19 +1072,19 @@ latency
 response quality
    ↓
 performance stability
-
+```
 PixStars does not necessarily require extremely large context windows.
 
 Good architectural memory and scene-state management can often be more valuable than feeding the entire screenplay into every inference request.
 
 ⸻
 
-33. Cost Implications
+## 33. Cost Implications
 
 The local inference architecture also reduces recurring operational costs.
 
 Instead of:
-
+```
 performance
    ↓
 API request
@@ -1092,15 +1092,15 @@ API request
 cloud inference
    ↓
 per-token cost
-
+```
 PixStars can use:
-
+```
 performance
    ↓
 Mac Mini
    ↓
 local inference
-
+```
 The Mac Mini is therefore not only a development workstation.
 
 It becomes reusable AI infrastructure.
@@ -1118,10 +1118,10 @@ Cloud AI becomes an optional resource rather than a prerequisite.
 
 ⸻
 
-34. Reliability Principle
+## 34. Reliability Principle
 
 PixStars should be designed around the following hierarchy:
-
+```
 THE SHOW
    │
    ▼
@@ -1138,30 +1138,30 @@ AI
    │
    ▼
 MODEL
-
+```
 Not:
-
+```
 MODEL
   │
   ▼
 everything else
-
+```
 This hierarchy protects both engineering reliability and artistic intent.
 
 ⸻
 
-35. Proposed Implementation Phases
+## 35. Proposed Implementation Phases
 
-Phase 1 — Establish Local Inference Service
+### Phase 1 — Establish Local Inference Service
 
 Formalize the existing working configuration:
-
+```
 Mac Mini
    ↓
 MLXServe
    ↓
 Qwen3-Coder-30B-A3B-Instruct-4bit
-
+```
 Provide:
 
 * startup;
@@ -1170,22 +1170,22 @@ Provide:
 * configuration;
 * logging.
 
-Phase 2 — Structured Character Interpretation
+### Phase 2 — Structured Character Interpretation
 
 Introduce a minimal interface:
-
+```
 speech + scene
       ↓
      Qwen
       ↓
 structured intent
-
+```
 No hardware control yet.
 
-Phase 3 — Character Behaviour Vocabulary
+### Phase 3 — Character Behaviour Vocabulary
 
 Define behaviours such as:
-
+```
 look_away
 peek
 lean_closer
@@ -1197,12 +1197,12 @@ dismiss
 freeze
 wake
 sleep
-
-Phase 4 — MQTT Integration
+```
+### Phase 4 — MQTT Integration
 
 Translate validated behaviours into MQTT commands.
 
-Phase 5 — Physical Lamp Integration
+### Phase 5 — Physical Lamp Integration
 
 Connect behaviour primitives to:
 
@@ -1211,15 +1211,15 @@ Connect behaviour primitives to:
 * audio;
 * other actuators.
 
-Phase 6 — Timeline Integration
+### Phase 6 — Timeline Integration
 
 Allow selected screenplay moments to request character interpretation.
 
-Phase 7 — Deterministic Fallbacks
+### Phase 7 — Deterministic Fallbacks
 
 Provide scripted alternatives for every AI-assisted cue.
 
-Phase 8 — Rehearsal Instrumentation
+### Phase 8 — Rehearsal Instrumentation
 
 Record:
 
@@ -1229,11 +1229,11 @@ Record:
 * errors;
 * fallbacks.
 
-Phase 9 — Controlled Improvisation
+### Phase 9 — Controlled Improvisation
 
 Gradually enable character improvisation within approved scenes.
 
-Phase 10 — Performance Lock
+### Phase 10 — Performance Lock
 
 Freeze:
 
@@ -1248,10 +1248,10 @@ Then rehearse the exact production configuration.
 
 ⸻
 
-36. Proposed Repository Direction
+## 36. Proposed Repository Direction
 
 The PixStars repository can eventually represent this architecture approximately as:
-
+```
 pixstars/
 │
 ├── architecture/
@@ -1284,19 +1284,19 @@ pixstars/
 ├── rehearsal/
 │
 └── simulation/
-
+```
 This is illustrative rather than prescriptive.
 
 Existing repository structure should be respected when implementation begins.
 
 ⸻
 
-37. Architectural Decision
+## 37. Architectural Decision
 
 PixStars should adopt local AI inference on the Mac Mini M4 Pro as the preferred intelligence provider for the A.I. character.
 
 The current reference implementation is:
-
+```
 Qwen3-Coder-30B-A3B-Instruct-4bit
              │
              ▼
@@ -1304,7 +1304,7 @@ Qwen3-Coder-30B-A3B-Instruct-4bit
              │
              ▼
        Mac Mini M4 Pro
-
+```
 The model should sit behind a Character Runtime and must not directly control physical hardware.
 
 The PixStars timeline remains authoritative.
@@ -1315,7 +1315,7 @@ Internet connectivity must not be required for the core performance.
 
 ⸻
 
-38. Guiding Principles
+## 38. Guiding Principles
 
 The implementation should follow these principles:
 
@@ -1334,7 +1334,7 @@ The implementation should follow these principles:
 
 ⸻
 
-39. Conclusion
+## 39. Conclusion
 
 Running Qwen3-Coder-30B-A3B-Instruct-4bit successfully on the Mac Mini M4 Pro represents more than a local-LLM experiment.
 
