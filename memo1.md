@@ -1,14 +1,14 @@
-PixStars — Local AI Architecture
+# PixStars — Local AI Architecture
 
-Memo: 1
-Status: Vision / Architecture Direction
-Project: PixStars
-Repository: vanHeemstraPictures/pixstars
-Date: 15 August 2026
+Memo: 1  
+Status: Vision / Architecture Direction  
+Project: PixStars  
+Repository: vanHeemstraPictures/pixstars  
+Date: 15 August 2026  
 
 ⸻
 
-1. Executive Summary
+## 1. Executive Summary
 
 PixStars can now incorporate a powerful local Large Language Model as a first-class part of its runtime architecture.
 
@@ -34,7 +34,7 @@ The character called A.I. is actually powered by artificial intelligence running
 
 ⸻
 
-2. Context
+## 2. Context
 
 PixStars is an animatronic theatrical performance centered on the relationship between WALT, a human creator, and A.I., an intelligent lamp.
 
@@ -66,18 +66,18 @@ local inference.
 
 ⸻
 
-3. Proven Local AI Capability
+## 3. Proven Local AI Capability
 
 The following model has successfully been operated locally:
 
 Qwen3-Coder-30B-A3B-Instruct-4bit
 
 on:
-
+```
 Mac Mini M4 Pro
 Apple M4 Pro
 24 GB unified memory
-
+```
 using:
 
 MLXServe
@@ -96,14 +96,14 @@ How should PixStars safely and artistically exploit local AI?
 
 ⸻
 
-4. Architectural Principle
+## 4. Architectural Principle
 
 The local LLM must not become the performance director.
 
 It becomes an actor.
 
 The distinction is fundamental.
-
+```
 Screenplay / Timeline
         │
         │ defines boundaries
@@ -121,7 +121,7 @@ Character Runtime
         │ validates behaviour
         ▼
 Performance Actions
-
+```
 The AI may interpret and improvise.
 
 The performance system retains authority.
@@ -132,10 +132,10 @@ AI improvises; the screenplay conducts.
 
 ⸻
 
-5. Proposed Runtime Architecture
+## 5. Proposed Runtime Architecture
 
 The high-level architecture becomes:
-
+```
                          PIXSTARS
                             │
           ┌─────────────────┴─────────────────┐
@@ -162,7 +162,7 @@ The high-level architecture becomes:
                                       PixStars Timeline
                                               │
                                  Music / Projection / Cues
-
+```
 This establishes a useful separation between:
 
 1. physical embodiment;
@@ -171,7 +171,7 @@ This establishes a useful separation between:
 
 ⸻
 
-6. Raspberry Pi: The Nervous System
+## 6. Raspberry Pi: The Nervous System
 
 The Raspberry Pi in the lamp should primarily operate as the character’s physical nervous system.
 
@@ -200,7 +200,7 @@ The Pi should not need to host the large reasoning model.
 Instead, it exchanges structured events and commands with the Mac Mini.
 
 For example:
-
+```
 pixstars/perception/speech
 pixstars/perception/vision
 pixstars/state/servo
@@ -208,12 +208,12 @@ pixstars/state/light
 pixstars/action/head
 pixstars/action/light
 pixstars/action/voice
-
+```
 The precise MQTT ontology should be defined separately.
 
 ⸻
 
-7. Mac Mini: The Brain
+## 7. Mac Mini: The Brain
 
 The Mac Mini M4 Pro becomes the principal computational brain of the performance.
 
@@ -236,7 +236,7 @@ Its responsibilities can include:
 MLXServe provides access to the locally hosted Qwen model.
 
 Conceptually:
-
+```
 Mac Mini M4 Pro
 │
 ├── PixStars Orchestrator
@@ -255,15 +255,15 @@ Mac Mini M4 Pro
 ├── Ardour
 │
 └── Projection / Stage Services
-
+```
 The Mac Mini therefore becomes a local edge AI server for the performance.
 
 ⸻
 
-8. Local-First AI
+## 8. Local-First AI
 
 PixStars should adopt a local-first inference strategy.
-
+```
 Character request
        │
        ▼
@@ -275,7 +275,7 @@ Local inference
               │
               ▼
         deterministic fallback
-
+```
 Cloud inference should not be required for the core performance.
 
 A cloud model may remain useful during development, experimentation, evaluation, or optional non-critical capabilities.
@@ -293,7 +293,7 @@ This improves:
 
 ⸻
 
-9. The Character Runtime
+## 9. The Character Runtime
 
 The LLM should not directly control hardware.
 
@@ -302,7 +302,7 @@ Instead, it should operate behind a Character Runtime.
 The Character Runtime represents A.I. as a character rather than as a chatbot.
 
 Conceptually:
-
+```
 A.I.
 │
 ├── Identity
@@ -315,9 +315,9 @@ A.I.
 ├── Intent
 ├── Behaviour
 └── Inference
-
+```
 The inference component may use:
-
+```
 Inference
 │
 ├── Local
@@ -325,7 +325,7 @@ Inference
 │         └── Qwen3
 │
 └── Optional External Providers
-
+```
 This abstraction is important.
 
 A.I. should not become:
@@ -338,7 +338,7 @@ Models can therefore be upgraded, replaced, compared, or combined without redefi
 
 ⸻
 
-10. From Speech to Behaviour
+## 10. From Speech to Behaviour
 
 Consider a scene in which WALT has shown A.I. his drawing.
 
@@ -349,7 +349,7 @@ WALT might say:
 The performance should not depend upon this exact wording.
 
 The pipeline could instead be:
-
+```
 WALT speaks
      │
      ▼
@@ -366,18 +366,18 @@ Local LLM
      │
      ▼
 Structured interpretation
-
+```
 For example:
-
+```
 {
   "intent": "defend_drawing",
   "emotion": "playful_defensive",
   "scene": "mickey_rejection",
   "confidence": 0.94
 }
-
+```
 The Character Runtime can then map this interpretation onto permitted actions.
-
+```
 defend_drawing
       │
       ▼
@@ -386,7 +386,7 @@ A.I. response policy
       ├── shake head
       ├── annoyed light state
       └── sarcastic response
-
+```
 The resulting physical commands might become MQTT messages.
 
 The LLM interprets.
@@ -397,14 +397,14 @@ The actuator layer executes.
 
 ⸻
 
-11. Structured AI Outputs
+## 11. Structured AI Outputs
 
 Free-form LLM output should not directly reach hardware.
 
 Where possible, inference should produce validated structured data.
 
 For example:
-
+```
 {
   "scene": "lamp_drawing",
   "speaker": "ai",
@@ -416,7 +416,7 @@ For example:
     "lean_closer"
   ]
 }
-
+```
 This output should be validated against:
 
 * the current scene;
@@ -431,12 +431,12 @@ Only validated actions should enter the physical execution system.
 
 ⸻
 
-12. Scene-Constrained Intelligence
+## 12. Scene-Constrained Intelligence
 
 The LLM should always know the current dramatic context.
 
 For example:
-
+```
 Scene
   04
 Name
@@ -456,14 +456,14 @@ Forbidden transitions
   skip confrontation
   reveal future events
   address audience
-
+```
 The model can therefore improvise inside a dramatic envelope.
 
 This is significantly safer and artistically stronger than unconstrained conversation.
 
 ⸻
 
-13. Deterministic Story Beats
+## 13. Deterministic Story Beats
 
 Several PixStars moments should remain completely deterministic.
 
@@ -492,7 +492,7 @@ The AI should enrich these events, not replace them.
 
 ⸻
 
-14. Controlled Improvisation
+## 14. Controlled Improvisation
 
 Between deterministic beats, controlled improvisation can make A.I. feel genuinely alive.
 
@@ -509,7 +509,7 @@ Examples include:
 This creates variability without sacrificing narrative structure.
 
 A useful hierarchy is:
-
+```
 LEVEL 0 — HARD CUE
 Exact behaviour and timing.
 LEVEL 1 — PARAMETERIZED CUE
@@ -520,19 +520,19 @@ LEVEL 3 — DIALOGUE IMPROVISATION
 Generate language inside strict scene constraints.
 LEVEL 4 — FREE IMPROVISATION
 Not permitted during the primary performance.
-
+```
 Most PixStars AI behaviour should remain within Levels 1–3.
 
 ⸻
 
-15. The Timeline Remains Supreme
+## 15. The Timeline Remains Supreme
 
 Ardour and the broader PixStars timeline remain crucial.
 
 Music, projection and theatrical timing cannot simply wait indefinitely for an LLM.
 
 The orchestration system therefore remains authoritative.
-
+```
                  PERFORMANCE CLOCK
                         │
                         ▼
@@ -544,7 +544,7 @@ The orchestration system therefore remains authoritative.
                                       │
                                       ▼
                                    Local AI
-
+```
 The arrow is intentionally downward.
 
 The AI participates in the performance.
