@@ -690,12 +690,12 @@ Automate the envelope while preserving control of the performance.
 
 ⸻
 
-18. Crossplane
+## 18. Crossplane
 
 Crossplane should progressively become responsible for composing the Open Engineering resources required by PixStars.
 
 The long-term workflow becomes:
-
+```
 PixStars definition
        │
        ▼
@@ -709,19 +709,19 @@ Kubernetes Resources
        │
        ▼
 Minikube
-
+```
 Crossplane should not be introduced everywhere simultaneously.
 
 We should first establish a working Minikube deployment and then progressively replace manually deployed resources with compositions.
 
 ⸻
 
-19. Definitions, Parsers, and Rules
+## 19. Definitions, Parsers, and Rules
 
 PixStars should also consume the emerging Open Engineering definition infrastructure.
 
 For example:
-
+```
 Definition
     │
     ▼
@@ -738,7 +738,7 @@ Composer
     │
     ▼
 Runtime
-
+```
 Definitions might eventually exist for:
 
 * Pico;
@@ -758,14 +758,14 @@ PixStars can become an important real-world consumer that tests whether these ab
 
 ⸻
 
-20. What Must Remain in PixStars
+## 20. What Must Remain in PixStars
 
 Open Engineering adherence does not mean moving everything out of PixStars.
 
 PixStars remains responsible for its creative identity.
 
 The repository should continue to own things such as:
-
+```
 PixStars
 │
 ├── story/
@@ -779,7 +779,7 @@ PixStars
 ├── stage/
 ├── props/
 └── physical-configuration/
-
+```
 The following remain unmistakably PixStars:
 
 * Walt;
@@ -803,10 +803,10 @@ It does not own them.
 
 ⸻
 
-21. Repository Direction
+## 21. Repository Direction
 
 The PixStars repository should gradually move toward a structure such as:
-
+```
 pixstars/
 │
 ├── README.md
@@ -850,45 +850,45 @@ pixstars/
 └── tests/
     ├── integration/
     └── performance/
-
+```
 This is an intended direction rather than an immediate mandatory restructuring.
 
 ⸻
 
-22. Implementation Strategy
+## 22. Implementation Strategy
 
 The refactor should be evolutionary.
 
 We should avoid attempting a complete rewrite.
 
-Phase 1 — Establish the Local Cluster
+### Phase 1 — Establish the Local Cluster
 
 Install and validate Minikube on the Mac Mini M4 Pro.
 
 Establish:
-
+```
 Mac Mini
     ↓
 Minikube
     ↓
 PixStars namespace
-
+```
 Create initial namespaces such as:
-
+```
 open-engineering
 pixstars
 observability
-
+```
 The first objective is simply a reliable local Kubernetes environment.
 
 ⸻
 
-Phase 2 — Deploy Messaging
+### Phase 2 — Deploy Messaging
 
 Deploy EMQX or the selected MQTT infrastructure into Minikube.
 
 Verify communication between:
-
+```
 Minikube
     ↕
 MQTT
@@ -896,36 +896,36 @@ MQTT
 Mac
     ↕
 Raspberry Pi
-
+```
 This establishes the basic nervous system.
 
 ⸻
 
-Phase 3 — Introduce the Lamp Pico
+### Phase 3 — Introduce the Lamp Pico
 
 Create the first Open Engineering representation of the Lamp.
 
 Initially it can be deliberately small.
 
 For example:
-
+```
 Lamp Pico
     │
     ├── identity
     ├── status
     ├── heartbeat
     └── command interface
-
+```
 Then progressively attach capabilities.
 
 ⸻
 
-Phase 4 — Extract Robotics
+### Phase 4 — Extract Robotics
 
 Move generic robotics concepts away from PixStars-specific code.
 
 Introduce abstractions such as:
-
+```
 look-left
 look-right
 look-up
@@ -933,14 +933,14 @@ look-down
 nod
 shake
 home
-
+```
 The Lamp maps these actions onto its particular AX-12A hardware.
 
 This creates reusable robotics semantics.
 
 ⸻
 
-Phase 5 — Character Capsule Integration
+### Phase 5 — Character Capsule Integration
 
 Represent A.I. as a Character definition.
 
@@ -953,19 +953,19 @@ from:
 Physical Expression
 
 For example:
-
+```
 Character:
     emotion: offended
 Expression:
     look-away
 Robotics:
     rotate-head(...)
-
+```
 This separation will become highly reusable.
 
 ⸻
 
-Phase 6 — AI Provider Abstraction
+### Phase 6 — AI Provider Abstraction
 
 Expose MLXServe through the Open Engineering AI capability.
 
@@ -974,18 +974,18 @@ The first provider becomes:
 local-qwen
 
 with:
-
+```
 AI Capsule
     ↓
 MLXServe
     ↓
 Qwen3
-
+```
 PixStars should no longer directly depend on MLXServe.
 
 ⸻
 
-Phase 7 — Runner OS Integration
+### Phase 7 — Runner OS Integration
 
 Move deterministic performance execution into Runner OS.
 
@@ -1002,7 +1002,7 @@ Runner OS becomes capable of running the essential performance without AI.
 
 ⸻
 
-Phase 8 — Star OS Integration
+### Phase 8 — Star OS Integration
 
 Move intelligent performer behaviour into Star OS.
 
@@ -1019,7 +1019,7 @@ This creates the intelligent layer around the deterministic performance.
 
 ⸻
 
-Phase 9 — Crossplane Composition
+### Phase 9 — Crossplane Composition
 
 Once the components work independently, describe them declaratively through Open Engineering resources and Crossplane.
 
@@ -1028,7 +1028,7 @@ The goal becomes increasingly close to:
 kubectl apply -f pixstars.yaml
 
 followed by:
-
+```
 PixStars
    ↓
 Composer
@@ -1038,10 +1038,10 @@ Crossplane
 Open Engineering resources
    ↓
 Minikube
-
+```
 ⸻
 
-Phase 10 — Full Performance Validation
+### Phase 10 — Full Performance Validation
 
 Finally run the complete performance through the Open Engineering architecture.
 
@@ -1061,11 +1061,11 @@ The deterministic performance should degrade gracefully rather than collapse.
 
 ⸻
 
-23. Development Mode Versus Performance Mode
+## 23. Development Mode Versus Performance Mode
 
 PixStars should eventually support at least two runtime profiles.
 
-Development
+### Development
 
 pixstars-development
 
@@ -1078,7 +1078,7 @@ Characteristics:
 * simulations;
 * hardware optional.
 
-Performance
+### Performance
 
 pixstars-performance
 
@@ -1097,12 +1097,12 @@ Performance mode should prioritize reliability over experimentation.
 
 ⸻
 
-24. Simulation
+## 24. Simulation
 
 The Open Engineering Simulation Capsule should eventually allow PixStars to run without physical hardware.
 
 For example:
-
+```
 Lamp Pico
     │
     ├── physical runtime
@@ -1110,7 +1110,7 @@ Lamp Pico
     │
     └── simulated runtime
             └── virtual lamp
-
+```
 This would allow development of:
 
 * character behaviour;
@@ -1126,14 +1126,14 @@ It will also significantly improve automated testing.
 
 ⸻
 
-25. PixStars as an Open Engineering Reference Application
+## 25. PixStars as an Open Engineering Reference Application
 
 PixStars should ultimately be presented as an Open Engineering reference implementation for:
 
 Intelligent Character Performance
 
 It demonstrates that Open Engineering can compose:
-
+```
 Story
 +
 Character
@@ -1155,14 +1155,14 @@ Workflow
 Execution
 +
 Physical Hardware
-
+```
 into one functioning system.
 
 This makes PixStars an unusually powerful validation environment.
 
 ⸻
 
-26. Architectural Fitness Test
+## 26. Architectural Fitness Test
 
 PixStars can therefore serve as an architectural fitness test for Open Engineering.
 
@@ -1178,7 +1178,7 @@ If the answer is no, we should investigate whether:
 4. another capability is missing.
 
 This creates a productive feedback loop:
-
+```
 Open Engineering
        │
        ▼
@@ -1191,14 +1191,14 @@ Real physical performance
 Architectural feedback
        │
        └──────────────► Open Engineering
-
+```
 This is not a dependency from Open Engineering to PixStars.
 
 It is architectural validation through a consumer.
 
 ⸻
 
-27. Definition of Success
+## 27. Definition of Success
 
 The refactor can be considered successful when the following statement becomes true:
 
@@ -1209,7 +1209,7 @@ A particularly compelling future command might become:
 oe compose pixstars
 
 which ultimately results in:
-
+```
 PixStars Composition
         ↓
 Open Engineering
@@ -1225,27 +1225,27 @@ MQTT / EMQX
 Edge Runtime
         ↓
 Physical Lamp
-
+```
 with:
-
+```
 Open Engineering AI
         ↓
 MLXServe
         ↓
 Local Qwen
-
+```
 providing local intelligence.
 
 ⸻
 
-28. Guiding Principle
+## 28. Guiding Principle
 
 The most important rule for the implementation is simple:
 
 Do not rebuild Open Engineering inside PixStars.
 
 Whenever we discover a generally reusable capability while developing PixStars:
-
+```
 discover
     ↓
 generalize
@@ -1255,7 +1255,7 @@ move to Open Engineering
 expose as capability
     ↓
 consume from PixStars
-
+```
 PixStars should become progressively smaller at the infrastructure level while becoming richer at the creative level.
 
 That is desirable.
@@ -1270,7 +1270,7 @@ how the underlying engineering capabilities make that performance possible.
 
 ⸻
 
-29. Conclusion
+## 29. Conclusion
 
 The next generation of PixStars should therefore be built as:
 
