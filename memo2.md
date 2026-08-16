@@ -23,7 +23,7 @@ PixStars becomes a composition of Open Engineering capabilities.
 The target local runtime will be a Minikube Kubernetes cluster running on the Mac Mini M4 Pro.
 
 The resulting stack becomes:
-
+```
 PixStars
     │
     ▼
@@ -37,7 +37,7 @@ Minikube
     │
     ▼
 Mac Mini M4 Pro
-
+```
 Physical devices such as the animatronic lamp remain edge systems connected to this local platform.
 
 Local AI inference, currently provided by MLXServe and Qwen3-Coder-30B-A3B-Instruct-4bit, remains initially outside Minikube as a native macOS service and is exposed to Open Engineering through an AI provider abstraction.
@@ -48,7 +48,7 @@ PixStars becomes a reference implementation and vertical integration test for Op
 
 ⸻
 
-2. Context
+## 2. Context
 
 PixStars combines several unusually diverse engineering disciplines:
 
@@ -92,34 +92,34 @@ The appropriate next step is therefore architectural convergence.
 
 ⸻
 
-3. Strategic Decision
+## 3. Strategic Decision
 
 PixStars will become an Open Engineering native application.
 
 This means that PixStars may depend on Open Engineering, but Open Engineering must never depend on PixStars.
 
 The dependency direction is:
-
+```
 PixStars
     │
     │ uses
     ▼
 Open Engineering
-
+```
 Never:
-
+```
 Open Engineering
     │
     ▼
 PixStars
-
+``‘
 Open Engineering must remain completely usable without PixStars.
 
 PixStars is one consumer of the platform.
 
 ⸻
 
-4. Architectural Principle
+## 4. Architectural Principle
 
 The refactoring should continuously ask one question:
 
@@ -131,34 +131,35 @@ If it defines the artistic identity, story, staging, or particular physical conf
 
 For example:
 
-Concern	Owner
-AX-12A servo abstraction	Open Engineering Robotics
-generic head movement	Open Engineering Robotics
-character emotional state	Character Capsule
-speech recognition	Voice Capsule
-AI provider integration	AI Capsule
-character memory	Memory Capsule
-camera perception	Vision Capsule
-event semantics	Open Engineering Kernel
-execution orchestration	Runner OS
-performance semantics	Star OS
-Walt	PixStars
-A.I. character definition	PixStars
-Mickey Mouse drawing scene	PixStars
-lamp arrogance scene	PixStars
-bulb removal scene	PixStars
-musical score	PixStars
-projections	PixStars
-exact stage layout	PixStars
+| Concern | Owner |
+| —- | —- |  
+| AX-12A servo abstraction | Open Engineering Robotics |  
+| generic head movement | Open Engineering Robotics |  
+| character emotional state	| Character Capsule |  
+| speech recognition | Voice Capsule |  
+| AI provider integration | AI Capsule |
+| character memory | Memory Capsule |  
+| camera perception | Vision Capsule |  
+| event semantics | Open Engineering Kernel |  
+| execution orchestration | Runner OS |  
+| performance semantics	| Star OS |  
+| Walt | PixStars |  
+| A.I. character definition | PixStars |  
+| Mickey Mouse drawing scene | PixStars |  
+| lamp arrogance scene | PixStars |  
+| bulb removal scene | PixStars |  
+| musical score | PixStars |  
+| projections | PixStars |  
+| exact stage layout | PixStars |  
 
 This boundary should guide the entire migration.
 
 ⸻
 
-5. Target Architecture
+## 5. Target Architecture
 
 The intended architecture is approximately:
-
+```
 Open Engineering Platform
 │
 ├── Kernel
@@ -220,10 +221,10 @@ PixStars
 ├── Projections
 ├── Stage
 └── Physical Configuration
-
+```
 ⸻
 
-6. Mac Mini M4 Pro as the Local Open Engineering Host
+## 6. Mac Mini M4 Pro as the Local Open Engineering Host
 
 The Mac Mini M4 Pro should become the principal local compute platform for PixStars.
 
@@ -232,7 +233,7 @@ It should no longer merely be regarded as the computer running various supportin
 It becomes the local Open Engineering host.
 
 The initial architecture should be:
-
+```
 Mac Mini M4 Pro
 │
 ├── macOS
@@ -257,16 +258,16 @@ Mac Mini M4 Pro
 ├── Ardour
 │
 └── native macOS hardware integrations
-
+```
 Minikube therefore becomes the default development and performance Kubernetes environment.
 
 ⸻
 
-7. Why Minikube
+## 7. Why Minikube
 
 Using Minikube provides several important benefits.
 
-7.1 Architectural parity
+### 7.1 Architectural parity
 
 PixStars begins exercising the same Kubernetes concepts intended for the wider Open Engineering ecosystem.
 
@@ -274,12 +275,12 @@ The architecture stops being theoretical.
 
 ⸻
 
-7.2 Declarative deployment
+### 7.2 Declarative deployment
 
 Components can increasingly be described rather than manually assembled.
 
 Ultimately, something conceptually similar to this should become possible:
-
+```
 apiVersion: open-engineering.io/v1alpha1
 kind: Composition
 metadata:
@@ -299,18 +300,18 @@ spec:
   operatingSystems:
     - star
     - runner
-
+```
 A Composer and Crossplane can progressively turn such declarations into actual runtime resources.
 
 ⸻
 
-7.3 Isolation
+### 7.3 Isolation
 
 Services can be independently deployed, upgraded, restarted, inspected, and eventually sandboxed.
 
 ⸻
 
-7.4 Reproducibility
+### 7.4 Reproducibility
 
 The complete PixStars software environment becomes substantially easier to reproduce.
 
@@ -318,7 +319,7 @@ This is important both for development and for eventual performance deployment.
 
 ⸻
 
-7.5 Observability
+### 7.5 Observability
 
 Kubernetes gives us a natural environment for:
 
@@ -333,7 +334,7 @@ This becomes particularly valuable when diagnosing a complex physical performanc
 
 ⸻
 
-8. Local AI Strategy
+## 8. Local AI Strategy
 
 Local AI inference has become an important architectural capability.
 
@@ -350,7 +351,7 @@ PixStars should therefore never contain logic equivalent to:
 call Qwen through MLXServe
 
 Instead:
-
+```
 PixStars
     │
     ▼
@@ -367,14 +368,14 @@ AI Provider Interface
     ├── OpenAI
     ├── Anthropic
     └── future providers
-
+```
 PixStars requests reasoning.
 
 Open Engineering determines how that reasoning is provided.
 
 ⸻
 
-9. Keep MLXServe Outside Kubernetes Initially
+## 9. Keep MLXServe Outside Kubernetes Initially
 
 MLXServe should initially remain a native macOS service.
 
@@ -391,7 +392,7 @@ Running MLXServe inside Minikube would initially introduce:
 * little immediate architectural benefit.
 
 Therefore:
-
+```
 Minikube
     │
     │ HTTP/API
@@ -400,14 +401,14 @@ MLXServe on macOS
     │
     ▼
 Qwen
-
+```
 The Open Engineering AI Capsule should abstract this boundary.
 
 Containerizing or Kubernetes-managing local inference can be reconsidered later.
 
 ⸻
 
-10. The Lamp Becomes a Pico
+## 10. The Lamp Becomes a Pico
 
 One of the most important changes is that the physical lamp should be represented as an Open Engineering Pico.
 
@@ -416,7 +417,7 @@ Conceptually:
 Pico: pixstars.lamp
 
 The Lamp Pico composes capabilities rather than implementing all of them itself.
-
+```
 Lamp Pico
 │
 ├── Character
@@ -425,9 +426,9 @@ Lamp Pico
 ├── Vision
 ├── Memory
 └── AI
-
+```
 A future declarative definition could resemble:
-
+```
 apiVersion: open-engineering.io/v1alpha1
 kind: Pico
 metadata:
@@ -443,21 +444,21 @@ spec:
     - ai
   runtime:
     target: lamp
-
+```
 The exact API is not yet important.
 
 The architectural separation is.
 
 ⸻
 
-11. Edge Runtime
+## 11. Edge Runtime
 
 Kubernetes should not directly control individual servo movements at low latency.
 
 Physical control should remain close to the hardware.
 
 The architecture should therefore distinguish orchestration from execution.
-
+```
 Open Engineering
       │
       │ intent
@@ -476,7 +477,7 @@ Hardware Driver
       │
       ▼
 AX-12A
-
+```
 For example:
 
 look_down
@@ -497,7 +498,7 @@ The device runtime determines how it physically happens.
 
 ⸻
 
-12. Raspberry Pi as Edge Compute
+## 12. Raspberry Pi as Edge Compute
 
 The Raspberry Pi associated with the lamp should therefore evolve toward an Open Engineering edge runtime.
 
@@ -520,7 +521,7 @@ This is particularly important for robotics.
 
 ⸻
 
-13. MQTT / EMQX as the Nervous System
+## 13. MQTT / EMQX as the Nervous System
 
 PixStars already has a strong reason to use MQTT.
 
@@ -536,7 +537,7 @@ Under Open Engineering, MQTT/EMQX should become part of the messaging infrastruc
 * performance systems.
 
 Example topics might initially include:
-
+```
 pixstars/lamp/heard
 pixstars/lamp/thought
 pixstars/lamp/emotion
@@ -544,13 +545,13 @@ pixstars/lamp/look
 pixstars/lamp/nod
 pixstars/lamp/light
 pixstars/performance/cue
-
+```
 However, the semantics of the messages should increasingly derive from the Open Engineering ontology.
 
 That gives us a progression from transport-specific messages toward meaningful engineering events.
 
 For example:
-
+```
 Observation
      │
      ▼
@@ -569,10 +570,10 @@ AI  Character  Runner
             │
             ▼
            Lamp
-
+```
 ⸻
 
-14. Star OS
+## 14. Star OS
 
 Star OS should become responsible for the semantics of an intelligent performer.
 
@@ -599,7 +600,7 @@ belongs closer to Star OS and the Character capability than to robotics.
 
 ⸻
 
-15. Runner OS
+## 15. Runner OS
 
 Runner OS should be responsible for execution.
 
@@ -615,7 +616,7 @@ Responsibilities include:
 * performance state.
 
 The distinction becomes:
-
+```
 Story
    │
    ▼
@@ -635,7 +636,7 @@ Execution
    ├── Audio
    ├── Projection
    └── Effects
-
+```
 This distinction is particularly important for PixStars.
 
 AI and character behaviour can tolerate some nondeterminism.
@@ -644,7 +645,7 @@ A theatrical cue often cannot.
 
 ⸻
 
-16. Deterministic Core, Intelligent Edge
+## 16. Deterministic Core, Intelligent Edge
 
 The live performance should therefore follow an important safety principle:
 
@@ -653,20 +654,20 @@ AI may enrich the performance, but it must not become a single point of failure 
 The essential screenplay and cues should remain executable deterministically.
 
 For example:
-
+```
 Performance Timeline
         │
         ├──────── deterministic ────────► Runner OS
         │
         └──────── intelligent ──────────► Star OS / AI
-
+```
 If local inference fails during a performance, the core performance should still be capable of continuing.
 
 This distinction will make PixStars considerably more robust.
 
 ⸻
 
-17. Sandcastles
+## 17. Sandcastles
 
 Open Engineering Sandcastles can provide controlled environments for experimental or autonomous behaviour.
 
