@@ -131,7 +131,7 @@ If it defines the artistic identity, story, staging, or particular physical conf
 
 For example:
 
-| Concern | Owner |
+| Concern | Owner |  
 | —- | —- |  
 | AX-12A servo abstraction | Open Engineering Robotics |  
 | generic head movement | Open Engineering Robotics |  
