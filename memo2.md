@@ -112,7 +112,7 @@ Open Engineering
     │
     ▼
 PixStars
-``‘
+```
 Open Engineering must remain completely usable without PixStars.
 
 PixStars is one consumer of the platform.
